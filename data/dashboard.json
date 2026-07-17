@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 10:54 UTC",
+    "updated": "2026-07-17 11:24 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -42,6 +42,12 @@
       "value": "1,5 milj. l",
       "detail": "Verotetut tupakan korvikkeet, +18,2 %",
       "tone": "blue"
+    },
+    {
+      "label": "Espanja 2025",
+      "value": "29,568 milj. €",
+      "detail": "AEAT:n tarkka L1-L4-nettokertymä",
+      "tone": "gold"
     },
     {
       "label": "EU-ulkoraja 2025",
@@ -100,6 +106,16 @@
       "limit": "Tulliarvo ei ole vähittäismyyntiä eikä kata Yhdysvalloissa valmistettuja tuotteita, vähittäis-/tukkukatetta, varastoja tai laitonta kauppaa.",
       "source": "U.S. Census Bureau · Merchandise Trade Imports",
       "url": "https://www.census.gov/foreign-trade/data/IMDB.html"
+    },
+    {
+      "grade": "A",
+      "market": "Espanja",
+      "title": "Toteutunut nettokassakertymä ja Modelo 573",
+      "value": "29 568 000 EUR",
+      "detail": "AEAT:n huhti-joulukuun 2025 kuukausirivit täsmäävät tarkkaan vuosisummaan. Modelo 573 erottaa L1/L2-nesteiden millilitrat L3/L4-tuotteiden grammoista.",
+      "limit": "Kassakertymä kattaa kaikki neljä epigrafia. Se ei ole pelkkä e-nestevero, nestemäärä, vähittäismyynti tai markkina-arvo. L1/L2-veropohjat on pyydettävä erikseen.",
+      "source": "AEAT / BOE · vuoden 2025 veroraportit ja Modelo 573",
+      "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html"
     },
     {
       "grade": "B",
@@ -475,12 +491,12 @@
       "name": "Espanja",
       "sourceName": "Spain",
       "status": "partial",
-      "customs": "Eurostat Comext CN8 and Spanish customs tax agency data",
-      "route": "Origin versus EU consignment; subtract dispatches",
-      "salesSource": "Spanish Ministry of Health EU-CEG Article 20(7)",
-      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 143,4 milj. EUR; intra-EU 67,7 milj. EUR ja extra-EU 75,7 milj. EUR. No official sales aggregate obtained",
-      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and detailed CN8 route data",
-      "how": "Download Spain Comext rows; request aggregated sales from the EU-CEG contact listed by the European Commission; request customs CN8 import/export by origin and destination",
+      "customs": "Eurostat Comext CN8 plus AEAT Modelo 573 tax bases and cash revenue",
+      "route": "Origin versus EU consignment; subtract dispatches; keep L1/L2 millilitres separate from L3/L4 grams and opening-stock regularisation",
+      "salesSource": "AEAT Modelo 573 and Spanish Ministry of Health EU-CEG Article 20(7)",
+      "current": "AEAT:n tarkka huhti-joulukuun 2025 nettokassasarja täsmää 29 568 000 euroon, joka pyöristyy vuosiraportin 30 milj. euroon. Modelo 573 kerää L1/L2-e-nesteet millilitroina erillään L3/L4-tuotteiden grammoista. Julkinen kassasarja yhdistää neljä ryhmää, joten sitä ei nimetä e-nesteiden myynniksi tai verotetuksi nestemääräksi. Eurostat 2025 kapea CN8-kori: WORLD-tuonti 143,4 milj. EUR; intra-EU 67,7 milj. EUR ja extra-EU 75,7 milj. EUR. 2025 Eurostat route data and exact AEAT net cash revenue of EUR 29.568m obtained; Modelo 573 collection architecture audited",
+      "missing": "AEAT:n toteutuneet kuukausittaiset L1/L2-millilitrat, L3/L4-grammat, verovelka, vähennykset, palautukset ja huhtikuun alkuvarastojen oikaisu. Kuluttajamyynti, kotimainen tuotanto ja varastomuutos ovat edelleen erillisiä puutteita. Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Actual monthly L1/L2 taxable millilitres, L3/L4 grams, deductions/refunds, domestic production, inventory change and consumer sell-out",
+      "how": "Submit PX-ES-001 through the authenticated AEAT written excise-information procedure for aggregate Model 573 bases; separately request EU-CEG aggregate sales; reconcile both to Comext without converting kilograms to litres",
       "tax": {
         "name": "Espanja",
         "sourceName": "Spain",
@@ -502,26 +518,26 @@
           "open": 0.0
         },
         "derivedRate": 0.0,
-        "derivedBasis": "WHO reports VAT only in snapshot; subsequent Spanish excise introduction must be handled separately",
+        "derivedBasis": "WHO reports VAT only in snapshot; Spain introduced a separate national excise from 1 April 2025",
         "taxedVolume": "not_obtained",
-        "taxRevenue": "not_obtained",
-        "verification": "Spanish 2025 law introduced 0.15/0.20 EUR per ml depending on nicotine strength; effective date and 2026 application require AEAT confirmation",
+        "taxRevenue": "29 568 000 EUR combined L1-L4 net cash revenue",
+        "verification": "Official AEAT monthly tables reconcile exact 2025 net revenue; Modelo 573 retains L1/L2 e-liquid ml separately from L3/L4 grams but public revenue tables combine them",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-esp.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 snapshot predates national change",
+        "period": "WHO Report 2025 snapshot predates the national excise; current law and revenue are verified separately from BOE/AEAT",
         "national": {
           "asOf": "2026-07-17",
           "status": "verified",
-          "rate": "0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; 0,20 EUR/ml yli 15 mg/ml",
+          "rate": "L1 0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; L2 0,20 EUR/ml yli 15 mg/ml; L3/L4 0,10 EUR/g",
           "taxedVolume": "not_obtained",
-          "actualRevenue": "30 milj. EUR",
-          "revenuePeriod": "2025",
+          "actualRevenue": "29 568 000 EUR netto",
+          "revenuePeriod": "2025-04_to_2025-12",
           "forecast": "not_obtained",
-          "scope": "Kansallinen erityinen valmistusvero e-savukenesteille ja muille siihen liittyville nikotiinituotteille",
-          "caveat": "Veroraportti kohdistaa 30 milj. EUR uudelle verolle mutta yhteenveto ei julkaise pelkkää e-nesteiden verotettua litramäärää",
-          "rateUrl": "https://sede.agenciatributaria.gob.es/Sede/en_gb/impuestos-especiales-medioambientales/impuestos-especiales-fabricacion/liquidos-cigarrillos-electronicos-otros-productos-tabaco/base-imponible-tipo-gravamen.html",
+          "scope": "Modelo 573:n yhdistetty L1-L4-vero: e-savukenesteet erikseen ml-pohjalla ja nikotiinipussit/muut nikotiinituotteet g-pohjalla",
+          "caveat": "AEAT:n tarkka nettokertymä täsmää yhdeksän kuukauden kassasarjaan ja pyöristyy vuosiraportin 30 milj. EUR:oon; summaa ei saa nimetä pelkäksi e-neste- tai myyntituloksi ennen L1/L2-veropohjien saamista",
+          "rateUrl": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
           "volumeUrl": "",
-          "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_sobre_Impuestos_Especiales/Contenidos/InformeIIEE.pdf"
+          "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf"
         }
       }
     },
@@ -1633,26 +1649,26 @@
         "open": 0.0
       },
       "derivedRate": 0.0,
-      "derivedBasis": "WHO reports VAT only in snapshot; subsequent Spanish excise introduction must be handled separately",
+      "derivedBasis": "WHO reports VAT only in snapshot; Spain introduced a separate national excise from 1 April 2025",
       "taxedVolume": "not_obtained",
-      "taxRevenue": "not_obtained",
-      "verification": "Spanish 2025 law introduced 0.15/0.20 EUR per ml depending on nicotine strength; effective date and 2026 application require AEAT confirmation",
+      "taxRevenue": "29 568 000 EUR combined L1-L4 net cash revenue",
+      "verification": "Official AEAT monthly tables reconcile exact 2025 net revenue; Modelo 573 retains L1/L2 e-liquid ml separately from L3/L4 grams but public revenue tables combine them",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-esp.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 snapshot predates national change",
+      "period": "WHO Report 2025 snapshot predates the national excise; current law and revenue are verified separately from BOE/AEAT",
       "national": {
         "asOf": "2026-07-17",
         "status": "verified",
-        "rate": "0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; 0,20 EUR/ml yli 15 mg/ml",
+        "rate": "L1 0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; L2 0,20 EUR/ml yli 15 mg/ml; L3/L4 0,10 EUR/g",
         "taxedVolume": "not_obtained",
-        "actualRevenue": "30 milj. EUR",
-        "revenuePeriod": "2025",
+        "actualRevenue": "29 568 000 EUR netto",
+        "revenuePeriod": "2025-04_to_2025-12",
         "forecast": "not_obtained",
-        "scope": "Kansallinen erityinen valmistusvero e-savukenesteille ja muille siihen liittyville nikotiinituotteille",
-        "caveat": "Veroraportti kohdistaa 30 milj. EUR uudelle verolle mutta yhteenveto ei julkaise pelkkää e-nesteiden verotettua litramäärää",
-        "rateUrl": "https://sede.agenciatributaria.gob.es/Sede/en_gb/impuestos-especiales-medioambientales/impuestos-especiales-fabricacion/liquidos-cigarrillos-electronicos-otros-productos-tabaco/base-imponible-tipo-gravamen.html",
+        "scope": "Modelo 573:n yhdistetty L1-L4-vero: e-savukenesteet erikseen ml-pohjalla ja nikotiinipussit/muut nikotiinituotteet g-pohjalla",
+        "caveat": "AEAT:n tarkka nettokertymä täsmää yhdeksän kuukauden kassasarjaan ja pyöristyy vuosiraportin 30 milj. EUR:oon; summaa ei saa nimetä pelkäksi e-neste- tai myyntituloksi ennen L1/L2-veropohjien saamista",
+        "rateUrl": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
         "volumeUrl": "",
-        "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_sobre_Impuestos_Especiales/Contenidos/InformeIIEE.pdf"
+        "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf"
       }
     },
     {
@@ -4274,6 +4290,334 @@
     "serviceUrl": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1",
     "budgetUrl": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
   },
+  "spainAeat": {
+    "rates": [
+      {
+        "epigraph": "L1",
+        "label": "Nikotiiniton tai enintään 15 mg/ml e-neste",
+        "baseUnit": "ml",
+        "rateEurPerUnit": 0.15,
+        "effectiveFrom": "2025-04-01",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
+        "tier": "A_official_consolidated_law"
+      },
+      {
+        "epigraph": "L2",
+        "label": "Yli 15 mg/ml e-neste",
+        "baseUnit": "ml",
+        "rateEurPerUnit": 0.2,
+        "effectiveFrom": "2025-04-01",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
+        "tier": "A_official_consolidated_law"
+      },
+      {
+        "epigraph": "L3",
+        "label": "Nikotiinipussit",
+        "baseUnit": "g",
+        "rateEurPerUnit": 0.1,
+        "effectiveFrom": "2025-04-01",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
+        "tier": "A_official_consolidated_law"
+      },
+      {
+        "epigraph": "L4",
+        "label": "Muut nikotiinituotteet",
+        "baseUnit": "g",
+        "rateEurPerUnit": 0.1,
+        "effectiveFrom": "2025-04-01",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4",
+        "tier": "A_official_consolidated_law"
+      }
+    ],
+    "revenue": [
+      {
+        "period": "2025-04",
+        "month": 4,
+        "netRevenueEur": 294000,
+        "cumulativeNetRevenueEur": 294000,
+        "derivation": "derived_from_may_cumulative_minus_may_monthly",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_05_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-05",
+        "month": 5,
+        "netRevenueEur": 2332000,
+        "cumulativeNetRevenueEur": 2626000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_05_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-06",
+        "month": 6,
+        "netRevenueEur": 2518000,
+        "cumulativeNetRevenueEur": 5144000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_06_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-07",
+        "month": 7,
+        "netRevenueEur": 5311000,
+        "cumulativeNetRevenueEur": 10455000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_07_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-08",
+        "month": 8,
+        "netRevenueEur": 4296000,
+        "cumulativeNetRevenueEur": 14751000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_08_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-09",
+        "month": 9,
+        "netRevenueEur": 4069000,
+        "cumulativeNetRevenueEur": 18820000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_09_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-10",
+        "month": 10,
+        "netRevenueEur": 2914000,
+        "cumulativeNetRevenueEur": 21734000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_10_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-11",
+        "month": 11,
+        "netRevenueEur": 4496000,
+        "cumulativeNetRevenueEur": 26230000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_11_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      },
+      {
+        "period": "2025-12",
+        "month": 12,
+        "netRevenueEur": 3338000,
+        "cumulativeNetRevenueEur": 29568000,
+        "derivation": "reported_exact_monthly_table",
+        "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf",
+        "scope": "combined_L1_L2_L3_L4_tax_not_e_liquid_only"
+      }
+    ],
+    "sensitivity": [
+      {
+        "scenario": "low_e_liquid_allocation",
+        "label": "Matala nestekohdistus",
+        "eLiquidRevenueSharePct": 40,
+        "l1SharePct": 90,
+        "l2SharePct": 10,
+        "blendedRateEurPerMl": 0.155,
+        "illustrativeVolumeMl": 76304516,
+        "illustrativeVolumeLitres": 76304.516,
+        "status": "scenario_not_actual_volume",
+        "limitation": "Combined cash revenue includes L3/L4 gram-based products, deductions, refunds and timing; the scenario is not a reported tax base, sales volume or market value."
+      },
+      {
+        "scenario": "central_e_liquid_allocation",
+        "label": "Keskimmäinen nestekohdistus",
+        "eLiquidRevenueSharePct": 70,
+        "l1SharePct": 85,
+        "l2SharePct": 15,
+        "blendedRateEurPerMl": 0.1575,
+        "illustrativeVolumeMl": 131413333,
+        "illustrativeVolumeLitres": 131413.333,
+        "status": "scenario_not_actual_volume",
+        "limitation": "Combined cash revenue includes L3/L4 gram-based products, deductions, refunds and timing; the scenario is not a reported tax base, sales volume or market value."
+      },
+      {
+        "scenario": "full_e_liquid_attribution",
+        "label": "Täysi nestekohdistus",
+        "eLiquidRevenueSharePct": 100,
+        "l1SharePct": 80,
+        "l2SharePct": 20,
+        "blendedRateEurPerMl": 0.16,
+        "illustrativeVolumeMl": 184800000,
+        "illustrativeVolumeLitres": 184800.0,
+        "status": "scenario_not_actual_volume",
+        "limitation": "Combined cash revenue includes L3/L4 gram-based products, deductions, refunds and timing; the scenario is not a reported tax base, sales volume or market value."
+      }
+    ],
+    "manifest": {
+      "generated_at": "2026-07-17T11:24:47.724582+00:00",
+      "authority": "Agencia Estatal de Administración Tributaria / Boletín Oficial del Estado",
+      "country": "Spain",
+      "tax": "Impuesto sobre los Líquidos para Cigarrillos Electrónicos y otros Productos relacionados con el Tabaco",
+      "evidence_period": "2025-04-01/2025-12-31",
+      "official_results": {
+        "exact_net_cash_revenue_eur": 29568000,
+        "annual_report_rounded_net_revenue_eur": 30000000,
+        "december_report_rounded_gross_revenue_eur": 32000000,
+        "first_cash_period": "2025-04",
+        "monthly_series_status": "exact_EUR_from_AEAT_tables; April derived by cumulative reconciliation"
+      },
+      "model_573": {
+        "filing_frequency": "monthly",
+        "special_first_filing_window": "April-June 2025 returns filed 1-20 July 2025",
+        "epigraphs": [
+          "L1_ml",
+          "L2_ml",
+          "L3_g",
+          "L4_g"
+        ],
+        "reported_fields": [
+          "taxable_base",
+          "statutory_rate",
+          "gross_liability",
+          "deductions",
+          "net_liability",
+          "total_net_liability"
+        ]
+      },
+      "audit": {
+        "monthly_rows": 9,
+        "monthly_sum_eur": 29568000,
+        "december_cumulative_eur": 29568000,
+        "monthly_sum_equals_december_cumulative": true,
+        "rounded_annual_statement_reconciles": true,
+        "rate_assertions_passed": 3,
+        "model_field_assertions_passed": 5
+      },
+      "volume_status": {
+        "actual_L1_L2_millilitres_publicly_obtained": false,
+        "reason": "AEAT cash report combines L1/L2 e-liquids with L3/L4 gram-based nicotine products",
+        "conditional_all_e_liquid_range_ml": {
+          "lower_if_all_L2_at_0_20_EUR_per_ml": 147840000,
+          "upper_if_all_L1_at_0_15_EUR_per_ml": 197120000,
+          "status": "conditional_mathematical_range_not_observed_volume"
+        },
+        "official_request": "PX-ES-001"
+      },
+      "request_route": {
+        "url": "https://sede.agenciatributaria.gob.es/Sede/procedimientos/D122.shtml",
+        "authentication": "DNI_electronic_certificate_or_Clave_PIN",
+        "status": "ready_for_portal_submission_not_submitted"
+      },
+      "sources": {
+        "annual_excise_report": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_sobre_Impuestos_Especiales/Contenidos/InformeIIEE.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_special_excise_report_2025.pdf",
+          "bytes": 137790,
+          "sha256": "c983dd8d0db4502a9f2dc5807bf96ff7c4801dce4519c549b22f0c4e57bd82a2"
+        },
+        "annual_revenue_page": {
+          "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
+          "local_path": "data/raw/spain_aeat/aeat_annual_revenue_2025.html",
+          "bytes": 23742,
+          "sha256": "0ed436f3fbf91a5de1c924d82deec78ff7af7f243231ca6a7af114211218fe30"
+        },
+        "model_573_order": {
+          "url": "https://www.boe.es/boe/dias/2025/01/31/pdfs/BOE-A-2025-1732.pdf",
+          "local_path": "data/raw/spain_aeat/boe_order_hac_86_2025_model_573.pdf",
+          "bytes": 355417,
+          "sha256": "719979bf2d3afd0f51199e6bd3a9c76e4f50a9cf5305cdddad967cdd67406cfa"
+        },
+        "consolidated_excise_law": {
+          "url": "https://www.boe.es/buscar/pdf/1992/BOE-A-1992-28741-consolidado.pdf",
+          "local_path": "data/raw/spain_aeat/boe_excise_law_38_1992_consolidated.pdf",
+          "bytes": 554907,
+          "sha256": "ffb12ee996e23d58e90d90ada2750cde15c4b6569cb8297cb7585d3bb0b6e8f9"
+        },
+        "model_573_procedure": {
+          "url": "https://sede.agenciatributaria.gob.es/Sede/procedimientoini/DI10.shtml",
+          "local_path": "data/raw/spain_aeat/aeat_model_573.html",
+          "bytes": 13780,
+          "sha256": "29f68c8480edc78f4025ca23502e718e0bf1c225489f0f49fcffe9744c5e0af0"
+        },
+        "written_excise_request": {
+          "url": "https://sede.agenciatributaria.gob.es/Sede/procedimientos/D122.shtml",
+          "local_path": "data/raw/spain_aeat/aeat_written_excise_request.html",
+          "bytes": 10969,
+          "sha256": "503e4a75825776fd814b5e1d56f6444ba6eca9362e7dbd739a14386cc3b58a85"
+        },
+        "monthly_revenue_2025_04": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_04_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-04.pdf",
+          "bytes": 6381934,
+          "sha256": "ee11e50de0d4117abf8ae73d42b27a8e1d6ddf7e2f91ad61d5ba046891861db1"
+        },
+        "monthly_revenue_2025_05": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_05_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-05.pdf",
+          "bytes": 5736090,
+          "sha256": "eb3b0ed043fd330592ebe3b0c72826536b3f26b9e98dabafa32a23f4fb112a66"
+        },
+        "monthly_revenue_2025_06": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_06_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-06.pdf",
+          "bytes": 5673277,
+          "sha256": "c4079a6b8c6480559467bedbcc230e572dc4e41d01ddec4bd8841bd2f33973c0"
+        },
+        "monthly_revenue_2025_07": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_07_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-07.pdf",
+          "bytes": 6195048,
+          "sha256": "760efe56825bf8a8a405ffd83cc7340658d206de340a89fdff51a72839c236d9"
+        },
+        "monthly_revenue_2025_08": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_08_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-08.pdf",
+          "bytes": 5889369,
+          "sha256": "ae511bef254eb43cf0eb4432019b449d2211a86803c52702d62cffef04922ab0"
+        },
+        "monthly_revenue_2025_09": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_09_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-09.pdf",
+          "bytes": 5766332,
+          "sha256": "97b248efe6f90aef9829c30af3b2db40a4d09b79b7db863c6240a2cf4f24eb6e"
+        },
+        "monthly_revenue_2025_10": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_10_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-10.pdf",
+          "bytes": 6570969,
+          "sha256": "ba57d09c6877f7b5668e962be7f5f63e9454e3b2cb8236afd997281f88747650"
+        },
+        "monthly_revenue_2025_11": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_11_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-11.pdf",
+          "bytes": 5601402,
+          "sha256": "0674ab35ea3921d20ecc07e6697bdb0a5f588dc68b44ebb7683a1236e68576e9"
+        },
+        "monthly_revenue_2025_12": {
+          "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf",
+          "local_path": "data/raw/spain_aeat/aeat_monthly_revenue_2025-12.pdf",
+          "bytes": 6384287,
+          "sha256": "295899fb71e8595c53bb21bdaf9cbc956f3e78c04d29c12e181ecf95fb213500"
+        }
+      }
+    },
+    "exactNetRevenueEur": 29568000,
+    "roundedAnnualRevenueEur": 30000000,
+    "roundedGrossRevenueEur": 32000000,
+    "conditionalRange": {
+      "lower_if_all_L2_at_0_20_EUR_per_ml": 147840000,
+      "upper_if_all_L1_at_0_15_EUR_per_ml": 197120000,
+      "status": "conditional_mathematical_range_not_observed_volume"
+    },
+    "actualLiquidVolumeObtained": false,
+    "request": {
+      "id": "PX-ES-001",
+      "authority": "Agencia Estatal de Administración Tributaria",
+      "status": "ready_for_portal_submission",
+      "channel": "https://sede.agenciatributaria.gob.es/Sede/procedimientos/D122.shtml",
+      "scope": "2025 April-December and available 2026 monthly aggregate Modelo 573 bases for L1/L2 in ml and L3/L4 in g; gross liability deductions net liability cash received refunds opening-stock regularisation and non-identifying return/establishment counts",
+      "scopeFi": "Kuukausittaiset L1/L2-millilitrat, L3/L4-grammat, verovelat, vähennykset, palautukset ja huhtikuun alkuvarastojen oikaisu."
+    },
+    "annualReportUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
+    "model573Url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -6621,6 +6965,20 @@
       "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
     },
     {
+      "grade": "A",
+      "title": "Espanja AEAT · vuoden 2025 toteutunut verokertymä",
+      "coverage": "Huhti-joulukuun tarkka nettokassasarja 29 568 000 EUR; kuukausisumma täsmää joulukuun kumulatiiviseen taulukkoon",
+      "use": "Toteutunut kansallinen verotuottoankkuri yhdistetylle L1-L4-verolle; ei nimetä e-nesteiden myynniksi",
+      "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf"
+    },
+    {
+      "grade": "A",
+      "title": "Espanja BOE · Modelo 573",
+      "coverage": "Kuukausittaiset L1/L2-millilitrat sekä L3/L4-grammat, verokanta, bruttovelka, vähennykset ja nettovelka",
+      "use": "Todistaa täsmällisen nestemäärän keruun ja rajaa PX-ES-001-aggregointipyynnön",
+      "url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"
+    },
+    {
       "grade": "C",
       "title": "Kanadan dokumentoitu vähittäishintaotos",
       "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa",
@@ -6735,6 +7093,16 @@
       "status": "ready_for_confirmation",
       "sent": "—",
       "followUp": "—"
+    },
+    {
+      "id": "PX-ES-001",
+      "market": "Espanja",
+      "authority": "Agencia Estatal de Administración Tributaria",
+      "channel": "https://sede.agenciatributaria.gob.es/Sede/procedimientos/D122.shtml",
+      "scope": "2025 April-December and available 2026 monthly aggregate Modelo 573 bases for L1/L2 in ml and L3/L4 in g; gross liability deductions net liability cash received refunds opening-stock regularisation and non-identifying return/establishment counts",
+      "status": "ready_for_portal_submission",
+      "sent": "—",
+      "followUp": "—"
     }
   ],
   "tasks": [
@@ -6796,6 +7164,12 @@
       "priority": "high",
       "title": "Italian ADM:n toteutuneet PLI-aggregaatit",
       "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.",
+      "status": "active"
+    },
+    {
+      "priority": "high",
+      "title": "Espanjan AEAT L1/L2-veropohjat",
+      "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.",
       "status": "active"
     },
     {

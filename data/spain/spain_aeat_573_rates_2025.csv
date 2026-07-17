@@ -1,0 +1,5 @@
+epigraph,product,taxable_base_unit,rate_eur_per_unit,effective_from,source_url,source_tier
+L1,e-liquid without nicotine or at most 15 mg nicotine per ml,ml,0.15,2025-04-01,https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4,A_official_consolidated_law
+L2,e-liquid above 15 mg nicotine per ml,ml,0.20,2025-04-01,https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4,A_official_consolidated_law
+L3,nicotine pouches,g,0.10,2025-04-01,https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4,A_official_consolidated_law
+L4,other nicotine products,g,0.10,2025-04-01,https://www.boe.es/buscar/act.php?id=BOE-A-1992-28741#a6-4,A_official_consolidated_law

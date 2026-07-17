@@ -48,6 +48,17 @@ async function check(viewport, label) {
 
   await page.locator('[data-view="taxes"]').dispatchEvent("click");
   await page.waitForSelector('[data-view-panel="taxes"].active');
+  assert.equal(await page.locator("#spain-aeat-summary tbody tr").count(), 4);
+  assert.equal(await page.locator("#spain-aeat-revenue tbody tr").count(), 9);
+  assert.equal(await page.locator("#spain-aeat-rates tbody tr").count(), 4);
+  assert.equal(await page.locator("#spain-aeat-sensitivity tbody tr").count(), 3);
+  assert.match(await page.locator("#spain-aeat-summary").innerText(), /29,568 milj\. €/);
+  assert.match(await page.locator("#spain-aeat-revenue").innerText(), /5,311 milj\. €/);
+  assert.match(await page.locator("#spain-aeat-rates").innerText(), /L1/);
+  assert.match(await page.locator("#spain-aeat-rates").innerText(), /L4/);
+  assert.match(await page.locator("#spain-aeat-sensitivity").innerText(), /ei toteutunut volyymi/i);
+  await page.locator("#spain-aeat-summary").screenshot({ path: `/tmp/pixan-spain-summary-${label}.png` });
+  await page.locator("#spain-aeat-revenue").screenshot({ path: `/tmp/pixan-spain-revenue-${label}.png` });
   assert.equal(await page.locator("#italy-adm-summary tbody tr").count(), 4);
   assert.equal(await page.locator("#italy-adm-rates tbody tr").count(), 4);
   assert.equal(await page.locator("#italy-adm-forecast tbody tr").count(), 6);
@@ -91,6 +102,14 @@ async function check(viewport, label) {
       "data/raw/italy_adm/adm_pli_rate_2025-01.pdf",
       "data/raw/italy_adm/adm_pli_rate_2025-02.pdf",
       "data/raw/italy_adm/italy_budget_2026_table17_page.pdf",
+      "data/spain/spain_aeat_net_revenue_monthly_2025.csv",
+      "data/spain/spain_aeat_573_rates_2025.csv",
+      "data/spain/spain_aeat_liquid_sensitivity_2025.csv",
+      "data/spain/spain_aeat_request_scope_2026-07-17.csv",
+      "data/spain/spain_aeat_access_manifest_2026-07-17.json",
+      "data/raw/spain_aeat/aeat_special_excise_report_2025.pdf",
+      "data/raw/spain_aeat/aeat_monthly_revenue_2025-12.pdf",
+      "data/raw/spain_aeat/boe_order_hac_86_2025_model_573.pdf",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);
@@ -113,7 +132,7 @@ async function check(viewport, label) {
 try {
   await check({ width: 1440, height: 1000 }, "desktop");
   await check({ width: 390, height: 844 }, "mobile");
-  process.stdout.write("Dashboard QA passed: Canada pricing 3/10/3, Germany pricing 1/10/3, Italy ADM 4 rates/6 forecast rows/3 reporting flows, no runtime errors, mobile body fits viewport.\n");
+  process.stdout.write("Dashboard QA passed: Canada pricing 3/10/3, Germany pricing 1/10/3, Spain AEAT 9 revenue rows/4 rates/3 scenarios, Italy ADM 4 rates/6 forecast rows/3 reporting flows, no runtime errors, mobile body fits viewport.\n");
 } finally {
   await browser.close();
 }

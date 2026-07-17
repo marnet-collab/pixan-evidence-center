@@ -148,6 +148,18 @@ def build_payload() -> dict:
     italy_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "italy_adm_access_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
+    spain_rate_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "spain_aeat_573_rates_2025.csv"
+    )
+    spain_revenue_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "spain_aeat_net_revenue_monthly_2025.csv"
+    )
+    spain_sensitivity_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "spain_aeat_liquid_sensitivity_2025.csv"
+    )
+    spain_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "spain_aeat_access_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -657,6 +669,22 @@ def build_payload() -> dict:
             "kulutussummasta ja laitemyynti haettava erillisestä lähteestä. "
             + country["missing"]
         )
+    for country in countries:
+        if country["sourceName"] != "Spain":
+            continue
+        country["current"] = (
+            "AEAT:n tarkka huhti-joulukuun 2025 nettokassasarja täsmää 29 568 000 euroon, joka pyöristyy "
+            "vuosiraportin 30 milj. euroon. Modelo 573 kerää L1/L2-e-nesteet millilitroina erillään "
+            "L3/L4-tuotteiden grammoista. Julkinen kassasarja yhdistää neljä ryhmää, joten sitä ei nimetä "
+            "e-nesteiden myynniksi tai verotetuksi nestemääräksi. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "AEAT:n toteutuneet kuukausittaiset L1/L2-millilitrat, L3/L4-grammat, verovelka, vähennykset, "
+            "palautukset ja huhtikuun alkuvarastojen oikaisu. Kuluttajamyynti, kotimainen tuotanto ja "
+            "varastomuutos ovat edelleen erillisiä puutteita. "
+            + country["missing"]
+        )
 
     contacts = []
     for row in requests:
@@ -929,6 +957,76 @@ def build_payload() -> dict:
         "budgetUrl": italy_forecast_rows[0]["source_url"],
     }
 
+    spain_rate_labels = {
+        "L1": "Nikotiiniton tai enintään 15 mg/ml e-neste",
+        "L2": "Yli 15 mg/ml e-neste",
+        "L3": "Nikotiinipussit",
+        "L4": "Muut nikotiinituotteet",
+    }
+    spain_scenario_labels = {
+        "low_e_liquid_allocation": "Matala nestekohdistus",
+        "central_e_liquid_allocation": "Keskimmäinen nestekohdistus",
+        "full_e_liquid_attribution": "Täysi nestekohdistus",
+    }
+    spain_request = next(row for row in requests if row["request_id"] == "PX-ES-001")
+    spain_aeat = {
+        "rates": [
+            {
+                "epigraph": row["epigraph"],
+                "label": spain_rate_labels[row["epigraph"]],
+                "baseUnit": row["taxable_base_unit"],
+                "rateEurPerUnit": float(row["rate_eur_per_unit"]),
+                "effectiveFrom": row["effective_from"],
+                "url": row["source_url"],
+                "tier": row["source_tier"],
+            }
+            for row in spain_rate_rows
+        ],
+        "revenue": [
+            {
+                "period": row["cash_period"],
+                "month": int(row["month"]),
+                "netRevenueEur": int(row["net_revenue_eur"]),
+                "cumulativeNetRevenueEur": int(row["cumulative_net_revenue_eur"]),
+                "derivation": row["derivation"],
+                "url": row["source_url"],
+                "scope": row["scope"],
+            }
+            for row in spain_revenue_rows
+        ],
+        "sensitivity": [
+            {
+                "scenario": row["scenario"],
+                "label": spain_scenario_labels[row["scenario"]],
+                "eLiquidRevenueSharePct": int(row["assumed_e_liquid_share_of_combined_revenue_pct"]),
+                "l1SharePct": int(row["assumed_L1_share_pct"]),
+                "l2SharePct": int(row["assumed_L2_share_pct"]),
+                "blendedRateEurPerMl": float(row["blended_rate_eur_per_ml"]),
+                "illustrativeVolumeMl": int(row["illustrative_e_liquid_volume_ml"]),
+                "illustrativeVolumeLitres": float(row["illustrative_e_liquid_volume_litres"]),
+                "status": row["status"],
+                "limitation": row["limitation"],
+            }
+            for row in spain_sensitivity_rows
+        ],
+        "manifest": spain_manifest,
+        "exactNetRevenueEur": spain_manifest["official_results"]["exact_net_cash_revenue_eur"],
+        "roundedAnnualRevenueEur": spain_manifest["official_results"]["annual_report_rounded_net_revenue_eur"],
+        "roundedGrossRevenueEur": spain_manifest["official_results"]["december_report_rounded_gross_revenue_eur"],
+        "conditionalRange": spain_manifest["volume_status"]["conditional_all_e_liquid_range_ml"],
+        "actualLiquidVolumeObtained": spain_manifest["volume_status"]["actual_L1_L2_millilitres_publicly_obtained"],
+        "request": {
+            "id": spain_request["request_id"],
+            "authority": spain_request["authority"],
+            "status": spain_request["status"],
+            "channel": spain_request["recipient"],
+            "scope": spain_request["scope"],
+            "scopeFi": "Kuukausittaiset L1/L2-millilitrat, L3/L4-grammat, verovelat, vähennykset, palautukset ja huhtikuun alkuvarastojen oikaisu.",
+        },
+        "annualReportUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
+        "model573Url": "https://www.boe.es/eli/es/o/2025/01/13/hac86",
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -950,6 +1048,7 @@ def build_payload() -> dict:
             {"label": "Etelä-Korea 2025", "value": f"{korea_device['import_value_thousand_usd'] / 1000:.3f}".replace(".", ",") + " milj. USD", "detail": "KCS HS6 · täsmällinen laiteluokka", "tone": "blue"},
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
+            {"label": "Espanja 2025", "value": "29,568 milj. €", "detail": "AEAT:n tarkka L1-L4-nettokertymä", "tone": "gold"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
         ],
         "anchors": [
@@ -1002,6 +1101,16 @@ def build_payload() -> dict:
                 "limit": "Tulliarvo ei ole vähittäismyyntiä eikä kata Yhdysvalloissa valmistettuja tuotteita, vähittäis-/tukkukatetta, varastoja tai laitonta kauppaa.",
                 "source": "U.S. Census Bureau · Merchandise Trade Imports",
                 "url": "https://www.census.gov/foreign-trade/data/IMDB.html",
+            },
+            {
+                "grade": "A",
+                "market": "Espanja",
+                "title": "Toteutunut nettokassakertymä ja Modelo 573",
+                "value": "29 568 000 EUR",
+                "detail": "AEAT:n huhti-joulukuun 2025 kuukausirivit täsmäävät tarkkaan vuosisummaan. Modelo 573 erottaa L1/L2-nesteiden millilitrat L3/L4-tuotteiden grammoista.",
+                "limit": "Kassakertymä kattaa kaikki neljä epigrafia. Se ei ole pelkkä e-nestevero, nestemäärä, vähittäismyynti tai markkina-arvo. L1/L2-veropohjat on pyydettävä erikseen.",
+                "source": "AEAT / BOE · vuoden 2025 veroraportit ja Modelo 573",
+                "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
             },
             {
                 "grade": "B",
@@ -1085,6 +1194,7 @@ def build_payload() -> dict:
         "canadaRetail": canada_retail,
         "germanyRetail": germany_retail,
         "italyAdm": italy_adm,
+        "spainAeat": spain_aeat,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -1166,6 +1276,8 @@ def build_payload() -> dict:
             {"grade": "A", "title": "Italia ADM · PLI-PAT ja kuukausiraportin mallipohja", "coverage": "Puolikuukausi- ja kuukausiraportointi: tuotekoodi, pakkauskoko, nikotiinipitoisuus, pakkausmäärä ja kokonaismäärä kolmessa toimitusvirrassa", "use": "Todistaa viranomaisen keräämän datan rakenteen ja täsmällisen aggregaattipyynnön toteutettavuuden; ei vielä kansallinen myyntisumma", "url": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1"},
             {"grade": "A", "title": "Italia ADM · vuoden 2025 PLI-verokannat", "coverage": "Nikotiinillinen 0,143849 EUR/ml tammikuussa ja 0,146966 EUR/ml helmikuusta; nikotiiniton/aromit 0,098896 ja 0,101039 EUR/ml", "use": "Lakisääteinen verokanta kuukausikohtaiseen toteumalaskentaan, kun toteutuneet kategoriavolyymit saadaan", "url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530"},
             {"grade": "B", "title": "Italian parlamentti · budjettiselvityksen taulukko 17", "coverage": "Vuoden 2026 virallinen tekninen ennuste 1 107 249 007 ml ja 167 733 820 EUR verotuottoa", "use": "Viranomaisennuste markkinan suuruusluokan vertailuun; pidetään erillään toteutuneesta myynnistä ja verokertymästä", "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"},
+            {"grade": "A", "title": "Espanja AEAT · vuoden 2025 toteutunut verokertymä", "coverage": "Huhti-joulukuun tarkka nettokassasarja 29 568 000 EUR; kuukausisumma täsmää joulukuun kumulatiiviseen taulukkoon", "use": "Toteutunut kansallinen verotuottoankkuri yhdistetylle L1-L4-verolle; ei nimetä e-nesteiden myynniksi", "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf"},
+            {"grade": "A", "title": "Espanja BOE · Modelo 573", "coverage": "Kuukausittaiset L1/L2-millilitrat sekä L3/L4-grammat, verokanta, bruttovelka, vähennykset ja nettovelka", "use": "Todistaa täsmällisen nestemäärän keruun ja rajaa PX-ES-001-aggregointipyynnön", "url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
             {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
@@ -1181,6 +1293,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Kiina GACC tullimenettelyineen", "detail": "Virallinen maksuton reitti, kansallinen vastaanottaja ja 2025 HS8 85434000/24041200/24041910/24041990 on varmistettu. Kiinankielinen hakemus pyytää neljä taulukkoa: kohde vs. läpikulkumaa + tullimenettely, tullipaikka + kotimainen alue, rekisteröintialue + omistus sekä kuljetustapa. PRH:n 17.7.2026 yritystodiste on tarkastettu ja yksityinen lähetyspaketti odottaa lähetysvahvistusta.", "status": "active"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.", "status": "done"},
             {"priority": "high", "title": "Italian ADM:n toteutuneet PLI-aggregaatit", "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
+            {"priority": "high", "title": "Espanjan AEAT L1/L2-veropohjat", "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1333,6 +1446,29 @@ def publish_italy_evidence() -> None:
         shutil.copy2(raw / name, public_raw / name)
 
 
+def publish_spain_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "spain_aeat"
+    public_data = DASHBOARD_DIR / "data" / "spain"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "spain_aeat"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "spain_aeat_net_revenue_monthly_2025.csv",
+        "spain_aeat_573_rates_2025.csv",
+        "spain_aeat_liquid_sensitivity_2025.csv",
+        "spain_aeat_request_scope_2026-07-17.csv",
+        "spain_aeat_access_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "aeat_special_excise_report_2025.pdf",
+        "aeat_monthly_revenue_2025-12.pdf",
+        "boe_order_hac_86_2025_model_573.pdf",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
@@ -1341,6 +1477,7 @@ def main() -> None:
     publish_korea_evidence()
     publish_germany_evidence()
     publish_italy_evidence()
+    publish_spain_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

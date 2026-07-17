@@ -12,6 +12,7 @@
   const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
   const money = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. USD";
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
+  const moneyEur3 = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. €";
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
   const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
   const eur = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " €";
@@ -28,6 +29,7 @@
     queued: "Jonossa",
     requested: "Pyydetty",
     ready_for_confirmation: "Odottaa lähetysvahvistusta",
+    ready_for_portal_submission: "Valmis viranomaisportaaliin",
     active: "Työn alla",
     done: "Valmis",
     blocked: "Estynyt",
@@ -450,6 +452,54 @@
       </table>`;
     $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} WHO-numeerista osumaa (${hitRate} %); ${audit.nationalVerifiedCount} kansallista varmennusta; ${audit.officialRevenueCount} toteutunutta, laskennallista tai rajattua verotuottoriviä.</strong><p>${esc(audit.method)}</p><p>WHO:n open-system-otoksessa specific excise oli yli nollan ${audit.specificExciseCount} maassa ja ${audit.banCount} profiilia ilmoitti myyntikiellon. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi; ennuste säilytetään eri kentässä.</p>`;
 
+    const spain = data.spainAeat;
+    const spainPeak = [...spain.revenue].sort((a, b) => b.netRevenueEur - a.netRevenueEur)[0];
+    $("#spain-aeat-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Varmennettu tulos</th><th>Todistusvoima</th><th>Rajaus / seuraava askel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AEAT:n tarkka nettokassasarja</strong></td><td><strong>${moneyEur3(spain.exactNetRevenueEur)}</strong> · 9 kuukausiriviä</td><td>${tag("verified", "A-tason toteutunut verotuotto")}</td><td>Yhdistetty L1-L4; ei pelkkä e-neste</td></tr>
+          <tr><td><strong>AEAT:n vuosiraportti</strong></td><td>${moneyEur(spain.roundedAnnualRevenueEur)} pyöristetty nettokertymä</td><td>${tag("verified", "Täsmää tarkkaan kassasarjaan")}</td><td><a class="source-link" href="${esc(spain.annualReportUrl)}" target="_blank" rel="noopener">AEAT:n vuosiraportti ↗</a></td></tr>
+          <tr><td><strong>Modelo 573</strong></td><td>L1/L2 millilitroina · L3/L4 grammoina · verovelka ja vähennykset erikseen</td><td>${tag("verified", "A-tason kenttärakenne")}</td><td><a class="source-link" href="${esc(spain.model573Url)}" target="_blank" rel="noopener">BOE:n määräys ↗</a></td></tr>
+          <tr><td><strong>${esc(spain.request.id)}</strong></td><td>${esc(spain.request.scopeFi)}</td><td>${tag(spain.request.status)}</td><td><a class="source-link" href="${esc(spain.request.channel)}" target="_blank" rel="noopener">AEAT:n tunnistautuva kanava ↗</a></td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi:</strong> kuukausisumma ${moneyEur3(spain.manifest.audit.monthly_sum_eur)} = joulukuun kumulatiivinen ${moneyEur3(spain.manifest.audit.december_cumulative_eur)}. Suurin kuukausi oli ${esc(spainPeak.period)}, ${moneyEur3(spainPeak.netRevenueEur)}. Toteutuneet L1/L2-millilitrat on saatu: <code>${spain.actualLiquidVolumeObtained ? "true" : "false"}</code>.</div>`;
+
+    $("#spain-aeat-revenue").innerHTML = `
+      <table>
+        <thead><tr><th>Kassakuukausi</th><th>Nettokertymä</th><th>Kumulatiivinen nettokertymä</th><th>Lähde / täsmäytys</th></tr></thead>
+        <tbody>${spain.revenue.map((item) => `<tr>
+          <td><strong>${esc(item.period)}</strong></td><td class="num"><strong>${moneyEur3(item.netRevenueEur)}</strong></td><td class="num">${moneyEur3(item.cumulativeNetRevenueEur)}</td>
+          <td>${item.derivation === "derived_from_may_cumulative_minus_may_monthly" ? "Huhtikuu = toukokuun kumulatiivinen − toukokuun kuukausirivi" : "AEAT:n tarkka kuukausitaulukko"} <a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">PDF ↗</a></td>
+        </tr>`).join("")}</tbody>
+        <tfoot><tr><td><strong>2025 yhteensä</strong></td><td class="num"><strong>${moneyEur3(spain.exactNetRevenueEur)}</strong></td><td class="num"><strong>${moneyEur3(spain.exactNetRevenueEur)}</strong></td><td>9/9 kuukausiriviä täsmää</td></tr></tfoot>
+      </table>
+      <div class="meta-line table-note"><strong>Kassaperusta:</strong> sarja mittaa valtiolle kertynyttä nettotuloa, ei suoraan saman kuukauden kulutukseen luovutusta. Huhtikuun 2025 alkuvarastojen oikaisu ja ilmoitus-/maksuajankohdan viive pyydetään PX-ES-001:llä erikseen.</div>`;
+
+    $("#spain-aeat-rates").innerHTML = `
+      <table>
+        <thead><tr><th>Epigrafi</th><th>Tuoteryhmä</th><th>Veropohjan yksikkö</th><th>Virallinen kanta</th><th>Voimassa / käyttötapa</th></tr></thead>
+        <tbody>${spain.rates.map((item) => `<tr>
+          <td><strong>${esc(item.epigraph)}</strong></td><td>${esc(item.label)}</td><td>${esc(item.baseUnit === "ml" ? "millilitra" : "gramma")}</td>
+          <td class="num"><strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.rateEurPerUnit)} €/${esc(item.baseUnit)}</strong></td>
+          <td>${esc(item.effectiveFrom)} alkaen · <a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">BOE ↗</a></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Oikea muunnos:</strong> vain L1- ja L2-veropohjat ovat millilitroja. L3- ja L4-grammoja ei muuteta nesteeksi eikä yhdistetä e-nestevolyymiin.</div>`;
+
+    $("#spain-aeat-sensitivity").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>Oletettu e-nesteosuus yhdistelmäverosta</th><th>Oletettu L1/L2-jako</th><th>Sekoitettu kanta</th><th>Havainnollinen määrä</th><th>Luokitus</th></tr></thead>
+        <tbody>${spain.sensitivity.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${integer(item.eLiquidRevenueSharePct)} %</td><td class="num">${integer(item.l1SharePct)} / ${integer(item.l2SharePct)} %</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(item.blendedRateEurPerMl)} €/ml</td>
+          <td class="num"><strong>${integer(item.illustrativeVolumeMl)} ml</strong><div class="meta-line">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(item.illustrativeVolumeLitres)} l</div></td>
+          <td>${tag("partial", "Oletus — ei toteutunut volyymi")}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Ei markkina-arvio:</strong> skenaariot jakavat toteutunutta yhdistelmäveroa oletuksilla. Kassakertymä sisältää L3/L4-tuotteita sekä mahdolliset vähennykset, palautukset ja ajalliset erot. Edes “täysi kohdistus” ei ole viranomaisen ilmoittama nestemäärä.</div>`;
+
     const italy = data.italyAdm;
     const italy2026 = italy.forecastTotals.find((item) => item.year === 2026);
     $("#italy-adm-summary").innerHTML = `
@@ -549,6 +599,7 @@
     data.codes.forEach((item) => rows.push({ view: "customs", title: `HS ${item.code} · ${item.title}`, detail: item.detail }));
     data.taxes.forEach((item) => rows.push({ view: "taxes", title: `${item.name} · verotus`, detail: `${item.verification} ${item.period}` }));
     rows.push({ view: "taxes", title: "Italia · ADM PLI-PAT", detail: `Vuoden 2025 verokannat, ${italy2026Search()} ml:n virallinen 2026 budjettiennuste ja PX-IT-001 toteumapyyntö` });
+    rows.push({ view: "taxes", title: "Espanja · AEAT / Modelo 573", detail: `${moneyEur3(data.spainAeat.exactNetRevenueEur)} tarkka nettokertymä, L1/L2-millilitrat ja PX-ES-001` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }
