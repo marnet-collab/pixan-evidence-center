@@ -27,6 +27,8 @@ U.S. Census Bureaun vuoden 2025 HTS10-aineiston johdetut summat, alkuperämaat, 
 
 Statistics Canadan vuoden 2025 CIMT-aineiston HS10-tuontisummat, alkuperämaat, tullausmaakunnat, kuukausisarja sekä HS8-vienti-/jälleenvientilaskelma julkaistaan `data/canada/`-kansiossa. Julkiseen repoon kopioidaan kompaktit HS10-, HS6- ja vientilähdeotteet; kolme alkuperäistä ZIP-arkistoa jäävät paikalliseen datahuoneeseen ja niiden SHA-256-tunnisteet julkaistaan manifestissa. Auditointi täsmäyttää 608 valittua HS10-riviä viralliseen HS6-sarjaan 564 tarkastusavaimella ilman eroa.
 
+Kiinan GACC-reitin julkinen manifesti julkaistaan `data/china/`-kansiossa. Se todentaa maksuttoman virallisen palvelureitin, kansallisen vastaanottajan, 2025 HS8 -nimikkeet 85434000/24041200/24041910/24041990, hakemuksen tarkistussummat ja sen, että numeerista tuotetason tulliaineistoa ei ole vielä saatu. Varsinaista hakemuslomaketta tai yrityksen rekisteritodistusta ei julkaista sivustolla.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti

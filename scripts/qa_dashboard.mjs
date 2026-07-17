@@ -36,6 +36,7 @@ async function check(viewport, label) {
       "data/canada/canada_retail_stress_test_2026-07-17.csv",
       "data/canada/canada_retail_price_manifest_2026-07-17.json",
       "data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json",
+      "data/china/china_gacc_access_manifest_2026-07-17.json",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);

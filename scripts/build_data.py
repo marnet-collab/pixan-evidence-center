@@ -34,7 +34,7 @@ def status_for_country(name: str) -> str:
     if name in {
         "United States", "Japan", "EU-27", "France", "Italy", "Spain",
         "Poland", "Netherlands", "Belgium", "Luxembourg", "Sweden",
-        "Denmark", "Austria",
+        "Denmark", "Austria", "China",
     }:
         return "partial"
     return "missing"
@@ -843,6 +843,7 @@ def build_payload() -> dict:
             {"grade": "B", "title": "Japan Customs / MOF · 2025 revised", "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain", "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys", "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"},
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
             {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
+            {"grade": "B", "title": "China Customs · virallinen tilastopalvelu", "coverage": "Maksuton kansallinen hakemusreitti, 2025 HS8 -nimikkeet ja enintään viiden ryhmittelyn taulukkorakenne", "use": "Kiinan alkuperä-/kohdemaan, lähetys-/saapumismaan, tullimenettelyn ja kotimaisen reitin hankintaperusta; ei vielä markkina-arvoluku", "url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
         ],
         "contacts": contacts,
@@ -853,7 +854,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "Valmis: CIMT HS10-tuonti alkuperämaittain sekä HS8 total/domestic/re-export, 608 lähderiviä ja 564 HS6-tarkastusavainta nollaerolla. Avoinna vain alkuperämaa × suora lähetysmaa -ristiintaulukko ja 2025 Health Canada -myynti.", "status": "done"},
             {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
             {"priority": "medium", "title": "Kanadan vähittäishintaotos", "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.", "status": "done"},
-            {"priority": "medium", "title": "Kiina GACC tullimenettelyineen", "detail": "Hae alkuperä, lähetysmaa, tullimenettely ja maahantuojan sijainti; erottele vientihubi ja kotimarkkina.", "status": "queued"},
+            {"priority": "high", "title": "Kiina GACC tullimenettelyineen", "detail": "Virallinen maksuton reitti, kansallinen vastaanottaja ja 2025 HS8 85434000/24041200/24041910/24041990 on varmistettu. Kiinankielinen hakemus pyytää neljä taulukkoa: kohde vs. läpikulkumaa + tullimenettely, tullipaikka + kotimainen alue, rekisteröintialue + omistus sekä kuljetustapa. PRH:n 17.7.2026 yritystodiste on tarkastettu ja yksityinen lähetyspaketti odottaa lähetysvahvistusta.", "status": "active"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
@@ -927,10 +928,20 @@ def publish_canada_evidence() -> None:
     )
 
 
+def publish_china_access_evidence() -> None:
+    public_data = DASHBOARD_DIR / "data" / "china"
+    public_data.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(
+        PROJECT_DIR / "data" / "derived" / "china_gacc_access_manifest_2026-07-17.json",
+        public_data / "china_gacc_access_manifest_2026-07-17.json",
+    )
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
     publish_canada_evidence()
+    publish_china_access_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

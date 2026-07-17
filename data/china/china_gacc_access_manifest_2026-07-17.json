@@ -1,0 +1,54 @@
+{
+  "as_of": "2026-07-17",
+  "authority": "General Administration of Customs of the People's Republic of China",
+  "service": {
+    "name": "Provision of customs statistics services to the public",
+    "service_code": "002029004002",
+    "guide_url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html",
+    "national_recipient": "dwtjfw@mail.customs.gov.cn",
+    "fee": "none",
+    "form_required": true,
+    "applicant_proof_required": true,
+    "maximum_grouping_dimensions_per_result": 5,
+    "maximum_hs8_codes_when_hs8_is_first_group": 500,
+    "email_result_limit_mb": 50
+  },
+  "methodology": {
+    "url": "https://english.customs.gov.cn/statics/55dd0995-11de-4e05-a7e3-0dd5c4364f27.html",
+    "source_records": "verified customs declarations and supporting documents",
+    "import_partner_fields": ["country of origin", "country of consignment"],
+    "export_partner_fields": ["country of final destination", "country of consignment"],
+    "valuation_caveat": "Customs statistical value is a border value and is not retail sales."
+  },
+  "classification": {
+    "year": 2025,
+    "tariff_url": "https://gss.mof.gov.cn/gzdt/zhengcefabu/202412/t20241230_3950785.htm",
+    "codes": [
+      {"hs8": "85434000", "name_zh": "电子烟及类似的个人电子雾化设备", "role": "devices"},
+      {"hs8": "24041200", "name_zh": "不含烟草或再造烟草，含尼古丁的非经燃烧吸用的产品", "role": "nicotine inhalation products"},
+      {"hs8": "24041910", "name_zh": "其他含烟草代用品的非经燃烧吸入品", "role": "other inhalation products containing tobacco substitutes"},
+      {"hs8": "24041990", "name_zh": "其他非经燃烧吸入品", "role": "other non-combustion inhalation products"}
+    ]
+  },
+  "public_query_probe": {
+    "endpoint": "https://stats.customs.gov.cn",
+    "result": "upstream timeout/security gateway response from this environment",
+    "bypass_attempted": false,
+    "official_request_route_used_instead": true,
+    "local_probe_manifest": "data/raw/china_gacc/gacc_query_probe_manifest.json"
+  },
+  "request_package": {
+    "status": "ready_for_send_confirmation",
+    "docx": "outgoing/china_gacc/Pixan_Oy_GACC_statistics_request_2025.docx",
+    "docx_sha256": "f8853bb147f22bef9efcf61d115bc6fa13866b78b09b30db00cf13d3d14f7798",
+    "pdf": "outgoing/china_gacc/Pixan_Oy_GACC_statistics_request_2025.pdf",
+    "pdf_sha256": "feade2750e781cba242e1565fdd4d6e5d1a3a9f8fb528a31558615f1ce8f7c54",
+    "email_draft": "outgoing/china_gacc/email_to_gacc_bilingual.md",
+    "corporate_proof": "outgoing/china_gacc/Pixan_Oy_official_trade_register_extract_2026-07-17.pdf",
+    "corporate_proof_sha256": "3ad80bf1c07241a855fc9affa7a838da3d2e0d68d2ca9425c057a9c2f6372ead",
+    "corporate_proof_authority": "Finnish Patent and Registration Office (PRH)",
+    "corporate_proof_as_of": "2026-07-17",
+    "privacy_note": "The corporate proof contains personal data and is not published on the public dashboard."
+  },
+  "bank_use_status": "Official access route, methodology and classification are verified. No China product-level quantity or value has yet been received, so this manifest is not evidence of market size."
+}
