@@ -50,7 +50,7 @@
         </header>
 
         <div class="status-strip">
-          <span class="status-pill success"><span class="dot green"></span>4 virallista markkina-/verovirtaa + NL tutkimusmalli</span>
+          <span class="status-pill success"><span class="dot green"></span>5 virallista markkina-/verovirtaa + NL tutkimusmalli</span>
           <span class="status-pill info">HS 8543.40 · 2404.12 · 2404.19</span>
           <span class="status-pill warning">Tulliarvo ≠ kuluttajamyynti</span>
           <span class="status-pill neutral" id="updated-pill">Päivitetty —</span>
@@ -61,8 +61,8 @@
             <div class="summary-band">
               <div>
                 <span class="eyebrow">Tämänhetkinen johtopäätös</span>
-                <h2>Kanada, Saksa, Suomi ja Puola muodostavat virallisen markkina-/verovirran ytimen; Alankomaat täydentää sitä auditoidulla tutkimusmallilla.</h2>
-                <p>Kanada vahvistaa toimitusmyynnin arvon ja volyymin. Saksa ja Suomi vahvistavat verotettua e-nestevolyymia, ja Puola yhdistää ilmoitetun volyymin verotuottoon. Alankomaiden VWS:n tilaama 281,548 milj. euron arvio esitetään tutkimusmallina, ei virallisena sell-outina. Tullidata toimii reitti- ja suuruusluokkatodisteena, kunnes paikallinen myynti-, vero- tai EU-CEG-sarja saadaan.</p>
+                <h2>Kanada, Saksa, Suomi, Puola ja Ruotsi muodostavat virallisen markkina-/verovirran ytimen; Alankomaat täydentää sitä auditoidulla tutkimusmallilla.</h2>
+                <p>Kanada vahvistaa toimitusmyynnin arvon ja volyymin. Saksa ja Suomi vahvistavat verotettua e-nestevolyymia, Puola yhdistää ilmoitetun volyymin verotuottoon ja Ruotsi julkaisee molemmat samassa viranomaisraportissa. Alankomaiden VWS:n tilaama 281,548 milj. euron arvio esitetään tutkimusmallina, ei virallisena sell-outina. Tullidata toimii reitti- ja suuruusluokkatodisteena, kunnes paikallinen myynti-, vero- tai EU-CEG-sarja saadaan.</p>
               </div>
               <div class="summary-actions">
                 <a class="button primary" href="./assets/pixan_pankkiliite.pdf" target="_blank" rel="noopener">Pankkiliite</a>
@@ -328,6 +328,36 @@
               <a href="data/raw/netherlands_vws/donkere_wolken_summary_2026.pdf" download>VWS-yhteenveto PDF ↓</a>
               <a href="data/raw/netherlands_vws/eurostat_netherlands_cn8_route_2025.json" download>Raaka Eurostat-reitti JSON ↓</a>
               <a href="data/raw/netherlands_vws/cbs_lifestyle_esigarette_2024.json" download>Raaka CBS API JSON ↓</a>
+            </div>
+            <div class="section-heading compact"><span>Ruotsi · Finansdepartement / Skatteverket / FHM / Eurostat</span><h2>Virallinen e-nestevolyymi, verotuotto, hintastressi ja tullireitti</h2><p>Vuoden 2024 veroankkuri erotetaan WHO:n hintaotoksesta ja vuoden 2025 rajavirrasta. Tulos ei sisällä laitteiden kuluttajamyyntiä tai koko laillista ja laitonta markkinaa.</p></div>
+            <div class="boundary-band"><strong>Pankkikäyttöön hyväksytty raja:</strong><span>Finansdepartementin julkaisema 26 000 litraa ja 80 milj. SEK mittaa rekisteröityä verollista nikotiinia sisältävien e-nesteiden kulutusta. Tarkkojen verokantojen 80,8 milj. SEK:n tulos poikkeaa −1,0 %, ja ilmoitetut pyöristysvälit menevät päällekkäin.</span></div>
+            <div class="customs-table" id="sweden-summary"></div>
+            <div class="section-heading compact"><span>Lakisääteiset verokannat</span><h2>Vuodet 2023–2026 e-nestetyypeittäin</h2></div>
+            <div class="customs-table" id="sweden-rates"></div>
+            <div class="section-heading compact"><span>Pyöristys- ja järkevyystarkastus</span><h2>Vuoden 2024 määrä × kanta verrattuna näytettyyn verotuottoon</h2></div>
+            <div class="customs-table" id="sweden-reconciliation"></div>
+            <div class="section-heading compact"><span>WHO-hinta ja kolme stressiä</span><h2>Hintaotoksen suuruusluokka ilman markkina-arvoväitettä</h2></div>
+            <div class="customs-table" id="sweden-prices"></div>
+            <div class="customs-table" id="sweden-stress"></div>
+            <div class="section-heading compact"><span>Eurostat Comext 2025</span><h2>WORLD = intra-EU lähetysmaa + extra-EU alkuperämaa</h2></div>
+            <div class="customs-table" id="sweden-route"></div>
+            <div class="customs-table" id="sweden-partners"></div>
+            <div class="section-heading compact"><span>Menetelmä ja avoimet täsmäpyynnöt</span><h2>Kuusi lähdettä auditoitu · kaksi viestiä odottaa hyväksyntää</h2></div>
+            <div class="customs-table" id="sweden-method"></div>
+            <div class="download-links">
+              <a href="data/sweden/sweden_e_liquid_volume_revenue_2024_2026.csv" download>Virallinen määrä ja verotuotto CSV ↓</a>
+              <a href="data/sweden/sweden_e_liquid_tax_rates_2023_2026.csv" download>Verokannat CSV ↓</a>
+              <a href="data/sweden/sweden_e_liquid_tax_reconciliation_2024.csv" download>Verotäsmäytys CSV ↓</a>
+              <a href="data/sweden/sweden_who_price_inputs_2025.csv" download>WHO-hintahavainnot CSV ↓</a>
+              <a href="data/sweden/sweden_e_liquid_price_stress_test_2024.csv" download>Hintastressit CSV ↓</a>
+              <a href="data/sweden/sweden_eurostat_route_2025.csv" download>Eurostat-reitti CSV ↓</a>
+              <a href="data/sweden/sweden_eurostat_scope_partners_2025.csv" download>Partnerit CSV ↓</a>
+              <a href="data/sweden/sweden_evidence_method_audit_2026-07-17.csv" download>Menetelmäauditointi CSV ↓</a>
+              <a href="data/sweden/sweden_evidence_manifest_2026-07-17.json" download>Auditointimanifesti JSON ↓</a>
+              <a href="assets/pixan_sweden_official_evidence_2024_2026.xlsx" download>Ruotsin tarkistettu Excel ↓</a>
+              <a href="data/raw/sweden_finance/berakningskonventioner_2026.pdf" download>Finansdepartementin alkuperäinen PDF ↓</a>
+              <a href="data/raw/sweden_finance/who_sweden_2025.pdf" download>WHO:n Ruotsi-profiili PDF ↓</a>
+              <a href="data/raw/sweden_finance/eurostat_sweden_cn8_route_2025.json" download>Raaka Eurostat-reitti JSON ↓</a>
             </div>
             <div class="section-heading compact"><span>Italia · ADM PLI-PAT</span><h2>Viranomaisen keräämä kuukausidata ja vuoden 2025 verokannat</h2><p>ADM:n julkinen raportointipohja todistaa, mitä kenttiä viranomainen saa. Se ei itsessään julkaise kansallisia toteumia.</p></div>
             <div class="boundary-band"><strong>Ei toteutunut myynti:</strong><span>Italian parlamentin budjettiselvityksen 1 107 249 007 ml ja 167 733 820 euroa vuodelle 2026 ovat virallisia teknisiä ennusteita. Niitä ei merkitä toteutuneeksi myynniksi, verokertymäksi tai vuoden 2025 markkinaksi.</span></div>

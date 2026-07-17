@@ -1,0 +1,4 @@
+format,package_ml,price_sek,price_sek_per_ml,specific_excise_share_pct,observation,source_tier,source_page,source_url
+closed_system_e_liquid,1,41.67,41.67,9.7,WHO cheapest-brand price snapshot; not sales-weighted,B,9,https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf
+closed_system_disposable,1,34.5,34.5,11.71,WHO cheapest-brand price snapshot; not sales-weighted,B,9,https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf
+open_system_e_liquid,10,69.0,6.9,29.28,WHO cheapest-brand 10ml price snapshot; used only as a transparent sensitivity anchor,B,9,https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf

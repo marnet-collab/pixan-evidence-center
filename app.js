@@ -15,6 +15,7 @@
   const moneyEur3 = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. €";
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
   const moneyPln = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. PLN";
+  const moneySek = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. SEK";
   const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
   const eur = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " €";
   const moneyJpy = (value) => value >= 1e9
@@ -761,6 +762,85 @@
         </tr>`).join("")}</tbody>
       </table>
       <div class="meta-line table-note"><strong>Partnerisemantiikka:</strong> intra-EU-tuonnissa partneri on lähetysmaa ja extra-EU-tuonnissa alkuperämaa. Laiterivin suurin tuontialkuperä oli Kiina ${moneyEur3(nl.partners.find((item) => item.product === "85434000" && item.flow === "import" && item.rank === 1).valueEur)}; 24041200-rivin Kiina-tuonti ${moneyEur3(nl.partners.find((item) => item.product === "24041200" && item.flow === "import" && item.rank === 1).valueEur)}.</div>`;
+
+    const se = data.swedenEvidence;
+    const seChecks = se.manifest.key_checks;
+    const se2024 = se.volume.filter((item) => item.year === 2024);
+    const seNarrowRoute = se.route.find((item) => item.scope === "narrow_patent_scope_proxy");
+    $("#sweden-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Arvo</th><th>Luokitus</th><th>Tulkintaraja</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Finansdepartement 2024</strong></td><td><strong>${integer(seChecks.official_2024_volume_litres)} litraa · ${moneySek(seChecks.official_2024_displayed_revenue_sek)}</strong></td><td>${tag("verified", "A-tason veroankkuri")}</td><td>Rekisteröity verollinen nikotiinia sisältävä e-nestekulutus; ei koko retail-markkina</td></tr>
+          <tr><td><strong>Määrä × tarkat kannat</strong></td><td>${moneySek(seChecks.mechanical_2024_revenue_sek)} · ero ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(seChecks.reported_minus_mechanical_pct)} %</td><td>${tag(seChecks.rounding_intervals_overlap ? "verified" : "partial", "Pyöristysvälit päällekkäin")}</td><td>Järkevyystarkastus; ei puuttuvan markkinan arvio</td></tr>
+          <tr><td><strong>Eurostat 2025 · kapea kori</strong></td><td>${moneyEur3(seNarrowRoute.worldImportEur)} tuonti · ${moneyEur3(seNarrowRoute.worldExportEur)} vienti · ${moneyEur3(seNarrowRoute.borderNetEur)} netto</td><td>${tag("partial", "Virallinen rajavirta")}</td><td>Tulliarvo ei ole Ruotsin kuluttajamyynti</td></tr>
+          <tr><td><strong>FHM Article 20(7)</strong></td><td>Kansallinen myyntiaggregaatti pyydetty</td><td>${tag(se.requests[0].status)} <strong>${esc(se.requests[0].id)}</strong></td><td>Keräysvelvollisuus varmistettu; julkinen kokonaisluku puuttuu</td></tr>
+          <tr><td><strong>Finansdepartement</strong></td><td>Pyöristämättömät määrä- ja verosolut pyydetty</td><td>${tag(se.requests[1].status)} <strong>${esc(se.requests[1].id)}</strong></td><td>Molemmat viestit ovat lähettämättömiä luonnoksia</td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Vuoden 2024 rakenne:</strong> ${se2024.map((item) => `${esc(item.label)} ${integer(item.litres)} l / ${moneySek(item.revenueSek)}`).join(" · ")}. Vuoden 2025–2026 taulukkorivejä ei käsitellä lopullisina toteumina.</div>`;
+
+    $("#sweden-rates").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Ryhmä</th><th>SEK/l</th><th>SEK/ml</th><th>Tila</th></tr></thead>
+        <tbody>${se.rates.map((item) => `<tr>
+          <td>${item.year}</td><td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(item.rateSekPerLitre)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.rateSekPerMl)}</td><td>${esc(item.status)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Vuoden 2026 kanta:</strong> muu verollinen e-neste 2,087 SEK/ml ja 15–20 mg/ml e-neste 4,174 SEK/ml. <a class="source-link" href="${esc(se.urls.tax)}" target="_blank" rel="noopener">Skatteverket ↗</a></div>`;
+
+    $("#sweden-reconciliation").innerHTML = `
+      <table>
+        <thead><tr><th>Ryhmä</th><th>Näytetty määrä</th><th>Kanta</th><th>Määrä × kanta</th><th>Näytetty verotuotto</th><th>Ero</th><th>Pyöristysvälit</th></tr></thead>
+        <tbody>${se.reconciliation.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${integer(item.litres)} l</td><td class="num">${item.rateSekPerLitre === null ? "Painotettu" : integer(item.rateSekPerLitre) + " SEK/l"}</td><td class="num">${moneySek(item.mechanicalTaxSek)}</td><td class="num">${moneySek(item.displayedRevenueSek)}</td><td class="num">${moneySek(item.gapSek)} · ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.gapPct)} %</td><td>${tag(item.roundingOverlap ? "verified" : "partial", item.roundingOverlap ? "Päällekkäin" : "Ei päällekkäin")}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointitulos:</strong> kokonaistason 80,8 milj. SEK:n mekaaninen tulos ja 80,0 milj. SEK:n näytetty tulo eroavat −0,8 milj. SEK eli −1,0 %. Taulukko näyttää määrän tuhansina litroina ja tulon 0,01 miljardin SEK:n tarkkuudella.</div>`;
+
+    $("#sweden-prices").innerHTML = `
+      <table>
+        <thead><tr><th>WHO-havainto</th><th>Pakkaus</th><th>Hinta</th><th>SEK/ml</th><th>Valmistevero-osuus</th><th>Todistustaso</th></tr></thead>
+        <tbody>${se.prices.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(item.packageMl)} ml</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceSek)} SEK</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceSekPerMl)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.exciseSharePct)} %</td><td>${tag("b", "B-tason halvin tuotemerkki")}</td>
+        </tr>`).join("")}</tbody>
+      </table>`;
+
+    $("#sweden-stress").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>SEK/10 ml</th><th>10 ml vasta-arvot</th><th>Mekaaninen arvo</th><th>Näytetty vero / arvo</th><th>Raja</th></tr></thead>
+        <tbody>${se.stress.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceSekPer10Ml)}</td><td class="num">${integer(item.tenMlEquivalents)}</td><td class="num"><strong>${moneySek(item.mechanicalValueSek)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.taxSharePct)} %</td><td>Herkkyys, ei virallinen markkina-arvo</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Hintaraja:</strong> WHO:n 69 SEK/10 ml on halvimman tuotemerkin havainto, ei myyntipainotettu keskihinta. Stressi ei kata laitteita, nikotiinittomia nesteitä, laitonta kauppaa tai kanavamixiä.</div>`;
+
+    $("#sweden-route").innerHTML = `
+      <table>
+        <thead><tr><th>Rajaus</th><th>WORLD-tuonti</th><th>WORLD-vienti</th><th>Rajavirta netto</th><th>Intra-tuonti</th><th>Extra-tuonti</th><th>Extra-osuus</th><th>Täsmäytys</th></tr></thead>
+        <tbody>${se.route.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong><div class="meta-line">${esc(item.products)}</div></td><td class="num">${moneyEur3(item.worldImportEur)}</td><td class="num">${moneyEur3(item.worldExportEur)}</td><td class="num"><strong>${moneyEur3(item.borderNetEur)}</strong></td><td class="num">${moneyEur3(item.intraImportEur)}</td><td class="num">${moneyEur3(item.extraImportEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.extraImportSharePct)} %</td><td>${item.importGapEur === 0 && item.exportGapEur === 0 ? tag("verified", "0 € / 0 €") : tag("partial")}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kapea kori:</strong> 48,611 milj. EUR:n rajavirran nettoa ei nimetä kotimaiseksi kysynnäksi. CN 24041200 on laaja nikotiinia sisältävien ilman palamista inhaloitavien tuotteiden proxy.</div>`;
+
+    $("#sweden-partners").innerHTML = `
+      <table>
+        <thead><tr><th>Virta</th><th>Sija</th><th>Partneri</th><th>Rooli</th><th>Arvo</th><th>Osuus julkaistuista maariveistä</th></tr></thead>
+        <tbody>${se.partners.map((item) => `<tr>
+          <td>${esc(item.flow === "import" ? "Tuonti" : "Vienti")}</td><td class="num">${item.rank}</td><td><strong>${esc(item.partnerLabel)}</strong></td><td>${esc(item.partnerBasis)}</td><td class="num">${moneyEur3(item.valueEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.sharePct)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Reittitulkinta:</strong> Kiina oli kapean korin suurin tuontipartneririvi ${moneyEur3(se.partners.find((item) => item.flow === "import" && item.rank === 1).valueEur)} eli 74,249 %. Puola, Belgia, Saksa ja Alankomaat ovat intra-EU-riveillä lähetysmaita, eivät todistettuja valmistusalkuperiä.</div>`;
+
+    $("#sweden-method").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Taso</th><th>Lähde</th><th>Alkuperäinen mittari</th><th>Auditointitulos</th><th>Rajoite</th></tr></thead>
+        <tbody>${se.method.map((item) => `<tr>
+          <td><code>${esc(item.id)}</code><div class="meta-line">${esc(item.topic)}</div></td><td>${tag(item.tier.toLowerCase(), `Taso ${item.tier}`)}</td><td><strong>${esc(item.source)}</strong></td><td>${esc(item.measure)}</td><td>${esc(item.result)}</td><td>${esc(item.limitation)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Hit rate:</strong> veroankkurin täsmäytysosuma on laskettu, mutta FHM:n EU-CEG-raportoinnin todellista kattavuusprosenttia ei voi laskea ilman odotettujen ja saatujen raporttien nimittäjiä. ${se.requests.map((item) => `${esc(item.id)} ${tag(item.status)}`).join(" · ")} Viestejä ei ole lähetetty.</div>`;
   }
 
   function renderGaps() {
@@ -816,6 +896,7 @@
     rows.push({ view: "customs", title: "Ranska · Douane / ANSES", detail: `${moneyEur3(data.franceEvidence.manifest.official_results.douane_all_four_codes_border_net_import_eur)} rajat ylittävä nettotuonti, 203 181 ANSES-ilmoitusriviä ja 35,010 % historiallinen hit rate` });
     rows.push({ view: "taxes", title: "Puola · MF / KAS / Eurostat", detail: `805 441 litraa vuoden 2023 ilmoitettua valmisteverovirtaa, ${moneyPln(data.polandEvidence.manifest.official_results.e_liquid_excise_revenue_2025_pln)} vuoden 2025 e-nesteveroa ja 36,007 % kohdennettu KAS-hit rate` });
     rows.push({ view: "taxes", title: "Alankomaat · VWS / CBS / Trimbos / Eurostat", detail: `${moneyEur3(data.netherlandsEvidence.manifest.headline.reported_total_consumer_spend_eur)} mallinnettua kulutusmenoa, 5 529 vastaajan menetelmäauditointi, 22,8 % lähdepoikkeama ja ${moneyEur3(data.netherlandsEvidence.bridge[0].worldImportEur)} WORLD-tuontia` });
+    rows.push({ view: "taxes", title: "Ruotsi · Finansdepartement / Skatteverket / FHM / Eurostat", detail: `26 000 litraa ja 80 milj. SEK vuoden 2024 rekisteröityä verollista e-nestekulutusta, −1,0 % pyöristystäsmäytys ja ${moneyEur3(data.swedenEvidence.manifest.key_checks.narrow_2025_border_net_eur)} vuoden 2025 rajavirran netto` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }

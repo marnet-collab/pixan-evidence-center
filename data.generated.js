@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 13:16 UTC",
+    "updated": "2026-07-17 14:00 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -53,6 +53,12 @@ window.PIXAN_DATA = {
       "label": "Puola 2025",
       "value": "993,1 milj. PLN",
       "detail": "Virallinen e-nesteen valmisteverototeuma",
+      "tone": "gold"
+    },
+    {
+      "label": "Ruotsi 2024",
+      "value": "26 000 l · 80 milj. SEK",
+      "detail": "Virallinen rekisteröity e-nestemäärä ja näytetty verotuotto",
       "tone": "gold"
     },
     {
@@ -138,6 +144,16 @@ window.PIXAN_DATA = {
       "limit": "Ilmoitettu laillinen valmisteverovirta ja verotuotto eivät ole retail-arvoa tai kuluttajien sell-outia. Vuoden 2023 määrä on 8,85 % alempi kuin aikaisempi julkaisu; revisiosyy odottaa vastausta.",
       "source": "Polish Ministry of Finance · interpellations 7255, 2408 and 17526",
       "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf"
+    },
+    {
+      "grade": "A",
+      "market": "Ruotsi",
+      "title": "Rekisteröity e-nesteen verovolyymi ja verotuotto",
+      "value": "26 000 l · 80 milj. SEK (2024)",
+      "detail": "Finansdepartementin taulukko 7.5 julkaisee 14 000 litraa vahvaa ja 12 000 litraa muuta nikotiinia sisältävää e-nestettä. Tarkkojen verokantojen mekaaninen tulos on 80,8 milj. SEK.",
+      "limit": "Luvut kuvaavat rekisteröityä verollista kulutusta ja ovat taulukossa pyöristettyjä. Ne eivät kata laitteita, nikotiinittomia nesteitä, ilmoittamattomia virtoja tai vähittäismyyntiarvoa.",
+      "source": "Finansdepartementet · Beräkningskonventioner 2026",
+      "url": "https://www.regeringen.se/rapporter/2025/09/berakningskonventioner-2026/"
     },
     {
       "grade": "B",
@@ -846,13 +862,13 @@ window.PIXAN_DATA = {
     {
       "name": "Ruotsi",
       "sourceName": "Sweden",
-      "status": "partial",
-      "customs": "Eurostat Comext CN8 and Statistics Sweden",
-      "route": "Origin versus consignment; subtract dispatches",
-      "salesSource": "Public Health Agency of Sweden EU-CEG",
-      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 50,0 milj. EUR; intra-EU 12,2 milj. EUR ja extra-EU 37,8 milj. EUR. No official sales aggregate obtained",
-      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and excise data",
-      "how": "Download Comext/SCB trade rows; request Article 20(7) aggregate from euceg@folkhalsomyndigheten.se",
+      "status": "verified",
+      "customs": "Eurostat Comext DS-045409 CN8 and Statistics Sweden",
+      "route": "Extra-EU import partner is origin and intra-EU import partner is consignment; exports use destination; subtract dispatches and do not treat border net as Swedish sell-out",
+      "salesSource": "Public Health Agency of Sweden annual e-cigarette/refill-container reporting; Ministry of Finance and Skatteverket nicotine tax",
+      "current": "Finansdepartementin taulukko 7.5 vahvistaa vuodelle 2024 yhteensä 26 000 litraa rekisteröityä verollista nikotiinia sisältävää e-nestettä ja 80 milj. SEK:n näytetyn verotuoton. Tarkkojen verokantojen mekaaninen tulos on 80,8 milj. SEK; -1,0 %:n ero mahtuu julkaisun määrä- ja tulopyöristysten päällekkäisiin väleihin. Eurostatin vuoden 2025 kapea laite + nikotiini-inhalaatiokori näyttää 50,028 milj. EUR tuontia, 1,417 milj. EUR vientiä ja 48,611 milj. EUR:n rajavirran nettoluvun. Eurostat 2025 kapea CN8-kori: WORLD-tuonti 50,0 milj. EUR; intra-EU 12,2 milj. EUR ja extra-EU 37,8 milj. EUR. Official 2024 registered nicotine e-liquid flow obtained: 26000 litres and SEK 80m displayed tax revenue. Rate cross-check gives SEK 80.8m and the -1.0% point gap is consistent with the table's thousand-litre and SEK 0.01bn display rounding. 2025 narrow 85434000+24041200 imports EUR 50.027654m exports EUR 1.417m border net EUR 48.610654m and extra-EU import share 75.515802%. WHO 69 SEK/10ml price gives a transparent SEK 143.52m/179.40m/215.28m sensitivity range, not an official market value.",
+      "missing": "Folkhälsomyndighetenin vuosien 2021-2025 kansallinen Article 20(7) -aggregaatti: laitteet/esitysyksiköt, täyttöpullojen, podien ja kertakäyttötuotteiden millilitrat, arvo sekä odotettujen ja saatujen vuosiraporttien kattavuus. Finansdepartementilta puuttuvat taulukko 7.5:n pyöristämättömät määrä- ja verosolut. Laitteiden kuluttajamyynti, kotimainen tuotanto, varastomuutos ja ilmoittamattomat virrat jäävät avoimiksi. Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Unrounded 2021-2025 tax litres/ml and net revenue; annual EU-CEG device/presentation units and refill/cartridge/pod/disposable ml; official sales-weighted price and value; nicotine-free liquid volume; domestic production inventory change and illegal-market estimate",
+      "how": "Use preserved Ministry table Skatteverket rates WHO profile and Eurostat JSON as audited evidence. Send PX-SE-001 to info@folkhalsomyndigheten.se with tobakstillsyn@folkhalsomyndigheten.se copied for non-identifying annual sales and completeness. Send PX-SE-002 to the Finance Ministry registrar for unrounded table 7.5 inputs. Never convert customs border net or the WHO cheapest-brand sensitivity into Swedish consumer sales.",
       "tax": {
         "name": "Ruotsi",
         "sourceName": "Sweden",
@@ -7518,6 +7534,678 @@ window.PIXAN_DATA = {
       "cbs_esigarette_2024": "https://opendata.cbs.nl/ODataApi/OData/85457NED/TypedDataSet?$filter=Perioden%20eq%20%272024JJ00%27&$select=Persoonskenmerken,Perioden,Marges,ESigaret12JaarOfOuder_14"
     }
   },
+  "swedenEvidence": {
+    "rates": [
+      {
+        "year": 2023,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "rateSekPerLitre": 2000.0,
+        "rateSekPerMl": 2.0,
+        "definition": "nicotine e-liquid below 15 mg/ml within taxable scope",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2023,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "rateSekPerLitre": 4000.0,
+        "rateSekPerMl": 4.0,
+        "definition": "nicotine concentration at least 15 and no more than 20 mg/ml",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2024,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "rateSekPerLitre": 2020.0,
+        "rateSekPerMl": 2.02,
+        "definition": "nicotine e-liquid below 15 mg/ml within taxable scope",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2024,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "rateSekPerLitre": 4040.0,
+        "rateSekPerMl": 4.04,
+        "definition": "nicotine concentration at least 15 and no more than 20 mg/ml",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2025,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "rateSekPerLitre": 2072.0,
+        "rateSekPerMl": 2.072,
+        "definition": "nicotine e-liquid below 15 mg/ml within taxable scope",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2025,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "rateSekPerLitre": 4143.0,
+        "rateSekPerMl": 4.143,
+        "definition": "nicotine concentration at least 15 and no more than 20 mg/ml",
+        "status": "official_historical_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2026,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "rateSekPerLitre": 2087.0,
+        "rateSekPerMl": 2.087,
+        "definition": "nicotine e-liquid below 15 mg/ml within taxable scope",
+        "status": "official_current_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "year": 2026,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "rateSekPerLitre": 4174.0,
+        "rateSekPerMl": 4.174,
+        "definition": "nicotine concentration at least 15 and no more than 20 mg/ml",
+        "status": "official_current_rate",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      }
+    ],
+    "volume": [
+      {
+        "year": 2024,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "litres": 14000,
+        "ml": 14000000,
+        "revenueSek": 60000000,
+        "status": "official_latest_full_outturn_anchor",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      },
+      {
+        "year": 2024,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "litres": 12000,
+        "ml": 12000000,
+        "revenueSek": 20000000,
+        "status": "official_latest_full_outturn_anchor",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      },
+      {
+        "year": 2025,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "litres": 14000,
+        "ml": 14000000,
+        "revenueSek": 60000000,
+        "status": "official_forecast_or_current_estimate_not_actual",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      },
+      {
+        "year": 2025,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "litres": 12000,
+        "ml": 12000000,
+        "revenueSek": 20000000,
+        "status": "official_forecast_or_current_estimate_not_actual",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      },
+      {
+        "year": 2026,
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "litres": 14000,
+        "ml": 14000000,
+        "revenueSek": 60000000,
+        "status": "official_forecast_or_current_estimate_not_actual",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      },
+      {
+        "year": 2026,
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "litres": 11000,
+        "ml": 11000000,
+        "revenueSek": 20000000,
+        "status": "official_forecast_or_current_estimate_not_actual",
+        "quantityGranularityLitres": 1000,
+        "revenueGranularitySek": 10000000,
+        "sourceTable": "Berakningskonventioner 2026, table 7.5, page 139",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "boundary": "registered taxable consumption and tax revenue; not retail sell-out or total market value"
+      }
+    ],
+    "reconciliation": [
+      {
+        "category": "high_concentration_e_liquid",
+        "label": "Vahva e-neste, 15–20 mg/ml",
+        "litres": 14000,
+        "rateSekPerLitre": 4040.0,
+        "mechanicalTaxSek": 56560000,
+        "displayedRevenueSek": 60000000,
+        "gapSek": 3440000,
+        "gapPct": 5.733333,
+        "roundingOverlap": true,
+        "interpretation": "point estimates differ because table 7.5 displays quantity to thousand litres and revenue to SEK 0.01bn; intervals overlap",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
+      },
+      {
+        "category": "regular_e_liquid",
+        "label": "Muu verollinen e-neste",
+        "litres": 12000,
+        "rateSekPerLitre": 2020.0,
+        "mechanicalTaxSek": 24240000,
+        "displayedRevenueSek": 20000000,
+        "gapSek": -4240000,
+        "gapPct": -21.2,
+        "roundingOverlap": true,
+        "interpretation": "point estimates differ because table 7.5 displays quantity to thousand litres and revenue to SEK 0.01bn; intervals overlap",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
+      },
+      {
+        "category": "total_e_liquid",
+        "label": "E-nesteet yhteensä",
+        "litres": 26000,
+        "rateSekPerLitre": null,
+        "mechanicalTaxSek": 80800000,
+        "displayedRevenueSek": 80000000,
+        "gapSek": -800000,
+        "gapPct": -1.0,
+        "roundingOverlap": true,
+        "interpretation": "total point estimate is within 1% of displayed revenue; combined component rounding intervals overlap",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
+      }
+    ],
+    "prices": [
+      {
+        "format": "closed_system_e_liquid",
+        "label": "Suljettu järjestelmä, 1 ml",
+        "packageMl": 1.0,
+        "priceSek": 41.67,
+        "priceSekPerMl": 41.67,
+        "exciseSharePct": 9.7,
+        "observation": "WHO cheapest-brand price snapshot; not sales-weighted",
+        "tier": "B",
+        "sourcePage": 9,
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      },
+      {
+        "format": "closed_system_disposable",
+        "label": "Kertakäyttöinen, 1 ml",
+        "packageMl": 1.0,
+        "priceSek": 34.5,
+        "priceSekPerMl": 34.5,
+        "exciseSharePct": 11.71,
+        "observation": "WHO cheapest-brand price snapshot; not sales-weighted",
+        "tier": "B",
+        "sourcePage": 9,
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      },
+      {
+        "format": "open_system_e_liquid",
+        "label": "Avoin järjestelmä, 10 ml",
+        "packageMl": 10.0,
+        "priceSek": 69.0,
+        "priceSekPerMl": 6.9,
+        "exciseSharePct": 29.28,
+        "observation": "WHO cheapest-brand 10ml price snapshot; used only as a transparent sensitivity anchor",
+        "tier": "B",
+        "sourcePage": 9,
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      }
+    ],
+    "stress": [
+      {
+        "scenario": "downside_minus_20_pct",
+        "label": "Alas −20 %",
+        "priceFactor": 0.8,
+        "priceSekPer10Ml": 55.2,
+        "officialVolumeLitres": 26000,
+        "tenMlEquivalents": 2600000,
+        "mechanicalValueSek": 143520000,
+        "officialDisplayedTaxRevenueSek": 80000000,
+        "taxSharePct": 55.74136,
+        "tier": "A volume plus B price",
+        "boundary": "sensitivity only; not an official market-size estimate; excludes devices, nicotine-free liquids, illegal flows and product/channel mix",
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      },
+      {
+        "scenario": "baseline_who_open_system",
+        "label": "WHO-lähtötaso",
+        "priceFactor": 1.0,
+        "priceSekPer10Ml": 69.0,
+        "officialVolumeLitres": 26000,
+        "tenMlEquivalents": 2600000,
+        "mechanicalValueSek": 179400000,
+        "officialDisplayedTaxRevenueSek": 80000000,
+        "taxSharePct": 44.593088,
+        "tier": "A volume plus B price",
+        "boundary": "sensitivity only; not an official market-size estimate; excludes devices, nicotine-free liquids, illegal flows and product/channel mix",
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      },
+      {
+        "scenario": "upside_plus_20_pct",
+        "label": "Ylös +20 %",
+        "priceFactor": 1.2,
+        "priceSekPer10Ml": 82.8,
+        "officialVolumeLitres": 26000,
+        "tenMlEquivalents": 2600000,
+        "mechanicalValueSek": 215280000,
+        "officialDisplayedTaxRevenueSek": 80000000,
+        "taxSharePct": 37.160907,
+        "tier": "A volume plus B price",
+        "boundary": "sensitivity only; not an official market-size estimate; excludes devices, nicotine-free liquids, illegal flows and product/channel mix",
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      }
+    ],
+    "route": [
+      {
+        "year": 2025,
+        "scope": "85434000",
+        "label": "Laitteet 85434000",
+        "products": "85434000",
+        "worldImportEur": 2317223,
+        "worldExportEur": 239091,
+        "borderNetEur": 2078132,
+        "intraImportEur": 827467,
+        "extraImportEur": 1489756,
+        "extraImportSharePct": 64.290575,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      },
+      {
+        "year": 2025,
+        "scope": "24041200",
+        "label": "Nikotiini-inhalaatiotuotteet 24041200",
+        "products": "24041200",
+        "worldImportEur": 47710431,
+        "worldExportEur": 1177909,
+        "borderNetEur": 46532522,
+        "intraImportEur": 11421403,
+        "extraImportEur": 36289028,
+        "extraImportSharePct": 76.060994,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      },
+      {
+        "year": 2025,
+        "scope": "24041910",
+        "label": "Nikotiiniton tupakankorvikeproxy 24041910",
+        "products": "24041910",
+        "worldImportEur": 116,
+        "worldExportEur": 739,
+        "borderNetEur": -623,
+        "intraImportEur": 0,
+        "extraImportEur": 116,
+        "extraImportSharePct": 100.0,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      },
+      {
+        "year": 2025,
+        "scope": "24041990",
+        "label": "Muu inhalaatioproxy 24041990",
+        "products": "24041990",
+        "worldImportEur": 1020528,
+        "worldExportEur": 67268,
+        "borderNetEur": 953260,
+        "intraImportEur": 0,
+        "extraImportEur": 1020528,
+        "extraImportSharePct": 100.0,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "label": "Kapea kori 85434000 + 24041200",
+        "products": "85434000+24041200",
+        "worldImportEur": 50027654,
+        "worldExportEur": 1417000,
+        "borderNetEur": 48610654,
+        "intraImportEur": 12248870,
+        "extraImportEur": 37778784,
+        "extraImportSharePct": 75.515802,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      },
+      {
+        "year": 2025,
+        "scope": "broad_inhalation_proxy",
+        "label": "Laaja neljän koodin konteksti",
+        "products": "85434000+24041200+24041910+24041990",
+        "worldImportEur": 51048298,
+        "worldExportEur": 1485007,
+        "borderNetEur": 49563291,
+        "intraImportEur": 12248870,
+        "extraImportEur": 38799428,
+        "extraImportSharePct": 76.005331,
+        "importGapEur": 0,
+        "exportGapEur": 0,
+        "status": "official_customs_statistics_not_consumer_sales",
+        "interpretation": "WORLD equals intra-EU arrivals/dispatches plus extra-EU imports/exports, subject to revisions and confidentiality",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "methodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm"
+      }
+    ],
+    "partners": [
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "import",
+        "rank": 1,
+        "partner": "CN",
+        "partnerLabel": "China",
+        "partnerBasis": "extra-EU country of origin",
+        "valueEur": 37144948,
+        "sharePct": 74.24883,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "import",
+        "rank": 2,
+        "partner": "PL",
+        "partnerLabel": "Poland",
+        "partnerBasis": "intra-EU country of consignment",
+        "valueEur": 3614941,
+        "sharePct": 7.225886,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "import",
+        "rank": 3,
+        "partner": "BE",
+        "partnerLabel": "Belgium (incl. Luxembourg 'LU' -> 1998)",
+        "partnerBasis": "intra-EU country of consignment",
+        "valueEur": 3413476,
+        "sharePct": 6.823178,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "import",
+        "rank": 4,
+        "partner": "DE",
+        "partnerLabel": "Germany (incl. German Democratic Republic 'DD' from 1991)",
+        "partnerBasis": "intra-EU country of consignment",
+        "valueEur": 2240822,
+        "sharePct": 4.479167,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "import",
+        "rank": 5,
+        "partner": "NL",
+        "partnerLabel": "Netherlands",
+        "partnerBasis": "intra-EU country of consignment",
+        "valueEur": 1959810,
+        "sharePct": 3.917453,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "export",
+        "rank": 1,
+        "partner": "US",
+        "partnerLabel": "United States (incl. Navassa Island (part of 'UM') from 1995 -> 2000)",
+        "partnerBasis": "country of destination",
+        "valueEur": 269981,
+        "sharePct": 19.052999,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "export",
+        "rank": 2,
+        "partner": "FI",
+        "partnerLabel": "Finland",
+        "partnerBasis": "country of destination",
+        "valueEur": 264187,
+        "sharePct": 18.644107,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "export",
+        "rank": 3,
+        "partner": "DK",
+        "partnerLabel": "Denmark",
+        "partnerBasis": "country of destination",
+        "valueEur": 218218,
+        "sharePct": 15.4,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "export",
+        "rank": 4,
+        "partner": "FR",
+        "partnerLabel": "France (incl. Saint Barthélemy 'BL' -> 2012; incl. French Guiana 'GF', Guadeloupe 'GP', Martinique 'MQ', Réunion 'RE' from 1997; incl. Mayotte 'YT' from 2014)",
+        "partnerBasis": "country of destination",
+        "valueEur": 214062,
+        "sharePct": 15.106704,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      {
+        "year": 2025,
+        "scope": "narrow_patent_scope_proxy",
+        "flow": "export",
+        "rank": 5,
+        "partner": "CN",
+        "partnerLabel": "China",
+        "partnerBasis": "country of destination",
+        "valueEur": 159664,
+        "sharePct": 11.267749,
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      }
+    ],
+    "method": [
+      {
+        "id": "SE-A1",
+        "topic": "taxed volume and revenue",
+        "tier": "A",
+        "source": "Swedish Ministry of Finance, Berakningskonventioner 2026 table 7.5",
+        "measure": "SEK bn and thousand litres by e-liquid strength, 2024-2026",
+        "transformation": "multiply displayed revenue by SEK 1bn and quantity by 1,000 litres",
+        "result": "2024 displayed total 26,000 litres and SEK 80m",
+        "limitation": "rounded and updated; 2025-2026 are not treated as final actuals",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
+      },
+      {
+        "id": "SE-A2",
+        "topic": "tax rate",
+        "tier": "A",
+        "source": "Skatteverket nicotine tax page",
+        "measure": "SEK per litre by year and strength",
+        "transformation": "divide by 1,000 for SEK/ml presentation",
+        "result": "2024 rates 2.020 and 4.040 SEK/ml; 2026 rates 2.087 and 4.174 SEK/ml",
+        "limitation": "tax scope is nicotine-containing e-liquids; exemptions apply",
+        "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+      },
+      {
+        "id": "SE-A3",
+        "topic": "volume-revenue reconciliation",
+        "tier": "derived from A",
+        "source": "table 7.5 quantities plus Skatteverket rates",
+        "measure": "displayed rounded quantities, revenues and exact annual rates",
+        "transformation": "quantity x rate, then compare with displayed revenue and half-unit rounding intervals",
+        "result": "SEK 80.8m mechanical versus SEK 80m displayed; -1.0% reported-minus-mechanical",
+        "limitation": "component point gaps cannot be interpreted without displayed-value rounding",
+        "url": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
+      },
+      {
+        "id": "SE-A4",
+        "topic": "annual sales reporting universe",
+        "tier": "A",
+        "source": "Public Health Agency of Sweden",
+        "measure": "annual Swedish sales volume by brand and product type due by 31 March",
+        "transformation": "none; used to define information-request fields",
+        "result": "authority confirms a national annual reporting duty and recommends EU-CEG",
+        "limitation": "no public national aggregate found on the preserved page",
+        "url": "https://www.folkhalsomyndigheten.se/anmal-och-rapportera/anmala-ansoka-rapportera-och-registrera-tobaks-och-nikotinprodukter/anmala-ingredienser-i-e-cigaretter-och-pafyllningsbehallare/"
+      },
+      {
+        "id": "SE-A5",
+        "topic": "customs route",
+        "tier": "A",
+        "source": "Eurostat Comext DS-045409",
+        "measure": "2025 import/export value by CN8, flow and partner group/country",
+        "transformation": "sum products by narrow/broad scope; subtract exports from imports",
+        "result": "route and partner tables reconcile WORLD to intra-/extra-EU groups where reported",
+        "limitation": "customs value is not retail sell-out; intra-EU import partner is consignment country",
+        "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+      },
+      {
+        "id": "SE-B1",
+        "topic": "retail price sensitivity",
+        "tier": "B",
+        "source": "WHO 2025 Sweden country profile page 9",
+        "measure": "cheapest-brand prices by e-liquid format",
+        "transformation": "apply 69 SEK/10ml open-system anchor to 2024 taxed litres with +/-20% cases",
+        "result": "mechanical value range SEK 143.52m-215.28m; baseline SEK 179.40m",
+        "limitation": "not sales-weighted and not an official market-size estimate",
+        "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf"
+      }
+    ],
+    "manifest": {
+      "country": "Sweden",
+      "as_of": "2026-07-17",
+      "status": "verified_official_tax_volume_revenue_and_customs_route",
+      "source_boundaries": {
+        "tax": "legal registered nicotine e-liquid consumption and tax revenue, not total consumer market",
+        "customs": "border values, not final destination retail sales",
+        "price": "WHO cheapest-brand snapshot used only for stress testing",
+        "sales_reporting": "official reporting duty confirmed; national aggregate not yet obtained"
+      },
+      "raw_files": {
+        "data/raw/sweden_finance/berakningskonventioner_2026.pdf": "4f0b290a232ae2809655415ae0dcbecaa33e6cb747e89e6614beba9ca0aca35c",
+        "data/raw/sweden_finance/skatteverket_nikotinskatt_2026.html": "52d27ebc0b93e2b376d951fb55ed0a75c0cf223748280dd61323f754b60f1948",
+        "data/raw/sweden_finance/fhm_eu_ceg_annual_sales_reporting_2025.html": "dbb6ee8c3ab9d295df67f8f6885a85925785ae3916e362eb9f291afb991b4c10",
+        "data/raw/sweden_finance/fhm_contacts_2026.html": "518339fd6da78a61a14244aadf56d2175a2d04661869579dff88a58db197cee6",
+        "data/raw/sweden_finance/regeringskansliet_registrars_2026.html": "74e373a7062c642474d4222884aabb790efe84b84195be3fc44356bec13b08b7",
+        "data/raw/who_2025_tax_profiles/swe.pdf": "873b9cbe90ea9c67439042421e657d8766c3b6e38db4f937327fbd1719b1dfee",
+        "data/raw/sweden_finance/eurostat_sweden_cn8_route_2025.json": "0757def4e4964bdffd9e6a96e3e7fbd8b2ca8a418a64bc1be6767bebd2a90089",
+        "data/raw/sweden_finance/eurostat_sweden_cn8_partners_2025.json": "a6cd9617c514514ad8d100c5f58dec9794e0c3339cf33f51eb215c868c7d5e96"
+      },
+      "derived_files": {
+        "data/derived/sweden_e_liquid_tax_rates_2023_2026.csv": "dfcb1ff1e9f3050b7e7704f10040b8316151bb8f4a1c910d2dd909e50a19117f",
+        "data/derived/sweden_e_liquid_volume_revenue_2024_2026.csv": "786182fb66ed050d420bd0e7529da01ab488b1551e4787e4842dbc022766f547",
+        "data/derived/sweden_e_liquid_tax_reconciliation_2024.csv": "a505f23e1416eb8de4a294c0c590da8baa38d9428aebf9172fb26831af6ddac1",
+        "data/derived/sweden_who_price_inputs_2025.csv": "f9305c7b329ca7343a65e73a403bb23b177be4f392cc6d43bda26157679d3470",
+        "data/derived/sweden_e_liquid_price_stress_test_2024.csv": "168916e953137921793c9e6bfd77f2f4d4fbeb35f930f7278ec6c23adf0a278f",
+        "data/derived/sweden_eurostat_route_2025.csv": "34edbeb200325510b4647c0fab0039a0ee2af32b3484167bc3dbefc283b56d99",
+        "data/derived/sweden_eurostat_scope_partners_2025.csv": "5e6325e27a3e16ab87c415efa2e70a9652d57cc580679e3e912d5f2695e1af09",
+        "data/derived/sweden_evidence_method_audit_2026-07-17.csv": "672b3688cffe0a967578b89ebadd2f8ee30cfd12400dc0a51d5c18baad5c7b34"
+      },
+      "urls": {
+        "finance": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "finance_page": "https://www.regeringen.se/rapporter/2025/09/berakningskonventioner-2026/",
+        "tax": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
+        "fhm_reporting": "https://www.folkhalsomyndigheten.se/anmal-och-rapportera/anmala-ansoka-rapportera-och-registrera-tobaks-och-nikotinprodukter/anmala-ingredienser-i-e-cigaretter-och-pafyllningsbehallare/",
+        "fhm_contacts": "https://www.folkhalsomyndigheten.se/om-folkhalsomyndigheten/kontakta-folkhalsomyndigheten/",
+        "finance_contacts": "https://www.regeringen.se/kontaktuppgifter/kontaktuppgifter-till-departementens-registratorer/",
+        "who": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf",
+        "eurostat_method": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+        "eurostat_route": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+        "eurostat_partners": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+      },
+      "key_checks": {
+        "official_2024_volume_litres": 26000,
+        "official_2024_displayed_revenue_sek": 80000000,
+        "mechanical_2024_revenue_sek": 80800000,
+        "reported_minus_mechanical_pct": -1.0,
+        "rounding_intervals_overlap": true,
+        "narrow_2025_border_net_eur": 48610654.0
+      }
+    },
+    "requests": [
+      {
+        "id": "PX-SE-001",
+        "authority": "Public Health Agency of Sweden",
+        "status": "ready_for_confirmation",
+        "recipient": "info@folkhalsomyndigheten.se",
+        "scope": "2021-2025 annual non-identifying Swedish e-cigarette and refill-container sales by product type: device/presentation units refill cartridge pod and disposable ml nicotine category value if held obligated/reporting entities expected/received presentations late missing corrected submissions coverage and exact field definitions"
+      },
+      {
+        "id": "PX-SE-002",
+        "authority": "Swedish Ministry of Finance Registrar",
+        "status": "ready_for_confirmation",
+        "recipient": "finansdepartementet.registrator@regeringskansliet.se",
+        "scope": "2021-2025 and available 2026 unrounded registered e-liquid litres/ml and tax by strength group; gross tax refunds corrections net amounts non-identifying return/entity counts domestic/EU-receipt/import split actual-versus-forecast flags source systems periodisation revision and calculation file behind table 7.5"
+      }
+    ],
+    "urls": {
+      "finance": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+      "finance_page": "https://www.regeringen.se/rapporter/2025/09/berakningskonventioner-2026/",
+      "tax": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
+      "fhm_reporting": "https://www.folkhalsomyndigheten.se/anmal-och-rapportera/anmala-ansoka-rapportera-och-registrera-tobaks-och-nikotinprodukter/anmala-ingredienser-i-e-cigaretter-och-pafyllningsbehallare/",
+      "fhm_contacts": "https://www.folkhalsomyndigheten.se/om-folkhalsomyndigheten/kontakta-folkhalsomyndigheten/",
+      "finance_contacts": "https://www.regeringen.se/kontaktuppgifter/kontaktuppgifter-till-departementens-registratorer/",
+      "who": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf",
+      "eurostat_method": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+      "eurostat_route": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+      "eurostat_partners": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en"
+    }
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -9744,6 +10432,31 @@ window.PIXAN_DATA = {
       "note": "Hinnat ovat kymmenen varastossa olleen 10 ml tuotteen yhden myyjän päivätty alin/mediaani/ylin. Vuoden 2025 pyöristetyn virallisen volyymin ja vuoden 2026 hintaotoksen kertolasku on plausibiliteettialue, ei markkina-arvo tai ennuste."
     },
     {
+      "market": "Ruotsi",
+      "basis": "2024 virallinen verotettu e-nestemäärä 26 000 litraa",
+      "scenarios": [
+        {
+          "name": "Alas −20 %",
+          "price": "55,20 SEK/10 ml",
+          "volume": "2,6 milj. × 10 ml",
+          "value": "143,52 milj, SEK"
+        },
+        {
+          "name": "WHO-lähtötaso",
+          "price": "69,00 SEK/10 ml",
+          "volume": "2,6 milj. × 10 ml",
+          "value": "179,40 milj, SEK"
+        },
+        {
+          "name": "Ylös +20 %",
+          "price": "82,80 SEK/10 ml",
+          "volume": "2,6 milj. × 10 ml",
+          "value": "215,28 milj, SEK"
+        }
+      ],
+      "note": "WHO:n 69 SEK/10 ml halvinta tuotemerkkiä käytetään ±20 % hintastressissä. Tulokset eivät ole virallinen markkina-arvo tai myyntipainotettu hintaindeksi."
+    },
+    {
       "market": "Alankomaat",
       "basis": "VWS:n tilaama 281,548 milj. EUR:n kulutusmenomalli",
       "scenarios": [
@@ -9946,6 +10659,34 @@ window.PIXAN_DATA = {
       "url": "https://www.gov.pl/web/kas/kas-zwalcza-oszustwa-zwiazane-z-rynkiem-e-papierosow"
     },
     {
+      "grade": "A",
+      "title": "Ruotsin Finansdepartement · Beräkningskonventioner 2026",
+      "coverage": "Vuosi 2024: 26 000 litraa rekisteröityä nikotiinia sisältävää e-nestettä ja 80 milj. SEK näytettyä verotuottoa",
+      "use": "Kansallinen verollisen e-nestevirran määrä- ja veroankkuri; pyöristysvälit ja tarkat verokannat auditoitu",
+      "url": "https://www.regeringen.se/rapporter/2025/09/berakningskonventioner-2026/"
+    },
+    {
+      "grade": "A",
+      "title": "Ruotsin Skatteverket · Nikotinskatt",
+      "coverage": "Vuosien 2023–2026 e-nesteverokannat: vuoden 2026 muut nesteet 2,087 SEK/ml ja 15–20 mg/ml 4,174 SEK/ml",
+      "use": "Lakisääteinen kanta ja vuoden 2024 määrä × kanta -täsmäytys",
+      "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"
+    },
+    {
+      "grade": "A",
+      "title": "Ruotsin FHM · vuotuinen EU-CEG-myyntiraportointi",
+      "coverage": "Valmistajien ja maahantuojien velvollisuus toimittaa vuosittainen Ruotsin myyntivolyymi tuotemerkin ja tuotetyypin mukaan",
+      "use": "Todistaa keräysvelvollisuuden ja kohdentaa PX-SE-001:n kansalliseen myyntiaggregaattiin; julkista kokonaislukua ei vielä saatu",
+      "url": "https://www.folkhalsomyndigheten.se/anmal-och-rapportera/anmala-ansoka-rapportera-och-registrera-tobaks-och-nikotinprodukter/anmala-ingredienser-i-e-cigaretter-och-pafyllningsbehallare/"
+    },
+    {
+      "grade": "B",
+      "title": "Eurostat Comext · Ruotsi 2025",
+      "coverage": "Kapea CN8-kori: 50,028 milj. EUR tuontia, 1,417 milj. EUR vientiä ja 48,611 milj. EUR rajavirran netto",
+      "use": "WORLD-, intra-EU- ja extra-EU-reittitäsmäytys sekä alkuperä-/lähetysmaakorjaus; ei kuluttajamyynti",
+      "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"
+    },
+    {
       "grade": "B",
       "title": "VWS / Bureau Beke · Donkere wolken",
       "coverage": "Alankomaiden vuotuinen mallinnettu vape-kulutusmeno 281,548 milj. EUR ja laiton meno 256,865 milj. EUR",
@@ -10128,6 +10869,26 @@ window.PIXAN_DATA = {
       "status": "ready_for_confirmation",
       "sent": "—",
       "followUp": "—"
+    },
+    {
+      "id": "PX-SE-001",
+      "market": "Ruotsi",
+      "authority": "Public Health Agency of Sweden",
+      "channel": "info@folkhalsomyndigheten.se",
+      "scope": "2021-2025 annual non-identifying Swedish e-cigarette and refill-container sales by product type: device/presentation units refill cartridge pod and disposable ml nicotine category value if held obligated/reporting entities expected/received presentations late missing corrected submissions coverage and exact field definitions",
+      "status": "ready_for_confirmation",
+      "sent": "—",
+      "followUp": "—"
+    },
+    {
+      "id": "PX-SE-002",
+      "market": "Ruotsi",
+      "authority": "Swedish Ministry of Finance Registrar",
+      "channel": "finansdepartementet.registrator@regeringskansliet.se",
+      "scope": "2021-2025 and available 2026 unrounded registered e-liquid litres/ml and tax by strength group; gross tax refunds corrections net amounts non-identifying return/entity counts domestic/EU-receipt/import split actual-versus-forecast flags source systems periodisation revision and calculation file behind table 7.5",
+      "status": "ready_for_confirmation",
+      "sent": "—",
+      "followUp": "—"
     }
   ],
   "tasks": [
@@ -10213,6 +10974,18 @@ window.PIXAN_DATA = {
       "priority": "high",
       "title": "Alankomaiden mallisolut ja EU-CEG-sell-out",
       "detail": "VWS:n tilaama 281,548 milj. EUR:n arvio, 5 529 vastaajan menetelmä, Trimbos/CBS-prevalenssit, kuluttajahinnat ja vuoden 2025 Eurostat-reitti on auditoitu. PX-NL-001 pyytää ikäsolut, SPSS-syntaksin, vastausdisposition, 22,8 % -selityksen sekä Article 20(7) -yksiköt/ml/arvon; viesti odottaa nimenomaista lähetysvahvistusta.",
+      "status": "active"
+    },
+    {
+      "priority": "high",
+      "title": "Ruotsin FHM-myyntiaggregaatti",
+      "detail": "Vuoden 2024 virallinen 26 000 litran verovolyymi, 80 milj. SEK:n verotulo, pyöristysauditointi, WHO-hintastressi ja vuoden 2025 Eurostat-reitti ovat valmiit. PX-SE-001 pyytää vuosien 2021-2025 laite-/esitysyksiköt, täyttöpullojen, podien ja kertakäyttötuotteiden millilitrat, arvon sekä raportointikattavuuden; viesti odottaa nimenomaista lähetysvahvistusta.",
+      "status": "active"
+    },
+    {
+      "priority": "high",
+      "title": "Ruotsin pyöristämättömät verosolut",
+      "detail": "PX-SE-002 pyytää Finansdepartementilta taulukko 7.5:n pyöristämättömät litrat/millilitrat, verot, palautukset ja oikaisut sekä actual/forecast-luokituksen ja laskentatiedoston. Nykyinen -1,0 %:n piste-ero on yhteensopiva julkaisun näyttötarkkuuden kanssa; viestiä ei ole lähetetty.",
       "status": "active"
     },
     {
