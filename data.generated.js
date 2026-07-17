@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 08:40 UTC",
+    "updated": "2026-07-17 09:07 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -3241,6 +3241,357 @@ window.PIXAN_DATA = {
       "The 2025 files are revisable official statistics; refresh after Statistics Canada revisions."
     ]
   },
+  "canadaRetail": {
+    "observations": [
+      {
+        "id": "CA-RET-001",
+        "seller": "Vuse Canada / Imperial Tobacco Company Ltd.",
+        "sellerType": "manufacturer storefront",
+        "product": "Vuse Clear E-Liquid Pods",
+        "category": "Täytetty pod-pakkaus",
+        "liquidIncluded": true,
+        "packageCount": 2,
+        "liquidMl": 4.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "0 / 10 / 20",
+        "priceCad": 19.99,
+        "pricePerItemCad": 9.995,
+        "pricePerMlCad": 4.9975,
+        "federalDutyCad": 2.24,
+        "additionalDutyCad": 2.24,
+        "stock": "Ostokontrolli näkyvissä",
+        "priceBasis": "Valmistajan kertahinta; sovellettavat myyntiverot ja toimitus eivät sisälly Vusen myyntiehtojen mukaan.",
+        "url": "https://www.vuse.com/ca/en/buy-online/products/clear-e-liquid-pods",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-002",
+        "seller": "Vuse Canada / Imperial Tobacco Company Ltd.",
+        "sellerType": "manufacturer storefront",
+        "product": "Vuse GO 1000 Clear",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 2.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "20",
+        "priceCad": 12.99,
+        "pricePerItemCad": 12.99,
+        "pricePerMlCad": 6.495,
+        "federalDutyCad": 1.12,
+        "additionalDutyCad": 1.12,
+        "stock": "Ostokontrolli näkyvissä",
+        "priceBasis": "Valmistajan kertahinta; sovellettavat myyntiverot ja toimitus eivät sisälly Vusen myyntiehtojen mukaan.",
+        "url": "https://www.vuse.com/ca/en/buy-online/products/clear-go-1000-disposable-vape",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-003",
+        "seller": "Vuse Canada / Imperial Tobacco Company Ltd.",
+        "sellerType": "manufacturer storefront",
+        "product": "Vuse GO 5000 Blueberry Raspberry",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 10.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "20",
+        "priceCad": 32.19,
+        "pricePerItemCad": 32.19,
+        "pricePerMlCad": 3.219,
+        "federalDutyCad": 5.6,
+        "additionalDutyCad": 5.6,
+        "stock": "Ostokontrolli näkyvissä",
+        "priceBasis": "Valmistajan kertahinta; sovellettavat myyntiverot ja toimitus eivät sisälly Vusen myyntiehtojen mukaan.",
+        "url": "https://www.vuse.com/ca/en/buy-online/products/blueberry-raspberry-go-5000-disposable-vape",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-004",
+        "seller": "Vuse Canada / Imperial Tobacco Company Ltd.",
+        "sellerType": "manufacturer storefront",
+        "product": "Vuse GO 8000 Blueberry Raspberry",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 15.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "20",
+        "priceCad": 34.99,
+        "pricePerItemCad": 34.99,
+        "pricePerMlCad": 2.3327,
+        "federalDutyCad": 6.72,
+        "additionalDutyCad": 6.72,
+        "stock": "Ostokontrolli näkyvissä",
+        "priceBasis": "Valmistajan kertahinta; sovellettavat myyntiverot ja toimitus eivät sisälly Vusen myyntiehtojen mukaan.",
+        "url": "https://www.vuse.com/ca/en/buy-online/products/blue-raspberry-go-8000-disposable-vape",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-005",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "STLTH Eco Disposable Vape",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 6.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "not captured",
+        "priceCad": 19.99,
+        "pricePerItemCad": 19.99,
+        "pricePerMlCad": 3.3317,
+        "federalDutyCad": 3.36,
+        "additionalDutyCad": 3.36,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-006",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "STLTH Titan Pro Disposable Vape",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 20.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "not captured",
+        "priceCad": 40.5,
+        "pricePerItemCad": 40.5,
+        "pricePerMlCad": 2.025,
+        "federalDutyCad": 6.72,
+        "additionalDutyCad": 6.72,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-007",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "STLTH X Geek Bar Disposable Vape",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 30.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "not captured",
+        "priceCad": 50.99,
+        "pricePerItemCad": 50.99,
+        "pricePerMlCad": 1.6997,
+        "federalDutyCad": 7.84,
+        "additionalDutyCad": 7.84,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-008",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "STLTH Eco XL Disposable Vape",
+        "category": "Täytetty kertakäyttölaite",
+        "liquidIncluded": true,
+        "packageCount": 1,
+        "liquidMl": 20.0,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "not captured",
+        "priceCad": 37.99,
+        "pricePerItemCad": 37.99,
+        "pricePerMlCad": 1.8995,
+        "federalDutyCad": 6.72,
+        "additionalDutyCad": 6.72,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-009",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "Vaporesso XROS SE Kit",
+        "category": "Täytettävä laitepakkaus",
+        "liquidIncluded": false,
+        "packageCount": 1,
+        "liquidMl": null,
+        "emptyCapacityMl": null,
+        "nicotineMgMl": "not applicable",
+        "priceCad": 9.99,
+        "pricePerItemCad": 9.99,
+        "pricePerMlCad": null,
+        "federalDutyCad": null,
+        "additionalDutyCad": null,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      },
+      {
+        "id": "CA-RET-010",
+        "seller": "DashVapes Canada",
+        "sellerType": "retailer storefront",
+        "product": "Uwell Caliburn GPP A Replacement Pod",
+        "category": "Tyhjä täytettävä pod",
+        "liquidIncluded": false,
+        "packageCount": 1,
+        "liquidMl": null,
+        "emptyCapacityMl": 3.0,
+        "nicotineMgMl": "not applicable",
+        "priceCad": 3.99,
+        "pricePerItemCad": 3.99,
+        "pricePerMlCad": null,
+        "federalDutyCad": null,
+        "additionalDutyCad": null,
+        "stock": "Varastossa",
+        "priceBasis": "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla.",
+        "url": "https://www.dashvapes.com/ca",
+        "sourceTier": "C"
+      }
+    ],
+    "summary": [
+      {
+        "segment": "Täytetyt kertakäyttölaitteet",
+        "count": 7,
+        "minPriceCad": 12.99,
+        "medianPriceCad": 34.99,
+        "maxPriceCad": 50.99,
+        "minPerMlCad": 1.6997,
+        "medianPerMlCad": 2.3327,
+        "maxPerMlCad": 6.495,
+        "interpretation": "Päivämääräkohtainen, painottamaton otos; ei markkinakeskihinta."
+      },
+      {
+        "segment": "Kaikki nestettä sisältävät tuotteet",
+        "count": 8,
+        "minPriceCad": 12.99,
+        "medianPriceCad": 33.59,
+        "maxPriceCad": 50.99,
+        "minPerMlCad": 1.6997,
+        "medianPerMlCad": 2.7759,
+        "maxPerMlCad": 6.495,
+        "interpretation": "Päivämääräkohtainen, painottamaton otos; ei markkinakeskihinta."
+      },
+      {
+        "segment": "Tyhjä laitteisto",
+        "count": 2,
+        "minPriceCad": 3.99,
+        "medianPriceCad": 6.99,
+        "maxPriceCad": 9.99,
+        "minPerMlCad": null,
+        "medianPerMlCad": null,
+        "maxPerMlCad": null,
+        "interpretation": "Kaksi laitelajia; kapasiteetti ei ole myytyä nestettä."
+      }
+    ],
+    "healthComparison": [
+      {
+        "healthCategory": "Nestettä sisältävä laite",
+        "healthAverageCad": 14.56,
+        "retailSegment": "Täytetyt kertakäyttölaitteet",
+        "count": 7,
+        "retailMedianCad": 34.99,
+        "ratio": 2.403,
+        "interpretation": "Tuoteotos verrattuna tuoteryhmän toimituskeskiarvoon; ei vähittäiskate tai markup-arvio."
+      },
+      {
+        "healthCategory": "Nestettä sisältävä osa/pod",
+        "healthAverageCad": 5.39,
+        "retailSegment": "Vuse-podit kappalehinnalla",
+        "count": 1,
+        "retailMedianCad": 9.995,
+        "ratio": 1.854,
+        "interpretation": "Tuoteotos verrattuna tuoteryhmän toimituskeskiarvoon; ei vähittäiskate tai markup-arvio."
+      },
+      {
+        "healthCategory": "Laite/osa ilman nestettä",
+        "healthAverageCad": 4.46,
+        "retailSegment": "Tyhjä pod + täytettävä laitepakkaus",
+        "count": 2,
+        "retailMedianCad": 6.99,
+        "ratio": 1.567,
+        "interpretation": "Tuoteotos verrattuna tuoteryhmän toimituskeskiarvoon; ei vähittäiskate tai markup-arvio."
+      }
+    ],
+    "stress": [
+      {
+        "scenario": "hard_stress",
+        "baseCad": 1160753796.78,
+        "priceChangePct": -20.0,
+        "volumeChangePct": -30.0,
+        "valueCad": 650022126.2,
+        "changePct": -44.0,
+        "interpretation": "Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."
+      },
+      {
+        "scenario": "normalization",
+        "baseCad": 1160753796.78,
+        "priceChangePct": -5.0,
+        "volumeChangePct": -10.0,
+        "valueCad": 992444496.25,
+        "changePct": -14.5,
+        "interpretation": "Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."
+      },
+      {
+        "scenario": "pricing_power",
+        "baseCad": 1160753796.78,
+        "priceChangePct": 5.0,
+        "volumeChangePct": 0.0,
+        "valueCad": 1218791486.62,
+        "changePct": 5.0,
+        "interpretation": "Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."
+      }
+    ],
+    "manifest": {
+      "dataset": "Pixan Canada public retail price observations",
+      "date": "2026-07-17",
+      "generated_at_utc": "2026-07-17T09:07:46.223789+00:00",
+      "source_tier": "C supplementary",
+      "observation_count": 10,
+      "liquid_product_count": 8,
+      "empty_hardware_count": 2,
+      "cra_rate_cad": 1.12,
+      "method": "Rendered storefront text was preserved and hash-locked. Prices are unweighted point observations. Federal and additional specified-province duty examples apply the CRA rate to stated liquid volumes and are not checkout tax receipts.",
+      "limitations": [
+        "No purchase was made and no checkout-specific GST/HST/PST or delivery amount was observed.",
+        "The sample is not randomized, sales-weighted, or representative of the Canadian market.",
+        "Price per ml for disposable devices embeds hardware value and cannot be read as bottled-liquid price.",
+        "Health Canada comparisons are between public product observations and category-wide reported shipment averages; they do not measure margin."
+      ],
+      "capture_manifest": "data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json",
+      "capture_manifest_sha256": "1f39ceb4bb3bf85c39bac4d0b9c82bbaf8f992629bb39e9250f1ce038b6fab06",
+      "output_files": [
+        {
+          "path": "data/derived/canada_retail_price_observations_2026-07-17.csv",
+          "sha256": "6d73d7c13aa79690b167c91c45fcebaf6586fafff638eee6b42382405a2c0faa",
+          "bytes": 6378
+        },
+        {
+          "path": "data/derived/canada_retail_price_summary_2026-07-17.csv",
+          "sha256": "b6c96330edfbb59ae53ea70d5073062daf8ccb98059dcb6d32820d88ceac5294",
+          "bytes": 625
+        },
+        {
+          "path": "data/derived/canada_retail_health_comparison_2026-07-17.csv",
+          "sha256": "f3c5177c234c1d496c9ad0f5aed37ec6e2db735c8ee6da20709fb20e8abe7e9f",
+          "bytes": 659
+        },
+        {
+          "path": "data/derived/canada_retail_stress_test_2026-07-17.csv",
+          "sha256": "556640b751c1def1606a3a7460b4692ba660af430bc7c06348ef32d6db17c9be",
+          "bytes": 695
+        }
+      ]
+    },
+    "taxSource": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+    "taxRule": "1,12 CAD / alkava 2 ml ensimmäisestä 10 ml:sta; sen jälkeen 1,12 CAD / alkava 10 ml. Määrätyissä provinsseissa lisävero on samansuuruinen.",
+    "scope": "C-tason täydentävä, päivämääräkohtainen julkinen hintaotos; ei myyntipainotettu hintaindeksi, kassakuitti tai katelaskelma."
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -4605,7 +4956,7 @@ window.PIXAN_DATA = {
           "value": "1 219 milj. CAD"
         }
       ],
-      "note": "Laskenta: virallinen vuoden 2024 arvo × hinnan muutos × volyymin muutos."
+      "note": "Laskenta: virallinen vuoden 2024 arvo × hinnan muutos × volyymin muutos. Dokumentoitu 10 tuotteen julkinen hintaotos tarkistaa vain hintojen suuruusluokan, ei skenaarion todennäköisyyttä."
     },
     {
       "market": "Saksa",
@@ -4717,6 +5068,13 @@ window.PIXAN_DATA = {
       "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike",
       "use": "Japanin sarjan arvostus- ja luokitteluperusta",
       "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"
+    },
+    {
+      "grade": "C",
+      "title": "Kanadan dokumentoitu vähittäishintaotos",
+      "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa",
+      "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite",
+      "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"
     }
   ],
   "contacts": [
@@ -4830,6 +5188,12 @@ window.PIXAN_DATA = {
       "priority": "medium",
       "title": "Japani 9-numeroinen tuonti",
       "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.",
+      "status": "done"
+    },
+    {
+      "priority": "medium",
+      "title": "Kanadan vähittäishintaotos",
+      "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.",
       "status": "done"
     },
     {

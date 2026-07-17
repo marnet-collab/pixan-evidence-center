@@ -1,0 +1,41 @@
+{
+  "dataset": "Pixan Canada public retail price observations",
+  "date": "2026-07-17",
+  "generated_at_utc": "2026-07-17T09:07:46.223789+00:00",
+  "source_tier": "C supplementary",
+  "observation_count": 10,
+  "liquid_product_count": 8,
+  "empty_hardware_count": 2,
+  "cra_rate_cad": 1.12,
+  "method": "Rendered storefront text was preserved and hash-locked. Prices are unweighted point observations. Federal and additional specified-province duty examples apply the CRA rate to stated liquid volumes and are not checkout tax receipts.",
+  "limitations": [
+    "No purchase was made and no checkout-specific GST/HST/PST or delivery amount was observed.",
+    "The sample is not randomized, sales-weighted, or representative of the Canadian market.",
+    "Price per ml for disposable devices embeds hardware value and cannot be read as bottled-liquid price.",
+    "Health Canada comparisons are between public product observations and category-wide reported shipment averages; they do not measure margin."
+  ],
+  "capture_manifest": "data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json",
+  "capture_manifest_sha256": "1f39ceb4bb3bf85c39bac4d0b9c82bbaf8f992629bb39e9250f1ce038b6fab06",
+  "output_files": [
+    {
+      "path": "data/derived/canada_retail_price_observations_2026-07-17.csv",
+      "sha256": "6d73d7c13aa79690b167c91c45fcebaf6586fafff638eee6b42382405a2c0faa",
+      "bytes": 6378
+    },
+    {
+      "path": "data/derived/canada_retail_price_summary_2026-07-17.csv",
+      "sha256": "b6c96330edfbb59ae53ea70d5073062daf8ccb98059dcb6d32820d88ceac5294",
+      "bytes": 625
+    },
+    {
+      "path": "data/derived/canada_retail_health_comparison_2026-07-17.csv",
+      "sha256": "f3c5177c234c1d496c9ad0f5aed37ec6e2db735c8ee6da20709fb20e8abe7e9f",
+      "bytes": 659
+    },
+    {
+      "path": "data/derived/canada_retail_stress_test_2026-07-17.csv",
+      "sha256": "556640b751c1def1606a3a7460b4692ba660af430bc7c06348ef32d6db17c9be",
+      "bytes": 695
+    }
+  ]
+}

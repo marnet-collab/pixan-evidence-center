@@ -102,6 +102,21 @@ def build_payload() -> dict:
     canada_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_manifest_2025.json").read_text(encoding="utf-8")
     )
+    canada_retail_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "canada_retail_price_observations_2026-07-17.csv"
+    )
+    canada_retail_summary_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "canada_retail_price_summary_2026-07-17.csv"
+    )
+    canada_retail_comparison_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "canada_retail_health_comparison_2026-07-17.csv"
+    )
+    canada_retail_stress_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "canada_retail_stress_test_2026-07-17.csv"
+    )
+    canada_retail_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "canada_retail_price_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -530,6 +545,104 @@ def build_payload() -> dict:
             }
         )
 
+    retail_segment_labels = {
+        "prefilled disposable devices": "Täytetyt kertakäyttölaitteet",
+        "all liquid-containing products": "Kaikki nestettä sisältävät tuotteet",
+        "empty hardware": "Tyhjä laitteisto",
+    }
+    retail_category_labels = {
+        "prefilled pod pack": "Täytetty pod-pakkaus",
+        "prefilled disposable device": "Täytetty kertakäyttölaite",
+        "refillable device kit": "Täytettävä laitepakkaus",
+        "empty refillable pod": "Tyhjä täytettävä pod",
+    }
+    health_category_labels = {
+        "device containing vaping substance": "Nestettä sisältävä laite",
+        "part containing vaping substance": "Nestettä sisältävä osa/pod",
+        "device or part without vaping substance": "Laite/osa ilman nestettä",
+    }
+    retail_comparison_labels = {
+        "prefilled disposable devices": "Täytetyt kertakäyttölaitteet",
+        "Vuse prefilled pods per pod": "Vuse-podit kappalehinnalla",
+        "empty pod plus refillable kit": "Tyhjä pod + täytettävä laitepakkaus",
+    }
+    canada_retail = {
+        "observations": [
+            {
+                "id": row["observation_id"],
+                "seller": row["seller"],
+                "sellerType": row["seller_type"],
+                "product": row["product"],
+                "category": retail_category_labels.get(row["category"], row["category"]),
+                "liquidIncluded": row["liquid_included"] == "true",
+                "packageCount": int(row["package_count"]),
+                "liquidMl": number(row["liquid_ml_total"]),
+                "emptyCapacityMl": number(row["empty_capacity_ml"]),
+                "nicotineMgMl": row["nicotine_mg_ml"],
+                "priceCad": float(row["advertised_price_cad"]),
+                "pricePerItemCad": float(row["price_per_item_cad"]),
+                "pricePerMlCad": number(row["price_per_ml_cad"]),
+                "federalDutyCad": number(row["calculated_federal_vaping_duty_cad"]),
+                "additionalDutyCad": number(row["calculated_additional_duty_specified_province_cad"]),
+                "stock": "Ostokontrolli näkyvissä" if row["stock_observation"] == "purchase control visible" else "Varastossa",
+                "priceBasis": (
+                    "Valmistajan kertahinta; sovellettavat myyntiverot ja toimitus eivät sisälly Vusen myyntiehtojen mukaan."
+                    if row["seller_type"] == "manufacturer storefront"
+                    else "Ilmoitettu tuotehinta; GST/HST/PST- ja toimituskäsittelyä ei varmistettu kassalla."
+                ),
+                "url": row["source_url"],
+                "sourceTier": row["source_tier"],
+            }
+            for row in canada_retail_rows
+        ],
+        "summary": [
+            {
+                "segment": retail_segment_labels.get(row["segment"], row["segment"]),
+                "count": int(row["observation_count"]),
+                "minPriceCad": float(row["minimum_advertised_price_cad"]),
+                "medianPriceCad": float(row["median_advertised_price_cad"]),
+                "maxPriceCad": float(row["maximum_advertised_price_cad"]),
+                "minPerMlCad": number(row["minimum_price_per_ml_cad"]),
+                "medianPerMlCad": number(row["median_price_per_ml_cad"]),
+                "maxPerMlCad": number(row["maximum_price_per_ml_cad"]),
+                "interpretation": (
+                    "Kaksi laitelajia; kapasiteetti ei ole myytyä nestettä."
+                    if row["segment"] == "empty hardware"
+                    else "Päivämääräkohtainen, painottamaton otos; ei markkinakeskihinta."
+                ),
+            }
+            for row in canada_retail_summary_rows
+        ],
+        "healthComparison": [
+            {
+                "healthCategory": health_category_labels.get(row["health_canada_category"], row["health_canada_category"]),
+                "healthAverageCad": float(row["health_canada_2024_average_cad"]),
+                "retailSegment": retail_comparison_labels.get(row["retail_observation_segment"], row["retail_observation_segment"]),
+                "count": int(row["retail_observation_count"]),
+                "retailMedianCad": float(row["retail_median_cad"]),
+                "ratio": float(row["retail_to_shipment_ratio"]),
+                "interpretation": "Tuoteotos verrattuna tuoteryhmän toimituskeskiarvoon; ei vähittäiskate tai markup-arvio.",
+            }
+            for row in canada_retail_comparison_rows
+        ],
+        "stress": [
+            {
+                "scenario": row["scenario"],
+                "baseCad": float(row["official_base_2024_cad"]),
+                "priceChangePct": float(row["aggregate_price_change_pct"]),
+                "volumeChangePct": float(row["aggregate_volume_change_pct"]),
+                "valueCad": float(row["mechanical_value_cad"]),
+                "changePct": float(row["change_vs_2024_pct"]),
+                "interpretation": row["interpretation"],
+            }
+            for row in canada_retail_stress_rows
+        ],
+        "manifest": canada_retail_manifest,
+        "taxSource": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+        "taxRule": "1,12 CAD / alkava 2 ml ensimmäisestä 10 ml:sta; sen jälkeen 1,12 CAD / alkava 10 ml. Määrätyissä provinsseissa lisävero on samansuuruinen.",
+        "scope": "C-tason täydentävä, päivämääräkohtainen julkinen hintaotos; ei myyntipainotettu hintaindeksi, kassakuitti tai katelaskelma.",
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -668,6 +781,7 @@ def build_payload() -> dict:
             },
             "limits": canada_manifest["definitions_and_limits"],
         },
+        "canadaRetail": canada_retail,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -703,7 +817,7 @@ def build_payload() -> dict:
                     {"name": "Maltillinen", "price": "−5 %", "volume": "−10 %", "value": "992 milj. CAD"},
                     {"name": "Hintaherkkyys", "price": "+5 %", "volume": "0 %", "value": "1 219 milj. CAD"},
                 ],
-                "note": "Laskenta: virallinen vuoden 2024 arvo × hinnan muutos × volyymin muutos.",
+                "note": "Laskenta: virallinen vuoden 2024 arvo × hinnan muutos × volyymin muutos. Dokumentoitu 10 tuotteen julkinen hintaotos tarkistaa vain hintojen suuruusluokan, ei skenaarion todennäköisyyttä.",
             },
             {
                 "market": "Saksa",
@@ -729,6 +843,7 @@ def build_payload() -> dict:
             {"grade": "B", "title": "Japan Customs / MOF · 2025 revised", "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain", "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys", "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"},
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
             {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
+            {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
         ],
         "contacts": contacts,
         "tasks": [
@@ -737,6 +852,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Valmis 2025: kahdeksan HTS10-riviä, general imports ja imports for consumption, 127,747 milj. laitetta, 23,279 milj. kg täsmällisiä nesteseoksia, CIF ja 143,132 milj. USD laskettua tullia. 236 detaljiriviä täsmäytyivät ilman eroa.", "status": "done"},
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "Valmis: CIMT HS10-tuonti alkuperämaittain sekä HS8 total/domestic/re-export, 608 lähderiviä ja 564 HS6-tarkastusavainta nollaerolla. Avoinna vain alkuperämaa × suora lähetysmaa -ristiintaulukko ja 2025 Health Canada -myynti.", "status": "done"},
             {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
+            {"priority": "medium", "title": "Kanadan vähittäishintaotos", "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.", "status": "done"},
             {"priority": "medium", "title": "Kiina GACC tullimenettelyineen", "detail": "Hae alkuperä, lähetysmaa, tullimenettely ja maahantuojan sijainti; erottele vientihubi ja kotimarkkina.", "status": "queued"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
@@ -777,10 +893,13 @@ def publish_us_evidence() -> None:
 def publish_canada_evidence() -> None:
     derived = PROJECT_DIR / "data" / "derived"
     raw = PROJECT_DIR / "data" / "raw" / "canada_cimt"
+    retail_raw = PROJECT_DIR / "data" / "raw" / "canada_retail"
     public_data = DASHBOARD_DIR / "data" / "canada"
     public_raw = DASHBOARD_DIR / "data" / "raw" / "canada_cimt"
+    public_retail_raw = DASHBOARD_DIR / "data" / "raw" / "canada_retail"
     public_data.mkdir(parents=True, exist_ok=True)
     public_raw.mkdir(parents=True, exist_ok=True)
+    public_retail_raw.mkdir(parents=True, exist_ok=True)
     for name in (
         "canada_cimt_vape_import_totals_2025.csv",
         "canada_cimt_vape_import_origins_2025.csv",
@@ -788,6 +907,11 @@ def publish_canada_evidence() -> None:
         "canada_cimt_vape_import_monthly_2025.csv",
         "canada_cimt_vape_exports_reexports_2025.csv",
         "canada_cimt_vape_manifest_2025.json",
+        "canada_retail_price_observations_2026-07-17.csv",
+        "canada_retail_price_summary_2026-07-17.csv",
+        "canada_retail_health_comparison_2026-07-17.csv",
+        "canada_retail_stress_test_2026-07-17.csv",
+        "canada_retail_price_manifest_2026-07-17.json",
     ):
         shutil.copy2(derived / name, public_data / name)
     for name in (
@@ -797,6 +921,10 @@ def publish_canada_evidence() -> None:
         "CIMT_domestic_exports_HS8_vape_selected_2025.csv",
     ):
         shutil.copy2(raw / name, public_raw / name)
+    shutil.copy2(
+        retail_raw / "canada_retail_capture_manifest_2026-07-17.json",
+        public_retail_raw / "canada_retail_capture_manifest_2026-07-17.json",
+    )
 
 
 def main() -> None:

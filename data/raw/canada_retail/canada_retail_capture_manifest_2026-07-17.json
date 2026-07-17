@@ -1,0 +1,471 @@
+{
+  "dataset": "Pixan Canada public retail price observation capture",
+  "purpose": "Supplementary reproducible price observations; not a statistical retail price index or sales panel",
+  "generated_at_utc": "2026-07-17T08:56:50.921Z",
+  "pages": [
+    {
+      "id": "vuse_clear_pods",
+      "requested_url": "https://www.vuse.com/ca/en/buy-online/products/clear-e-liquid-pods",
+      "final_url": "https://www.vuse.com/ca/en/buy-online/products/clear-e-liquid-pods",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:55:49.453Z",
+      "required_strings": [
+        "$19.99",
+        "2 Vuse Pods per pack",
+        "2mL of e-liquid per pod"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 9699,
+      "rendered_text_sha256": "e58877efa59d35ed7e03bed2f29bc26e24563bd711bfaec7993605dd251c17c6",
+      "rendered_html_bytes": 1020426,
+      "rendered_html_sha256": "21f15c4cf4db71eb2777dcb154ba8cdb249ff619fe2d6a6bef8bd27bdbfd34a0",
+      "application_responses": [
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14775792140658/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564946290/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564225394/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774572941682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774573531506/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774568747378/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564946290/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564225394/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774573531506/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774572941682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774568747378/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564946290/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774564225394/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774573531506/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774572941682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14774568747378/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        }
+      ]
+    },
+    {
+      "id": "vuse_go1000_clear",
+      "requested_url": "https://www.vuse.com/ca/en/buy-online/products/clear-go-1000-disposable-vape",
+      "final_url": "https://www.vuse.com/ca/en/buy-online/products/clear-go-1000-disposable-vape",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:55:58.614Z",
+      "required_strings": [
+        "$12.99",
+        "Up to 1000 puffs",
+        "2 mL",
+        "20 mg/mL"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 10950,
+      "rendered_text_sha256": "6b9be8e46edcdd5ec82e6ae4b0eb957d5c171239a7a3be88e97c41b489605e51",
+      "rendered_html_bytes": 996904,
+      "rendered_html_sha256": "c16e54b157e4c91bccb28797266d68cd3633b9550a6610a6ed21967d1616fdee",
+      "application_responses": [
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297251389/ON",
+          "status": 405,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296661565/ON",
+          "status": 404,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297316925/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468652232765/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297054781/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296399421/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296661565/ON",
+          "status": 404,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297316925/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297054781/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296399421/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296661565/ON",
+          "status": 404,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297316925/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297054781/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296399421/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297316925/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387297054781/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387296399421/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        }
+      ]
+    },
+    {
+      "id": "vuse_go5000_blueberry_raspberry",
+      "requested_url": "https://www.vuse.com/ca/en/buy-online/products/blueberry-raspberry-go-5000-disposable-vape",
+      "final_url": "https://www.vuse.com/ca/en/buy-online/products/blueberry-raspberry-go-5000-disposable-vape",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:56:07.812Z",
+      "required_strings": [
+        "$32.19",
+        "Up to 5000 puffs",
+        "10 mL",
+        "20 mg/mL"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 9817,
+      "rendered_text_sha256": "0aa90090844ff980adcdc20785fffc82b9f5333b406e5d8bd8a9b6e65f9cd132",
+      "rendered_html_bytes": 994940,
+      "rendered_html_sha256": "c1363b669fdfe8e07fdbb8dc130d25a328ac329f57acdf82a4d9a3b0fee16439",
+      "application_responses": [
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7387295383613/ON",
+          "status": 404,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468655738941/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468683329597/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468673925181/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468624183357/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468657999933/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468683329597/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468673925181/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468624183357/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468655738941/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468657999933/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468655738941/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468673925181/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468683329597/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468624183357/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7468657999933/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        }
+      ]
+    },
+    {
+      "id": "vuse_go8000_blueberry_raspberry",
+      "requested_url": "https://www.vuse.com/ca/en/buy-online/products/blue-raspberry-go-8000-disposable-vape",
+      "final_url": "https://www.vuse.com/ca/en/buy-online/products/blue-raspberry-go-8000-disposable-vape",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:56:16.957Z",
+      "required_strings": [
+        "$34.99",
+        "Each device contains 15mL of e-liquid",
+        "20 mg/mL"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 8092,
+      "rendered_text_sha256": "016c3cb0f0b7b5bd4c3eb618346f07959a3245ad0b16556ee0d813cb2fa08d69",
+      "rendered_html_bytes": 926510,
+      "rendered_html_sha256": "544c8543d7500302cd05c97c1193a167e9c61b3d97e3cd9a6767c1a3dadb1c66",
+      "application_responses": [
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003326322/ON",
+          "status": 405,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688004079986/ON",
+          "status": 405,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/7209908109373/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003916146/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688004047218/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003850610/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003981682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003916146/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003981682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688004047218/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003850610/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003916146/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003981682/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688003850610/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        },
+        {
+          "url": "https://imperial-auth-api.wearefuturemaker.ca/product/14688004047218/ON",
+          "status": 200,
+          "resource_type": "xhr"
+        }
+      ]
+    },
+    {
+      "id": "vuse_conditions_of_sale",
+      "requested_url": "https://www.vuse.com/ca/en/pages/conditions-of-sale",
+      "final_url": "https://www.vuse.com/ca/en/pages/conditions-of-sale",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:56:26.196Z",
+      "required_strings": [
+        "All prices stated exclude applicable taxes",
+        "Delivery charges"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 28384,
+      "rendered_text_sha256": "2643f1ae1e0578c3d592c810cf540a113bc04e49f5077eb407ad697c56dacf1a",
+      "rendered_html_bytes": 612019,
+      "rendered_html_sha256": "8bae5442d6f675d47d988c9b2b903a77cbd47ab2968ff0c00909075da1ea5611",
+      "application_responses": []
+    },
+    {
+      "id": "dashvapes_home",
+      "requested_url": "https://www.dashvapes.com/ca",
+      "final_url": "https://www.dashvapes.com/ca",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:56:36.720Z",
+      "required_strings": [
+        "STLTH Eco Disposable Vape",
+        "C$19.99",
+        "6mL",
+        "STLTH Titan Pro Disposable Vape",
+        "C$40.50",
+        "20ml",
+        "STLTH X Geek Bar Disposable Vape",
+        "C$50.99",
+        "30mL",
+        "STLTH Eco XL Disposable Vape",
+        "C$37.99",
+        "Vaporesso XROS SE Kit",
+        "C$9.99",
+        "Uwell Caliburn GPP A Replacement Pod",
+        "C$3.99",
+        "holds 3mL"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 15306,
+      "rendered_text_sha256": "2d4d7559776d49fb6396a04d00f8b11b154476a8a9b9a3d555dc3cbf891cef80",
+      "rendered_html_bytes": 1319834,
+      "rendered_html_sha256": "3498e5a65883f2c0b2bbca55338adbecd635bdd342535f7c4f36718a076eb78f",
+      "application_responses": []
+    },
+    {
+      "id": "cra_excise_rates",
+      "requested_url": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+      "final_url": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+      "http_status": 200,
+      "captured_at_utc": "2026-07-17T08:56:50.854Z",
+      "required_strings": [
+        "$1.12 per 2",
+        "first 10",
+        "additional vaping duty"
+      ],
+      "missing_required_strings": [],
+      "rendered_text_bytes": 57791,
+      "rendered_text_sha256": "27f48606d711cb3c3871dc75d419d768c7367434ee93e0b2ce3c46b218dcdf61",
+      "rendered_html_bytes": 279611,
+      "rendered_html_sha256": "05bb035932a72addd0e93891e46e878982d38f5d487402bd4b66111960da8142",
+      "application_responses": []
+    }
+  ]
+}

@@ -13,6 +13,7 @@
   const money = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. USD";
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
+  const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
   const moneyJpy = (value) => value >= 1e9
     ? new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e9) + " mrd JPY"
     : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. JPY";
@@ -265,6 +266,42 @@
     $("#customs-bars").innerHTML = data.narrowCustoms.map((item) => `
       <div class="bar-row"><strong>${esc(item.market)}</strong><div class="bar-track"><div class="bar-fill" style="width:${Math.max(3, item.valueUsd / max * 100)}%"></div></div><strong>${money(item.valueUsd)}</strong></div>`).join("") +
       '<div class="meta-line">Kapea kori = HS 8543.40 + 2404.12. Arvot ovat tuontia, eivät vähittäismyyntiä.</div>';
+
+    const retail = data.canadaRetail;
+    $("#canada-retail-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Segmentti</th><th>Havaintoja</th><th>Alin hinta</th><th>Mediaani</th><th>Ylin hinta</th><th>CAD/ml mediaani</th><th>Tulkinta</th></tr></thead>
+        <tbody>${retail.summary.map((item) => `<tr>
+          <td><strong>${esc(item.segment)}</strong></td><td class="num">${integer(item.count)}</td>
+          <td class="num">${cad(item.minPriceCad)}</td><td class="num"><strong>${cad(item.medianPriceCad)}</strong></td><td class="num">${cad(item.maxPriceCad)}</td>
+          <td class="num">${item.medianPerMlCad === null ? "—" : cad(item.medianPerMlCad, 4)}</td><td>${esc(item.interpretation)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Rajaus:</strong> ${esc(retail.scope)}</div>`;
+
+    $("#canada-retail-observations").innerHTML = `
+      <table>
+        <thead><tr><th>ID</th><th>Tuote ja myyjä</th><th>Luokka</th><th>Nestemäärä</th><th>Mainoshinta</th><th>Hinta/ml</th><th>Liittovaltion duty</th><th>Määrätyn provinssin lisäduty</th><th>Hintaperusta</th></tr></thead>
+        <tbody>${retail.observations.map((item) => `<tr>
+          <td><code>${esc(item.id)}</code></td>
+          <td><strong>${esc(item.product)}</strong><div class="meta-line">${esc(item.seller)} · ${esc(item.stock)}</div><a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">Avaa lähde ↗</a></td>
+          <td>${esc(item.category)}</td>
+          <td class="num">${item.liquidMl !== null ? `${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.liquidMl)} ml` : item.emptyCapacityMl !== null ? `${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.emptyCapacityMl)} ml tyhjä kapasiteetti` : "Ei nestettä"}</td>
+          <td class="num"><strong>${cad(item.priceCad)}</strong></td><td class="num">${item.pricePerMlCad === null ? "—" : cad(item.pricePerMlCad, 4)}</td>
+          <td class="num">${cad(item.federalDutyCad)}</td><td class="num">${cad(item.additionalDutyCad)}</td><td>${esc(item.priceBasis)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>CRA:n laskentasääntö:</strong> ${esc(retail.taxRule)} <a class="source-link" href="${esc(retail.taxSource)}" target="_blank" rel="noopener">Virallinen verolähde ↗</a> Laskettu duty ei ole kassakuitin veroerittely.</div>`;
+
+    $("#canada-retail-comparison").innerHTML = `
+      <table>
+        <thead><tr><th>Health Canada -tuoteryhmä</th><th>Virallinen 2024 toimitusarvo/yksikkö</th><th>Julkinen vertailusegmentti</th><th>Havaintoja</th><th>Vertailumediaani</th><th>Suhdeluku</th><th>Oikea tulkinta</th></tr></thead>
+        <tbody>${retail.healthComparison.map((item) => `<tr>
+          <td><strong>${esc(item.healthCategory)}</strong></td><td class="num">${cad(item.healthAverageCad)}</td><td>${esc(item.retailSegment)}</td>
+          <td class="num">${integer(item.count)}</td><td class="num">${cad(item.retailMedianCad, item.retailMedianCad % 1 ? 4 : 2)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(item.ratio)}×</td><td>${esc(item.interpretation)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Ei katelaskelma:</strong> Health Canadan arvo/yksikkö on koko tuoteryhmän raportoitu toimituskeskiarvo. Julkinen otos sisältää eri kokoisia ja eri tekniikan tuotteita, joten suhdeluku kertoo vain suuruusluokan.</div>`;
   }
 
   function renderEvidence() {
@@ -386,6 +423,7 @@
     data.contacts.forEach((item) => rows.push({ view: "contacts", title: `${item.authority} · ${item.market}`, detail: item.scope }));
     data.codes.forEach((item) => rows.push({ view: "customs", title: `HS ${item.code} · ${item.title}`, detail: item.detail }));
     data.taxes.forEach((item) => rows.push({ view: "taxes", title: `${item.name} · verotus`, detail: `${item.verification} ${item.period}` }));
+    data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }
 

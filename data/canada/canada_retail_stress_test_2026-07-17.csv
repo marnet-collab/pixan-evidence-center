@@ -1,0 +1,4 @@
+scenario,official_base_2024_cad,aggregate_price_change_pct,aggregate_volume_change_pct,mechanical_value_cad,change_vs_2024_pct,interpretation
+hard_stress,1160753796.78,-20.0,-30.0,650022126.20,-44.0,"Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."
+normalization,1160753796.78,-5.0,-10.0,992444496.25,-14.5,"Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."
+pricing_power,1160753796.78,5.0,0.0,1218791486.62,5.0,"Sensitivity only; not a forecast. Retail observations validate public price order of magnitude, not the scenario probability."

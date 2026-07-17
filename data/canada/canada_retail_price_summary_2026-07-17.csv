@@ -1,0 +1,4 @@
+segment,observation_count,minimum_advertised_price_cad,median_advertised_price_cad,maximum_advertised_price_cad,minimum_price_per_ml_cad,median_price_per_ml_cad,maximum_price_per_ml_cad,interpretation
+prefilled disposable devices,7,12.99,34.99,50.99,1.6997,2.3327,6.4950,Seven point-in-time device observations; unweighted and not market representative.
+all liquid-containing products,8,12.99,33.59,50.99,1.6997,2.7759,6.4950,Includes one two-pod pack and seven devices; hardware value is embedded in per-ml prices.
+empty hardware,2,3.99,6.99,9.99,,,,One empty pod and one refillable kit; capacity is not liquid volume sold.
