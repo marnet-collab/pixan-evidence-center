@@ -84,6 +84,11 @@ def build_payload() -> dict:
     customs_rows = read_csv(choose_customs_file())
     eurostat_route_rows = read_csv(PROJECT_DIR / "data" / "derived" / "eurostat_comext_cn8_route_shares_2025.csv")
     eurostat_top_rows = read_csv(PROJECT_DIR / "data" / "derived" / "eurostat_comext_cn8_top_partners_2025.csv")
+    japan_total_rows = read_csv(PROJECT_DIR / "data" / "derived" / "japan_customs_vape_totals_2025.csv")
+    japan_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "japan_customs_vape_origins_2025.csv")
+    japan_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "japan_customs_vape_manifest_2025.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -256,6 +261,61 @@ def build_payload() -> dict:
         )
     eurostat_origins.sort(key=lambda row: (row["code"], row["rank"]))
 
+    japan_names = {
+        "Republic of Korea": "Etelä-Korea",
+        "People's Republic of China": "Kiina",
+        "Viet Nam": "Vietnam",
+        "Thailand": "Thaimaa",
+        "Malaysia": "Malesia",
+        "Philippines": "Filippiinit",
+        "Indonesia": "Indonesia",
+        "United Kingdom": "Yhdistynyt kuningaskunta",
+        "Netherlands": "Alankomaat",
+        "France": "Ranska",
+        "Germany": "Saksa",
+        "Switzerland": "Sveitsi",
+        "Spain": "Espanja",
+        "Italy": "Italia",
+        "Cyprus": "Kypros",
+        "United States of America": "Yhdysvallat",
+    }
+    japan_titles = {
+        "854340000": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "240412000": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "240419100": "Valmistetut tupakankorvikkeet",
+        "240419200": "Muut inhaloitavat tuotteet",
+    }
+    japan_totals = [
+        {
+            "code": row["hs9_code"],
+            "title": japan_titles[row["hs9_code"]],
+            "scope": row["scope"],
+            "quantity": int(row["quantity"]),
+            "unit": row["quantity_unit"],
+            "valueJpy": int(row["value_jpy"]),
+            "originCount": int(row["origin_count"]),
+            "largestOrigin": japan_names.get(row["largest_origin"], row["largest_origin"]),
+            "largestOriginShare": float(row["largest_origin_share_pct"]),
+            "url": row["source_url"],
+        }
+        for row in japan_total_rows
+    ]
+    japan_origins = [
+        {
+            "code": row["hs9_code"],
+            "title": japan_titles[row["hs9_code"]],
+            "countryCode": row["country_code"],
+            "origin": japan_names.get(row["country_of_origin"], row["country_of_origin"]),
+            "quantity": int(row["quantity"]),
+            "unit": row["quantity_unit"],
+            "valueJpy": int(row["value_jpy"]),
+            "valueShare": int(row["value_jpy"]) / next(
+                int(total["value_jpy"]) for total in japan_total_rows if total["hs9_code"] == row["hs9_code"]
+            ) * 100,
+        }
+        for row in japan_origin_rows
+    ]
+
     contacts = []
     for row in requests:
         contacts.append(
@@ -332,6 +392,16 @@ def build_payload() -> dict:
                 "source": "Eurostat Comext · DS-045409",
                 "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database",
             },
+            {
+                "grade": "B",
+                "market": "Japani",
+                "title": "Virallinen 9-numeroinen kansallinen tullisarja",
+                "value": "84,361 mrd JPY · 20 529 032 laitetta",
+                "detail": "Vuoden 2025 tarkistettu tuonti nimikkeellä 854340000. Lisäksi 240419200 kirjasi 805 316 kg / 6,997 mrd JPY muita inhaloitavia tuotteita.",
+                "limit": "CIF-tuontiarvo, ei kuluttajamyyntiä. 240419200 on laaja nimike eikä todista yksin, että koko määrä on nikotiinitonta e-nestettä.",
+                "source": "Japan Customs / MOF · e-Stat 2025 revised",
+                "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141",
+            },
         ],
         "report": [
             {"label": "GVR maailmanmarkkina 2025", "value": "45,7 mrd USD", "meaning": "Kaupallinen ennuste"},
@@ -358,6 +428,15 @@ def build_payload() -> dict:
         "customs": customs,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
+        "japanCustoms": {
+            "version": japan_manifest["version"],
+            "totals": japan_totals,
+            "origins": japan_origins,
+            "audit": japan_manifest["audit"],
+            "baskets": japan_manifest["baskets"],
+            "method": japan_manifest["method"],
+            "limit": japan_manifest["interpretation_limit"],
+        },
         "narrowCustoms": [{"market": market, "valueUsd": value} for market, value in sorted(narrow.items(), key=lambda item: item[1], reverse=True)],
         "codes": [
             {"code": "8543.40", "title": "Sähköiset höyrystinlaitteet", "detail": "Personal electric vaporising devices. Kansallinen 8–10-numeroinen alanimike tarvitaan osien ja laitteiden erotteluun.", "include": "Laitteet ja mahdolliset laiteosat nimikerajauksen mukaan."},
@@ -394,8 +473,9 @@ def build_payload() -> dict:
             {"grade": "A", "title": "EU Tobacco Products Directive 20(7)", "coverage": "Vuosittaiset myyntimäärät tuotemerkki- ja tyyppitasolla kansallisille viranomaisille", "use": "Oikeusperusta aggregoitujen tietopyyntöjen kohdentamiseen", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32014L0040"},
             {"grade": "B", "title": "UN Comtrade", "coverage": "USA, Kanada ja Japani 2025: HS 854340, 240412 ja 240419", "use": "Rajakaupan suuruusluokka ja ristiintarkastus", "url": "https://comtradeplus.un.org/"},
             {"grade": "B", "title": "Eurostat Comext DS-045409", "coverage": "EU:n extra- ja intra-EU CN8-kauppa alkuperä- ja lähetysmaittain", "use": "EU:n reitti- ja hubikorjaus", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
+            {"grade": "B", "title": "Japan Customs / MOF · 2025 revised", "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain", "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys", "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"},
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
-            {"grade": "B", "title": "Japan Customs methodology", "coverage": "CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin kansallisen tullisarjan määrittely", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
+            {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
         ],
         "contacts": contacts,
         "tasks": [
@@ -403,7 +483,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "EU-CEG aggregoidut myyntipyynnöt", "detail": "Lähetä Article 20(7) -pyynnöt kansallisille toimivaltaisille viranomaisille, ilman yritystason luottamuksellisia tietoja.", "status": "queued"},
             {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Hanki Census-avain tai dataote; erota general imports, imports for consumption ja re-exports.", "status": "requested"},
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "CIMT 10-digit + origin/export country + foreign-origin re-exports, täsmäytys Health Canadan toimitusmyyntiin.", "status": "requested"},
-            {"priority": "medium", "title": "Japani 9-numeroinen nimike", "detail": "Hae Japan Customs -sarja alkuperämaittain ja erota laitteet, nikotiinituotteet ja muut inhaloitavat tuotteet.", "status": "queued"},
+            {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
             {"priority": "medium", "title": "Kiina GACC tullimenettelyineen", "detail": "Hae alkuperä, lähetysmaa, tullimenettely ja maahantuojan sijainti; erottele vientihubi ja kotimarkkina.", "status": "queued"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},

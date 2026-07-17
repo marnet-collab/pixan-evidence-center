@@ -226,7 +226,7 @@ a { color: inherit; }
 .section-heading.compact { margin-top: 0; }
 .section-heading.compact h2 { font-size: 24px; }
 
-.anchor-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+.anchor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px; }
 .anchor-card { padding: 21px; }
 .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .card-top small, .meta-line { color: var(--muted); font-size: 11px; }
@@ -272,6 +272,8 @@ a { color: inherit; }
 .customs-table { overflow: auto; background: white; border: 1px solid var(--line); border-radius: var(--radius); }
 #eurostat-summary table { min-width: 1040px; }
 #eurostat-origins table { min-width: 760px; }
+#japan-summary table { min-width: 980px; }
+#japan-origins table { min-width: 760px; }
 .table-note { padding: 13px 14px; border-top: 1px solid var(--line); }
 .table-note strong { color: var(--ink); }
 .download-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 20px; }

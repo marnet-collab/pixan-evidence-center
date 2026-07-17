@@ -1,0 +1,60 @@
+{
+  "dataset": "Trade Statistics of Japan / Commodity by Country / Import",
+  "publisher": "Ministry of Finance Japan and Japan Customs, distributed via e-Stat",
+  "downloaded_at_utc": "2026-07-17T07:42:43+00:00",
+  "period": "2025",
+  "version": "Revised, published 2026-03-12; fixed version expected in November 2026 under the official revision cycle",
+  "method": {
+    "source": "Customs declarations",
+    "value_unit": "JPY 1,000, rounded down",
+    "import_valuation": "CIF",
+    "partner_basis": "country of origin",
+    "classification": "9-digit Japan statistical code"
+  },
+  "official_links": {
+    "estat_dataset_list": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141",
+    "methodology": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm",
+    "statistical_code": "https://www.customs.go.jp/toukei/sankou/code/code_e.htm",
+    "country_code": "https://www.customs.go.jp/toukei/sankou/code/country_e.htm"
+  },
+  "raw_files": [
+    {
+      "section": "chapter_16_24",
+      "path": "data/raw/japan_customs/chapter_16_24_2025_revised_2026-07-17T074243Z.csv",
+      "bytes": 942412,
+      "sha256": "f5ada22048a0f0bcd98e8269c427c20b30b07b2639b82cfe213cb1fd0f5b4841",
+      "stat_inf_id": "000040424871",
+      "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424871",
+      "dataset_title": "Revised 25-04 2025 Commodity by Country (Import Jan-Dec: Revised), Section IV Chapters 16-24"
+    },
+    {
+      "section": "chapter_84_85",
+      "path": "data/raw/japan_customs/chapter_84_85_2025_revised_2026-07-17T074243Z.csv",
+      "bytes": 3024864,
+      "sha256": "628c9c76f9d5564be8c3c8cae5f588e3d0a96bf709ad673dc5fe0e8156ef49af",
+      "stat_inf_id": "000040424883",
+      "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424883",
+      "dataset_title": "Revised 25-16 2025 Commodity by Country (Import Jan-Dec: Revised), Section XVI Chapters 84-85"
+    }
+  ],
+  "audit": {
+    "selected_origin_rows": 28,
+    "selected_codes": [
+      "240412000",
+      "240419100",
+      "240419200",
+      "854340000"
+    ],
+    "sum_of_absolute_quantity_month_gaps": 0,
+    "sum_of_absolute_value_month_gaps_thousand_jpy": 0,
+    "status": "pass"
+  },
+  "baskets": {
+    "core_value_jpy": 84365460000,
+    "core_definition": "854340000 devices + 240412000 nicotine-containing inhalation products",
+    "extended_value_jpy": 91362497000,
+    "extended_definition": "core + 240419200 other inhalation products; broader code is not exclusively nicotine-free e-liquid",
+    "excluded_from_baskets_but_shown_separately": "240419100 manufactured tobacco substitutes"
+  },
+  "interpretation_limit": "Customs import value is a border-flow measure, not Japanese consumer sales or market revenue."
+}

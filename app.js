@@ -12,6 +12,9 @@
   const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
   const money = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. USD";
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
+  const moneyJpy = (value) => value >= 1e9
+    ? new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e9) + " mrd JPY"
+    : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. JPY";
   const integer = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(value);
 
   const statusLabels = {
@@ -140,6 +143,29 @@
           <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.sharePct)} %</td><td>${esc(item.basis)}</td>
         </tr>`).join("")}</tbody>
       </table>`;
+
+    const japan = data.japanCustoms;
+    $("#japan-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Japanin 9-numeroinen nimike</th><th>Virallinen kuvaus</th><th>Vuoden 2025 määrä</th><th>CIF-tuontiarvo</th><th>Alkuperämaita</th><th>Suurin alkuperä</th></tr></thead>
+        <tbody>${japan.totals.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.title)}</strong><div class="meta-line">${esc(item.scope)}</div></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num"><strong>${moneyJpy(item.valueJpy)}</strong></td>
+          <td class="num">${item.originCount}</td><td>${esc(item.largestOrigin)} <span class="meta-line">(${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.largestOriginShare)} % arvosta)</span></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi hyväksytty:</strong> ${japan.audit.selected_origin_rows} alkuperäriviä; vuosisummien ja 12 kuukauden absoluuttinen ero ${japan.audit.sum_of_absolute_value_month_gaps_thousand_jpy} tuhatta JPY ja määräero ${japan.audit.sum_of_absolute_quantity_month_gaps}. Lähde perustuu tulliselvityksiin; arvo on CIF ja kumppani on alkuperämaa. Vuoden 2025 aineisto on tarkistettu versio, ei vielä marraskuun 2026 kiinteä versio.</div>`;
+
+    $("#japan-origins").innerHTML = `
+      <table>
+        <thead><tr><th>Nimike</th><th>Alkuperämaa</th><th>Määrä</th><th>CIF-tuontiarvo</th><th>Osuus nimikkeen arvosta</th></tr></thead>
+        <tbody>${japan.origins.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.origin)}</strong></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num">${moneyJpy(item.valueJpy)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.valueShare)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Rajaus:</strong> kapea kori on 854340000 + 240412000, yhteensä ${moneyJpy(japan.baskets.core_value_jpy)}. Laajempi kori lisää 240419200-rivin, mutta tämä “muut inhaloitavat tuotteet” -nimike ei ole yksinomaan nikotiiniton e-neste. Tullivirtaa ei merkitä Japanin kuluttajamyynniksi.</div>`;
 
     const rows = [...data.customs].sort((a, b) => a.market.localeCompare(b.market, "fi") || a.code.localeCompare(b.code));
     $("#customs-table").innerHTML = `

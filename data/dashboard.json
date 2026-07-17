@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 07:33 UTC",
+    "updated": "2026-07-17 07:45 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -72,6 +72,16 @@
       "limit": "CIF-tulliarvo, ei kuluttajamyyntiä; ei kata EU:n kotimaista tuotantoa eikä vähittäiskaupan katetta.",
       "source": "Eurostat Comext · DS-045409",
       "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"
+    },
+    {
+      "grade": "B",
+      "market": "Japani",
+      "title": "Virallinen 9-numeroinen kansallinen tullisarja",
+      "value": "84,361 mrd JPY · 20 529 032 laitetta",
+      "detail": "Vuoden 2025 tarkistettu tuonti nimikkeellä 854340000. Lisäksi 240419200 kirjasi 805 316 kg / 6,997 mrd JPY muita inhaloitavia tuotteita.",
+      "limit": "CIF-tuontiarvo, ei kuluttajamyyntiä. 240419200 on laaja nimike eikä todista yksin, että koko määrä on nikotiinitonta e-nestettä.",
+      "source": "Japan Customs / MOF · e-Stat 2025 revised",
+      "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"
     }
   ],
   "report": [
@@ -1106,12 +1116,12 @@
       "name": "Japani",
       "sourceName": "Japan",
       "status": "partial",
-      "customs": "MOF/Customs 9-digit trade statistics 854340-000, 240412-000, 240419 national code",
-      "route": "Imports use country of origin and CIF; exports final destination and FOB; subtract re-exports if identifiable and compare mirror data",
+      "customs": "MOF/Customs 9-digit trade statistics 854340-000, 240412-000, 240419-100 and 240419-200",
+      "route": "Imports use country of origin and CIF; exports final destination and FOB; compare mirror data and do not convert import value into Japanese consumer sales",
       "salesSource": "Ministry of Health/PMDA approvals for nicotine liquids; official household/industry data only as secondary cross-check",
-      "current": "UN aggregate obtained; national 9-digit extract and consumer sales not preserved",
-      "missing": "9-digit import/export by partner; lawful nicotine-liquid supply and retail sales",
-      "how": "Use Japan Customs commodity search, December annual cumulative row and country table; download 9-digit data; request sales/approval aggregates from MHLW/PMDA and distinguish liquid e-cigarettes from heated-tobacco products",
+      "current": "2025 revised national import extract obtained and preserved: 854340000 20,529,032 devices / 84.361341bn JPY; 240412000 135 kg / 4.119m JPY; 240419100 142 kg / 2.041m JPY; 240419200 805,316 kg / 6.997037bn JPY; all selected annual rows reconcile to 12 months with zero gap",
+      "missing": "Consumer sell-out, domestic production, exports/re-exports, lawful nicotine-liquid supply and classification proof that isolates nicotine-free e-liquid inside 240419200",
+      "how": "Use the saved e-Stat raw CSVs and audit manifest as customs proof; obtain the fixed 2025 release in November 2026; download matching exports; request non-identifiable sales/approval aggregates from MHLW/PMDA and ask Customs for a ruling or statistical cross-tab that isolates e-liquid within 240419200",
       "tax": {
         "name": "Japani",
         "sourceName": "Japan",
@@ -2585,6 +2595,368 @@
       "rank": 5
     }
   ],
+  "japanCustoms": {
+    "version": "Revised, published 2026-03-12; fixed version expected in November 2026 under the official revision cycle",
+    "totals": [
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "scope": "core_device",
+        "quantity": 20529032,
+        "unit": "NO",
+        "valueJpy": 84361341000,
+        "originCount": 9,
+        "largestOrigin": "Indonesia",
+        "largestOriginShare": 49.520974305043346,
+        "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424883"
+      },
+      {
+        "code": "240412000",
+        "title": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "scope": "core_nicotine_inhalation",
+        "quantity": 135,
+        "unit": "KG",
+        "valueJpy": 4119000,
+        "originCount": 2,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 94.63462005341103,
+        "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424871"
+      },
+      {
+        "code": "240419100",
+        "title": "Valmistetut tupakankorvikkeet",
+        "scope": "extended_separate_not_assumed_e_liquid",
+        "quantity": 142,
+        "unit": "KG",
+        "valueJpy": 2041000,
+        "originCount": 3,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 52.52327290543851,
+        "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424871"
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "scope": "extended_possible_non_nicotine_liquid_not_exclusive",
+        "quantity": 805316,
+        "unit": "KG",
+        "valueJpy": 6997037000,
+        "originCount": 14,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 84.40537044466107,
+        "url": "https://www.e-stat.go.jp/en/stat-search/file-download?fileKind=1&statInfId=000040424871"
+      }
+    ],
+    "origins": [
+      {
+        "code": "240412000",
+        "title": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "countryCode": "105",
+        "origin": "Kiina",
+        "quantity": 118,
+        "unit": "KG",
+        "valueJpy": 3898000,
+        "valueShare": 94.63462005341103
+      },
+      {
+        "code": "240412000",
+        "title": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "countryCode": "205",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 17,
+        "unit": "KG",
+        "valueJpy": 221000,
+        "valueShare": 5.365379946588978
+      },
+      {
+        "code": "240419100",
+        "title": "Valmistetut tupakankorvikkeet",
+        "countryCode": "105",
+        "origin": "Kiina",
+        "quantity": 121,
+        "unit": "KG",
+        "valueJpy": 1072000,
+        "valueShare": 52.52327290543851
+      },
+      {
+        "code": "240419100",
+        "title": "Valmistetut tupakankorvikkeet",
+        "countryCode": "213",
+        "origin": "Saksa",
+        "quantity": 2,
+        "unit": "KG",
+        "valueJpy": 666000,
+        "valueShare": 32.63106320431161
+      },
+      {
+        "code": "240419100",
+        "title": "Valmistetut tupakankorvikkeet",
+        "countryCode": "304",
+        "origin": "Yhdysvallat",
+        "quantity": 19,
+        "unit": "KG",
+        "valueJpy": 303000,
+        "valueShare": 14.845663890249877
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "105",
+        "origin": "Kiina",
+        "quantity": 725786,
+        "unit": "KG",
+        "valueJpy": 5905875000,
+        "valueShare": 84.40537044466107
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "103",
+        "origin": "Etelä-Korea",
+        "quantity": 57268,
+        "unit": "KG",
+        "valueJpy": 897367000,
+        "valueShare": 12.824957192594521
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "110",
+        "origin": "Vietnam",
+        "quantity": 13554,
+        "unit": "KG",
+        "valueJpy": 111194000,
+        "valueShare": 1.5891583823266906
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "113",
+        "origin": "Malesia",
+        "quantity": 3822,
+        "unit": "KG",
+        "valueJpy": 32477000,
+        "valueShare": 0.4641536124505272
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "304",
+        "origin": "Yhdysvallat",
+        "quantity": 3179,
+        "unit": "KG",
+        "valueJpy": 29595000,
+        "valueShare": 0.4229647492217063
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "205",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 1055,
+        "unit": "KG",
+        "valueJpy": 9988000,
+        "valueShare": 0.142746136686143
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "210",
+        "origin": "Ranska",
+        "quantity": 322,
+        "unit": "KG",
+        "valueJpy": 3830000,
+        "valueShare": 0.054737455297149344
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "220",
+        "origin": "Italia",
+        "quantity": 83,
+        "unit": "KG",
+        "valueJpy": 2286000,
+        "valueShare": 0.032670972012867734
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "213",
+        "origin": "Saksa",
+        "quantity": 22,
+        "unit": "KG",
+        "valueJpy": 1023000,
+        "valueShare": 0.014620474352215087
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "233",
+        "origin": "Kypros",
+        "quantity": 49,
+        "unit": "KG",
+        "valueJpy": 836000,
+        "valueShare": 0.011947914524390825
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "218",
+        "origin": "Espanja",
+        "quantity": 54,
+        "unit": "KG",
+        "valueJpy": 823000,
+        "valueShare": 0.01176212159518379
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "117",
+        "origin": "Filippiinit",
+        "quantity": 75,
+        "unit": "KG",
+        "valueJpy": 741000,
+        "valueShare": 0.010590196964800958
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "207",
+        "origin": "Alankomaat",
+        "quantity": 2,
+        "unit": "KG",
+        "valueJpy": 624000,
+        "valueShare": 0.008918060601937648
+      },
+      {
+        "code": "240419200",
+        "title": "Muut inhaloitavat tuotteet",
+        "countryCode": "111",
+        "origin": "Thaimaa",
+        "quantity": 45,
+        "unit": "KG",
+        "valueJpy": 378000,
+        "valueShare": 0.005402286710789152
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "118",
+        "origin": "Indonesia",
+        "quantity": 4789468,
+        "unit": "NO",
+        "valueJpy": 41776558000,
+        "valueShare": 49.520974305043346
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "105",
+        "origin": "Kiina",
+        "quantity": 11794500,
+        "unit": "NO",
+        "valueJpy": 25517426000,
+        "valueShare": 30.24777190300946
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "113",
+        "origin": "Malesia",
+        "quantity": 3789192,
+        "unit": "NO",
+        "valueJpy": 16614634000,
+        "valueShare": 19.694606324477466
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "103",
+        "origin": "Etelä-Korea",
+        "quantity": 95700,
+        "unit": "NO",
+        "valueJpy": 287272000,
+        "valueShare": 0.3405256443232689
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "110",
+        "origin": "Vietnam",
+        "quantity": 53860,
+        "unit": "NO",
+        "valueJpy": 158632000,
+        "valueShare": 0.1880387368427441
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "304",
+        "origin": "Yhdysvallat",
+        "quantity": 5548,
+        "unit": "NO",
+        "valueJpy": 4040000,
+        "valueShare": 0.0047889234003523
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "215",
+        "origin": "Sveitsi",
+        "quantity": 697,
+        "unit": "NO",
+        "valueJpy": 1832000,
+        "valueShare": 0.0021716108092686673
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "117",
+        "origin": "Filippiinit",
+        "quantity": 60,
+        "unit": "NO",
+        "valueJpy": 597000,
+        "valueShare": 0.000707670116339189
+      },
+      {
+        "code": "854340000",
+        "title": "Sähköiset savukkeet ja vastaavat höyrystinlaitteet",
+        "countryCode": "213",
+        "origin": "Saksa",
+        "quantity": 7,
+        "unit": "NO",
+        "valueJpy": 350000,
+        "valueShare": 0.00041488197775329345
+      }
+    ],
+    "audit": {
+      "selected_origin_rows": 28,
+      "selected_codes": [
+        "240412000",
+        "240419100",
+        "240419200",
+        "854340000"
+      ],
+      "sum_of_absolute_quantity_month_gaps": 0,
+      "sum_of_absolute_value_month_gaps_thousand_jpy": 0,
+      "status": "pass"
+    },
+    "baskets": {
+      "core_value_jpy": 84365460000,
+      "core_definition": "854340000 devices + 240412000 nicotine-containing inhalation products",
+      "extended_value_jpy": 91362497000,
+      "extended_definition": "core + 240419200 other inhalation products; broader code is not exclusively nicotine-free e-liquid",
+      "excluded_from_baskets_but_shown_separately": "240419100 manufactured tobacco substitutes"
+    },
+    "method": {
+      "source": "Customs declarations",
+      "value_unit": "JPY 1,000, rounded down",
+      "import_valuation": "CIF",
+      "partner_basis": "country of origin",
+      "classification": "9-digit Japan statistical code"
+    },
+    "limit": "Customs import value is a border-flow measure, not Japanese consumer sales or market revenue."
+  },
   "narrowCustoms": [
     {
       "market": "Japani",
@@ -2722,6 +3094,13 @@
       "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"
     },
     {
+      "grade": "B",
+      "title": "Japan Customs / MOF · 2025 revised",
+      "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain",
+      "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys",
+      "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"
+    },
+    {
       "grade": "A",
       "title": "FTC E-Cigarette Report 2021",
       "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD",
@@ -2731,8 +3110,8 @@
     {
       "grade": "B",
       "title": "Japan Customs methodology",
-      "coverage": "CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike",
-      "use": "Japanin kansallisen tullisarjan määrittely",
+      "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike",
+      "use": "Japanin sarjan arvostus- ja luokitteluperusta",
       "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"
     }
   ],
@@ -2845,9 +3224,9 @@
     },
     {
       "priority": "medium",
-      "title": "Japani 9-numeroinen nimike",
-      "detail": "Hae Japan Customs -sarja alkuperämaittain ja erota laitteet, nikotiinituotteet ja muut inhaloitavat tuotteet.",
-      "status": "queued"
+      "title": "Japani 9-numeroinen tuonti",
+      "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.",
+      "status": "done"
     },
     {
       "priority": "medium",
