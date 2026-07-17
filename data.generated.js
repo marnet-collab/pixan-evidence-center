@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 09:42 UTC",
+    "updated": "2026-07-17 10:15 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -23,6 +23,12 @@ window.PIXAN_DATA = {
       "label": "USA 2025",
       "value": "577,8 milj, USD",
       "detail": "Census HTS10 · laitteet + täsmälliset nesteseokset",
+      "tone": "blue"
+    },
+    {
+      "label": "Etelä-Korea 2025",
+      "value": "148,534 milj. USD",
+      "detail": "KCS HS6 · täsmällinen laiteluokka",
       "tone": "blue"
     },
     {
@@ -114,6 +120,16 @@ window.PIXAN_DATA = {
       "limit": "CIF-tuontiarvo, ei kuluttajamyyntiä. 240419200 on laaja nimike eikä todista yksin, että koko määrä on nikotiinitonta e-nestettä.",
       "source": "Japan Customs / MOF · e-Stat 2025 revised",
       "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"
+    },
+    {
+      "grade": "B",
+      "market": "Etelä-Korea",
+      "title": "Virallinen HS6-tullisarja ja 2025 HSK10-luokitus",
+      "value": "148,534 milj. USD · 1 282 856 kg laitteita",
+      "detail": "Korea Customs Servicen vuoden 2025 laitetuonti HS 854340. Laajojen HS 240412/240419 inhaloitavien tuotteiden tuonti oli lisäksi 123,731 milj. USD / 2 112 659 kg. Laitteiden kolmen suurimman alkuperämaan osuus oli 98,93 %.",
+      "limit": "Tulliarvo ei ole kuluttajamyyntiä. HS6 240412/240419 ei todista koko määrää e-nesteeksi; tarkat HSK10-nesteiden arvot odottavat virallista API- tai tulliviranomaisotetta.",
+      "source": "Korea Customs Service · Trade Statistics / UNI-PASS",
+      "url": "https://tradedata.go.kr/cts/index_eng.do"
     }
   ],
   "report": [
@@ -1188,13 +1204,13 @@ window.PIXAN_DATA = {
     {
       "name": "Etelä-Korea",
       "sourceName": "South Korea",
-      "status": "missing",
-      "customs": "Korea Customs Service Trade Statistics 10-digit HSK through tradedata.go.kr",
-      "route": "Use origin/destination; subtract re-exports; compare China/Hong Kong mirror flows and special express imports",
+      "status": "partial",
+      "customs": "Korea Customs Service public trade statistics at HS6 plus 2025 UNI-PASS HSK10 classification; official data.go.kr Itemtrade API for exact HSK10 values",
+      "route": "Imports use country of origin; exports use destination; subtract re-exports when obtained; compare China/Hong Kong mirror flows and special express imports",
       "salesSource": "Ministry of Economy and Finance tobacco-market trends; KOSIS/MOHW surveys; liquid-vape tax declarations",
-      "current": "No official vape-specific sales value obtained",
-      "missing": "10-digit trade, liquid ml/tax volume and device sales",
-      "how": "Query tradedata.go.kr for 8543400000 and all 240412/240419 HSK suffixes; request downloadable official extract; request MOEF/KOSIS split between liquid and heated tobacco sales and tax volume",
+      "current": "Korea Customs Service 2025 HS6: sähkösavukelaitteet 1 282 856 kg / 148,534 milj. USD; laajat 240412/240419 inhaloitavien tuotteiden proxyt 2 112 659 kg / 123,731 milj. USD. Kaikki 24 kuukausi- ja alkuperämaatäsmäytystä mahtuvat virallisen kokonaiskilogramman ja tuhannen USD:n esitystarkkuuden pyöristysrajaan. Virallinen 2025 HSK10-nimikkeistö erottaa sähkösavukenesteet koodeihin 2404121000 ja 2404199010, mutta niiden erillisiä arvoja ei ole vielä saatu.",
+      "missing": "Tarkat HSK10-arvot laitteille ja kahdelle sähkösavukenesteen nimikkeelle, vienti-/jälleenvientisilta, verotettu nestemäärä ja -tuotto sekä laitteiden ja nesteiden kuluttajamyynti.",
+      "how": "Apply for the official Itemtrade API or request a KCS downloadable HSK10 extract; never allocate the HS6 240412/240419 totals to the two e-cigarette-solution rows by assumption. Request MOEF/KOSIS split between liquid and heated-tobacco sales and tax volume and obtain export/re-export rows.",
       "tax": {
         "name": "Etelä-Korea",
         "sourceName": "South Korea",
@@ -4898,6 +4914,840 @@ window.PIXAN_DATA = {
     },
     "limit": "Customs import value is a border-flow measure, not Japanese consumer sales or market revenue."
   },
+  "koreaCustoms": {
+    "version": "2026-07-17",
+    "totals": [
+      {
+        "code": "854340",
+        "title": "Sähkösavukkeet ja vastaavat henkilökohtaiset sähköiset höyrystinlaitteet",
+        "officialTitle": "Electronic cigarettes and similar personal electric vaporising devices",
+        "scope": "core_devices",
+        "importKg": 1282856,
+        "importValueUsd": 148534000,
+        "exportKg": 47270,
+        "exportValueUsd": 5815000,
+        "url": "https://tradedata.go.kr/cts/index_eng.do"
+      },
+      {
+        "code": "240412",
+        "title": "Laaja nikotiinia sisältävien inhaloitavien tuotteiden proxy",
+        "officialTitle": "Other, containing nicotine",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 1947496,
+        "importValueUsd": 119124000,
+        "exportKg": 915,
+        "exportValueUsd": 76000,
+        "url": "https://tradedata.go.kr/cts/index_eng.do"
+      },
+      {
+        "code": "240419",
+        "title": "Laaja muiden inhaloitavien tuotteiden proxy",
+        "officialTitle": "Other",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 165163,
+        "importValueUsd": 4607000,
+        "exportKg": 308766,
+        "exportValueUsd": 11938000,
+        "url": "https://tradedata.go.kr/cts/index_eng.do"
+      }
+    ],
+    "origins": [
+      {
+        "code": "240412",
+        "origin": "Kiina",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 1927659,
+        "importValueUsd": 117608000,
+        "valueShare": 98.727377
+      },
+      {
+        "code": "240412",
+        "origin": "Yhdistynyt kuningaskunta",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 12363,
+        "importValueUsd": 732000,
+        "valueShare": 0.614486
+      },
+      {
+        "code": "240412",
+        "origin": "Yhdysvallat",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 3933,
+        "importValueUsd": 546000,
+        "valueShare": 0.458346
+      },
+      {
+        "code": "240412",
+        "origin": "Malesia",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 3023,
+        "importValueUsd": 202000,
+        "valueShare": 0.169571
+      },
+      {
+        "code": "240412",
+        "origin": "Indonesia",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 504,
+        "importValueUsd": 34000,
+        "valueShare": 0.028542
+      },
+      {
+        "code": "240412",
+        "origin": "Kanada",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 1,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240412",
+        "origin": "Saksa",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240412",
+        "origin": "Greece",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240412",
+        "origin": "Japani",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240412",
+        "origin": "Sveitsi",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "importKg": 13,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Kiina",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 158857,
+        "importValueUsd": 4323000,
+        "valueShare": 93.835468
+      },
+      {
+        "code": "240419",
+        "origin": "Yhdysvallat",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 1183,
+        "importValueUsd": 133000,
+        "valueShare": 2.886911
+      },
+      {
+        "code": "240419",
+        "origin": "Malesia",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 2105,
+        "importValueUsd": 112000,
+        "valueShare": 2.431083
+      },
+      {
+        "code": "240419",
+        "origin": "Japani",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 609,
+        "importValueUsd": 11000,
+        "valueShare": 0.238767
+      },
+      {
+        "code": "240419",
+        "origin": "Czech Republic",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 150,
+        "importValueUsd": 7000,
+        "valueShare": 0.151943
+      },
+      {
+        "code": "240419",
+        "origin": "Vietnam",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 2000,
+        "importValueUsd": 5000,
+        "valueShare": 0.10853
+      },
+      {
+        "code": "240419",
+        "origin": "Indonesia",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 99,
+        "importValueUsd": 4000,
+        "valueShare": 0.086824
+      },
+      {
+        "code": "240419",
+        "origin": "Yhdistynyt kuningaskunta",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 40,
+        "importValueUsd": 4000,
+        "valueShare": 0.086824
+      },
+      {
+        "code": "240419",
+        "origin": "Australia",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 29,
+        "importValueUsd": 3000,
+        "valueShare": 0.065118
+      },
+      {
+        "code": "240419",
+        "origin": "Alankomaat",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 24,
+        "importValueUsd": 2000,
+        "valueShare": 0.043412
+      },
+      {
+        "code": "240419",
+        "origin": "Singapore",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 48,
+        "importValueUsd": 1000,
+        "valueShare": 0.021706
+      },
+      {
+        "code": "240419",
+        "origin": "Ruotsi",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 10,
+        "importValueUsd": 1000,
+        "valueShare": 0.021706
+      },
+      {
+        "code": "240419",
+        "origin": "Kanada",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 1,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Tanska",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 3,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Ranska",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 2,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Saksa",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 1,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Hongkong",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 2,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Hungary",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "India",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Russian Federation",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Slovakia",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "240419",
+        "origin": "Sveitsi",
+        "scope": "broad_other_inhalation_proxy",
+        "importKg": 1,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Kiina",
+        "scope": "core_devices",
+        "importKg": 874321,
+        "importValueUsd": 87071000,
+        "valueShare": 58.620249
+      },
+      {
+        "code": "854340",
+        "origin": "Vietnam",
+        "scope": "core_devices",
+        "importKg": 314583,
+        "importValueUsd": 47693000,
+        "valueShare": 32.109147
+      },
+      {
+        "code": "854340",
+        "origin": "Malesia",
+        "scope": "core_devices",
+        "importKg": 83976,
+        "importValueUsd": 12180000,
+        "valueShare": 8.200143
+      },
+      {
+        "code": "854340",
+        "origin": "Japani",
+        "scope": "core_devices",
+        "importKg": 9449,
+        "importValueUsd": 1127000,
+        "valueShare": 0.758749
+      },
+      {
+        "code": "854340",
+        "origin": "Puola",
+        "scope": "core_devices",
+        "importKg": 39,
+        "importValueUsd": 416000,
+        "valueShare": 0.280071
+      },
+      {
+        "code": "854340",
+        "origin": "Indonesia",
+        "scope": "core_devices",
+        "importKg": 391,
+        "importValueUsd": 29000,
+        "valueShare": 0.019524
+      },
+      {
+        "code": "854340",
+        "origin": "Yhdysvallat",
+        "scope": "core_devices",
+        "importKg": 32,
+        "importValueUsd": 7000,
+        "valueShare": 0.004713
+      },
+      {
+        "code": "854340",
+        "origin": "Yhdistynyt kuningaskunta",
+        "scope": "core_devices",
+        "importKg": 25,
+        "importValueUsd": 6000,
+        "valueShare": 0.004039
+      },
+      {
+        "code": "854340",
+        "origin": "Saksa",
+        "scope": "core_devices",
+        "importKg": 6,
+        "importValueUsd": 2000,
+        "valueShare": 0.001346
+      },
+      {
+        "code": "854340",
+        "origin": "Kanada",
+        "scope": "core_devices",
+        "importKg": 17,
+        "importValueUsd": 1000,
+        "valueShare": 0.000673
+      },
+      {
+        "code": "854340",
+        "origin": "Ranska",
+        "scope": "core_devices",
+        "importKg": 1,
+        "importValueUsd": 1000,
+        "valueShare": 0.000673
+      },
+      {
+        "code": "854340",
+        "origin": "Philippines",
+        "scope": "core_devices",
+        "importKg": 6,
+        "importValueUsd": 1000,
+        "valueShare": 0.000673
+      },
+      {
+        "code": "854340",
+        "origin": "Turkiye",
+        "scope": "core_devices",
+        "importKg": 1,
+        "importValueUsd": 1000,
+        "valueShare": 0.000673
+      },
+      {
+        "code": "854340",
+        "origin": "Australia",
+        "scope": "core_devices",
+        "importKg": 2,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Greece",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Hongkong",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Mongolia",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Russian Federation",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Serbia",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Singapore",
+        "scope": "core_devices",
+        "importKg": 7,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      },
+      {
+        "code": "854340",
+        "origin": "Sveitsi",
+        "scope": "core_devices",
+        "importKg": 0,
+        "importValueUsd": 0,
+        "valueShare": 0.0
+      }
+    ],
+    "hsk10": [
+      {
+        "code": "8543401000",
+        "parent": "854340",
+        "officialKorean": "연소시키지 않고 흡입하도록 만들어진 물품(제2404호의 것으로 한정한다)을 포함한 것",
+        "title": "Sisältää ilman palamista inhaloitavaksi tarkoitetun 2404-nimikkeen tuotteen",
+        "scope": "core_device_containing_heading_2404_article",
+        "included": true,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "8543409000",
+        "parent": "854340",
+        "officialKorean": "기타",
+        "title": "Muu sähkösavuke tai vastaava henkilökohtainen sähköinen höyrystinlaite",
+        "scope": "core_device_other",
+        "included": true,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "2404121000",
+        "parent": "240412",
+        "officialKorean": "전자담배용 용액",
+        "title": "Nikotiinia sisältävä sähkösavukeneste",
+        "scope": "core_nicotine_e_cigarette_liquid",
+        "included": true,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "2404129000",
+        "parent": "240412",
+        "officialKorean": "기타",
+        "title": "Muu nikotiinia sisältävä inhaloitava tuote",
+        "scope": "excluded_broad_other_nicotine_product",
+        "included": false,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "2404191000",
+        "parent": "240419",
+        "officialKorean": "담배대용물을 함유한 것",
+        "title": "Sisältää tupakan korvikkeita",
+        "scope": "excluded_tobacco_substitute_product",
+        "included": false,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "2404199010",
+        "parent": "240419",
+        "officialKorean": "전자담배용 용액",
+        "title": "Muu sähkösavukeneste",
+        "scope": "core_other_e_cigarette_liquid",
+        "included": true,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      },
+      {
+        "code": "2404199090",
+        "parent": "240419",
+        "officialKorean": "기타",
+        "title": "Muu inhaloitava tuote",
+        "scope": "excluded_broad_other_product",
+        "included": false,
+        "url": "https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do"
+      }
+    ],
+    "audit": {
+      "annual_rows": 3,
+      "monthly_rows": 36,
+      "country_rows": 53,
+      "reconciliation_checks": [
+        {
+          "component": "monthly",
+          "hs6_code": "854340",
+          "metric": "export_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 47270,
+          "component_display_sum": 47267,
+          "difference_display_units": -3,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "854340",
+          "metric": "export_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 5815,
+          "component_display_sum": 5817,
+          "difference_display_units": 2,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "854340",
+          "metric": "import_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 1282856,
+          "component_display_sum": 1282856,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "854340",
+          "metric": "import_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 148534,
+          "component_display_sum": 148533,
+          "difference_display_units": -1,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240412",
+          "metric": "export_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 915,
+          "component_display_sum": 915,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240412",
+          "metric": "export_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 76,
+          "component_display_sum": 77,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240412",
+          "metric": "import_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 1947496,
+          "component_display_sum": 1947496,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240412",
+          "metric": "import_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 119124,
+          "component_display_sum": 119125,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240419",
+          "metric": "export_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 308766,
+          "component_display_sum": 308767,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240419",
+          "metric": "export_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 11938,
+          "component_display_sum": 11940,
+          "difference_display_units": 2,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240419",
+          "metric": "import_weight_kg",
+          "component_count": 12,
+          "annual_display_value": 165163,
+          "component_display_sum": 165163,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "monthly",
+          "hs6_code": "240419",
+          "metric": "import_value_thousand_usd",
+          "component_count": 12,
+          "annual_display_value": 4607,
+          "component_display_sum": 4607,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 6,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "854340",
+          "metric": "export_weight_kg",
+          "component_count": 21,
+          "annual_display_value": 47270,
+          "component_display_sum": 47271,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "854340",
+          "metric": "export_value_thousand_usd",
+          "component_count": 21,
+          "annual_display_value": 5815,
+          "component_display_sum": 5815,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "854340",
+          "metric": "import_weight_kg",
+          "component_count": 21,
+          "annual_display_value": 1282856,
+          "component_display_sum": 1282856,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "854340",
+          "metric": "import_value_thousand_usd",
+          "component_count": 21,
+          "annual_display_value": 148534,
+          "component_display_sum": 148535,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240412",
+          "metric": "export_weight_kg",
+          "component_count": 10,
+          "annual_display_value": 915,
+          "component_display_sum": 915,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 5,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240412",
+          "metric": "export_value_thousand_usd",
+          "component_count": 10,
+          "annual_display_value": 76,
+          "component_display_sum": 77,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 5,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240412",
+          "metric": "import_weight_kg",
+          "component_count": 10,
+          "annual_display_value": 1947496,
+          "component_display_sum": 1947496,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 5,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240412",
+          "metric": "import_value_thousand_usd",
+          "component_count": 10,
+          "annual_display_value": 119124,
+          "component_display_sum": 119122,
+          "difference_display_units": -2,
+          "rounding_tolerance_display_units": 5,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240419",
+          "metric": "export_weight_kg",
+          "component_count": 22,
+          "annual_display_value": 308766,
+          "component_display_sum": 308766,
+          "difference_display_units": 0,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240419",
+          "metric": "export_value_thousand_usd",
+          "component_count": 22,
+          "annual_display_value": 11938,
+          "component_display_sum": 11937,
+          "difference_display_units": -1,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240419",
+          "metric": "import_weight_kg",
+          "component_count": 22,
+          "annual_display_value": 165163,
+          "component_display_sum": 165164,
+          "difference_display_units": 1,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        },
+        {
+          "component": "country_of_origin",
+          "hs6_code": "240419",
+          "metric": "import_value_thousand_usd",
+          "component_count": 22,
+          "annual_display_value": 4607,
+          "component_display_sum": 4606,
+          "difference_display_units": -1,
+          "rounding_tolerance_display_units": 11,
+          "within_rounding_tolerance": true
+        }
+      ],
+      "all_checks_within_component_rounding_tolerance": true,
+      "tariff_response_sha256_uncompressed": "2cd89fd785a8a914ab332f59171d1df57ad5b317489b16ae07544195c2413410"
+    },
+    "baskets": {
+      "core_devices": {
+        "codes": [
+          "854340"
+        ],
+        "import_weight_kg": 1282856,
+        "import_value_thousand_usd": 148534
+      },
+      "broad_inhalation_proxies_not_proven_e_liquid": {
+        "codes": [
+          "240412",
+          "240419"
+        ],
+        "import_weight_kg": 2112659,
+        "import_value_thousand_usd": 123731
+      }
+    },
+    "method": {
+      "source_basis": "Trade records collected from import/export declarations and customs processing",
+      "coverage_exclusions": "Transit goods and temporary imports/exports do not change national material resources and are excluded",
+      "import_value_basis": "Taxable-price amount in USD; imports are compiled on the official CIF basis",
+      "export_value_basis": "Declared amount in USD; exports are compiled on the official FOB basis",
+      "weight_basis": "Net weight in kilograms",
+      "revision_policy": "Prior-month data are refreshed around the 15th each month for corrections and withdrawals",
+      "display_rounding": "Public table rows are displayed as whole kilograms and whole thousand USD"
+    },
+    "hsk10ValueStatus": {
+      "status": "not_obtained_without_data_go_api_key_or_official_extract",
+      "reason": "The public no-key table returned the verified HS6 series; exact HSK10 values require the official data.go.kr API or a downloadable authority extract",
+      "do_not_infer": "Do not allocate HS6 240412 or 240419 totals to the e-cigarette-liquid HSK10 rows by assumption"
+    },
+    "limit": "HS 854340 is a device heading. HS 240412 and 240419 are broader non-combustion inhalation-product headings at the public-value level and are not consumer sales or proven e-liquid volumes. Only HSK10 2404121000 and 2404199010 are explicitly labelled e-cigarette solutions."
+  },
   "narrowCustoms": [
     {
       "market": "Japani",
@@ -5056,6 +5906,13 @@ window.PIXAN_DATA = {
       "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"
     },
     {
+      "grade": "B",
+      "title": "Korea Customs Service · 2025 HS6 / HSK10",
+      "coverage": "Etelä-Korean HS6 vuosi- ja kuukausisarja, 53 alkuperämaariviä sekä virallinen seitsemän HSK10-rivin luokitus",
+      "use": "Laitetuonnin kansallinen arvo-/painoankkuri ja tarkkojen nestekoodien luokitusperusta; 24 täsmäytystä hyväksytty pyöristysrajassa",
+      "url": "https://tradedata.go.kr/cts/index_eng.do"
+    },
+    {
       "grade": "A",
       "title": "FTC E-Cigarette Report 2021",
       "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD",
@@ -5164,6 +6021,16 @@ window.PIXAN_DATA = {
       "status": "sent",
       "sent": "2026-07-16",
       "followUp": "2026-07-23"
+    },
+    {
+      "id": "PX-KR-001",
+      "market": "Etelä-Korea",
+      "authority": "Korea Customs Service / Public Data Portal",
+      "channel": "https://www.data.go.kr/data/15101609/openapi.do",
+      "scope": "2025 monthly HSK10 imports and exports for 8543401000 8543409000 2404121000 2404129000 2404191000 2404199010 2404199090 including country and official value/weight definitions",
+      "status": "queued",
+      "sent": "—",
+      "followUp": "—"
     }
   ],
   "tasks": [
@@ -5196,6 +6063,12 @@ window.PIXAN_DATA = {
       "title": "Japani 9-numeroinen tuonti",
       "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.",
       "status": "done"
+    },
+    {
+      "priority": "high",
+      "title": "Etelä-Korea HSK10-nestearvot",
+      "detail": "HS6-vaihe valmis: 2025 laitteet 148,534 milj. USD ja laajat 2404-proxyt 123,731 milj. USD; 36 kuukausiriviä, 53 alkuperämaariviä ja 2025 HSK10-luokitus auditoitu. Jonossa virallinen Itemtrade API-/tulliote, joka erottaa 2404121000 ja 2404199010 nestearvot ilman oletusjakoa.",
+      "status": "active"
     },
     {
       "priority": "medium",

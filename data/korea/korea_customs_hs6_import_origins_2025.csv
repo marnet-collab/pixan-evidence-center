@@ -1,0 +1,54 @@
+period,hs6_code,country_of_origin,pixan_scope,export_weight_kg,export_value_thousand_usd,import_weight_kg,import_value_thousand_usd,import_value_share_of_annual_code_pct,source_url
+2025,240412,China,broad_nicotine_inhalation_proxy,408,2,1927659,117608,98.727377,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,United Kingdom,broad_nicotine_inhalation_proxy,507,75,12363,732,0.614486,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,United States,broad_nicotine_inhalation_proxy,0,0,3933,546,0.458346,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Malaysia,broad_nicotine_inhalation_proxy,0,0,3023,202,0.169571,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Indonesia,broad_nicotine_inhalation_proxy,0,0,504,34,0.028542,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Canada,broad_nicotine_inhalation_proxy,0,0,1,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Germany,broad_nicotine_inhalation_proxy,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Greece,broad_nicotine_inhalation_proxy,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Japan,broad_nicotine_inhalation_proxy,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,Switzerland,broad_nicotine_inhalation_proxy,0,0,13,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,China,broad_other_inhalation_proxy,20,6,158857,4323,93.835468,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,United States,broad_other_inhalation_proxy,0,0,1183,133,2.886911,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Malaysia,broad_other_inhalation_proxy,0,0,2105,112,2.431083,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Japan,broad_other_inhalation_proxy,300057,11552,609,11,0.238767,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Czech Republic,broad_other_inhalation_proxy,0,0,150,7,0.151943,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Viet nam,broad_other_inhalation_proxy,0,0,2000,5,0.10853,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Indonesia,broad_other_inhalation_proxy,0,0,99,4,0.086824,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,United Kingdom,broad_other_inhalation_proxy,3,0,40,4,0.086824,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Australia,broad_other_inhalation_proxy,0,0,29,3,0.065118,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Netherlands,broad_other_inhalation_proxy,0,0,24,2,0.043412,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Singapore,broad_other_inhalation_proxy,0,0,48,1,0.021706,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Sweden,broad_other_inhalation_proxy,0,0,10,1,0.021706,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Canada,broad_other_inhalation_proxy,1,0,1,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Denmark,broad_other_inhalation_proxy,0,0,3,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,France,broad_other_inhalation_proxy,0,0,2,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Germany,broad_other_inhalation_proxy,1,0,1,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Hong Kong,broad_other_inhalation_proxy,2,0,2,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Hungary,broad_other_inhalation_proxy,1,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,India,broad_other_inhalation_proxy,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Russian Federation,broad_other_inhalation_proxy,8577,379,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Slovakia,broad_other_inhalation_proxy,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Switzerland,broad_other_inhalation_proxy,104,0,1,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,China,core_devices,482,52,874321,87071,58.620249,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Viet nam,core_devices,6,2,314583,47693,32.109147,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Malaysia,core_devices,8,1,83976,12180,8.200143,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Japan,core_devices,39439,4791,9449,1127,0.758749,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Poland,core_devices,0,0,39,416,0.280071,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Indonesia,core_devices,1073,189,391,29,0.019524,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,United States,core_devices,2,0,32,7,0.004713,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,United Kingdom,core_devices,0,0,25,6,0.004039,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Germany,core_devices,3,1,6,2,0.001346,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Canada,core_devices,25,12,17,1,0.000673,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,France,core_devices,0,0,1,1,0.000673,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Philippines,core_devices,0,0,6,1,0.000673,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Turkiye,core_devices,0,0,1,1,0.000673,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Australia,core_devices,0,0,2,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Greece,core_devices,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Hong Kong,core_devices,0,0,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Mongolia,core_devices,228,26,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Russian Federation,core_devices,5971,738,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Serbia,core_devices,25,2,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Singapore,core_devices,0,0,7,0,0.0,https://tradedata.go.kr/cts/index_eng.do
+2025,854340,Switzerland,core_devices,9,1,0,0,0.0,https://tradedata.go.kr/cts/index_eng.do

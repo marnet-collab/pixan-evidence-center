@@ -35,6 +35,7 @@ def status_for_country(name: str) -> str:
         "United States", "Japan", "EU-27", "France", "Italy", "Spain",
         "Poland", "Netherlands", "Belgium", "Luxembourg", "Sweden",
         "Denmark", "Austria", "China",
+        "South Korea",
     }:
         return "partial"
     return "missing"
@@ -89,6 +90,12 @@ def build_payload() -> dict:
     japan_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "japan_customs_vape_origins_2025.csv")
     japan_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "japan_customs_vape_manifest_2025.json").read_text(encoding="utf-8")
+    )
+    korea_total_rows = read_csv(PROJECT_DIR / "data" / "derived" / "korea_customs_hs6_totals_2025.csv")
+    korea_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "korea_customs_hs6_import_origins_2025.csv")
+    korea_hsk_rows = read_csv(PROJECT_DIR / "data" / "derived" / "korea_customs_hsk10_classification_2025.csv")
+    korea_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "korea_customs_hs6_manifest_2025.json").read_text(encoding="utf-8")
     )
     us_total_rows = read_csv(PROJECT_DIR / "data" / "derived" / "us_census_vape_totals_2025.csv")
     us_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "us_census_vape_origins_2025.csv")
@@ -344,6 +351,69 @@ def build_payload() -> dict:
         for row in japan_origin_rows
     ]
 
+    korea_names = {
+        "China": "Kiina", "Viet nam": "Vietnam", "Malaysia": "Malesia",
+        "Japan": "Japani", "United Kingdom": "Yhdistynyt kuningaskunta",
+        "United States": "Yhdysvallat", "Indonesia": "Indonesia",
+        "Singapore": "Singapore", "Thailand": "Thaimaa", "Germany": "Saksa",
+        "France": "Ranska", "Netherlands": "Alankomaat", "Italy": "Italia",
+        "Sweden": "Ruotsi", "Canada": "Kanada", "Australia": "Australia",
+        "Hong Kong": "Hongkong", "Taiwan": "Taiwan", "Poland": "Puola",
+        "Switzerland": "Sveitsi", "Spain": "Espanja", "Denmark": "Tanska",
+        "Finland": "Suomi", "Belgium": "Belgia", "Austria": "Itävalta",
+    }
+    korea_scope_titles = {
+        "core_devices": "Sähkösavukkeet ja vastaavat henkilökohtaiset sähköiset höyrystinlaitteet",
+        "broad_nicotine_inhalation_proxy": "Laaja nikotiinia sisältävien inhaloitavien tuotteiden proxy",
+        "broad_other_inhalation_proxy": "Laaja muiden inhaloitavien tuotteiden proxy",
+    }
+    korea_totals = [
+        {
+            "code": row["hs6_code"],
+            "title": korea_scope_titles[row["pixan_scope"]],
+            "officialTitle": row["official_english_label"],
+            "scope": row["pixan_scope"],
+            "importKg": int(row["import_weight_kg"]),
+            "importValueUsd": int(row["import_value_thousand_usd"]) * 1000,
+            "exportKg": int(row["export_weight_kg"]),
+            "exportValueUsd": int(row["export_value_thousand_usd"]) * 1000,
+            "url": row["source_url"],
+        }
+        for row in korea_total_rows
+    ]
+    korea_origins = [
+        {
+            "code": row["hs6_code"],
+            "origin": korea_names.get(row["country_of_origin"], row["country_of_origin"]),
+            "scope": row["pixan_scope"],
+            "importKg": int(row["import_weight_kg"]),
+            "importValueUsd": int(row["import_value_thousand_usd"]) * 1000,
+            "valueShare": float(row["import_value_share_of_annual_code_pct"]),
+        }
+        for row in korea_origin_rows
+    ]
+    korea_hsk10 = [
+        {
+            "code": row["hsk10_code"],
+            "parent": row["parent_hs6"],
+            "officialKorean": row["official_korean_label"],
+            "title": row["working_finnish_translation"],
+            "scope": row["pixan_scope"],
+            "included": row["pixan_scope"].startswith("core_"),
+            "url": row["source_url"],
+        }
+        for row in korea_hsk_rows
+    ]
+    korea_device_top3_share = sum(
+        row["valueShare"] for row in korea_origins if row["code"] == "854340"
+    ) if len([row for row in korea_origins if row["code"] == "854340"]) <= 3 else sum(
+        row["valueShare"] for row in sorted(
+            (row for row in korea_origins if row["code"] == "854340"),
+            key=lambda item: item["importValueUsd"], reverse=True,
+        )[:3]
+    )
+    korea_device_top3_text = f"{korea_device_top3_share:.2f}".replace(".", ",")
+
     us_titles = {
         "2404120500": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
         "2404121000": "Muu nikotiiniseos sähkösavukkeeseen",
@@ -504,6 +574,8 @@ def build_payload() -> dict:
 
     us_device_value = us_manifest["baskets"]["core_devices"]["general_customs_value_usd"]
     us_liquid_value = us_manifest["baskets"]["core_liquids"]["general_customs_value_usd"]
+    korea_device = korea_manifest["baskets"]["core_devices"]
+    korea_broad = korea_manifest["baskets"]["broad_inhalation_proxies_not_proven_e_liquid"]
     for country in countries:
         if country["sourceName"] != "United States":
             continue
@@ -528,6 +600,20 @@ def build_payload() -> dict:
         country["missing"] = (
             "HS10-ristiintaulukko alkuperämaasta ja suorasta lähetys-/vientimaasta, kotimainen tuotanto, "
             "varastomuutos sekä 2025 Health Canada -myynti."
+        )
+    for country in countries:
+        if country["sourceName"] != "South Korea":
+            continue
+        country["current"] = (
+            "Korea Customs Service 2025 HS6: sähkösavukelaitteet 1 282 856 kg / 148,534 milj. USD; "
+            "laajat 240412/240419 inhaloitavien tuotteiden proxyt 2 112 659 kg / 123,731 milj. USD. "
+            "Kaikki 24 kuukausi- ja alkuperämaatäsmäytystä mahtuvat virallisen kokonaiskilogramman ja "
+            "tuhannen USD:n esitystarkkuuden pyöristysrajaan. Virallinen 2025 HSK10-nimikkeistö erottaa "
+            "sähkösavukenesteet koodeihin 2404121000 ja 2404199010, mutta niiden erillisiä arvoja ei ole vielä saatu."
+        )
+        country["missing"] = (
+            "Tarkat HSK10-arvot laitteille ja kahdelle sähkösavukenesteen nimikkeelle, vienti-/jälleenvientisilta, "
+            "verotettu nestemäärä ja -tuotto sekä laitteiden ja nesteiden kuluttajamyynti."
         )
 
     contacts = []
@@ -661,6 +747,7 @@ def build_payload() -> dict:
             {"label": "Kanada 2024", "value": "1,161 mrd CAD", "detail": "Viranomaiselle raportoitu toimitusmyynti", "tone": ""},
             {"label": "Kanada tulli 2025", "value": f"{canada_combined_value / 1e6:.1f} milj. CAD".replace(".", ","), "detail": "CIMT HS10 · laitteet + laaja inhaloitavien kori", "tone": "blue"},
             {"label": "USA 2025", "value": f"{(us_device_value + us_liquid_value) / 1e6:.1f} milj. USD".replace(".", ","), "detail": "Census HTS10 · laitteet + täsmälliset nesteseokset", "tone": "blue"},
+            {"label": "Etelä-Korea 2025", "value": f"{korea_device['import_value_thousand_usd'] / 1000:.3f}".replace(".", ",") + " milj. USD", "detail": "KCS HS6 · täsmällinen laiteluokka", "tone": "blue"},
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
@@ -736,6 +823,20 @@ def build_payload() -> dict:
                 "source": "Japan Customs / MOF · e-Stat 2025 revised",
                 "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141",
             },
+            {
+                "grade": "B",
+                "market": "Etelä-Korea",
+                "title": "Virallinen HS6-tullisarja ja 2025 HSK10-luokitus",
+                "value": "148,534 milj. USD · 1 282 856 kg laitteita",
+                "detail": (
+                    "Korea Customs Servicen vuoden 2025 laitetuonti HS 854340. Laajojen HS 240412/240419 "
+                    "inhaloitavien tuotteiden tuonti oli lisäksi 123,731 milj. USD / 2 112 659 kg. "
+                    f"Laitteiden kolmen suurimman alkuperämaan osuus oli {korea_device_top3_text} %."
+                ),
+                "limit": "Tulliarvo ei ole kuluttajamyyntiä. HS6 240412/240419 ei todista koko määrää e-nesteeksi; tarkat HSK10-nesteiden arvot odottavat virallista API- tai tulliviranomaisotetta.",
+                "source": "Korea Customs Service · Trade Statistics / UNI-PASS",
+                "url": "https://tradedata.go.kr/cts/index_eng.do",
+            },
         ],
         "report": [
             {"label": "GVR maailmanmarkkina 2025", "value": "45,7 mrd USD", "meaning": "Kaupallinen ennuste"},
@@ -802,6 +903,17 @@ def build_payload() -> dict:
             "method": japan_manifest["method"],
             "limit": japan_manifest["interpretation_limit"],
         },
+        "koreaCustoms": {
+            "version": korea_manifest["version"],
+            "totals": korea_totals,
+            "origins": korea_origins,
+            "hsk10": korea_hsk10,
+            "audit": korea_manifest["audit"],
+            "baskets": korea_manifest["baskets"],
+            "method": korea_manifest["method"],
+            "hsk10ValueStatus": korea_manifest["hsk10_trade_value_status"],
+            "limit": korea_manifest["interpretation_limit"],
+        },
         "narrowCustoms": [{"market": market, "valueUsd": value} for market, value in sorted(narrow.items(), key=lambda item: item[1], reverse=True)],
         "codes": [
             {"code": "8543.40", "title": "Sähköiset höyrystinlaitteet", "detail": "Personal electric vaporising devices. Kansallinen 8–10-numeroinen alanimike tarvitaan osien ja laitteiden erotteluun.", "include": "Laitteet ja mahdolliset laiteosat nimikerajauksen mukaan."},
@@ -841,6 +953,7 @@ def build_payload() -> dict:
             {"grade": "B", "title": "U.S. Census · Merchandise Trade Imports 2025", "coverage": "Yhdysvaltain HTS10 general imports, imports for consumption, CIF, määrä, laskettu tulli ja 42 nimike–alkuperämaariviä", "use": "Kansallinen laite- ja nestetuonnin reittiankkuri; detaljisummat täsmäävät kansallisiin lukuihin", "url": "https://www.census.gov/foreign-trade/data/IMDB.html"},
             {"grade": "B", "title": "Eurostat Comext DS-045409", "coverage": "EU:n extra- ja intra-EU CN8-kauppa alkuperä- ja lähetysmaittain", "use": "EU:n reitti- ja hubikorjaus", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
             {"grade": "B", "title": "Japan Customs / MOF · 2025 revised", "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain", "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys", "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"},
+            {"grade": "B", "title": "Korea Customs Service · 2025 HS6 / HSK10", "coverage": "Etelä-Korean HS6 vuosi- ja kuukausisarja, 53 alkuperämaariviä sekä virallinen seitsemän HSK10-rivin luokitus", "use": "Laitetuonnin kansallinen arvo-/painoankkuri ja tarkkojen nestekoodien luokitusperusta; 24 täsmäytystä hyväksytty pyöristysrajassa", "url": "https://tradedata.go.kr/cts/index_eng.do"},
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
             {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
             {"grade": "B", "title": "China Customs · virallinen tilastopalvelu", "coverage": "Maksuton kansallinen hakemusreitti, 2025 HS8 -nimikkeet ja enintään viiden ryhmittelyn taulukkorakenne", "use": "Kiinan alkuperä-/kohdemaan, lähetys-/saapumismaan, tullimenettelyn ja kotimaisen reitin hankintaperusta; ei vielä markkina-arvoluku", "url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html"},
@@ -853,6 +966,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Valmis 2025: kahdeksan HTS10-riviä, general imports ja imports for consumption, 127,747 milj. laitetta, 23,279 milj. kg täsmällisiä nesteseoksia, CIF ja 143,132 milj. USD laskettua tullia. 236 detaljiriviä täsmäytyivät ilman eroa.", "status": "done"},
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "Valmis: CIMT HS10-tuonti alkuperämaittain sekä HS8 total/domestic/re-export, 608 lähderiviä ja 564 HS6-tarkastusavainta nollaerolla. Avoinna vain alkuperämaa × suora lähetysmaa -ristiintaulukko ja 2025 Health Canada -myynti.", "status": "done"},
             {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
+            {"priority": "high", "title": "Etelä-Korea HSK10-nestearvot", "detail": "HS6-vaihe valmis: 2025 laitteet 148,534 milj. USD ja laajat 2404-proxyt 123,731 milj. USD; 36 kuukausiriviä, 53 alkuperämaariviä ja 2025 HSK10-luokitus auditoitu. Jonossa virallinen Itemtrade API-/tulliote, joka erottaa 2404121000 ja 2404199010 nestearvot ilman oletusjakoa.", "status": "active"},
             {"priority": "medium", "title": "Kanadan vähittäishintaotos", "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.", "status": "done"},
             {"priority": "high", "title": "Kiina GACC tullimenettelyineen", "detail": "Virallinen maksuton reitti, kansallinen vastaanottaja ja 2025 HS8 85434000/24041200/24041910/24041990 on varmistettu. Kiinankielinen hakemus pyytää neljä taulukkoa: kohde vs. läpikulkumaa + tullimenettely, tullipaikka + kotimainen alue, rekisteröintialue + omistus sekä kuljetustapa. PRH:n 17.7.2026 yritystodiste on tarkastettu ja yksityinen lähetyspaketti odottaa lähetysvahvistusta.", "status": "active"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
@@ -937,11 +1051,36 @@ def publish_china_access_evidence() -> None:
     )
 
 
+def publish_korea_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "korea_customs"
+    public_data = DASHBOARD_DIR / "data" / "korea"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "korea_customs"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "korea_customs_hs6_totals_2025.csv",
+        "korea_customs_hs6_monthly_2025.csv",
+        "korea_customs_hs6_import_origins_2025.csv",
+        "korea_customs_hsk10_classification_2025.csv",
+        "korea_customs_hs6_manifest_2025.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "kcs_hs6_annual_2025.json",
+        "kcs_hs6_monthly_2025.json",
+        "kcs_hs6_country_2025_page1.json",
+        "korea_hsk_tariff_2025.html.gz",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
     publish_canada_evidence()
     publish_china_access_evidence()
+    publish_korea_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

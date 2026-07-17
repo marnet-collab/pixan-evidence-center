@@ -29,6 +29,8 @@ Statistics Canadan vuoden 2025 CIMT-aineiston HS10-tuontisummat, alkuperämaat, 
 
 Kiinan GACC-reitin julkinen manifesti julkaistaan `data/china/`-kansiossa. Se todentaa maksuttoman virallisen palvelureitin, kansallisen vastaanottajan, 2025 HS8 -nimikkeet 85434000/24041200/24041910/24041990, hakemuksen tarkistussummat ja sen, että numeerista tuotetason tulliaineistoa ei ole vielä saatu. Varsinaista hakemuslomaketta tai yrityksen rekisteritodistusta ei julkaista sivustolla.
 
+Korea Customs Servicen vuoden 2025 julkiset HS6-vuosi-, kuukausi- ja alkuperämaasarjat sekä virallinen HSK10-luokitus julkaistaan `data/korea/`-kansiossa. Auditointi hyväksyy 24 kuukausi- ja alkuperämaatäsmäytystä virallisen taulukon kokonaiskilogramman ja tuhannen USD:n komponenttipyöristyksen rajoissa. HSK10 2404121000 ja 2404199010 ovat virallisesti sähkösavukenesteen nimikkeitä, mutta niiden erillisiä kauppa-arvoja ei johdeta HS6-aggregaateista ilman Itemtrade API- tai viranomaisotetta.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti

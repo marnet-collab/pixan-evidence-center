@@ -27,6 +27,17 @@ async function check(viewport, label) {
   assert.match(await page.locator("#canada-retail-observations").innerText(), /STLTH X Geek Bar/);
   assert.match(await page.locator("#canada-retail-observations").innerText(), /50,99 CAD/);
   assert.match(await page.locator("#canada-retail-comparison").innerText(), /2,403×/);
+
+  await page.locator('[data-view="customs"]').dispatchEvent("click");
+  await page.waitForSelector('[data-view-panel="customs"].active');
+  assert.equal(await page.locator("#korea-summary tbody tr").count(), 3);
+  assert.equal(await page.locator("#korea-hsk10 tbody tr").count(), 7);
+  assert.equal(await page.locator("#korea-origins tbody tr").count(), 53);
+  assert.match(await page.locator("#korea-summary").innerText(), /148,5 milj\. USD/);
+  assert.match(await page.locator("#korea-hsk10").innerText(), /2404121000/);
+  assert.match(await page.locator("#korea-hsk10").innerText(), /2404199010/);
+  await page.locator("#korea-summary").screenshot({ path: `/tmp/pixan-korea-summary-${label}.png` });
+  await page.locator("#korea-hsk10").screenshot({ path: `/tmp/pixan-korea-hsk10-${label}.png` });
   assert.equal(errors.length, 0, errors.join("\n"));
 
   if (label === "desktop") {
@@ -37,6 +48,12 @@ async function check(viewport, label) {
       "data/canada/canada_retail_price_manifest_2026-07-17.json",
       "data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json",
       "data/china/china_gacc_access_manifest_2026-07-17.json",
+      "data/korea/korea_customs_hs6_totals_2025.csv",
+      "data/korea/korea_customs_hs6_monthly_2025.csv",
+      "data/korea/korea_customs_hs6_import_origins_2025.csv",
+      "data/korea/korea_customs_hsk10_classification_2025.csv",
+      "data/korea/korea_customs_hs6_manifest_2025.json",
+      "data/raw/korea_customs/kcs_hs6_annual_2025.json",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);

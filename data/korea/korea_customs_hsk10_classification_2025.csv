@@ -1,0 +1,8 @@
+hsk10_code,parent_hs6,official_korean_label,working_english_translation,working_finnish_translation,pixan_scope,tariff_year,source_url
+8543401000,854340,연소시키지 않고 흡입하도록 만들어진 물품(제2404호의 것으로 한정한다)을 포함한 것,"Containing articles made for inhalation without combustion, limited to heading 2404",Sisältää ilman palamista inhaloitavaksi tarkoitetun 2404-nimikkeen tuotteen,core_device_containing_heading_2404_article,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+8543409000,854340,기타,Other,Muu sähkösavuke tai vastaava henkilökohtainen sähköinen höyrystinlaite,core_device_other,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+2404121000,240412,전자담배용 용액,Solutions for electronic cigarettes,Nikotiinia sisältävä sähkösavukeneste,core_nicotine_e_cigarette_liquid,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+2404129000,240412,기타,Other,Muu nikotiinia sisältävä inhaloitava tuote,excluded_broad_other_nicotine_product,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+2404191000,240419,담배대용물을 함유한 것,Containing tobacco substitutes,Sisältää tupakan korvikkeita,excluded_tobacco_substitute_product,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+2404199010,240419,전자담배용 용액,Solutions for electronic cigarettes,Muu sähkösavukeneste,core_other_e_cigarette_liquid,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do
+2404199090,240419,기타,Other,Muu inhaloitava tuote,excluded_broad_other_product,2025,https://unipass.customs.go.kr/clip/hsinfosrch/openULS0201007Q.do

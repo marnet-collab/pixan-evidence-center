@@ -1,0 +1,4 @@
+period,hs6_code,official_english_label,finnish_label,pixan_scope,export_weight_kg,export_value_thousand_usd,import_weight_kg,import_value_thousand_usd,source_url
+2025,854340,Electronic cigarettes and similar personal electric vaporising devices,Sähkösavukkeet ja vastaavat henkilökohtaiset sähköiset höyrystinlaitteet,core_devices,47270,5815,1282856,148534,https://tradedata.go.kr/cts/index_eng.do
+2025,240412,"Other, containing nicotine",Muut nikotiinia sisältävät tuotteet inhaloitavaksi ilman palamista,broad_nicotine_inhalation_proxy,915,76,1947496,119124,https://tradedata.go.kr/cts/index_eng.do
+2025,240419,Other,Muut tuotteet inhaloitavaksi ilman palamista,broad_other_inhalation_proxy,308766,11938,165163,4607,https://tradedata.go.kr/cts/index_eng.do

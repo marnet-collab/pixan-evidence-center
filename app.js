@@ -238,6 +238,40 @@
       </table>
       <div class="meta-line table-note"><strong>Rajaus:</strong> kapea kori on 854340000 + 240412000, yhteensä ${moneyJpy(japan.baskets.core_value_jpy)}. Laajempi kori lisää 240419200-rivin, mutta tämä “muut inhaloitavat tuotteet” -nimike ei ole yksinomaan nikotiiniton e-neste. Tullivirtaa ei merkitä Japanin kuluttajamyynniksi.</div>`;
 
+    const korea = data.koreaCustoms;
+    $("#korea-summary").innerHTML = `
+      <table>
+        <thead><tr><th>HS6</th><th>Virallinen rajaus</th><th>Tuontipaino</th><th>Tuontiarvo</th><th>Vientipaino</th><th>Vientiarvo</th></tr></thead>
+        <tbody>${korea.totals.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.title)}</strong><div class="meta-line">${esc(item.officialTitle)}</div></td>
+          <td class="num">${integer(item.importKg)} kg</td><td class="num"><strong>${money(item.importValueUsd)}</strong></td>
+          <td class="num">${integer(item.exportKg)} kg</td><td class="num">${money(item.exportValueUsd)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi hyväksytty:</strong> ${korea.audit.monthly_rows} kuukausiriviä ja ${korea.audit.country_rows} alkuperämaariviä tuottivat ${korea.audit.reconciliation_checks.length} tarkastusta. Kaikki erot olivat virallisen taulukon kokonaiskilogramman ja tuhannen USD:n komponenttipyöristyksen sallimissa rajoissa. Arvo on tulliarvo, ei vähittäismyynti.</div>`;
+
+    $("#korea-hsk10").innerHTML = `
+      <table>
+        <thead><tr><th>HSK10</th><th>Suomenkielinen rajaus</th><th>Virallinen koreankielinen nimike</th><th>Pixan-käsittely</th></tr></thead>
+        <tbody>${korea.hsk10.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code><div class="meta-line">HS6 ${esc(item.parent)}</div></td>
+          <td><strong>${esc(item.title)}</strong></td><td lang="ko">${esc(item.officialKorean)}</td>
+          <td>${item.included ? "Sisältyy rajattuun tuotekoriin" : "Näytetään erikseen; ei ydinkoriin ilman lisänäyttöä"}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Olennainen raja:</strong> koodit <code>2404121000</code> ja <code>2404199010</code> on virallisesti nimetty sähkösavukenesteiksi. Luokitus ei vielä kerro niiden vuoden 2025 kauppa-arvoa. HS6-rivejä 240412 ja 240419 ei jaeta näille koodeille oletuksella.</div>`;
+
+    $("#korea-origins").innerHTML = `
+      <table>
+        <thead><tr><th>HS6</th><th>Alkuperämaa</th><th>Tuontipaino</th><th>Tuontiarvo</th><th>Osuus nimikkeen vuotuisesta arvosta</th></tr></thead>
+        <tbody>${korea.origins.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.origin)}</strong></td>
+          <td class="num">${integer(item.importKg)} kg</td><td class="num">${money(item.importValueUsd)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 2 }).format(item.valueShare)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Reittiraja:</strong> tuonnin maa esitetään Korean tullin alkuperämaana. Tämä ei vielä ratkaise mahdollista Hongkongin tai muun hubin kautta kulkenutta lähetysmaata, jälleenvientiä, kotimaista tuotantoa tai kuluttajamyyntiä.</div>`;
+
     const rows = [...data.customs].sort((a, b) => a.market.localeCompare(b.market, "fi") || a.code.localeCompare(b.code));
     $("#customs-table").innerHTML = `
       <table>
