@@ -1,0 +1,11 @@
+metric,value,unit,period,status,note
+registry_rows,203181,rows,snapshot_2026-07-01,official_raw_declarations,"Records in the published list; not sales, active SKUs or authorised products."
+unique_product_numbers,111556,distinct_identifiers,snapshot_2026-07-01,derived_from_official_registry,Distinct Numéro_Produit values; one identifier can have multiple registry rows.
+unique_references,203181,distinct_references,snapshot_2026-07-01,derived_from_official_registry,Distinct Code_Référence values; not an active-market count.
+unique_brand_strings,16851,distinct_strings,snapshot_2026-07-01,derived_from_official_registry,Unnormalised brand strings; not a company count.
+published_columns,27,columns,snapshot_2026-07-01,verified,No annual sales field is present in the public registry file.
+liquid_volume_field_population_rate,99.792303,percent_of_rows,snapshot_2026-07-01,field_completeness_not_accuracy,202759 of 203181 rows contain a liquid-volume value.
+nicotine_field_population_rate,100.0,percent_of_rows,snapshot_2026-07-01,field_completeness_not_accuracy,203181 of 203181 rows contain a nicotine-concentration value.
+rows_reporting_2_ml,53514,rows,snapshot_2026-07-01,declared_characteristic_not_sales,Count of registry rows reporting 2 ml; no sales weighting.
+rows_reporting_10_ml,141065,rows,snapshot_2026-07-01,declared_characteristic_not_sales,Count of registry rows reporting 10 ml; no sales weighting.
+rows_reporting_nicotine_above_20_mg_ml,860,rows,snapshot_2026-07-01,raw_declaration_quality_flag,A declaration flag only; ANSES warns it does not guarantee raw-content accuracy.

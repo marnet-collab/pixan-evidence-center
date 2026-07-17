@@ -160,6 +160,30 @@ def build_payload() -> dict:
     spain_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "spain_aeat_access_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
+    france_customs_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_douane_cn8_2025.csv"
+    )
+    france_monthly_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_douane_monthly_2025.csv"
+    )
+    france_origin_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_douane_top_origins_2025.csv"
+    )
+    france_route_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_route_bridge_2025.csv"
+    )
+    france_registry_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_anses_registry_audit_2026-07-01.csv"
+    )
+    france_product_type_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_anses_product_types_2026-07-01.csv"
+    )
+    france_coverage_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "france_anses_sales_coverage_2016_2017.csv"
+    )
+    france_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "france_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -670,6 +694,25 @@ def build_payload() -> dict:
             + country["missing"]
         )
     for country in countries:
+        if country["sourceName"] != "France":
+            continue
+        country["current"] = (
+            "Ranskan Douanen vuoden 2025 neljän CN8-koodin tuonti oli 363 939 981 EUR, vienti "
+            "127 863 384 EUR ja rajat ylittävä nettotuonti 236 076 597 EUR. Kapea laite + "
+            "nikotiini-inhalaatioproxy tuotti 229 615 309 EUR nettotuonnin. Douanen ja Eurostatin "
+            "tuontisummaa erottaa 0,030 % ja vientisummaa 0,449 %. ANSES:n 1.7.2026 rekisterissä "
+            "oli 203 181 ilmoitusriviä, mutta ei julkista vuosimyyntikenttää. Historiallisen 2016-2017 "
+            "myyntiraportoinnin hit rate oli vain 35,010 %, joten ANSES katsoi volyymit käyttökelvottomiksi. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "ANSES:n 2018-2025 kansalliset odotetut, saadut, puuttuvat, korjatut ja hylätyt "
+            "myyntiraportit; laitteiden, podien ja täyttöpullojen yksiköt; e-nestemillilitrat, "
+            "nikotiinijako ja arvo, jos viranomainen sitä hallussa pitää. Lisäksi tarvitaan kotimainen "
+            "tuotanto, varastomuutos ja kuluttajamyynti. "
+            + country["missing"]
+        )
+    for country in countries:
         if country["sourceName"] != "Spain":
             continue
         country["current"] = (
@@ -1027,6 +1070,114 @@ def build_payload() -> dict:
         "model573Url": "https://www.boe.es/eli/es/o/2025/01/13/hac86",
     }
 
+    france_scope_labels = {
+        "core_devices": "Sähkösavukelaitteet",
+        "broad_nicotine_inhalation_proxy": "Laaja nikotiinia sisältävä inhalaatioproxy",
+        "broad_nicotine_free_tobacco_substitute_inhalation_proxy": "Laaja nikotiiniton tupakankorvikeproxy",
+        "broad_other_substitute_inhalation_proxy": "Laaja muu inhalaatioproxy",
+    }
+    france_request = next(row for row in requests if row["request_id"] == "PX-FR-001")
+    france_evidence = {
+        "customs": [
+            {
+                "code": row["cn8"],
+                "scope": row["scope"],
+                "label": france_scope_labels[row["scope"]],
+                "officialLabel": row["official_label_fr"],
+                "importEur": int(row["douane_import_eur"]),
+                "exportEur": int(row["douane_export_eur"]),
+                "borderNetEur": int(row["border_net_import_eur"]),
+                "importKg": int(row["douane_import_kg"]),
+                "exportKg": int(row["douane_export_kg"]),
+                "chinaOriginEur": int(row["china_origin_import_eur"]),
+                "chinaSharePct": float(row["china_origin_share_pct"]),
+                "eurostatImportEur": int(row["eurostat_world_import_eur"]),
+                "eurostatExportEur": int(row["eurostat_world_export_eur"]),
+                "importGapPct": float(row["douane_vs_eurostat_import_gap_pct"]),
+                "exportGapPct": float(row["douane_vs_eurostat_export_gap_pct"]),
+                "supplementaryUnitStatus": row["supplementary_unit_status"],
+            }
+            for row in france_customs_rows
+        ],
+        "monthly": [
+            {
+                "month": int(row["month"]),
+                "code": row["cn8"],
+                "importEur": int(row["import_eur"]),
+                "exportEur": int(row["export_eur"]),
+                "borderNetEur": int(row["border_net_import_eur"]),
+            }
+            for row in france_monthly_rows
+        ],
+        "topOrigins": [
+            {
+                "code": row["cn8"],
+                "rank": int(row["rank"]),
+                "originCode": row["origin_code"],
+                "origin": row["origin_name"],
+                "importEur": int(row["import_eur"]),
+                "importKg": int(row["import_kg"]),
+                "sharePct": float(row["share_of_code_import_value_pct"]),
+            }
+            for row in france_origin_rows
+        ],
+        "routeBridge": [
+            {
+                "code": row["cn8"],
+                "nationalNonEuOriginEur": int(row["douane_known_non_eu_origin_import_eur"]),
+                "indeterminateOriginEur": int(row["douane_indeterminate_origin_import_eur"]),
+                "nationalEuOrFranceOriginEur": int(row["douane_eu27_or_fr_origin_import_eur"]),
+                "eurostatDirectExtraEur": int(row["eurostat_direct_extra_eu_import_eur"]),
+                "eurostatIntraConsignmentEur": int(row["eurostat_intra_eu_consignment_import_eur"]),
+                "eurostatWorldEur": int(row["eurostat_world_import_eur"]),
+                "partsGapEur": int(row["eurostat_parts_reconciliation_gap_eur"]),
+                "classificationGapEur": int(row["origin_vs_direct_extra_classification_gap_eur"]),
+            }
+            for row in france_route_rows
+        ],
+        "registryAudit": [
+            {
+                "metric": row["metric"],
+                "value": float(row["value"]),
+                "unit": row["unit"],
+                "status": row["status"],
+                "note": row["note"],
+            }
+            for row in france_registry_rows
+        ],
+        "productTypes": [
+            {
+                "type": row["product_type"],
+                "rows": int(row["registry_rows"]),
+                "sharePct": float(row["share_of_registry_rows_pct"]),
+            }
+            for row in france_product_type_rows
+        ],
+        "salesCoverage": [
+            {
+                "period": row["sales_year"],
+                "expected": int(row["expected_product_presentations"]),
+                "transmitted": int(row["sales_data_transmitted"]),
+                "missing": int(row["sales_data_missing"]),
+                "hitRatePct": float(row["submission_hit_rate_pct"]),
+                "conclusion": row["anses_conclusion"],
+            }
+            for row in france_coverage_rows
+        ],
+        "manifest": france_manifest,
+        "request": {
+            "id": france_request["request_id"],
+            "authority": france_request["authority"],
+            "status": france_request["status"],
+            "recipient": france_request["recipient"],
+            "scope": france_request["scope"],
+        },
+        "douaneUrl": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title=",
+        "eurostatMethodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+        "ansesRegistryUrl": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/",
+        "ansesCoverageUrl": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf",
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -1195,6 +1346,7 @@ def build_payload() -> dict:
         "germanyRetail": germany_retail,
         "italyAdm": italy_adm,
         "spainAeat": spain_aeat,
+        "franceEvidence": france_evidence,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -1278,6 +1430,9 @@ def build_payload() -> dict:
             {"grade": "B", "title": "Italian parlamentti · budjettiselvityksen taulukko 17", "coverage": "Vuoden 2026 virallinen tekninen ennuste 1 107 249 007 ml ja 167 733 820 EUR verotuottoa", "use": "Viranomaisennuste markkinan suuruusluokan vertailuun; pidetään erillään toteutuneesta myynnistä ja verokertymästä", "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"},
             {"grade": "A", "title": "Espanja AEAT · vuoden 2025 toteutunut verokertymä", "coverage": "Huhti-joulukuun tarkka nettokassasarja 29 568 000 EUR; kuukausisumma täsmää joulukuun kumulatiiviseen taulukkoon", "use": "Toteutunut kansallinen verotuottoankkuri yhdistetylle L1-L4-verolle; ei nimetä e-nesteiden myynniksi", "url": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_mensuales_recaudacion_tributaria/2025/IMR_25_12_es_es.pdf"},
             {"grade": "A", "title": "Espanja BOE · Modelo 573", "coverage": "Kuukausittaiset L1/L2-millilitrat sekä L3/L4-grammat, verokanta, bruttovelka, vähennykset ja nettovelka", "use": "Todistaa täsmällisen nestemäärän keruun ja rajaa PX-ES-001-aggregointipyynnön", "url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"},
+            {"grade": "A", "title": "Ranska Douane · National 2025 import/export", "coverage": "Neljä CN8-nimikettä, 48 kuukausiriviä, 363,940 milj. EUR tuontia ja 127,863 milj. EUR vientiä", "use": "Kansallinen rajakaupan ankkuri; Douane ja Eurostat täsmäävät alle 0,5 %:n erolla", "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title="},
+            {"grade": "A", "title": "ANSES · vaping-ilmoitusrekisteri", "coverage": "1.7.2026: 203 181 ilmoitusriviä ja 111 556 yksilöllistä tuotenumeroa; julkisessa aineistossa ei vuosimyyntikenttää", "use": "Tuoterakenteen näyttö, ei myynnin, aktiivisten SKU-tuotteiden tai yritysmäärän näyttö", "url": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/"},
+            {"grade": "A", "title": "ANSES · myyntiraportoinnin kattavuusauditointi", "coverage": "2016-2017: 23 036 myyntitietoa / 65 799 odotettua esitystä, hit rate 35,010 %", "use": "Viranomaisen oma kattavuusmittaus; ANSES katsoi volyymit puutteiden vuoksi käyttökelvottomiksi", "url": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
             {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
@@ -1294,6 +1449,7 @@ def build_payload() -> dict:
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.", "status": "done"},
             {"priority": "high", "title": "Italian ADM:n toteutuneet PLI-aggregaatit", "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Espanjan AEAT L1/L2-veropohjat", "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.", "status": "active"},
+            {"priority": "high", "title": "Ranskan ANSES 2018-2025 myyntiaggregaatit", "detail": "Douanen vuoden 2025 neljä CN8-koodia ja Eurostat-reittitäsmäytys ovat valmiit. ANSES-rekisterin 203 181 riviä on auditoitu, ja 2016-2017 raportoinnin hit rate oli 35,010 %. PX-FR-001 pyytää uudemmat kattavuusluvut, yksiköt, millilitrat ja arvon; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1469,6 +1625,48 @@ def publish_spain_evidence() -> None:
         shutil.copy2(raw / name, public_raw / name)
 
 
+def publish_france_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    douane_raw = PROJECT_DIR / "data" / "raw" / "france_douane"
+    anses_raw = PROJECT_DIR / "data" / "raw" / "france_anses"
+    public_data = DASHBOARD_DIR / "data" / "france"
+    public_douane_raw = DASHBOARD_DIR / "data" / "raw" / "france_douane"
+    public_anses_raw = DASHBOARD_DIR / "data" / "raw" / "france_anses"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_douane_raw.mkdir(parents=True, exist_ok=True)
+    public_anses_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "france_douane_cn8_2025.csv",
+        "france_douane_monthly_2025.csv",
+        "france_douane_top_origins_2025.csv",
+        "france_route_bridge_2025.csv",
+        "france_anses_registry_audit_2026-07-01.csv",
+        "france_anses_product_types_2026-07-01.csv",
+        "france_anses_sales_coverage_2016_2017.csv",
+        "france_evidence_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "Description-des-jeux-de-donnees-derniere-publication_EMEBI.pdf",
+        "eurostat_france_cn8_2025.json",
+    ):
+        shutil.copy2(douane_raw / name, public_douane_raw / name)
+    for name in (
+        "anses_vaping_declarations_report_2016_2020.pdf",
+        "data_gouv_dataset_metadata_2026-07-17.json",
+        "notice-utilisateurs-donnees-anses-tabac.pdf",
+    ):
+        shutil.copy2(anses_raw / name, public_anses_raw / name)
+    workbook = (
+        DASHBOARD_DIR.parent
+        / "outputs"
+        / "019f6bea-c7f5-74c0-9534-66324a4b97ae"
+        / "pixan_france_official_evidence_2025.xlsx"
+    )
+    (DASHBOARD_DIR / "assets").mkdir(exist_ok=True)
+    shutil.copy2(workbook, DASHBOARD_DIR / "assets" / workbook.name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
@@ -1478,6 +1676,7 @@ def main() -> None:
     publish_germany_evidence()
     publish_italy_evidence()
     publish_spain_evidence()
+    publish_france_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

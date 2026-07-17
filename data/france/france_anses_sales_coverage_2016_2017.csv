@@ -1,0 +1,4 @@
+sales_year,expected_product_presentations,sales_data_transmitted,sales_data_missing,submission_hit_rate_pct,source_report_page,anses_conclusion,source_url
+2016,27579,8813,18766,31.955473,ANSES report page 38-39 (PDF pages 40-41),sales_volumes_not_exploitable_due_to_missing_submissions,https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf
+2017,38220,14223,23997,37.213501,ANSES report page 38-39 (PDF pages 40-41),sales_volumes_not_exploitable_due_to_missing_submissions,https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf
+2016-2017_combined,65799,23036,42763,35.009651,ANSES report page 38-39 (PDF pages 40-41),sales_volumes_not_exploitable_due_to_missing_submissions,https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf

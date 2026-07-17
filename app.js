@@ -150,6 +150,55 @@
         </tr>`).join("")}</tbody>
       </table>`;
 
+    const france = data.franceEvidence;
+    const franceOfficial = france.manifest.official_results;
+    const registryMetric = (name) => france.registryAudit.find((item) => item.metric === name);
+    $("#france-summary").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Virallinen rajaus</th><th>Tuonti</th><th>Vienti</th><th>Rajanettotuonti</th><th>Tuontipaino</th><th>Kiinan alkuperäosuus</th></tr></thead>
+        <tbody>${france.customs.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.label)}</strong><div class="meta-line" lang="fr">${esc(item.officialLabel)}</div></td>
+          <td class="num"><strong>${moneyEur3(item.importEur)}</strong></td><td class="num">${moneyEur3(item.exportEur)}</td>
+          <td class="num"><strong>${moneyEur3(item.borderNetEur)}</strong></td><td class="num">${integer(item.importKg)} kg</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.chinaSharePct)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Virallinen yhteenveto:</strong> neljän koodin tuonti ${moneyEur3(franceOfficial.douane_all_four_codes_import_eur)}, vienti ${moneyEur3(franceOfficial.douane_all_four_codes_export_eur)} ja rajat ylittävä nettotuonti ${moneyEur3(franceOfficial.douane_all_four_codes_border_net_import_eur)}. Kapea 85434000 + 24041200 -netto on ${moneyEur3(franceOfficial.douane_narrow_border_net_import_eur)}. Kilogrammoja ei muunneta laiteyksiköiksi tai e-nestemillilitroiksi, koska lisäpaljousyksikkö puuttuu. <a class="source-link" href="${esc(france.douaneUrl)}" target="_blank" rel="noopener">France Douane ↗</a></div>`;
+
+    $("#france-route").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Kansallinen ei-EU-alkuperä</th><th>Kansallinen EU/Ranska-alkuperä</th><th>Eurostat suora extra-EU</th><th>Eurostat intra-EU lähetysmaa</th><th>WORLD</th><th>Luokitusero*</th></tr></thead>
+        <tbody>${france.routeBridge.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td class="num">${moneyEur3(item.nationalNonEuOriginEur)}</td>
+          <td class="num">${moneyEur3(item.nationalEuOrFranceOriginEur)}</td><td class="num">${moneyEur3(item.eurostatDirectExtraEur)}</td>
+          <td class="num">${moneyEur3(item.eurostatIntraConsignmentEur)}</td><td class="num"><strong>${moneyEur3(item.eurostatWorldEur)}</strong></td>
+          <td class="num">${moneyEur3(item.classificationGapEur)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Täsmäytys:</strong> WORLD = intra + extra kaikissa koodeissa; komponenttiero on 0 EUR. Douanen ja Eurostatin kokonaistuonnin ero on ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(franceOfficial.douane_vs_eurostat_total_import_gap_pct)} % ja viennin ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(franceOfficial.douane_vs_eurostat_total_export_gap_pct)} %. *Luokitusero kertoo alkuperä- ja lähetysmaakäsitteiden herkkyydestä; se ei ole täsmällinen jälleenvienti- tai tullinoptimointimäärä. <a class="source-link" href="${esc(france.eurostatMethodUrl)}" target="_blank" rel="noopener">Eurostat-menetelmä ↗</a></div>`;
+
+    $("#france-anses").innerHTML = `
+      <table>
+        <thead><tr><th>ANSES-tuotetyyppi</th><th>Ilmoitusrivejä</th><th>Osuus rekisteristä</th><th>Tulkinta</th></tr></thead>
+        <tbody>${france.productTypes.map((item) => `<tr>
+          <td><strong lang="fr">${esc(item.type)}</strong></td><td class="num">${integer(item.rows)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.sharePct)} %</td>
+          <td>Ilmoitusrivejä; ei myytyjä yksiköitä tai aktiivisia SKU-tuotteita</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>1.7.2026 tilanne:</strong> ${integer(registryMetric("registry_rows").value)} ilmoitusriviä, ${integer(registryMetric("unique_product_numbers").value)} yksilöllistä tuotenumeroa ja ${integer(registryMetric("unique_brand_strings").value)} normalisoimatonta brändimerkkijonoa. Julkisessa rekisterissä ei ole vuosimyyntikenttää. Rekisteririvit eivät ole hyväksyntöjä, aktiivisia SKU-tuotteita, yrityksiä tai myytyjä yksiköitä. <a class="source-link" href="${esc(france.ansesRegistryUrl)}" target="_blank" rel="noopener">ANSES/data.gouv.fr ↗</a></div>`;
+
+    $("#france-coverage").innerHTML = `
+      <table>
+        <thead><tr><th>Jakso</th><th>Odotetut tuote-esitykset</th><th>Myyntitieto toimitettu</th><th>Puuttui</th><th>Submission hit rate</th><th>Viranomaisen johtopäätös</th></tr></thead>
+        <tbody>${france.salesCoverage.map((item) => `<tr>
+          <td><strong>${esc(item.period)}</strong></td><td class="num">${integer(item.expected)}</td><td class="num">${integer(item.transmitted)}</td>
+          <td class="num">${integer(item.missing)}</td><td class="num"><strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.hitRatePct)} %</strong></td>
+          <td>Myyntivolyymit eivät olleet hyödynnettävissä puuttuvien ilmoitusten vuoksi</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Menetelmäauditointi:</strong> yhdistetty 2016–2017 hit rate oli 23 036 / 65 799 = 35,010 %. Tämä mittaa historiallisten myyntitietojen toimituskattavuutta, ei viranomaisen tarkastusten virheprosenttia eikä nykyisen rekisterin tarkkuutta. ${tag(france.request.status)} <strong>${esc(france.request.id)}</strong> pyytää vuosien 2018–2025 kattavuusluvut, laite-/pod-yksiköt ja e-nestemillilitrat. Viestiä ei ole lähetetty. <a class="source-link" href="${esc(france.ansesCoverageUrl)}" target="_blank" rel="noopener">ANSES-raportti ↗</a></div>`;
+
     const canada = data.canadaCustoms;
     $("#canada-summary").innerHTML = `
       <table>
@@ -600,6 +649,7 @@
     data.taxes.forEach((item) => rows.push({ view: "taxes", title: `${item.name} · verotus`, detail: `${item.verification} ${item.period}` }));
     rows.push({ view: "taxes", title: "Italia · ADM PLI-PAT", detail: `Vuoden 2025 verokannat, ${italy2026Search()} ml:n virallinen 2026 budjettiennuste ja PX-IT-001 toteumapyyntö` });
     rows.push({ view: "taxes", title: "Espanja · AEAT / Modelo 573", detail: `${moneyEur3(data.spainAeat.exactNetRevenueEur)} tarkka nettokertymä, L1/L2-millilitrat ja PX-ES-001` });
+    rows.push({ view: "customs", title: "Ranska · Douane / ANSES", detail: `${moneyEur3(data.franceEvidence.manifest.official_results.douane_all_four_codes_border_net_import_eur)} rajat ylittävä nettotuonti, 203 181 ANSES-ilmoitusriviä ja 35,010 % historiallinen hit rate` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }

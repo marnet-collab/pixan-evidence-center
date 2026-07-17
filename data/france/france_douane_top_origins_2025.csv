@@ -1,0 +1,34 @@
+year,cn8,scope,rank,origin_code,origin_name,import_eur,import_kg,share_of_code_import_value_pct,source_rows,origin_definition
+2025,85434000,core_devices,1,CN,Chine,119761777,1626379,62.517583,12,France national statistics: country of origin
+2025,85434000,core_devices,2,NL,Pays-Bas,23249211,58847,12.136464,12,France national statistics: country of origin
+2025,85434000,core_devices,3,MY,Malaisie,22248478,117537,11.614065,9,France national statistics: country of origin
+2025,85434000,core_devices,4,ID,Indonésie,21613773,119283,11.282739,12,France national statistics: country of origin
+2025,85434000,core_devices,5,DE,Allemagne,1545394,2266,0.806721,12,France national statistics: country of origin
+2025,85434000,core_devices,6,BE,Belgique,1099325,20449,0.573865,10,France national statistics: country of origin
+2025,85434000,core_devices,7,HK,Hong Kong,905018,13636,0.472434,4,France national statistics: country of origin
+2025,85434000,core_devices,8,FR,France,343344,3784,0.179231,9,France national statistics: country of origin
+2025,85434000,core_devices,9,GB,Royaume-Uni,237718,2360,0.124093,12,France national statistics: country of origin
+2025,85434000,core_devices,10,QU,Pays et territoires non déterminés,162432,746,0.084792,11,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,1,CN,Chine,125874950,1860018,80.865375,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,2,GB,Royaume-Uni,11996554,259946,7.706901,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,3,US,Etats-Unis,5680565,197267,3.649344,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,4,BE,Belgique,4698532,671780,3.01846,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,5,NL,Pays-Bas,1691621,624455,1.086742,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,6,ID,Indonésie,1403446,6600,0.901611,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,7,FR,France,1216435,26435,0.78147,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,8,HK,Hong Kong,1121821,36650,0.720687,1,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,9,IT,Italie,825260,6087,0.530169,12,France national statistics: country of origin
+2025,24041200,broad_nicotine_inhalation_proxy,10,DE,Allemagne,322343,29404,0.207082,12,France national statistics: country of origin
+2025,24041910,broad_nicotine_free_tobacco_substitute_inhalation_proxy,1,GB,Royaume-Uni,15164,243,58.788866,3,France national statistics: country of origin
+2025,24041910,broad_nicotine_free_tobacco_substitute_inhalation_proxy,2,QU,Pays et territoires non déterminés,10630,200,41.211134,1,France national statistics: country of origin
+2025,24041910,broad_nicotine_free_tobacco_substitute_inhalation_proxy,3,CN,Chine,0,0,0.0,0,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,1,GB,Royaume-Uni,10633587,171074,63.714799,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,2,CN,Chine,1670947,52372,10.012054,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,3,MY,Malaisie,1396684,35294,8.368713,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,4,NL,Pays-Bas,923755,10873,5.534996,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,5,US,Etats-Unis,500540,19282,2.999158,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,6,BE,Belgique,463865,8678,2.779407,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,7,FR,France,390812,7875,2.341685,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,8,CA,Canada,234405,3136,1.404518,8,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,9,PL,Pologne,141330,27331,0.846827,12,France national statistics: country of origin
+2025,24041990,broad_other_substitute_inhalation_proxy,10,DE,Allemagne,128000,4400,0.766956,3,France national statistics: country of origin

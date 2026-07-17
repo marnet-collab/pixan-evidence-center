@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 11:24 UTC",
+    "updated": "2026-07-17 11:54 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -383,12 +383,12 @@ window.PIXAN_DATA = {
       "name": "Ranska",
       "sourceName": "France",
       "status": "partial",
-      "customs": "Eurostat Comext CN8 and French customs data",
-      "route": "Separate country of origin from EU country of consignment; subtract exports/dispatches",
-      "salesSource": "Direction Generale de la Sante / EU-CEG Article 20(7)",
-      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 347,1 milj. EUR; intra-EU 134,8 milj. EUR ja extra-EU 212,3 milj. EUR. No official sales aggregate obtained",
-      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual device units, refill ml and sales value; detailed route flows",
-      "how": "Download France reporter rows from Comext DS-045409; request aggregated annual sales from info-industrie-vapotage@sante.gouv.fr under Article 20(7), excluding company-identifiable detail",
+      "customs": "French Douane monthly NC8 origin/destination files plus Eurostat Comext DS-045409 route totals for 85434000 24041200 24041910 24041990",
+      "route": "Use French national imports for origin and exports for final destination; use Eurostat extra-EU origin versus intra-EU consignment to expose routing; do not treat the classification gap as exact re-export",
+      "salesSource": "ANSES EU-CEG raw registry and annual Article 20(7) sales submissions",
+      "current": "Ranskan Douanen vuoden 2025 neljän CN8-koodin tuonti oli 363 939 981 EUR, vienti 127 863 384 EUR ja rajat ylittävä nettotuonti 236 076 597 EUR. Kapea laite + nikotiini-inhalaatioproxy tuotti 229 615 309 EUR nettotuonnin. Douanen ja Eurostatin tuontisummaa erottaa 0,030 % ja vientisummaa 0,449 %. ANSES:n 1.7.2026 rekisterissä oli 203 181 ilmoitusriviä, mutta ei julkista vuosimyyntikenttää. Historiallisen 2016-2017 myyntiraportoinnin hit rate oli vain 35,010 %, joten ANSES katsoi volyymit käyttökelvottomiksi. Eurostat 2025 kapea CN8-kori: WORLD-tuonti 347,1 milj. EUR; intra-EU 134,8 milj. EUR ja extra-EU 212,3 milj. EUR. 2025 Douane four-code imports EUR 363.939981m exports EUR 127.863384m and border net EUR 236.076597m obtained; narrow 85434000+24041200 border net EUR 229.615309m. Eurostat cross-check differs by 0.029918% on imports and 0.448860% on exports. ANSES snapshot has 203181 registry rows but no public sales field; ANSES 2016-2017 sales-submission hit rate recalculates to 35.009651% and its report concludes volumes were not exploitable.",
+      "missing": "ANSES:n 2018-2025 kansalliset odotetut, saadut, puuttuvat, korjatut ja hylätyt myyntiraportit; laitteiden, podien ja täyttöpullojen yksiköt; e-nestemillilitrat, nikotiinijako ja arvo, jos viranomainen sitä hallussa pitää. Lisäksi tarvitaan kotimainen tuotanto, varastomuutos ja kuluttajamyynti. Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Current annual device units refill ml sales value domestic production inventory change and corrected consumer sell-out; current Article 20(7) submission completeness",
+      "how": "Use saved Douane ZIPs Eurostat JSON and ANSES manifest as primary evidence; send PX-FR-001 to euceg@anses.fr with info-industrie-vapotage@sante.gouv.fr copied for non-identifying 2018-2025 annual sales totals and completeness metrics; never convert customs kg to ml or units",
       "tax": {
         "name": "Ranska",
         "sourceName": "France",
@@ -4618,6 +4618,1011 @@ window.PIXAN_DATA = {
     "annualReportUrl": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
     "model573Url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"
   },
+  "franceEvidence": {
+    "customs": [
+      {
+        "code": "85434000",
+        "scope": "core_devices",
+        "label": "Sähkösavukelaitteet",
+        "officialLabel": "Cigarettes électroniques et dispositifs de vaporisation électriques personnels similaires",
+        "importEur": 191564950,
+        "exportEur": 101383587,
+        "borderNetEur": 90181363,
+        "importKg": 1975435,
+        "exportKg": 1088504,
+        "chinaOriginEur": 119761777,
+        "chinaSharePct": 62.517583,
+        "eurostatImportEur": 191525311,
+        "eurostatExportEur": 100911119,
+        "importGapPct": 0.020696,
+        "exportGapPct": 0.468202,
+        "supplementaryUnitStatus": "not_available_for_selected_cn8_codes"
+      },
+      {
+        "code": "24041200",
+        "scope": "broad_nicotine_inhalation_proxy",
+        "label": "Laaja nikotiinia sisältävä inhalaatioproxy",
+        "officialLabel": "Produits contenant de la nicotine, destinés à une inhalation sans combustion (mais ne contenant pas de tabac ou de tabac reconstitué)",
+        "importEur": 155659885,
+        "exportEur": 16225939,
+        "borderNetEur": 139433946,
+        "importKg": 3783799,
+        "exportKg": 720694,
+        "chinaOriginEur": 125874950,
+        "chinaSharePct": 80.865375,
+        "eurostatImportEur": 155593223,
+        "eurostatExportEur": 16172562,
+        "importGapPct": 0.042844,
+        "exportGapPct": 0.330047,
+        "supplementaryUnitStatus": "not_available_for_selected_cn8_codes"
+      },
+      {
+        "code": "24041910",
+        "scope": "broad_nicotine_free_tobacco_substitute_inhalation_proxy",
+        "label": "Laaja nikotiiniton tupakankorvikeproxy",
+        "officialLabel": "Produits contenant des succédanés de tabac, destinés à une inhalation sans combustion (mais ne contenant pas de nicotine)",
+        "importEur": 25794,
+        "exportEur": 212174,
+        "borderNetEur": -186380,
+        "importKg": 443,
+        "exportKg": 5202,
+        "chinaOriginEur": 0,
+        "chinaSharePct": 0.0,
+        "eurostatImportEur": 25794,
+        "eurostatExportEur": 212096,
+        "importGapPct": 0.0,
+        "exportGapPct": 0.036776,
+        "supplementaryUnitStatus": "not_available_for_selected_cn8_codes"
+      },
+      {
+        "code": "24041990",
+        "scope": "broad_other_substitute_inhalation_proxy",
+        "label": "Laaja muu inhalaatioproxy",
+        "officialLabel": "Produits contenant des succédanés de nicotine, destinés à une inhalation sans combustion (mais ne contenant pas de nicotine ou de succédanés de tabac)",
+        "importEur": 16689352,
+        "exportEur": 10041684,
+        "borderNetEur": 6647668,
+        "importKg": 343296,
+        "exportKg": 163616,
+        "chinaOriginEur": 1670947,
+        "chinaSharePct": 10.012054,
+        "eurostatImportEur": 16686803,
+        "eurostatExportEur": 9996244,
+        "importGapPct": 0.015276,
+        "exportGapPct": 0.454571,
+        "supplementaryUnitStatus": "not_available_for_selected_cn8_codes"
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "code": "85434000",
+        "importEur": 16574562,
+        "exportEur": 6603918,
+        "borderNetEur": 9970644
+      },
+      {
+        "month": 2,
+        "code": "85434000",
+        "importEur": 13167377,
+        "exportEur": 4285751,
+        "borderNetEur": 8881626
+      },
+      {
+        "month": 3,
+        "code": "85434000",
+        "importEur": 12638820,
+        "exportEur": 5045909,
+        "borderNetEur": 7592911
+      },
+      {
+        "month": 4,
+        "code": "85434000",
+        "importEur": 12242717,
+        "exportEur": 6185667,
+        "borderNetEur": 6057050
+      },
+      {
+        "month": 5,
+        "code": "85434000",
+        "importEur": 14229065,
+        "exportEur": 5625913,
+        "borderNetEur": 8603152
+      },
+      {
+        "month": 6,
+        "code": "85434000",
+        "importEur": 12514413,
+        "exportEur": 3951529,
+        "borderNetEur": 8562884
+      },
+      {
+        "month": 7,
+        "code": "85434000",
+        "importEur": 15528322,
+        "exportEur": 5337509,
+        "borderNetEur": 10190813
+      },
+      {
+        "month": 8,
+        "code": "85434000",
+        "importEur": 18493395,
+        "exportEur": 10493168,
+        "borderNetEur": 8000227
+      },
+      {
+        "month": 9,
+        "code": "85434000",
+        "importEur": 14535848,
+        "exportEur": 10437516,
+        "borderNetEur": 4098332
+      },
+      {
+        "month": 10,
+        "code": "85434000",
+        "importEur": 21492735,
+        "exportEur": 16241908,
+        "borderNetEur": 5250827
+      },
+      {
+        "month": 11,
+        "code": "85434000",
+        "importEur": 21690514,
+        "exportEur": 17468606,
+        "borderNetEur": 4221908
+      },
+      {
+        "month": 12,
+        "code": "85434000",
+        "importEur": 18457182,
+        "exportEur": 9706193,
+        "borderNetEur": 8750989
+      },
+      {
+        "month": 1,
+        "code": "24041200",
+        "importEur": 8331836,
+        "exportEur": 1341395,
+        "borderNetEur": 6990441
+      },
+      {
+        "month": 2,
+        "code": "24041200",
+        "importEur": 6790477,
+        "exportEur": 1286755,
+        "borderNetEur": 5503722
+      },
+      {
+        "month": 3,
+        "code": "24041200",
+        "importEur": 10645052,
+        "exportEur": 1498800,
+        "borderNetEur": 9146252
+      },
+      {
+        "month": 4,
+        "code": "24041200",
+        "importEur": 9843557,
+        "exportEur": 1636997,
+        "borderNetEur": 8206560
+      },
+      {
+        "month": 5,
+        "code": "24041200",
+        "importEur": 11969943,
+        "exportEur": 1318644,
+        "borderNetEur": 10651299
+      },
+      {
+        "month": 6,
+        "code": "24041200",
+        "importEur": 15264317,
+        "exportEur": 1273250,
+        "borderNetEur": 13991067
+      },
+      {
+        "month": 7,
+        "code": "24041200",
+        "importEur": 11764767,
+        "exportEur": 1463476,
+        "borderNetEur": 10301291
+      },
+      {
+        "month": 8,
+        "code": "24041200",
+        "importEur": 9263400,
+        "exportEur": 1193202,
+        "borderNetEur": 8070198
+      },
+      {
+        "month": 9,
+        "code": "24041200",
+        "importEur": 11377005,
+        "exportEur": 1940771,
+        "borderNetEur": 9436234
+      },
+      {
+        "month": 10,
+        "code": "24041200",
+        "importEur": 21634073,
+        "exportEur": 786008,
+        "borderNetEur": 20848065
+      },
+      {
+        "month": 11,
+        "code": "24041200",
+        "importEur": 23139965,
+        "exportEur": 1667940,
+        "borderNetEur": 21472025
+      },
+      {
+        "month": 12,
+        "code": "24041200",
+        "importEur": 15635493,
+        "exportEur": 818701,
+        "borderNetEur": 14816792
+      },
+      {
+        "month": 1,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 0,
+        "borderNetEur": 0
+      },
+      {
+        "month": 2,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 0,
+        "borderNetEur": 0
+      },
+      {
+        "month": 3,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 0,
+        "borderNetEur": 0
+      },
+      {
+        "month": 4,
+        "code": "24041910",
+        "importEur": 6921,
+        "exportEur": 76709,
+        "borderNetEur": -69788
+      },
+      {
+        "month": 5,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 28692,
+        "borderNetEur": -28692
+      },
+      {
+        "month": 6,
+        "code": "24041910",
+        "importEur": 18800,
+        "exportEur": 26728,
+        "borderNetEur": -7928
+      },
+      {
+        "month": 7,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 24971,
+        "borderNetEur": -24971
+      },
+      {
+        "month": 8,
+        "code": "24041910",
+        "importEur": 73,
+        "exportEur": 15073,
+        "borderNetEur": -15000
+      },
+      {
+        "month": 9,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 19582,
+        "borderNetEur": -19582
+      },
+      {
+        "month": 10,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 828,
+        "borderNetEur": -828
+      },
+      {
+        "month": 11,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 19591,
+        "borderNetEur": -19591
+      },
+      {
+        "month": 12,
+        "code": "24041910",
+        "importEur": 0,
+        "exportEur": 0,
+        "borderNetEur": 0
+      },
+      {
+        "month": 1,
+        "code": "24041990",
+        "importEur": 1287462,
+        "exportEur": 909727,
+        "borderNetEur": 377735
+      },
+      {
+        "month": 2,
+        "code": "24041990",
+        "importEur": 1515365,
+        "exportEur": 615590,
+        "borderNetEur": 899775
+      },
+      {
+        "month": 3,
+        "code": "24041990",
+        "importEur": 1602304,
+        "exportEur": 1227804,
+        "borderNetEur": 374500
+      },
+      {
+        "month": 4,
+        "code": "24041990",
+        "importEur": 1699384,
+        "exportEur": 1050100,
+        "borderNetEur": 649284
+      },
+      {
+        "month": 5,
+        "code": "24041990",
+        "importEur": 1222571,
+        "exportEur": 706561,
+        "borderNetEur": 516010
+      },
+      {
+        "month": 6,
+        "code": "24041990",
+        "importEur": 1174199,
+        "exportEur": 648804,
+        "borderNetEur": 525395
+      },
+      {
+        "month": 7,
+        "code": "24041990",
+        "importEur": 1586797,
+        "exportEur": 1026036,
+        "borderNetEur": 560761
+      },
+      {
+        "month": 8,
+        "code": "24041990",
+        "importEur": 1540944,
+        "exportEur": 780948,
+        "borderNetEur": 759996
+      },
+      {
+        "month": 9,
+        "code": "24041990",
+        "importEur": 1248838,
+        "exportEur": 816682,
+        "borderNetEur": 432156
+      },
+      {
+        "month": 10,
+        "code": "24041990",
+        "importEur": 840179,
+        "exportEur": 536042,
+        "borderNetEur": 304137
+      },
+      {
+        "month": 11,
+        "code": "24041990",
+        "importEur": 1635855,
+        "exportEur": 808478,
+        "borderNetEur": 827377
+      },
+      {
+        "month": 12,
+        "code": "24041990",
+        "importEur": 1335454,
+        "exportEur": 914912,
+        "borderNetEur": 420542
+      }
+    ],
+    "topOrigins": [
+      {
+        "code": "85434000",
+        "rank": 1,
+        "originCode": "CN",
+        "origin": "Chine",
+        "importEur": 119761777,
+        "importKg": 1626379,
+        "sharePct": 62.517583
+      },
+      {
+        "code": "85434000",
+        "rank": 2,
+        "originCode": "NL",
+        "origin": "Pays-Bas",
+        "importEur": 23249211,
+        "importKg": 58847,
+        "sharePct": 12.136464
+      },
+      {
+        "code": "85434000",
+        "rank": 3,
+        "originCode": "MY",
+        "origin": "Malaisie",
+        "importEur": 22248478,
+        "importKg": 117537,
+        "sharePct": 11.614065
+      },
+      {
+        "code": "85434000",
+        "rank": 4,
+        "originCode": "ID",
+        "origin": "Indonésie",
+        "importEur": 21613773,
+        "importKg": 119283,
+        "sharePct": 11.282739
+      },
+      {
+        "code": "85434000",
+        "rank": 5,
+        "originCode": "DE",
+        "origin": "Allemagne",
+        "importEur": 1545394,
+        "importKg": 2266,
+        "sharePct": 0.806721
+      },
+      {
+        "code": "85434000",
+        "rank": 6,
+        "originCode": "BE",
+        "origin": "Belgique",
+        "importEur": 1099325,
+        "importKg": 20449,
+        "sharePct": 0.573865
+      },
+      {
+        "code": "85434000",
+        "rank": 7,
+        "originCode": "HK",
+        "origin": "Hong Kong",
+        "importEur": 905018,
+        "importKg": 13636,
+        "sharePct": 0.472434
+      },
+      {
+        "code": "85434000",
+        "rank": 8,
+        "originCode": "FR",
+        "origin": "France",
+        "importEur": 343344,
+        "importKg": 3784,
+        "sharePct": 0.179231
+      },
+      {
+        "code": "85434000",
+        "rank": 9,
+        "originCode": "GB",
+        "origin": "Royaume-Uni",
+        "importEur": 237718,
+        "importKg": 2360,
+        "sharePct": 0.124093
+      },
+      {
+        "code": "85434000",
+        "rank": 10,
+        "originCode": "QU",
+        "origin": "Pays et territoires non déterminés",
+        "importEur": 162432,
+        "importKg": 746,
+        "sharePct": 0.084792
+      },
+      {
+        "code": "24041200",
+        "rank": 1,
+        "originCode": "CN",
+        "origin": "Chine",
+        "importEur": 125874950,
+        "importKg": 1860018,
+        "sharePct": 80.865375
+      },
+      {
+        "code": "24041200",
+        "rank": 2,
+        "originCode": "GB",
+        "origin": "Royaume-Uni",
+        "importEur": 11996554,
+        "importKg": 259946,
+        "sharePct": 7.706901
+      },
+      {
+        "code": "24041200",
+        "rank": 3,
+        "originCode": "US",
+        "origin": "Etats-Unis",
+        "importEur": 5680565,
+        "importKg": 197267,
+        "sharePct": 3.649344
+      },
+      {
+        "code": "24041200",
+        "rank": 4,
+        "originCode": "BE",
+        "origin": "Belgique",
+        "importEur": 4698532,
+        "importKg": 671780,
+        "sharePct": 3.01846
+      },
+      {
+        "code": "24041200",
+        "rank": 5,
+        "originCode": "NL",
+        "origin": "Pays-Bas",
+        "importEur": 1691621,
+        "importKg": 624455,
+        "sharePct": 1.086742
+      },
+      {
+        "code": "24041200",
+        "rank": 6,
+        "originCode": "ID",
+        "origin": "Indonésie",
+        "importEur": 1403446,
+        "importKg": 6600,
+        "sharePct": 0.901611
+      },
+      {
+        "code": "24041200",
+        "rank": 7,
+        "originCode": "FR",
+        "origin": "France",
+        "importEur": 1216435,
+        "importKg": 26435,
+        "sharePct": 0.78147
+      },
+      {
+        "code": "24041200",
+        "rank": 8,
+        "originCode": "HK",
+        "origin": "Hong Kong",
+        "importEur": 1121821,
+        "importKg": 36650,
+        "sharePct": 0.720687
+      },
+      {
+        "code": "24041200",
+        "rank": 9,
+        "originCode": "IT",
+        "origin": "Italie",
+        "importEur": 825260,
+        "importKg": 6087,
+        "sharePct": 0.530169
+      },
+      {
+        "code": "24041200",
+        "rank": 10,
+        "originCode": "DE",
+        "origin": "Allemagne",
+        "importEur": 322343,
+        "importKg": 29404,
+        "sharePct": 0.207082
+      },
+      {
+        "code": "24041910",
+        "rank": 1,
+        "originCode": "GB",
+        "origin": "Royaume-Uni",
+        "importEur": 15164,
+        "importKg": 243,
+        "sharePct": 58.788866
+      },
+      {
+        "code": "24041910",
+        "rank": 2,
+        "originCode": "QU",
+        "origin": "Pays et territoires non déterminés",
+        "importEur": 10630,
+        "importKg": 200,
+        "sharePct": 41.211134
+      },
+      {
+        "code": "24041910",
+        "rank": 3,
+        "originCode": "CN",
+        "origin": "Chine",
+        "importEur": 0,
+        "importKg": 0,
+        "sharePct": 0.0
+      },
+      {
+        "code": "24041990",
+        "rank": 1,
+        "originCode": "GB",
+        "origin": "Royaume-Uni",
+        "importEur": 10633587,
+        "importKg": 171074,
+        "sharePct": 63.714799
+      },
+      {
+        "code": "24041990",
+        "rank": 2,
+        "originCode": "CN",
+        "origin": "Chine",
+        "importEur": 1670947,
+        "importKg": 52372,
+        "sharePct": 10.012054
+      },
+      {
+        "code": "24041990",
+        "rank": 3,
+        "originCode": "MY",
+        "origin": "Malaisie",
+        "importEur": 1396684,
+        "importKg": 35294,
+        "sharePct": 8.368713
+      },
+      {
+        "code": "24041990",
+        "rank": 4,
+        "originCode": "NL",
+        "origin": "Pays-Bas",
+        "importEur": 923755,
+        "importKg": 10873,
+        "sharePct": 5.534996
+      },
+      {
+        "code": "24041990",
+        "rank": 5,
+        "originCode": "US",
+        "origin": "Etats-Unis",
+        "importEur": 500540,
+        "importKg": 19282,
+        "sharePct": 2.999158
+      },
+      {
+        "code": "24041990",
+        "rank": 6,
+        "originCode": "BE",
+        "origin": "Belgique",
+        "importEur": 463865,
+        "importKg": 8678,
+        "sharePct": 2.779407
+      },
+      {
+        "code": "24041990",
+        "rank": 7,
+        "originCode": "FR",
+        "origin": "France",
+        "importEur": 390812,
+        "importKg": 7875,
+        "sharePct": 2.341685
+      },
+      {
+        "code": "24041990",
+        "rank": 8,
+        "originCode": "CA",
+        "origin": "Canada",
+        "importEur": 234405,
+        "importKg": 3136,
+        "sharePct": 1.404518
+      },
+      {
+        "code": "24041990",
+        "rank": 9,
+        "originCode": "PL",
+        "origin": "Pologne",
+        "importEur": 141330,
+        "importKg": 27331,
+        "sharePct": 0.846827
+      },
+      {
+        "code": "24041990",
+        "rank": 10,
+        "originCode": "DE",
+        "origin": "Allemagne",
+        "importEur": 128000,
+        "importKg": 4400,
+        "sharePct": 0.766956
+      }
+    ],
+    "routeBridge": [
+      {
+        "code": "85434000",
+        "nationalNonEuOriginEur": 165047467,
+        "indeterminateOriginEur": 162461,
+        "nationalEuOrFranceOriginEur": 26355022,
+        "eurostatDirectExtraEur": 152091329,
+        "eurostatIntraConsignmentEur": 39433982,
+        "eurostatWorldEur": 191525311,
+        "partsGapEur": 0,
+        "classificationGapEur": 13118599
+      },
+      {
+        "code": "24041200",
+        "nationalNonEuOriginEur": 146262735,
+        "indeterminateOriginEur": 30507,
+        "nationalEuOrFranceOriginEur": 9366643,
+        "eurostatDirectExtraEur": 60234155,
+        "eurostatIntraConsignmentEur": 95359068,
+        "eurostatWorldEur": 155593223,
+        "partsGapEur": 0,
+        "classificationGapEur": 86059087
+      },
+      {
+        "code": "24041910",
+        "nationalNonEuOriginEur": 15164,
+        "indeterminateOriginEur": 10630,
+        "nationalEuOrFranceOriginEur": 0,
+        "eurostatDirectExtraEur": 25794,
+        "eurostatIntraConsignmentEur": 0,
+        "eurostatWorldEur": 25794,
+        "partsGapEur": 0,
+        "classificationGapEur": 0
+      },
+      {
+        "code": "24041990",
+        "nationalNonEuOriginEur": 14487578,
+        "indeterminateOriginEur": 14253,
+        "nationalEuOrFranceOriginEur": 2187521,
+        "eurostatDirectExtraEur": 14138258,
+        "eurostatIntraConsignmentEur": 2548545,
+        "eurostatWorldEur": 16686803,
+        "partsGapEur": 0,
+        "classificationGapEur": 363573
+      }
+    ],
+    "registryAudit": [
+      {
+        "metric": "registry_rows",
+        "value": 203181.0,
+        "unit": "rows",
+        "status": "official_raw_declarations",
+        "note": "Records in the published list; not sales, active SKUs or authorised products."
+      },
+      {
+        "metric": "unique_product_numbers",
+        "value": 111556.0,
+        "unit": "distinct_identifiers",
+        "status": "derived_from_official_registry",
+        "note": "Distinct Numéro_Produit values; one identifier can have multiple registry rows."
+      },
+      {
+        "metric": "unique_references",
+        "value": 203181.0,
+        "unit": "distinct_references",
+        "status": "derived_from_official_registry",
+        "note": "Distinct Code_Référence values; not an active-market count."
+      },
+      {
+        "metric": "unique_brand_strings",
+        "value": 16851.0,
+        "unit": "distinct_strings",
+        "status": "derived_from_official_registry",
+        "note": "Unnormalised brand strings; not a company count."
+      },
+      {
+        "metric": "published_columns",
+        "value": 27.0,
+        "unit": "columns",
+        "status": "verified",
+        "note": "No annual sales field is present in the public registry file."
+      },
+      {
+        "metric": "liquid_volume_field_population_rate",
+        "value": 99.792303,
+        "unit": "percent_of_rows",
+        "status": "field_completeness_not_accuracy",
+        "note": "202759 of 203181 rows contain a liquid-volume value."
+      },
+      {
+        "metric": "nicotine_field_population_rate",
+        "value": 100.0,
+        "unit": "percent_of_rows",
+        "status": "field_completeness_not_accuracy",
+        "note": "203181 of 203181 rows contain a nicotine-concentration value."
+      },
+      {
+        "metric": "rows_reporting_2_ml",
+        "value": 53514.0,
+        "unit": "rows",
+        "status": "declared_characteristic_not_sales",
+        "note": "Count of registry rows reporting 2 ml; no sales weighting."
+      },
+      {
+        "metric": "rows_reporting_10_ml",
+        "value": 141065.0,
+        "unit": "rows",
+        "status": "declared_characteristic_not_sales",
+        "note": "Count of registry rows reporting 10 ml; no sales weighting."
+      },
+      {
+        "metric": "rows_reporting_nicotine_above_20_mg_ml",
+        "value": 860.0,
+        "unit": "rows",
+        "status": "raw_declaration_quality_flag",
+        "note": "A declaration flag only; ANSES warns it does not guarantee raw-content accuracy."
+      }
+    ],
+    "productTypes": [
+      {
+        "type": "Flacon ou cartouche de recharge avec e-liquide",
+        "rows": 186992,
+        "sharePct": 92.032227
+      },
+      {
+        "type": "Vapoteuse remplissable avec e-liquide",
+        "rows": 5345,
+        "sharePct": 2.630659
+      },
+      {
+        "type": "Vapoteuse rechargeable avec e-liquide",
+        "rows": 4682,
+        "sharePct": 2.304349
+      },
+      {
+        "type": "Kit",
+        "rows": 2448,
+        "sharePct": 1.204837
+      },
+      {
+        "type": "Accessoire de vapoteuse",
+        "rows": 2429,
+        "sharePct": 1.195486
+      },
+      {
+        "type": "Autre",
+        "rows": 680,
+        "sharePct": 0.334677
+      },
+      {
+        "type": "Vapoteuse rechargeable",
+        "rows": 358,
+        "sharePct": 0.176198
+      },
+      {
+        "type": "Vapoteuse remplissable",
+        "rows": 247,
+        "sharePct": 0.121566
+      }
+    ],
+    "salesCoverage": [
+      {
+        "period": "2016",
+        "expected": 27579,
+        "transmitted": 8813,
+        "missing": 18766,
+        "hitRatePct": 31.955473,
+        "conclusion": "sales_volumes_not_exploitable_due_to_missing_submissions"
+      },
+      {
+        "period": "2017",
+        "expected": 38220,
+        "transmitted": 14223,
+        "missing": 23997,
+        "hitRatePct": 37.213501,
+        "conclusion": "sales_volumes_not_exploitable_due_to_missing_submissions"
+      },
+      {
+        "period": "2016-2017_combined",
+        "expected": 65799,
+        "transmitted": 23036,
+        "missing": 42763,
+        "hitRatePct": 35.009651,
+        "conclusion": "sales_volumes_not_exploitable_due_to_missing_submissions"
+      }
+    ],
+    "manifest": {
+      "manifest_id": "PX-FR-AUDIT-2026-07-17",
+      "market": "France",
+      "reference_period": "2025 customs; ANSES registry snapshot 2026-07-01; sales coverage audit 2016-2017",
+      "built_at": "2026-07-17",
+      "source_tier": "A_official_primary",
+      "official_results": {
+        "douane_narrow_85434000_plus_24041200_import_eur": 347224835,
+        "douane_narrow_85434000_plus_24041200_export_eur": 117609526,
+        "douane_narrow_border_net_import_eur": 229615309,
+        "douane_all_four_codes_import_eur": 363939981,
+        "douane_all_four_codes_export_eur": 127863384,
+        "douane_all_four_codes_border_net_import_eur": 236076597,
+        "eurostat_all_four_codes_world_import_eur": 363831131,
+        "eurostat_all_four_codes_world_export_eur": 127292021,
+        "douane_vs_eurostat_total_import_gap_eur": 108850,
+        "douane_vs_eurostat_total_import_gap_pct": 0.029918,
+        "douane_vs_eurostat_total_export_gap_eur": 571363,
+        "douane_vs_eurostat_total_export_gap_pct": 0.44886,
+        "anses_registry_rows": 203181,
+        "anses_unique_product_numbers": 111556,
+        "anses_refill_or_cartridge_rows": 186992,
+        "anses_2016_2017_sales_submission_hit_rate_pct": 35.009651
+      },
+      "audit_checks": {
+        "selected_cn8_codes": [
+          "85434000",
+          "24041200",
+          "24041910",
+          "24041990"
+        ],
+        "monthly_rows_expected": 48,
+        "monthly_rows_obtained": 48,
+        "douane_import_sum_matches_monthly": true,
+        "douane_export_sum_matches_monthly": true,
+        "eurostat_world_equals_intra_plus_extra_all_codes": true,
+        "selected_codes_have_no_supplementary_units": true,
+        "anses_public_registry_contains_sales_field": false,
+        "anses_registry_resource_last_modified": "2026-07-01T15:55:58.907000+00:00"
+      },
+      "methodology": {
+        "france_douane": "Monthly raw-collection rows were filtered to four CN8 codes and summed independently by month, code and origin/destination country. Imports use country of origin; exports use final destination.",
+        "eurostat": "The harmonised Comext series was decoded from JSON-stat and reconciled WORLD = intra-EU + extra-EU for every code. Extra-EU imports use origin; intra-EU imports use Member State of consignment.",
+        "anses_registry": "The official raw declaration list was streamed row by row. Counts are registry-record and field-population measures only; no sales weighting or active-product assumption was applied.",
+        "anses_sales_coverage": "ANSES inferred expected annual sales submissions from product market dates and compared expected presentations with transmitted sales records. The published 2016 and 2017 counts were recomputed."
+      },
+      "boundaries": [
+        "Customs value is border value, not consumer sell-out, tax-inclusive retail value or domestic market size.",
+        "The France open-data files are raw collection without non-response correction; Eurostat is the harmonised cross-check.",
+        "No supplementary unit is available for the selected codes, so kilograms are not converted to device units or liquid millilitres.",
+        "CN 24041200, 24041910 and 24041990 are inhalation-product proxies and are not assumed to equal e-liquid sales.",
+        "ANSES registry rows are declared product records, not units sold, active SKUs, approvals or companies.",
+        "ANSES concluded the 2016-2017 sales volumes were not exploitable; the 35.0097% combined hit rate is coverage, not market share.",
+        "The origin-versus-consignment classification gap is evidence of routing sensitivity, not an exact re-export estimate."
+      ],
+      "sources": [
+        {
+          "name": "France Douane 2025 national imports",
+          "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title=",
+          "file": "data/raw/france_douane/202605-National-2025-import.zip",
+          "sha256": "b80420bc53c020bd9ce1aebf18b75f5c7d29c98eb9ee6abcb15097bb9839982f"
+        },
+        {
+          "name": "France Douane 2025 national exports",
+          "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title=",
+          "file": "data/raw/france_douane/202605-National-2025-export.zip",
+          "sha256": "4e6f48896d53351176ca940af6d19c12922dff7775aaa804cce1997bae945a19"
+        },
+        {
+          "name": "France Douane dataset methodology",
+          "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title=",
+          "file": "data/raw/france_douane/Description-des-jeux-de-donnees-derniere-publication_EMEBI.pdf",
+          "sha256": "dc925337f91492ebf87642b47c94e629f9b0cadcf045dcb333689b966a9f0098"
+        },
+        {
+          "name": "Eurostat Comext France 2025 route bridge",
+          "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=FR&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+          "method_url": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+          "file": "data/raw/france_douane/eurostat_france_cn8_2025.json",
+          "sha256": "17baee1878568bbfb107a7089c023f2e279812e5ef3fa9dd7fc5b41233b59310"
+        },
+        {
+          "name": "ANSES vaping product registry snapshot",
+          "url": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/",
+          "file": "data/raw/france_anses/liste-fr-vapotage_2026-07-01.csv",
+          "sha256": "ccfb39dee39236b3baa867fb2cbbdd10003a02913fa83c53d8f69811917ef78d"
+        },
+        {
+          "name": "ANSES vaping declarations and sales-coverage report",
+          "url": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf",
+          "file": "data/raw/france_anses/anses_vaping_declarations_report_2016_2020.pdf",
+          "sha256": "ecfd74051a1c9b03d26cc0c6590cd42a448d9ecbe6ad548c7e6c3489232ed868"
+        }
+      ]
+    },
+    "request": {
+      "id": "PX-FR-001",
+      "authority": "ANSES EU-CEG / Direction générale de la santé",
+      "status": "ready_for_confirmation",
+      "recipient": "euceg@anses.fr",
+      "scope": "2018-2025 annual non-identifying Article 20(7) sales: expected and submitted presentations reporting entities device or presentation units refill and cartridge ml product type nicotine status value if held corrections and exact field definitions"
+    },
+    "douaneUrl": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title=",
+    "eurostatMethodUrl": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+    "ansesRegistryUrl": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/",
+    "ansesCoverageUrl": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf"
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -6979,6 +7984,27 @@ window.PIXAN_DATA = {
       "url": "https://www.boe.es/eli/es/o/2025/01/13/hac86"
     },
     {
+      "grade": "A",
+      "title": "Ranska Douane · National 2025 import/export",
+      "coverage": "Neljä CN8-nimikettä, 48 kuukausiriviä, 363,940 milj. EUR tuontia ja 127,863 milj. EUR vientiä",
+      "use": "Kansallinen rajakaupan ankkuri; Douane ja Eurostat täsmäävät alle 0,5 %:n erolla",
+      "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title="
+    },
+    {
+      "grade": "A",
+      "title": "ANSES · vaping-ilmoitusrekisteri",
+      "coverage": "1.7.2026: 203 181 ilmoitusriviä ja 111 556 yksilöllistä tuotenumeroa; julkisessa aineistossa ei vuosimyyntikenttää",
+      "use": "Tuoterakenteen näyttö, ei myynnin, aktiivisten SKU-tuotteiden tai yritysmäärän näyttö",
+      "url": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/"
+    },
+    {
+      "grade": "A",
+      "title": "ANSES · myyntiraportoinnin kattavuusauditointi",
+      "coverage": "2016-2017: 23 036 myyntitietoa / 65 799 odotettua esitystä, hit rate 35,010 %",
+      "use": "Viranomaisen oma kattavuusmittaus; ANSES katsoi volyymit puutteiden vuoksi käyttökelvottomiksi",
+      "url": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf"
+    },
+    {
       "grade": "C",
       "title": "Kanadan dokumentoitu vähittäishintaotos",
       "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa",
@@ -7103,6 +8129,16 @@ window.PIXAN_DATA = {
       "status": "ready_for_portal_submission",
       "sent": "—",
       "followUp": "—"
+    },
+    {
+      "id": "PX-FR-001",
+      "market": "Ranska",
+      "authority": "ANSES EU-CEG / Direction générale de la santé",
+      "channel": "euceg@anses.fr",
+      "scope": "2018-2025 annual non-identifying Article 20(7) sales: expected and submitted presentations reporting entities device or presentation units refill and cartridge ml product type nicotine status value if held corrections and exact field definitions",
+      "status": "ready_for_confirmation",
+      "sent": "—",
+      "followUp": "—"
     }
   ],
   "tasks": [
@@ -7170,6 +8206,12 @@ window.PIXAN_DATA = {
       "priority": "high",
       "title": "Espanjan AEAT L1/L2-veropohjat",
       "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.",
+      "status": "active"
+    },
+    {
+      "priority": "high",
+      "title": "Ranskan ANSES 2018-2025 myyntiaggregaatit",
+      "detail": "Douanen vuoden 2025 neljä CN8-koodia ja Eurostat-reittitäsmäytys ovat valmiit. ANSES-rekisterin 203 181 riviä on auditoitu, ja 2016-2017 raportoinnin hit rate oli 35,010 %. PX-FR-001 pyytää uudemmat kattavuusluvut, yksiköt, millilitrat ja arvon; viesti odottaa nimenomaista lähetysvahvistusta.",
       "status": "active"
     },
     {

@@ -37,6 +37,20 @@ async function check(viewport, label) {
 
   await page.locator('[data-view="customs"]').dispatchEvent("click");
   await page.waitForSelector('[data-view-panel="customs"].active');
+  assert.equal(await page.locator("#france-summary tbody tr").count(), 4);
+  assert.equal(await page.locator("#france-route tbody tr").count(), 4);
+  assert.equal(await page.locator("#france-anses tbody tr").count(), 8);
+  assert.equal(await page.locator("#france-coverage tbody tr").count(), 3);
+  assert.match(await page.locator("#france-summary").innerText(), /363,940 milj\. €/);
+  assert.match(await page.locator("#france-summary").innerText(), /229,615 milj\. €/);
+  assert.match(await page.locator("#france-route").innerText(), /0,030 %/);
+  assert.match(await page.locator("#france-anses").innerText(), /203[\s\u00a0]181 ilmoitusriviä/);
+  assert.match(await page.locator("#france-coverage").innerText(), /35,010 %/);
+  assert.match(await page.locator("#france-coverage").innerText(), /Viestiä ei ole lähetetty/);
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.franceEvidence.monthly.length), 48);
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.franceEvidence.manifest.audit_checks.anses_public_registry_contains_sales_field), false);
+  await page.locator("#france-summary").screenshot({ path: `/tmp/pixan-france-summary-${label}.png` });
+  await page.locator("#france-coverage").screenshot({ path: `/tmp/pixan-france-coverage-${label}.png` });
   assert.equal(await page.locator("#korea-summary tbody tr").count(), 3);
   assert.equal(await page.locator("#korea-hsk10 tbody tr").count(), 7);
   assert.equal(await page.locator("#korea-origins tbody tr").count(), 53);
@@ -110,6 +124,18 @@ async function check(viewport, label) {
       "data/raw/spain_aeat/aeat_special_excise_report_2025.pdf",
       "data/raw/spain_aeat/aeat_monthly_revenue_2025-12.pdf",
       "data/raw/spain_aeat/boe_order_hac_86_2025_model_573.pdf",
+      "data/france/france_douane_cn8_2025.csv",
+      "data/france/france_douane_monthly_2025.csv",
+      "data/france/france_douane_top_origins_2025.csv",
+      "data/france/france_route_bridge_2025.csv",
+      "data/france/france_anses_registry_audit_2026-07-01.csv",
+      "data/france/france_anses_product_types_2026-07-01.csv",
+      "data/france/france_anses_sales_coverage_2016_2017.csv",
+      "data/france/france_evidence_manifest_2026-07-17.json",
+      "data/raw/france_douane/Description-des-jeux-de-donnees-derniere-publication_EMEBI.pdf",
+      "data/raw/france_douane/eurostat_france_cn8_2025.json",
+      "data/raw/france_anses/anses_vaping_declarations_report_2016_2020.pdf",
+      "assets/pixan_france_official_evidence_2025.xlsx",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);
@@ -132,7 +158,7 @@ async function check(viewport, label) {
 try {
   await check({ width: 1440, height: 1000 }, "desktop");
   await check({ width: 390, height: 844 }, "mobile");
-  process.stdout.write("Dashboard QA passed: Canada pricing 3/10/3, Germany pricing 1/10/3, Spain AEAT 9 revenue rows/4 rates/3 scenarios, Italy ADM 4 rates/6 forecast rows/3 reporting flows, no runtime errors, mobile body fits viewport.\n");
+  process.stdout.write("Dashboard QA passed: France Douane 4 codes/48 monthly rows/4 route rows and ANSES 8 product types/3 coverage rows, Canada pricing 3/10/3, Germany pricing 1/10/3, Spain AEAT 9 revenue rows/4 rates/3 scenarios, Italy ADM 4 rates/6 forecast rows/3 reporting flows, no runtime errors, mobile body fits viewport.\n");
 } finally {
   await browser.close();
 }
