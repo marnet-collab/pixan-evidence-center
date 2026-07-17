@@ -16,6 +16,7 @@
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
   const moneyPln = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. PLN";
   const moneySek = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. SEK";
+  const moneyDkk = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. DKK";
   const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
   const eur = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " €";
   const moneyJpy = (value) => value >= 1e9
@@ -841,6 +842,87 @@
         </tr>`).join("")}</tbody>
       </table>
       <div class="meta-line table-note"><strong>Hit rate:</strong> veroankkurin täsmäytysosuma on laskettu, mutta FHM:n EU-CEG-raportoinnin todellista kattavuusprosenttia ei voi laskea ilman odotettujen ja saatujen raporttien nimittäjiä. ${se.requests.map((item) => `${esc(item.id)} ${tag(item.status)}`).join(" · ")} Viestejä ei ole lähetetty.</div>`;
+
+    const dk = data.denmarkEvidence;
+    const dkChecks = dk.manifest.key_checks;
+    const dk2025 = dk.actuals.find((item) => item.year === 2025);
+    const dk2024 = dk.actuals.find((item) => item.year === 2024);
+    const dkNarrowRoute = dk.route.find((item) => item.scope === "narrow_patent_scope_proxy");
+    const dkForecastBridge = dk.bridge.find((item) => item.metric === "official_2025_e_liquid_revenue_forecast");
+    const dkRegistry = dk.registry[0];
+    const dkControlHit = dk.controls.find((item) => item.hitRatePct !== null);
+    $("#denmark-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Arvo</th><th>Luokitus</th><th>Tulkintaraja</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Skatteministeriet 2025</strong></td><td><strong>${moneyDkk(dk2025.bookedRevenueDkk)}</strong> · kasvu ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(dk2025.growthPct)} %</td><td>${tag("verified", "A-tason toteuma")}</td><td>Nikotiinituotteet/-pussit ja nikotiininesteet yhdessä; ei e-nesteen erillinen toteuma</td></tr>
+          <tr><td><strong>Folketinget SAU 678</strong></td><td>${moneyDkk(dkForecastBridge.valueDkk)} · ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(dkForecastBridge.ratioPct)} % yhdistelmätilistä</td><td>${tag("partial", "A-tason ennuste")}</td><td>Pyöristetty lähimpään 5 milj. DKK:hon; suhde ei testaa ennusteen osuvuutta</td></tr>
+          <tr><td><strong>Eurostat 2025 · kapea kori</strong></td><td>${moneyEur3(dkNarrowRoute.worldImportEur)} tuonti · ${moneyEur3(dkNarrowRoute.worldExportEur)} vienti · ${moneyEur3(dkNarrowRoute.borderNetEur)} netto</td><td>${tag("partial", "Virallinen rajavirta")}</td><td>Tulliarvo ei ole Tanskan kuluttajamyynti</td></tr>
+          <tr><td><strong>Julkinen tuoterekisteri</strong></td><td>${integer(dkRegistry.totalRows)} riviä · ${integer(dkRegistry.totalUniqueIds)} ID:tä · ${integer(dkRegistry.reportingEntities)} ilmoittajaa</td><td>${tag("verified", "Tuoteuniversumi")}</td><td>Rekisteröinti ei todista aktiivisuutta, myyntiä tai raportoinnin täydellisyyttä</td></tr>
+          <tr><td><strong>EU-CEG / e-nesteveropohja</strong></td><td>${dk.requests.map((item) => `${esc(item.id)} ${tag(item.status)}`).join(" · ")}</td><td>${tag("active", "Täsmäpyynnöt valmiit")}</td><td>Viestit ovat lähettämättömiä; muistutuspäivä asetetaan vasta lähetyksen jälkeen</td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kirjanpitotäsmäytys:</strong> ${moneyDkk(dk2024.bookedRevenueDkk)} vuonna 2024 ja ${moneyDkk(dk2025.bookedRevenueDkk)} vuonna 2025. Kuukausisummat täsmäävät julkaistuihin vuosisoluihin laskennallisella nollaerolla.</div>`;
+
+    $("#denmark-rates").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Vahvuusryhmä</th><th>DKK/ml</th><th>DKK/l</th><th>Tila</th></tr></thead>
+        <tbody>${dk.rates.map((item) => `<tr><td>${item.year}</td><td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.rateDkkPerMl)}</td><td class="num">${integer(item.rateDkkPerLitre)}</td><td>${esc(item.status)}</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Nykyinen kanta:</strong> 1,50 DKK/ml enintään 12 mg/ml ja 2,50 DKK/ml yli 12 mg/ml. <a class="source-link" href="${esc(dk.urls.tax)}" target="_blank" rel="noopener">Skatteministeriet ↗</a></div>`;
+
+    $("#denmark-forecast").innerHTML = `
+      <table>
+        <thead><tr><th>Kantatapaus</th><th>Ennuste</th><th>Pyöristysraja, ala</th><th>Pistevolyymi</th><th>Pyöristysraja, ylä</th><th>Raja</th></tr></thead>
+        <tbody>${dk.forecast.map((item) => `<tr><td><strong>${esc(item.label)}</strong></td><td class="num">${moneyDkk(item.officialForecastDkk)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.volumeLowLitres)} l</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.volumePointLitres)} l</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.volumeHighLitres)} l</td><td>Ennusteesta ja nimelliskannasta johdettu; ei mitattu verollinen volyymi</td></tr>`).join("")}</tbody>
+      </table>`;
+
+    $("#denmark-prices").innerHTML = `
+      <table>
+        <thead><tr><th>WHO-havainto</th><th>Pakkaus</th><th>Hinta</th><th>DKK/ml</th><th>Valmistevero-osuus</th><th>Todistustaso</th></tr></thead>
+        <tbody>${dk.prices.map((item) => `<tr><td><strong>${esc(item.label)}</strong></td><td class="num">${item.packageMl} ml</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceDkk)} DKK</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceDkkPerMl)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.exciseSharePct)} %</td><td>${tag("b", "B-tason halvin tuotemerkki")}</td></tr>`).join("")}</tbody>
+      </table>`;
+
+    $("#denmark-stress").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>Ennusteankkuri</th><th>Efektiivinen kanta</th><th>Johdettu volyymi</th><th>DKK/10 ml</th><th>Mekaaninen arvo</th><th>Ennustevero / arvo</th></tr></thead>
+        <tbody>${dk.stress.map((item) => `<tr><td><strong>${esc(item.label)}</strong></td><td class="num">${moneyDkk(item.forecastAnchorDkk)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.effectiveRateDkkPerMl)} DKK/ml</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.impliedVolumeLitres)} l</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.priceDkkPer10Ml)}</td><td class="num"><strong>${moneyDkk(item.mechanicalValueDkk)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.taxSharePct)} %</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Stressiraja:</strong> 145,6 / 234,0 / 384,8 milj. DKK ovat ennusteesta johdettuja herkkyyksiä. Ne eivät ole virallinen markkina-arvo, toteutunut myynti tai luottamusväli.</div>`;
+
+    $("#denmark-registry").innerHTML = `
+      <table>
+        <thead><tr><th>Tuotetyyppi</th><th>Rivit</th><th>Yksilölliset ID:t</th><th>Osuus rekisteririveistä</th></tr></thead>
+        <tbody>${dk.registry.map((item) => `<tr><td><strong>${esc(item.label)}</strong></td><td class="num">${integer(item.rows)}</td><td class="num">${integer(item.uniqueIds)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.sharePct)} %</td></tr>`).join("")}</tbody>
+      </table>`;
+
+    $("#denmark-controls").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Tupakkavalvonnat</th><th>Nikotiinivalvonnat</th><th>Yhteensä</th><th>Hit rate / havainto</th><th>Tulkintaraja</th></tr></thead>
+        <tbody>${dk.controls.map((item) => `<tr><td>${item.period}</td><td class="num">${item.tobacco === null ? "—" : integer(item.tobacco)}</td><td class="num">${item.nicotine === null ? "—" : integer(item.nicotine)}</td><td class="num">${item.total === null ? "—" : integer(item.total)}</td><td>${item.hitRatePct !== null ? `<strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(item.hitRatePct)} %</strong> · ${esc(item.hitRateScope)}` : item.period === 2025 ? "Noin 40 000 puff baria · noin 2,5 milj. DKK maksamatonta veroa" : "Riskiperusteinen valinta"}</td><td>${esc(item.boundary)}</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Hit rate:</strong> ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(dkControlHit.hitRatePct)} % on vuosien 2020-2024 riskin ja olennaisuuden perusteella valittujen valvontojen keskiarvo. Se ei ole laittoman markkinan osuus tai väestöotoksen rikkomusaste.</div>`;
+
+    $("#denmark-route").innerHTML = `
+      <table>
+        <thead><tr><th>Rajaus</th><th>WORLD-tuonti</th><th>WORLD-vienti</th><th>Rajavirta netto</th><th>Intra-tuonti</th><th>Extra-tuonti</th><th>Extra-osuus</th><th>Täsmäytys</th></tr></thead>
+        <tbody>${dk.route.map((item) => `<tr><td><strong>${esc(item.label)}</strong><div class="meta-line">${esc(item.products)}</div></td><td class="num">${moneyEur3(item.worldImportEur)}</td><td class="num">${moneyEur3(item.worldExportEur)}</td><td class="num"><strong>${moneyEur3(item.borderNetEur)}</strong></td><td class="num">${moneyEur3(item.intraImportEur)}</td><td class="num">${moneyEur3(item.extraImportEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.extraImportSharePct)} %</td><td>${item.importGapEur === 0 && item.exportGapEur === 0 ? tag("verified", "0 € / 0 €") : tag("partial")}</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kapea kori:</strong> ${moneyEur3(dkNarrowRoute.borderNetEur)} rajavirran nettoa ei nimetä kotimaiseksi kysynnäksi tai lisätä vero- ja hintastressin päälle.</div>`;
+
+    $("#denmark-partners").innerHTML = `
+      <table>
+        <thead><tr><th>Virta</th><th>Sija</th><th>Partneri</th><th>Rooli</th><th>Arvo</th><th>Osuus julkaistuista maariveistä</th></tr></thead>
+        <tbody>${dk.partners.map((item) => `<tr><td>${item.flow === "import" ? "Tuonti" : "Vienti"}</td><td class="num">${item.rank}</td><td><strong>${esc(item.partnerLabel)}</strong></td><td>${esc(item.partnerBasis)}</td><td class="num">${moneyEur3(item.valueEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.sharePct)} %</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Reittitulkinta:</strong> Kiina oli kapean tuontikorin suurin partneri ${moneyEur3(dk.partners.find((item) => item.flow === "import" && item.rank === 1).valueEur)}. Kroatia, Puola ja Saksa ovat intra-EU-tuonnissa lähetysmaita, eivät automaattisesti valmistusalkuperiä.</div>`;
+
+    $("#denmark-method").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Taso</th><th>Lähde</th><th>Alkuperäinen mittari</th><th>Auditointitulos</th><th>Rajoite</th></tr></thead>
+        <tbody>${dk.method.map((item) => `<tr><td><code>${esc(item.id)}</code><div class="meta-line">${esc(item.topic)}</div></td><td>${tag(item.tier.toLowerCase(), `Taso ${item.tier}`)}</td><td><strong>${esc(item.source)}</strong></td><td>${esc(item.measure)}</td><td>${esc(item.result)}</td><td>${esc(item.limitation)}</td></tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Avoin näyttö:</strong> EU-CEG:n kattavuusprosenttia ei voi laskea ilman odotettujen ja saatujen raporttien nimittäjiä. Erillinen e-nestetoteuma puuttuu yhdistelmätilistä. ${dk.requests.map((item) => `${esc(item.id)} ${tag(item.status)}`).join(" · ")} Viestejä ei ole lähetetty.</div>`;
   }
 
   function renderGaps() {
@@ -897,6 +979,7 @@
     rows.push({ view: "taxes", title: "Puola · MF / KAS / Eurostat", detail: `805 441 litraa vuoden 2023 ilmoitettua valmisteverovirtaa, ${moneyPln(data.polandEvidence.manifest.official_results.e_liquid_excise_revenue_2025_pln)} vuoden 2025 e-nesteveroa ja 36,007 % kohdennettu KAS-hit rate` });
     rows.push({ view: "taxes", title: "Alankomaat · VWS / CBS / Trimbos / Eurostat", detail: `${moneyEur3(data.netherlandsEvidence.manifest.headline.reported_total_consumer_spend_eur)} mallinnettua kulutusmenoa, 5 529 vastaajan menetelmäauditointi, 22,8 % lähdepoikkeama ja ${moneyEur3(data.netherlandsEvidence.bridge[0].worldImportEur)} WORLD-tuontia` });
     rows.push({ view: "taxes", title: "Ruotsi · Finansdepartement / Skatteverket / FHM / Eurostat", detail: `26 000 litraa ja 80 milj. SEK vuoden 2024 rekisteröityä verollista e-nestekulutusta, −1,0 % pyöristystäsmäytys ja ${moneyEur3(data.swedenEvidence.manifest.key_checks.narrow_2025_border_net_eur)} vuoden 2025 rajavirran netto` });
+    rows.push({ view: "taxes", title: "Tanska · Skatteministeriet / Erhvervsstyrelsen / Eurostat", detail: `${moneyDkk(data.denmarkEvidence.manifest.key_checks.official_2025_combined_revenue_dkk)} yhdistettyä nikotiinituotetilin toteumaa, 90 milj. DKK e-neste-ennuste, 1 198 rekisteririviä, 70 % riskiperusteinen valvonta-hit rate ja ${moneyEur3(data.denmarkEvidence.manifest.key_checks.narrow_2025_border_net_eur)} vuoden 2025 rajavirran netto` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }

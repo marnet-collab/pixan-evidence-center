@@ -132,11 +132,30 @@ async function check(viewport, label) {
   assert.match(await page.locator("#sweden-partners").innerText(), /37,145 milj\. €/);
   assert.match(await page.locator("#sweden-method").innerText(), /Viestejä ei ole lähetetty/);
   assert.equal(await page.evaluate(() => window.PIXAN_DATA.swedenEvidence.manifest.key_checks.rounding_intervals_overlap), true);
-  assert.equal(await page.evaluate(() => window.PIXAN_DATA.contacts.length), 16);
+  assert.equal(await page.locator("#denmark-summary tbody tr").count(), 5);
+  assert.equal(await page.locator("#denmark-rates tbody tr").count(), 6);
+  assert.equal(await page.locator("#denmark-forecast tbody tr").count(), 2);
+  assert.equal(await page.locator("#denmark-prices tbody tr").count(), 3);
+  assert.equal(await page.locator("#denmark-stress tbody tr").count(), 3);
+  assert.equal(await page.locator("#denmark-registry tbody tr").count(), 8);
+  assert.equal(await page.locator("#denmark-controls tbody tr").count(), 6);
+  assert.equal(await page.locator("#denmark-route tbody tr").count(), 6);
+  assert.equal(await page.locator("#denmark-partners tbody tr").count(), 10);
+  assert.equal(await page.locator("#denmark-method tbody tr").count(), 8);
+  assert.match(await page.locator("#denmark-summary").innerText(), /789,133 milj\. DKK/);
+  assert.match(await page.locator("#denmark-summary").innerText(), /90,0 milj\. DKK/);
+  assert.match(await page.locator("#denmark-stress").innerText(), /145,6 milj\. DKK/);
+  assert.match(await page.locator("#denmark-stress").innerText(), /384,8 milj\. DKK/);
+  assert.match(await page.locator("#denmark-controls").innerText(), /70,0 %/);
+  assert.match(await page.locator("#denmark-method").innerText(), /Viestejä ei ole lähetetty/);
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.denmarkEvidence.actuals.find((item) => item.year === 2025).bookedRevenueDkk), await page.evaluate(() => window.PIXAN_DATA.denmarkEvidence.manifest.key_checks.official_2025_combined_revenue_dkk));
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.contacts.length), 18);
   await page.locator("#netherlands-summary").screenshot({ path: `/tmp/pixan-netherlands-summary-${label}.png` });
   await page.locator("#netherlands-youth").screenshot({ path: `/tmp/pixan-netherlands-youth-${label}.png` });
   await page.locator("#sweden-summary").screenshot({ path: `/tmp/pixan-sweden-summary-${label}.png` });
   await page.locator("#sweden-stress").screenshot({ path: `/tmp/pixan-sweden-stress-${label}.png` });
+  await page.locator("#denmark-summary").screenshot({ path: `/tmp/pixan-denmark-summary-${label}.png` });
+  await page.locator("#denmark-stress").screenshot({ path: `/tmp/pixan-denmark-stress-${label}.png` });
   assert.equal(errors.length, 0, errors.join("\n"));
 
   if (label === "desktop") {
@@ -233,6 +252,22 @@ async function check(viewport, label) {
       "data/raw/sweden_finance/eurostat_sweden_cn8_route_2025.json",
       "data/raw/sweden_finance/who_sweden_2025.pdf",
       "assets/pixan_sweden_official_evidence_2024_2026.xlsx",
+      "data/denmark/denmark_combined_nicotine_revenue_2024_2025.csv",
+      "data/denmark/denmark_combined_nicotine_revenue_monthly_2024_2025.csv",
+      "data/denmark/denmark_e_liquid_tax_rates_2025_2027.csv",
+      "data/denmark/denmark_e_liquid_forecast_volume_bounds_2025.csv",
+      "data/denmark/denmark_who_price_inputs_2025.csv",
+      "data/denmark/denmark_e_liquid_price_stress_test_2025.csv",
+      "data/denmark/denmark_enforcement_audit_2020_2025.csv",
+      "data/denmark/denmark_product_registry_summary_2026-07-17.csv",
+      "data/denmark/denmark_eurostat_route_2025.csv",
+      "data/denmark/denmark_eurostat_scope_partners_2025.csv",
+      "data/denmark/denmark_evidence_method_audit_2026-07-17.csv",
+      "data/denmark/denmark_evidence_manifest_2026-07-17.json",
+      "data/raw/denmark_official/skm_revenue_list_2025.xlsx",
+      "data/raw/denmark_official/who_denmark_2025.pdf",
+      "data/raw/denmark_official/eurostat_denmark_cn8_route_2025.json",
+      "assets/pixan_denmark_official_evidence_2024_2026.xlsx",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);
@@ -255,7 +290,7 @@ async function check(viewport, label) {
 try {
   await check({ width: 1440, height: 1000 }, "desktop");
   await check({ width: 390, height: 844 }, "mobile");
-  process.stdout.write("Dashboard QA passed: Sweden 5 summary/8 rate/3 reconciliation/3 price/3 stress/6 route/10 partner/6 method rows, Netherlands 4 summary/16 method/4 price/3 stress/3 youth/10 CBS/2 bridge/24 route/36 partner rows, Poland MF/KAS 4 summary/6 annual/2 revision/3 reconciliation/5 controls/4 route rows, France Douane 4 codes/48 monthly rows/4 route rows and ANSES 8 product types/3 coverage rows, Canada/Germany/Netherlands/Sweden stress cards, Spain AEAT and Italy ADM, 16 contacts, no runtime errors, mobile body fits viewport.\n");
+  process.stdout.write("Dashboard QA passed: Denmark 5 summary/6 rate/2 forecast/3 price/3 stress/8 registry/6 control/6 route/10 displayed partner/8 method rows, Sweden 5 summary/8 rate/3 reconciliation/3 price/3 stress/6 route/10 partner/6 method rows, Netherlands 4 summary/16 method/4 price/3 stress/3 youth/10 CBS/2 bridge/24 route/36 partner rows, Poland MF/KAS 4 summary/6 annual/2 revision/3 reconciliation/5 controls/4 route rows, France Douane 4 codes/48 monthly rows/4 route rows and ANSES 8 product types/3 coverage rows, Canada/Germany/Netherlands/Sweden/Denmark stress cards, Spain AEAT and Italy ADM, 18 contacts, no runtime errors, mobile body fits viewport.\n");
 } finally {
   await browser.close();
 }

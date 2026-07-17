@@ -1,0 +1,7 @@
+year,category,rate_dkk_per_ml,rate_dkk_per_litre,definition,status,source_url
+2025,nicotine_e_liquid_up_to_12mg_ml,1.5,1500.0,nicotine content no more than 12 mg/ml,official_rate_used_in_forecast_year,https://www.ft.dk/samling/20231/almdel/sau/spm/678/svar/2074316/2914215.pdf
+2025,nicotine_e_liquid_above_12mg_ml,2.5,2500.0,nicotine content above 12 mg/ml,official_rate_used_in_forecast_year,https://www.ft.dk/samling/20231/almdel/sau/spm/678/svar/2074316/2914215.pdf
+2026,nicotine_e_liquid_up_to_12mg_ml,1.5,1500.0,nicotine content no more than 12 mg/ml,official_current_rate,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven
+2026,nicotine_e_liquid_above_12mg_ml,2.5,2500.0,nicotine content above 12 mg/ml,official_current_rate,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven
+2027,nicotine_e_liquid_up_to_12mg_ml,1.5,1500.0,nicotine content no more than 12 mg/ml,official_published_rate,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven
+2027,nicotine_e_liquid_above_12mg_ml,2.5,2500.0,nicotine content above 12 mg/ml,official_published_rate,https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven

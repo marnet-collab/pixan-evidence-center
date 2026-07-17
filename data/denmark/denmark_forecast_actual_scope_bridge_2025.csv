@@ -1,0 +1,3 @@
+metric,value_dkk,comparison_value_dkk,ratio_pct,interpretation,status,source_url
+official_2025_e_liquid_revenue_forecast,90000000,789133262.5257559,11.404918,forecast is 11.4% of the later combined booked category; this is not an accuracy test,scope_mismatch_do_not_validate_forecast,https://www.ft.dk/samling/20231/almdel/sau/spm/678/svar/2074316/2914215.pdf
+combined_actual_growth_2024_to_2025,789133262.5257559,548495746.0507325,43.87226668714508,combined nicotine-product and nicotine-liquid account grew 43.9%; e-liquid contribution is not public,official_actual_combined_category,https://skm.dk/media/nd0bwgno/indtaegtsliste-2025.xlsx

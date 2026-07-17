@@ -29,7 +29,7 @@ def public_contact(value: str) -> str:
 
 
 def status_for_country(name: str) -> str:
-    if name in {"Canada", "Germany", "Finland", "Poland", "Sweden"}:
+    if name in {"Canada", "Germany", "Finland", "Poland", "Sweden", "Denmark"}:
         return "verified"
     if name in {
         "United States", "Japan", "EU-27", "France", "Italy", "Spain",
@@ -264,6 +264,42 @@ def build_payload() -> dict:
     )
     sweden_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "sweden_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
+    denmark_rate_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_e_liquid_tax_rates_2025_2027.csv"
+    )
+    denmark_actual_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_combined_nicotine_revenue_2024_2025.csv"
+    )
+    denmark_forecast_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_e_liquid_forecast_volume_bounds_2025.csv"
+    )
+    denmark_price_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_who_price_inputs_2025.csv"
+    )
+    denmark_stress_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_e_liquid_price_stress_test_2025.csv"
+    )
+    denmark_bridge_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_forecast_actual_scope_bridge_2025.csv"
+    )
+    denmark_control_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_enforcement_audit_2020_2025.csv"
+    )
+    denmark_registry_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_product_registry_summary_2026-07-17.csv"
+    )
+    denmark_route_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_eurostat_route_2025.csv"
+    )
+    denmark_partner_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_eurostat_scope_partners_2025.csv"
+    )
+    denmark_method_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "denmark_evidence_method_audit_2026-07-17.csv"
+    )
+    denmark_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "denmark_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
@@ -863,6 +899,25 @@ def build_payload() -> dict:
             "arvo sekä odotettujen ja saatujen vuosiraporttien kattavuus. Finansdepartementilta "
             "puuttuvat taulukko 7.5:n pyöristämättömät määrä- ja verosolut. Laitteiden kuluttajamyynti, "
             "kotimainen tuotanto, varastomuutos ja ilmoittamattomat virrat jäävät avoimiksi. "
+            + country["missing"]
+        )
+    for country in countries:
+        if country["sourceName"] != "Denmark":
+            continue
+        country["current"] = (
+            "Skatteministerietin kirjattu yhdistetty nikotiinituotteiden/-pussien ja nikotiininesteiden "
+            "verokertymä oli 548,496 milj. DKK vuonna 2024 ja 789,133 milj. DKK vuonna 2025, eli kasvu "
+            "43,872 %. E-nesteen erillinen 2025-luku on 90 milj. DKK:n virallinen ennuste, ei toteuma. "
+            "Eurostatin vuoden 2025 kapea laite + nikotiini-inhalaatiokori näyttää 14,386 milj. EUR "
+            "tuontia, 0,905 milj. EUR vientiä ja 13,481 milj. EUR:n rajavirran nettoluvun. Julkisessa "
+            "tuoterekisterissä oli 1 198 riviä ja 545 yksilöllistä ID:tä. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "E-nesteen erillinen toteutunut veropohja ja verokertymä, verolliset millilitrat vahvuusryhmittäin, "
+            "EU-CEG:n vuosittaiset laiteyksiköt ja nestemillilitrat/arvo sekä odotettujen ja saatujen raporttien "
+            "kattavuus. Lisäksi puuttuvat kotimainen tuotanto, varastomuutos ja kuluttajien toteutunut sell-out. "
+            "PX-DK-001 ja PX-DK-002 ovat valmiita mutta lähettämättä. "
             + country["missing"]
         )
 
@@ -1781,6 +1836,183 @@ def build_payload() -> dict:
         "urls": sweden_manifest["urls"],
     }
 
+    denmark_scope_labels = {
+        "core_devices": "Laitteet 85434000",
+        "nicotine_inhalation_products": "Nikotiini-inhalaatiotuotteet 24041200",
+        "nicotine_free_tobacco_substitute_inhalation_proxy": "Nikotiiniton tupakankorvikeproxy 24041910",
+        "other_substitute_inhalation_proxy": "Muu inhalaatioproxy 24041990",
+        "narrow patent scope proxy": "Kapea kori 85434000 + 24041200",
+        "broad inhalation proxy": "Laaja neljän koodin konteksti",
+    }
+    denmark_scenario_labels = {
+        "downside_high_rate_low_rounding_minus_20pct": "Alas: korkea kanta, alaraja, hinta -20 %",
+        "central_equal_volume_mix_who_price": "Keskus: 50/50 volyymimix ja WHO-hinta",
+        "upside_low_rate_high_rounding_plus_20pct": "Ylös: matala kanta, yläraja, hinta +20 %",
+    }
+    denmark_format_labels = {
+        "closed_system_e_liquid": "Suljetun järjestelmän e-neste",
+        "closed_system_disposable": "Kertakäyttöinen",
+        "open_system_e_liquid": "Avoimen järjestelmän e-neste",
+    }
+    denmark_registry_labels = {
+        "Refill container/cartridge containing e-liquid.": "E-nestettä sisältävä täyttösäiliö/patruuna",
+        "Other": "Muu",
+        "Kit – Pack containing more than one different e-cigarette device and/or more than one different refill container/cartridge.": "Kitti/pakkaus",
+        "Individual part of electronic cigarette capable of containing e-liquid.": "E-nestettä sisältävä laitteen osa",
+        "Electronic cigarette – Disposable.": "Kertakäyttöinen e-savuke",
+        "Electronic cigarette – Refillable, device only.": "Täytettävä laite",
+        "Electronic cigarette – Rechargeable, device only Any rechargeable which can also be used as a refillable should be reported under the refillable category.": "Ladattava laite",
+        "Electronic cigarette – Rechargeable, placed on the market with one type of e-liquid (fixed combination). Any rechargeable which can also be used as a refillable should be reported under the refillable categ": "Ladattava kiinteä neste-yhdistelmä",
+    }
+    denmark_partner_names = {
+        "CN": "Kiina", "HR": "Kroatia", "PL": "Puola", "DE": "Saksa", "FR": "Ranska",
+        "NO": "Norja", "US": "Yhdysvallat", "MX": "Meksiko", "FI": "Suomi",
+    }
+    denmark_requests = {
+        row["request_id"]: row for row in requests if row["request_id"] in {"PX-DK-001", "PX-DK-002"}
+    }
+    denmark_evidence = {
+        "rates": [
+            {
+                "year": int(row["year"]), "category": row["category"],
+                "label": "Enintään 12 mg/ml" if "up_to" in row["category"] else "Yli 12 mg/ml",
+                "rateDkkPerMl": float(row["rate_dkk_per_ml"]),
+                "rateDkkPerLitre": float(row["rate_dkk_per_litre"]),
+                "definition": row["definition"], "status": row["status"], "url": row["source_url"],
+            }
+            for row in denmark_rate_rows
+        ],
+        "actuals": [
+            {
+                "year": int(row["year"]),
+                "bookedRevenueDkk": float(row["booked_combined_revenue_dkk"]),
+                "bookedRevenueMillionDkk": float(row["booked_combined_revenue_million_dkk"]),
+                "growthPct": number(row["year_on_year_growth_pct"]),
+                "status": row["status"], "scope": row["scope"],
+                "separableELiquidActual": row["separable_e_liquid_actual"] == "yes",
+                "boundary": row["boundary"], "sourceCell": row["source_cell"], "url": row["source_url"],
+            }
+            for row in denmark_actual_rows
+        ],
+        "forecast": [
+            {
+                "year": int(row["forecast_year"]), "case": row["rate_case"],
+                "label": "Kaikki yli 12 mg/ml" if "above" in row["rate_case"] else "Kaikki enintään 12 mg/ml",
+                "rateDkkPerMl": float(row["rate_dkk_per_ml"]),
+                "officialForecastDkk": float(row["official_displayed_forecast_dkk"]),
+                "displayGranularityDkk": float(row["forecast_display_granularity_dkk"]),
+                "roundingLowDkk": float(row["rounding_revenue_low_dkk"]),
+                "roundingHighDkk": float(row["rounding_revenue_high_dkk"]),
+                "volumeLowLitres": float(row["implied_volume_low_litres"]),
+                "volumePointLitres": float(row["implied_volume_point_litres"]),
+                "volumeHighLitres": float(row["implied_volume_high_litres"]),
+                "status": row["status"], "boundary": row["boundary"], "url": row["source_url"],
+            }
+            for row in denmark_forecast_rows
+        ],
+        "prices": [
+            {
+                "format": row["format"], "label": denmark_format_labels[row["format"]],
+                "packageMl": float(row["package_ml"]), "priceDkk": float(row["price_dkk"]),
+                "priceDkkPerMl": float(row["price_dkk_per_ml"]),
+                "exciseSharePct": float(row["specific_excise_share_pct"]),
+                "observation": row["observation"], "tier": row["source_tier"],
+                "sourcePage": int(row["source_page"]), "url": row["source_url"],
+            }
+            for row in denmark_price_rows
+        ],
+        "stress": [
+            {
+                "scenario": row["scenario"], "label": denmark_scenario_labels[row["scenario"]],
+                "forecastAnchorDkk": float(row["forecast_revenue_anchor_dkk"]),
+                "effectiveRateDkkPerMl": float(row["effective_rate_dkk_per_ml"]),
+                "impliedVolumeLitres": float(row["implied_volume_litres"]),
+                "priceFactor": float(row["price_factor"]), "priceDkkPer10Ml": float(row["price_dkk_per_10ml"]),
+                "mechanicalValueDkk": float(row["mechanical_gross_retail_value_dkk"]),
+                "taxSharePct": float(row["forecast_tax_share_of_mechanical_value_pct"]),
+                "assumption": row["mix_and_rounding_assumption"], "tier": row["source_tier"],
+                "boundary": row["boundary"], "url": row["source_url"],
+            }
+            for row in denmark_stress_rows
+        ],
+        "bridge": [
+            {
+                "metric": row["metric"], "valueDkk": float(row["value_dkk"]),
+                "comparisonDkk": float(row["comparison_value_dkk"]), "ratioPct": float(row["ratio_pct"]),
+                "interpretation": row["interpretation"], "status": row["status"], "url": row["source_url"],
+            }
+            for row in denmark_bridge_rows
+        ],
+        "controls": [
+            {
+                "period": int(row["period"]), "type": row["evidence_type"],
+                "tobacco": int(row["tobacco_controls"]) if row["tobacco_controls"] else None,
+                "nicotine": int(row["nicotine_controls"]) if row["nicotine_controls"] else None,
+                "total": int(row["total_displayed_controls"]) if row["total_displayed_controls"] else None,
+                "hitRatePct": number(row["hit_rate_pct"]), "hitRateScope": row["hit_rate_scope"],
+                "derivedMetric": row["derived_metric"], "derivedValue": number(row["derived_value"]),
+                "boundary": row["boundary"], "url": row["source_url"],
+            }
+            for row in denmark_control_rows
+        ],
+        "registry": [
+            {
+                "date": row["snapshot_date"], "type": row["product_type"],
+                "label": denmark_registry_labels.get(row["product_type"], row["product_type"]),
+                "rows": int(row["registry_rows"]), "uniqueIds": int(row["unique_product_ids_within_type"]),
+                "sharePct": float(row["share_of_registry_rows_pct"]),
+                "totalRows": int(row["total_registry_rows"]), "totalUniqueIds": int(row["total_unique_product_ids"]),
+                "reportingEntities": int(row["total_reporting_entities"]), "status": row["status"], "url": row["source_url"],
+            }
+            for row in denmark_registry_rows
+        ],
+        "route": [
+            {
+                "year": int(row["period"]), "scope": row["scope"], "label": denmark_scope_labels[row["scope_label"]],
+                "products": row["products"], "worldImportEur": int(float(row["world_import_value_eur"])),
+                "worldExportEur": int(float(row["world_export_value_eur"])),
+                "borderNetEur": int(float(row["border_net_import_value_eur"])),
+                "intraImportEur": int(float(row["intra_eu_import_value_eur"])),
+                "extraImportEur": int(float(row["extra_eu_import_value_eur"])),
+                "extraImportSharePct": float(row["extra_eu_import_share_pct"]),
+                "importGapEur": int(float(row["import_route_gap_eur"])), "exportGapEur": int(float(row["export_route_gap_eur"])),
+                "status": row["evidence_status"], "interpretation": row["interpretation"],
+                "url": row["source_url"], "methodUrl": row["method_url"],
+            }
+            for row in denmark_route_rows
+        ],
+        "partners": [
+            {
+                "year": int(row["period"]), "scope": row["scope"], "flow": row["flow"],
+                "rank": int(row["rank"]), "partner": row["partner"],
+                "partnerLabel": denmark_partner_names.get(row["partner"], row["partner_label"].split(" (incl.")[0]),
+                "partnerBasis": row["partner_basis"], "valueEur": int(float(row["value_eur"])),
+                "sharePct": float(row["share_of_country_partner_rows_pct"]), "url": row["source_url"],
+            }
+            for row in denmark_partner_rows
+            if row["scope"] == "narrow_patent_scope_proxy" and int(row["rank"]) <= 5
+        ],
+        "method": [
+            {
+                "id": row["evidence_id"], "topic": row["topic"], "tier": row["source_tier"],
+                "source": row["source"], "measure": row["original_measure"],
+                "transformation": row["transformation"], "result": row["audit_result"],
+                "limitation": row["limitation"], "url": row["source_url"],
+            }
+            for row in denmark_method_rows
+        ],
+        "manifest": denmark_manifest,
+        "requests": [
+            {
+                "id": request_id, "authority": denmark_requests[request_id]["authority"],
+                "status": denmark_requests[request_id]["status"],
+                "recipient": denmark_requests[request_id]["recipient"], "scope": denmark_requests[request_id]["scope"],
+            }
+            for request_id in ("PX-DK-001", "PX-DK-002")
+        ],
+        "urls": denmark_manifest["urls"],
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -1805,6 +2037,7 @@ def build_payload() -> dict:
             {"label": "Espanja 2025", "value": "29,568 milj. €", "detail": "AEAT:n tarkka L1-L4-nettokertymä", "tone": "gold"},
             {"label": "Puola 2025", "value": "993,1 milj. PLN", "detail": "Virallinen e-nesteen valmisteverototeuma", "tone": "gold"},
             {"label": "Ruotsi 2024", "value": "26 000 l · 80 milj. SEK", "detail": "Virallinen rekisteröity e-nestemäärä ja näytetty verotuotto", "tone": "gold"},
+            {"label": "Tanska 2025", "value": "789,133 milj. DKK", "detail": "Virallinen yhdistetty nikotiinituotteiden ja -nesteiden verototeuma · ei e-neste yksin", "tone": "gold"},
             {"label": "Alankomaat", "value": "281,548 milj. €", "detail": "VWS:n tilaama mallinnettu kulutusmeno · ei virallinen sell-out", "tone": "blue"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
         ],
@@ -1888,6 +2121,16 @@ def build_payload() -> dict:
                 "limit": "Luvut kuvaavat rekisteröityä verollista kulutusta ja ovat taulukossa pyöristettyjä. Ne eivät kata laitteita, nikotiinittomia nesteitä, ilmoittamattomia virtoja tai vähittäismyyntiarvoa.",
                 "source": "Finansdepartementet · Beräkningskonventioner 2026",
                 "url": "https://www.regeringen.se/rapporter/2025/09/berakningskonventioner-2026/",
+            },
+            {
+                "grade": "A",
+                "market": "Tanska",
+                "title": "Kirjattu yhdistetty nikotiinituotetilin verototeuma",
+                "value": "789,133 milj. DKK (2025)",
+                "detail": "Skatteministerietin SKR-tulolistan kuukausirivit täsmäävät vuosisoluun. Yhdistelmätili kasvoi 43,872 % vuoden 2024 548,496 milj. DKK:sta.",
+                "limit": "Tili yhdistää nikotiinituotteet/-pussit ja nikotiinia sisältävät nesteet. Se ei ole e-nesteen erillinen verotulo, myynti tai markkina-arvo. 90 milj. DKK:n e-nesteluku on ennuste.",
+                "source": "Skatteministeriet · Indtægtsliste 2025",
+                "url": "https://skm.dk/tal-og-metode/statistik/indtaegtslister/indtaegtsliste-for-2025",
             },
             {
                 "grade": "B",
@@ -1986,6 +2229,7 @@ def build_payload() -> dict:
         "polandEvidence": poland_evidence,
         "netherlandsEvidence": netherlands_evidence,
         "swedenEvidence": sweden_evidence,
+        "denmarkEvidence": denmark_evidence,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -2107,6 +2351,10 @@ def build_payload() -> dict:
             {"grade": "A", "title": "Ruotsin Skatteverket · Nikotinskatt", "coverage": "Vuosien 2023–2026 e-nesteverokannat: vuoden 2026 muut nesteet 2,087 SEK/ml ja 15–20 mg/ml 4,174 SEK/ml", "use": "Lakisääteinen kanta ja vuoden 2024 määrä × kanta -täsmäytys", "url": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html"},
             {"grade": "A", "title": "Ruotsin FHM · vuotuinen EU-CEG-myyntiraportointi", "coverage": "Valmistajien ja maahantuojien velvollisuus toimittaa vuosittainen Ruotsin myyntivolyymi tuotemerkin ja tuotetyypin mukaan", "use": "Todistaa keräysvelvollisuuden ja kohdentaa PX-SE-001:n kansalliseen myyntiaggregaattiin; julkista kokonaislukua ei vielä saatu", "url": "https://www.folkhalsomyndigheten.se/anmal-och-rapportera/anmala-ansoka-rapportera-och-registrera-tobaks-och-nikotinprodukter/anmala-ingredienser-i-e-cigaretter-och-pafyllningsbehallare/"},
             {"grade": "B", "title": "Eurostat Comext · Ruotsi 2025", "coverage": "Kapea CN8-kori: 50,028 milj. EUR tuontia, 1,417 milj. EUR vientiä ja 48,611 milj. EUR rajavirran netto", "use": "WORLD-, intra-EU- ja extra-EU-reittitäsmäytys sekä alkuperä-/lähetysmaakorjaus; ei kuluttajamyynti", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
+            {"grade": "A", "title": "Tanskan Skatteministeriet · Indtægtsliste 2025", "coverage": "2024-2025 kuukausittainen ja vuosittainen kirjattu yhdistelmäkertymä: 548,496 ja 789,133 milj. DKK", "use": "Virallinen nikotiinituotteiden/-pussien ja nikotiininesteiden yhdistetty toteuma; e-nesteosuus ei julkisesti erotu", "url": "https://skm.dk/tal-og-metode/statistik/indtaegtslister/indtaegtsliste-for-2025"},
+            {"grade": "A", "title": "Tanskan EU-CEG-vuosiraportointi ja tuoterekisteri", "coverage": "Vuosittainen Tanskan myyntivolyymi tuotemerkin ja tuotetyypin mukaan; 17.7.2026 rekisterissä 1 198 riviä ja 545 ID:tä", "use": "Todistaa tietojen keräysvelvollisuuden ja tuoteuniversumin; rekisteri ei ole myynti tai kattavuusprosentti", "url": "https://www.sik.dk/en/node/355"},
+            {"grade": "A", "title": "Tanskan Skattestyrelsen · riskiperusteiset valvonnat", "coverage": "2020-2024 yhteensä 3 326 valvontaa ja 70 % keskimääräinen hit rate; 2025 yksittäinen puff bar -tapaus", "use": "Valvontamenetelmän näyttö; 70 % ei ole laittoman markkinan tai väestön osuus", "url": "https://www.ft.dk/samling/20241/almdel/SAU/bilag/220/3018939.pdf"},
+            {"grade": "B", "title": "Eurostat Comext · Tanska 2025", "coverage": "Kapea CN8-kori: 14,386 milj. EUR tuontia, 0,905 milj. EUR vientiä ja 13,481 milj. EUR rajavirran netto", "use": "WORLD-, intra-EU- ja extra-EU-reittitäsmäytys; Kiina alkuperänä ja EU-maat lähetysmaina; ei kuluttajamyynti", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
             {"grade": "B", "title": "VWS / Bureau Beke · Donkere wolken", "coverage": "Alankomaiden vuotuinen mallinnettu vape-kulutusmeno 281,548 milj. EUR ja laiton meno 256,865 milj. EUR", "use": "Valtion tilaama markkinatutkimusarvio; ei virallinen myynti-, vero- tai kassarekisterisarja", "url": "https://www.tweedekamer.nl/downloads/document?id=2026D17119"},
             {"grade": "A", "title": "CBS StatLine · sähkösavukkeen käyttö 2024", "coverage": "3,5 % vähintään 12-vuotiaista; ikäryhmäkohtaiset piste-estimaatit ja 95 % välit toistettu virallisesta API:sta", "use": "Tutkimuksen prevalenssikorjauksen riippumaton virallinen lähde; käyttöä, ei myyntiä", "url": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85457NED/table"},
             {"grade": "A", "title": "Trimbos ScholierenMonitor · 12-16-vuotiaat", "coverage": "Joskus vapettanut: piste-estimaatti 24,6 %, 95 % väli 22,8-26,4 %", "use": "Lähdeauditointi osoittaa, että tutkimuksen 22,8 % vastaa alempaa luottamusrajaa eikä piste-estimaattia", "url": "https://cijfers.trimbos.nl/scholierenmonitor/vape-snus-en-waterpijp/cijfers-2023-12-16-jaar-vape-snus-waterpijp/"},
@@ -2132,6 +2380,8 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Alankomaiden mallisolut ja EU-CEG-sell-out", "detail": "VWS:n tilaama 281,548 milj. EUR:n arvio, 5 529 vastaajan menetelmä, Trimbos/CBS-prevalenssit, kuluttajahinnat ja vuoden 2025 Eurostat-reitti on auditoitu. PX-NL-001 pyytää ikäsolut, SPSS-syntaksin, vastausdisposition, 22,8 % -selityksen sekä Article 20(7) -yksiköt/ml/arvon; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Ruotsin FHM-myyntiaggregaatti", "detail": "Vuoden 2024 virallinen 26 000 litran verovolyymi, 80 milj. SEK:n verotulo, pyöristysauditointi, WHO-hintastressi ja vuoden 2025 Eurostat-reitti ovat valmiit. PX-SE-001 pyytää vuosien 2021-2025 laite-/esitysyksiköt, täyttöpullojen, podien ja kertakäyttötuotteiden millilitrat, arvon sekä raportointikattavuuden; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Ruotsin pyöristämättömät verosolut", "detail": "PX-SE-002 pyytää Finansdepartementilta taulukko 7.5:n pyöristämättömät litrat/millilitrat, verot, palautukset ja oikaisut sekä actual/forecast-luokituksen ja laskentatiedoston. Nykyinen -1,0 %:n piste-ero on yhteensopiva julkaisun näyttötarkkuuden kanssa; viestiä ei ole lähetetty.", "status": "active"},
+            {"priority": "high", "title": "Tanskan EU-CEG-myynti ja kattavuus", "detail": "Virallinen vuosiraportointivelvollisuus ja 1 198 rekisteririvin tuoteuniversumi on auditoitu. PX-DK-001 pyytää vuosien 2021-2025 laiteyksiköt, refill-/pod-/kertakäyttömillilitrat, arvon jos kerätty sekä odotetut, saadut, puuttuvat ja korjatut ilmoitukset. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
+            {"priority": "high", "title": "Tanskan e-nesteen erillinen verototeuma", "detail": "Vuoden 2025 yhdistetty nikotiinituotetili 789,133 milj. DKK, 90 milj. DKK:n e-neste-ennuste, WHO-hintastressi ja 13,481 milj. EUR:n tullireitti on auditoitu. PX-DK-002 pyytää verolliset millilitrat vahvuusryhmittäin sekä brutto-, palautus- ja nettoluvut. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
