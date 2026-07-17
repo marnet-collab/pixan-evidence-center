@@ -24,6 +24,7 @@
           <button data-view="taxes"><span class="nav-icon">€</span>Verotus</button>
           <button data-view="evidence"><span class="nav-icon">▤</span>Todisteet</button>
           <button data-view="gaps"><span class="nav-icon">△</span>Puuttuva data <span class="nav-badge" id="gap-badge">0</span></button>
+          <button data-view="pending"><span class="nav-icon">?</span>Vahvistamatta <span class="nav-badge" id="pending-badge">0</span></button>
           <button data-view="contacts"><span class="nav-icon">@</span>Kontaktoidut</button>
           <button data-view="tasks"><span class="nav-icon">✓</span>Työjono</button>
           <button data-view="method"><span class="nav-icon">i</span>Menetelmä</button>
@@ -216,6 +217,9 @@
               <a href="data/canada/canada_retail_stress_test_2026-07-17.csv" download>Stressitestit CSV ↓</a>
               <a href="data/canada/canada_retail_price_manifest_2026-07-17.json" download>Auditointimanifesti JSON ↓</a>
               <a href="data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json" download>Lähdekaappauksen manifesti JSON ↓</a>
+              <a href="data/canada/health_canada_vprr_sales_2023_2024.csv" download>Health Canada VPRR -myynti CSV ↓</a>
+              <a href="data/canada/health_canada_vprr_sales_manifest_2026-07-17.json" download>VPRR-menetelmämanifesti JSON ↓</a>
+              <a href="data/canada/canada_vaping_excise_revenue_public_accounts_2024.csv" download>Kanadan valmisteverotuotto CSV ↓</a>
             </div>
             <div class="section-heading compact"><span>Saksa · julkinen hintaotos 17.7.2026</span><h2>10 dokumentoitua 10 ml e-nestehintaa</h2><p>Destatisin 1,5 miljoonan litran virallinen vuoden 2025 volyymi ja lakisääteinen verokanta pidetään erillään yhden myyjän nykyhintaotoksesta. Otos toimii vain suuruusluokan stressitestinä.</p></div>
             <div class="customs-table" id="germany-retail-summary"></div>
@@ -421,6 +425,21 @@
             <div class="gap-list" id="gap-list"></div>
           </section>
 
+          <section class="view" data-view-panel="pending">
+            <div class="section-heading"><span>Vahvistamatta / odottaa varmennusta</span><h2>Claimit, lähdestatus ja seuraava todennettava askel</h2><p>Tämä erillinen työpöytä näyttää myös toissijaiset lähteet, tulliproxyt, ennusteet ja avoimet tietopyynnöt. Luku ei siirry pankkikelpoiseksi faktaksi ennen kuin ilmoitettu varmennusreitti on suoritettu.</p></div>
+            <div class="metric-grid" id="unverified-metrics"></div>
+            <div class="toolbar">
+              <div class="filter-row" id="pending-filters"></div>
+              <span class="result-count" id="pending-count"></span>
+            </div>
+            <div class="pending-list" id="unverified-list"></div>
+            <div class="download-links">
+              <a href="data/unverified_sources.csv" download>Kaikki avoimet lähde-ehdokkaat CSV ↓</a>
+              <a href="data/unverified_sources.js" download>Lähderekisteri JS ↓</a>
+            </div>
+            <div class="boundary-band"><strong>Luottamusasteikko:</strong><span>0–39 % = alustava reitti tai puuttuva luku, 40–69 % = osittainen/proxy-näyttö ja 70–100 % = vahva mutta vielä erillisen vahvistuksen vaativa väite. Prosentti ei ole tilastollinen todennäköisyys.</span></div>
+          </section>
+
           <section class="view" data-view-panel="tasks">
             <div class="section-heading"><span>Itsenäinen työjono</span><h2>Datahankinnan eteneminen</h2><p>Tehtävät priorisoidaan todistusvoiman, markkinan merkityksen ja saatavuuden mukaan.</p></div>
             <div class="work-queue" id="work-queue"></div>
@@ -448,6 +467,7 @@
       </div>
     </div>
     <script src="./data.generated.js"></script>
+    <script src="./data/unverified_sources.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

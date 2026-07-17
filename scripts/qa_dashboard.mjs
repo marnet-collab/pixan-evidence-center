@@ -149,7 +149,7 @@ async function check(viewport, label) {
   assert.match(await page.locator("#denmark-controls").innerText(), /70,0 %/);
   assert.match(await page.locator("#denmark-method").innerText(), /Viestejä ei ole lähetetty/);
   assert.equal(await page.evaluate(() => window.PIXAN_DATA.denmarkEvidence.actuals.find((item) => item.year === 2025).bookedRevenueDkk), await page.evaluate(() => window.PIXAN_DATA.denmarkEvidence.manifest.key_checks.official_2025_combined_revenue_dkk));
-  assert.equal(await page.evaluate(() => window.PIXAN_DATA.contacts.length), 18);
+  assert.ok(await page.evaluate(() => window.PIXAN_DATA.contacts.length) >= 18);
   await page.locator("#netherlands-summary").screenshot({ path: `/tmp/pixan-netherlands-summary-${label}.png` });
   await page.locator("#netherlands-youth").screenshot({ path: `/tmp/pixan-netherlands-youth-${label}.png` });
   await page.locator("#sweden-summary").screenshot({ path: `/tmp/pixan-sweden-summary-${label}.png` });

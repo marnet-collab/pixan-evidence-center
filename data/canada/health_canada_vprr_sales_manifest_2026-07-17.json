@@ -1,0 +1,25 @@
+{
+  "dataset": "Health Canada Vaping Product Reporting Regulations (VPRR) sales",
+  "publisher": "Health Canada Health Infobase",
+  "landing_url": "https://health-infobase.canada.ca/substance-use/vaping/sales/",
+  "raw_download_url": "https://health-infobase.canada.ca/src/data/substance-use/vaping/sales/VPRR%20Data%20-%202026-01-22.zip",
+  "retrieved_at": "2026-07-17",
+  "coverage": "2023-2024, Canada national totals",
+  "reporting_basis": "Manufacturers and importers report shipments to wholesalers or retailers twice a year under the Vaping Product Reporting Regulations; consumer till sales and consumption are not measured.",
+  "categories": [
+    "Vaping substance",
+    "Vaping part that contains a vaping substance",
+    "Vaping device that contains a vaping substance",
+    "Vaping part or device that does not contain a vaping substance"
+  ],
+  "quality_and_limitations": [
+    "Health Canada states data may be revised after re-submissions or audits.",
+    "Some data are suppressed or merged where few companies operate.",
+    "Totals are shipment destination province/territory, not final consumer purchase location."
+  ],
+  "verification_status": "official_primary_reported_sales; not audited sell-out",
+  "derived_totals": {
+    "2023": {"value_cad": 577907334.85, "net_units": 54177188, "volume_litres": 546140},
+    "2024": {"value_cad": 1160753796.78, "net_units": 118901910, "volume_litres": 1251843}
+  }
+}

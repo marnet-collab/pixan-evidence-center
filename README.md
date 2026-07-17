@@ -8,6 +8,7 @@ Julkinen markkina-, tulli-, verotus- ja todistusaineiston tilannekeskus.
 - ei luottamuksellista patenttistrategiaa tai sähköpostien sisältöä
 - virallinen myynti-/verosarja, tulliproxy ja laskennallinen skenaario erotetaan toisistaan
 - puuttuva tieto esitetään puuttuvana, ei nollana
+- `Vahvistamatta`-näkymä pitää avoimet väitteet, proxyt ja ennusteet erillään pankkikelpoisista ankkureista ja näyttää luottamuksen, lähdestatuksen sekä seuraavan varmennusreitin
 
 ## Datan päivitys
 
@@ -16,6 +17,12 @@ Dashboard-data muodostetaan Pixan-evidenssiprojektin CSV-aineistosta:
 ```sh
 python3 scripts/build_data.py
 ```
+
+Jos `data/unverified_sources.js` on mukana julkaisussa, se ladataan erillisenä tutkimusrekisterinä ja yhdistetään samaan `Vahvistamatta`-näkymään; sen rivit eivät muuta A/B-todistetasoa.
+
+`data/unverified_sources.csv` sisältää myös virallisia mutta ei-myyntiin soveltuvia portaalilähteitä (esim. FDA:n tuoterekisteri, EU-CEG:n raportointireitti, Kiinan tulliluokitus, Japanin luokittelupäätökset), survey-/scanner-proxyjä sekä kaupallisia arvioita. Jokaisella rivillä on syy, miksi sitä ei vielä hyväksytä pankkikelpoiseksi markkinamyynniksi, ja seuraava varmennusreitti.
+
+Kanadan VPRR-lähdeote ja Public Accounts -valmisteverotuotto ovat erillisinä tiedostoina `data/canada/`-kansiossa. VPRR on virallinen valmistaja-/maahantuojatoimitusten raportti, ei kassamyynti; verotuotto on valtion kassan luku, ei markkina-arvo.
 
 Tämän jälkeen tarkistetaan `data/dashboard.json` ja `data.generated.js`, kopioidaan uusin pankkiliite `assets/`-kansioon ja julkaistaan muutos `main`-haaraan. GitHub Pages julkaisee sivun automaattisesti suoraan `main`-haarasta.
 

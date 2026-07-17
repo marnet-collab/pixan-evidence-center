@@ -28,6 +28,9 @@
     verified: "Vahvistettu ankkuri",
     partial: "Osittainen näyttö",
     missing: "Tieto puuttuu",
+    pending: "Odottaa varmennusta",
+    unverified: "Ei vahvistettu",
+    rejected: "Hylätty / älä käytä",
     sent: "Lähetetty",
     queued: "Jonossa",
     requested: "Pyydetty",
@@ -938,6 +941,113 @@
       </article>`).join("");
   }
 
+  // Keep unverified claims in a separate queue.  This prevents a proxy,
+  // forecast or an open access request from being rendered as a verified
+  // market number.  Older payloads may not have the collection yet, so a
+  // small contact-derived fallback keeps the view useful during data rebuilds.
+  const fallbackUnverifiedSources = [
+    {
+      id: "fallback-pending",
+      market: "Dashboard",
+      claim: "Unverified source register is waiting for the next data build",
+      value: "No payload array available",
+      evidenceType: "Data-pipeline notice",
+      sourceStatus: "pending",
+      confidence: 0,
+      source: "Pixan evidence payload",
+      sourceUrl: "#method",
+      nextVerification: "Run scripts/build_data.py and review the source manifest.",
+      contactId: "—",
+      lastChecked: "—",
+    },
+  ];
+
+  function unverifiedSources() {
+    const payload = Array.isArray(data.unverifiedSources) ? data.unverifiedSources : [];
+    // An optional data/unverified_sources.js file can carry a larger research
+    // register.  Normalize its lead-oriented schema into this view when the
+    // file is loaded, while preserving the compact generated payload.
+    const externalStatus = (status) => {
+      const value = String(status || "").toLowerCase();
+      if (value.includes("proxy") || value.includes("partial") || value.includes("not_sales") || value.includes("aggregate_only") || value.includes("legal")) return "partial";
+      if (value.includes("unverified") || value.includes("commercial") || value.includes("survey")) return "unverified";
+      return "pending";
+    };
+    const external = Array.isArray(window.PIXAN_UNVERIFIED_SOURCES)
+      ? window.PIXAN_UNVERIFIED_SOURCES.map((item) => ({
+        id: item.id,
+        market: item.market,
+        claim: item.measure || item.source || "Nimeämätön lähde",
+        value: item.signal || item.caveat || "Luku puuttuu",
+        evidenceType: item.type || "Tutkimus-/portaalilähde",
+        sourceStatus: externalStatus(item.status),
+        confidence: externalStatus(item.status) === "partial" ? 45 : externalStatus(item.status) === "unverified" ? 25 : 20,
+        source: item.source,
+        sourceUrl: item.url,
+        nextVerification: [item.next, item.caveat].filter(Boolean).join(" "),
+        contactId: item.id,
+        lastChecked: item.checked,
+      }))
+      : [];
+    const ids = new Set(payload.map((item) => item.id));
+    const combined = [...payload, ...external.filter((item) => item.id && !ids.has(item.id))];
+    return combined.length ? combined : fallbackUnverifiedSources;
+  }
+
+  let pendingFilter = "all";
+  function renderPendingFilters() {
+    const items = unverifiedSources();
+    const counts = items.reduce((acc, item) => {
+      const status = item.sourceStatus || "pending";
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {});
+    const filters = [
+      ["all", "Kaikki", items.length],
+      ["pending", "Odottaa", counts.pending || 0],
+      ["partial", "Osittainen", counts.partial || 0],
+      ["unverified", "Ei vahvistettu", counts.unverified || 0],
+      ["verified", "Vahva / tarkista", counts.verified || 0],
+    ];
+    $("#pending-filters").innerHTML = filters.map(([key, label, count]) => `<button class="filter-button ${pendingFilter === key ? "active" : ""}" data-pending-filter="${esc(key)}">${esc(label)} · ${count}</button>`).join("");
+    $$('[data-pending-filter]').forEach((button) => button.addEventListener("click", () => {
+      pendingFilter = button.dataset.pendingFilter;
+      renderPendingFilters();
+      renderPendingSources();
+    }));
+  }
+
+  function renderPendingSources() {
+    const all = unverifiedSources();
+    const items = pendingFilter === "all" ? all : all.filter((item) => (item.sourceStatus || "pending") === pendingFilter);
+    const confidence = (value) => Math.max(0, Math.min(100, Number(value) || 0));
+    const confidenceLabel = (value) => value < 40 ? "alustava" : value < 70 ? "osittainen" : "vahva, mutta varmennettava";
+    const sorted = [...items].sort((a, b) => confidence(a.confidence) - confidence(b.confidence) || String(a.market).localeCompare(String(b.market), "fi"));
+    $("#pending-badge").textContent = all.length;
+    $("#pending-count").textContent = `${items.length} väitettä · ${all.filter((item) => (item.sourceStatus || "pending") === "pending").length} odottaa vastausta`;
+    $("#unverified-metrics").innerHTML = [
+      { label: "Väitteet jonossa", value: all.length, detail: "Ei vielä pankkikelpoiseksi faktaksi nostettu", tone: "red" },
+      { label: "Odottaa varmennusta", value: all.filter((item) => (item.sourceStatus || "pending") === "pending").length, detail: "Avoin viranomais- tai portaalireitti", tone: "gold" },
+      { label: "Osittainen / proxy", value: all.filter((item) => (item.sourceStatus || "pending") === "partial").length, detail: "Lähde on olemassa, mutta rajaus puuttuu", tone: "blue" },
+      { label: "Keski-luottamus", value: `${Math.round(all.reduce((sum, item) => sum + confidence(item.confidence), 0) / Math.max(1, all.length))} %`, detail: "Sisäinen priorisointimittari, ei todennäköisyys", tone: "" },
+    ].map((item) => `<article class="metric-card ${esc(item.tone)}"><span class="metric-label">${esc(item.label)}</span><strong class="metric-value">${esc(item.value)}</strong><span class="metric-detail">${esc(item.detail)}</span></article>`).join("");
+    $("#unverified-list").innerHTML = sorted.length ? sorted.map((item) => {
+      const status = item.sourceStatus || "pending";
+      const score = confidence(item.confidence);
+      return `<article class="pending-card ${esc(status)}">
+        <div class="pending-card-head"><span class="pending-id">${esc(item.id || "—")}</span>${tag(status)}<span class="pending-market">${esc(item.market || "—")}</span></div>
+        <h3>${esc(item.claim || "Nimeämätön väite")}</h3>
+        <p class="pending-value">${esc(item.value || "Luku puuttuu")}</p>
+        <div class="pending-grid">
+          <div><span class="pending-label">Lähdestatus</span><strong>${esc(item.evidenceType || "—")}</strong><p>${esc(item.source || "—")}</p></div>
+          <div><span class="pending-label">Luottamus</span><strong>${score} % · ${confidenceLabel(score)}</strong><div class="confidence-meter" role="progressbar" aria-label="Luottamus ${score} prosenttia" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${score}"><span style="width:${score}%"></span></div></div>
+          <div><span class="pending-label">Seuraava varmennusreitti</span><p>${esc(item.nextVerification || "Määritä vastuulähde")}</p><small>${esc(item.contactId || "Ei yhteystunnusta")} · tarkistettu ${esc(item.lastChecked || "—")}</small></div>
+        </div>
+        ${item.sourceUrl && item.sourceUrl !== "#method" ? `<a class="source-link" href="${esc(item.sourceUrl)}" target="_blank" rel="noopener">Avaa lähde / portaali ↗</a>` : ""}
+      </article>`;
+    }).join("") : '<div class="empty-state">Tällä suodattimella ei ole väitteitä.</div>';
+  }
+
   function renderTasks() {
     $("#work-queue").innerHTML = data.tasks.map((item, index) => `
       <article class="queue-row">
@@ -969,6 +1079,7 @@
     const rows = [];
     data.countries.forEach((item) => rows.push({ view: "countries", title: item.name, detail: `${item.current} ${item.missing} ${item.how}` }));
     data.evidence.forEach((item) => rows.push({ view: "evidence", title: item.title, detail: `${item.coverage} ${item.use}` }));
+    unverifiedSources().forEach((item) => rows.push({ view: "pending", title: `${item.market} · ${item.claim}`, detail: `${item.value} ${item.nextVerification || ""}` }));
     data.tasks.forEach((item) => rows.push({ view: "tasks", title: item.title, detail: item.detail }));
     data.contacts.forEach((item) => rows.push({ view: "contacts", title: `${item.authority} · ${item.market}`, detail: item.scope }));
     data.codes.forEach((item) => rows.push({ view: "customs", title: `HS ${item.code} · ${item.title}`, detail: item.detail }));
@@ -1042,6 +1153,8 @@
   renderTaxFilters();
   renderTaxes();
   renderGaps();
+  renderPendingFilters();
+  renderPendingSources();
   renderTasks();
   renderContacts();
   renderMethod();
