@@ -17,7 +17,7 @@ Dashboard-data muodostetaan Pixan-evidenssiprojektin CSV-aineistosta:
 python3 scripts/build_data.py
 ```
 
-Tämän jälkeen tarkistetaan `data/dashboard.json` ja `data.generated.js`, kopioidaan uusin pankkiliite `assets/`-kansioon ja julkaistaan muutos `main`-haaraan. GitHub Pages -työnkulku julkaisee sivun automaattisesti.
+Tämän jälkeen tarkistetaan `data/dashboard.json` ja `data.generated.js`, kopioidaan uusin pankkiliite `assets/`-kansioon ja julkaistaan muutos `main`-haaraan. GitHub Pages julkaisee sivun automaattisesti suoraan `main`-haarasta.
 
 ## Todistustasot
 
@@ -26,4 +26,3 @@ Tämän jälkeen tarkistetaan `data/dashboard.json` ja `data.generated.js`, kopi
 - C: täydentävä kaupallinen tai muu lähde
 
 Sivusto ei ole oikeudellinen lausunto eikä tilintarkastettu markkina-arvio.
-
