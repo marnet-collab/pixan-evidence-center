@@ -208,6 +208,36 @@ def build_payload() -> dict:
     poland_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "poland_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
+    netherlands_market_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_vws_market_estimate_2026.csv"
+    )
+    netherlands_method_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_vws_method_audit_2026.csv"
+    )
+    netherlands_price_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_vws_price_inputs_2026.csv"
+    )
+    netherlands_stress_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_vws_price_stress_test_2026.csv"
+    )
+    netherlands_youth_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_vws_youth_prevalence_check_2023.csv"
+    )
+    netherlands_cbs_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_cbs_esigarette_prevalence_2024.csv"
+    )
+    netherlands_bridge_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_eurostat_customs_bridge_2025.csv"
+    )
+    netherlands_route_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_eurostat_route_2025.csv"
+    )
+    netherlands_partner_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "netherlands_eurostat_top_partners_2025.csv"
+    )
+    netherlands_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "netherlands_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -768,6 +798,24 @@ def build_payload() -> dict:
             "Vuoden 2024 e-nesteverotuotto, vuosien 2024-2025 kuukausittaiset ml:t kotimaan myynnille, "
             "EU-hankinnalle ja tuonnille, vuoden 2025 laite-/osasarjakappaleet, Article 20(7) -myynti, "
             "kotimainen tuotanto, varastomuutos ja vähittäismyynti sekä vuoden 2023 revisiosyy. "
+            + country["missing"]
+        )
+    for country in countries:
+        if country["sourceName"] != "Netherlands":
+            continue
+        country["current"] = (
+            "VWS:n tilaaman Bureau Beken tutkimuksen mallinnettu vuotuinen vape-kulutusmeno on "
+            "281,548 milj. EUR, josta ikäryhmämenetelmä luokittelee 256,865 milj. EUR laittomaksi. "
+            "CBS:n vuoden 2024 nykykäytön piste-estimaatti on 3,5 %. Tutkimuksen 5 529 vastaajan "
+            "otos, 443 todellista vape-vastaajaa, painotus ja triangulaatio on auditoitu. Eurostatin "
+            "vuoden 2025 kapea kori näyttää 204,763 milj. EUR WORLD-tuontia ja 69,809 milj. EUR vientiä. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "VWS:n markkinalaskennan ikäsolut, kuukausimenot, laillinen/laiton/keskiryhmän osuudet, "
+            "SPSS-syntaksi, vastausdispositio ja design effect; selitys sille, miksi 12-16-vuotiaille "
+            "käytettiin Trimbosin 22,8 % alempaa 95 % rajaa 24,6 % piste-estimaatin sijasta; "
+            "EU-CEG Article 20(7) -yksiköt, millilitrat ja arvo sekä virallinen laillinen sell-out. "
             + country["missing"]
         )
 
@@ -1339,6 +1387,179 @@ def build_payload() -> dict:
         "publicInformationUrl": "https://www.gov.pl/web/finanse/uzyskaj-informacje-publiczna",
     }
 
+    netherlands_metric_labels = {
+        "reported_total_consumer_spend": "Mallinnettu kulutusmeno yhteensä",
+        "reported_illegal_consumer_spend_age_specific": "Mallinnettu laiton kulutusmeno, ikäryhmämenetelmä",
+        "derived_legal_consumer_spend_residual": "Johdettu laillinen jäännös",
+        "reported_direct_illegal_87pct_method": "Raportin suora 87 % -menetelmä",
+        "derived_direct_legal_residual": "Johdettu laillinen jäännös, suora menetelmä",
+        "derived_age_specific_vs_direct_illegal_delta": "Ikä- ja suoran menetelmän ero",
+        "reported_uncorrected_ipsos_extrapolation": "Hylätty korjaamaton Ipsos-ekstrapolaatio",
+    }
+    netherlands_price_labels = {
+        "disposable_vape": "Kertakäyttöinen vape",
+        "refillable_or_smart_vape": "Täytettävä / smart-vape",
+        "refill_liquid": "Täyttöneste",
+        "other_including_cannabis_vapes": "Muu, sisältää kannabisvapeja",
+    }
+    netherlands_youth_labels = {
+        "report_input_and_official_lower_95pct_bound": "Raportin 22,8 % / alempi 95 % raja",
+        "official_point_estimate": "Virallinen piste-estimaatti",
+        "official_upper_95pct_bound": "Virallinen ylempi 95 % raja",
+    }
+    netherlands_basket_labels = {
+        "narrow_devices_plus_nicotine_proxy": "Kapea: 85434000 + 24041200",
+        "broad_four_code_context": "Laaja neljän koodin konteksti",
+    }
+    netherlands_request = next(row for row in requests if row["request_id"] == "PX-NL-001")
+    netherlands_evidence = {
+        "market": [
+            {
+                "metric": row["metric"],
+                "label": netherlands_metric_labels[row["metric"]],
+                "valueEur": float(row["value_eur"]),
+                "sharePct": float(row["share_of_total_pct"]),
+                "calculation": row["calculation"],
+                "status": row["evidence_status"],
+                "sourcePage": row["source_page"],
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_market_rows
+        ],
+        "method": [
+            {
+                "item": row["audit_item"],
+                "observed": row["observed_value"],
+                "result": row["audit_result"],
+                "bankUse": row["bank_use"],
+                "sourcePage": row["source_page"],
+                "url": row["source_url"],
+            }
+            for row in netherlands_method_rows
+        ],
+        "prices": [
+            {
+                "product": row["product_type"],
+                "label": netherlands_price_labels[row["product_type"]],
+                "averagePriceEur": float(row["average_price_eur"]),
+                "reportedN": int(row["reported_n"]),
+                "purchaseFrequency": row["purchase_frequency"],
+                "sourcePage": row["source_page"],
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_price_rows
+        ],
+        "stress": [
+            {
+                "scenario": row["scenario"],
+                "multiplier": float(row["price_spend_multiplier"]),
+                "totalSpendEur": float(row["total_consumer_spend_eur"]),
+                "illegalSpendEur": float(row["illegal_consumer_spend_eur"]),
+                "legalResidualEur": float(row["legal_residual_eur"]),
+                "illegalSharePct": float(row["illegal_share_held_constant_pct"]),
+                "interpretation": row["interpretation"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_stress_rows
+        ],
+        "youth": [
+            {
+                "scenario": row["scenario"],
+                "label": netherlands_youth_labels[row["scenario"]],
+                "population": int(row["population_age_12_16"]),
+                "prevalencePct": float(row["ever_vaped_prevalence_pct"]),
+                "impliedPeople": int(row["implied_people"]),
+                "differencePeople": int(row["difference_vs_report_people"]),
+                "status": row["status"],
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_youth_rows
+        ],
+        "cbs": [
+            {
+                "year": int(row["year"]),
+                "category": row["person_category"],
+                "ageGroup": row["age_group"],
+                "pointPct": float(row["point_estimate_pct"]),
+                "lowerPct": float(row["lower_95pct_bound"]),
+                "upperPct": float(row["upper_95pct_bound"]),
+                "measure": row["measure"],
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_cbs_rows
+        ],
+        "bridge": [
+            {
+                "year": int(row["year"]),
+                "basket": row["basket"],
+                "label": netherlands_basket_labels[row["basket"]],
+                "products": row["products"],
+                "worldImportEur": int(row["world_import_eur"]),
+                "worldExportEur": int(row["world_export_eur"]),
+                "borderNetEur": int(row["border_net_import_minus_export_eur"]),
+                "intraImportEur": int(row["intra_EU_import_eur"]),
+                "extraImportEur": int(row["extra_EU_import_eur"]),
+                "intraExportEur": int(row["intra_EU_export_eur"]),
+                "extraExportEur": int(row["extra_EU_export_eur"]),
+                "importGapEur": int(row["import_world_reconciliation_gap_eur"]),
+                "exportGapEur": int(row["export_world_reconciliation_gap_eur"]),
+                "extraImportSharePct": float(row["extra_EU_import_share_pct"]),
+                "exportImportRatioPct": float(row["export_to_import_ratio_pct"]),
+                "reportedConsumerSpendEur": int(row["reported_consumer_spend_eur"]),
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_bridge_rows
+        ],
+        "route": [
+            {
+                "year": int(row["year"]),
+                "product": row["product"],
+                "productLabel": row["product_label"],
+                "scope": row["scope"],
+                "flow": row["flow"],
+                "partnerScope": row["partner_scope"],
+                "valueEur": int(row["value_eur"]) if row["value_eur"] else None,
+                "quantityKg": number(row["quantity_kg"]),
+                "supplementaryQuantity": number(row["supplementary_quantity"]),
+                "gapEur": int(row["world_minus_intra_minus_extra_eur"]) if row["world_minus_intra_minus_extra_eur"] else None,
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_route_rows
+        ],
+        "partners": [
+            {
+                "year": int(row["year"]),
+                "product": row["product"],
+                "scope": row["scope"],
+                "flow": row["flow"],
+                "partner": row["partner"],
+                "partnerLabel": row["partner_label"],
+                "partnerRole": row["partner_role"],
+                "valueEur": int(row["value_eur"]),
+                "rank": int(row["rank"]),
+                "sharePct": float(row["share_of_country_partner_rows_pct"]),
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in netherlands_partner_rows
+        ],
+        "manifest": netherlands_manifest,
+        "request": {
+            "id": netherlands_request["request_id"],
+            "authority": netherlands_request["authority"],
+            "status": netherlands_request["status"],
+            "recipient": netherlands_request["recipient"],
+            "scope": netherlands_request["scope"],
+        },
+        "urls": netherlands_manifest["source_urls"],
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -1362,6 +1583,7 @@ def build_payload() -> dict:
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
             {"label": "Espanja 2025", "value": "29,568 milj. €", "detail": "AEAT:n tarkka L1-L4-nettokertymä", "tone": "gold"},
             {"label": "Puola 2025", "value": "993,1 milj. PLN", "detail": "Virallinen e-nesteen valmisteverototeuma", "tone": "gold"},
+            {"label": "Alankomaat", "value": "281,548 milj. €", "detail": "VWS:n tilaama mallinnettu kulutusmeno · ei virallinen sell-out", "tone": "blue"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
         ],
         "anchors": [
@@ -1434,6 +1656,16 @@ def build_payload() -> dict:
                 "limit": "Ilmoitettu laillinen valmisteverovirta ja verotuotto eivät ole retail-arvoa tai kuluttajien sell-outia. Vuoden 2023 määrä on 8,85 % alempi kuin aikaisempi julkaisu; revisiosyy odottaa vastausta.",
                 "source": "Polish Ministry of Finance · interpellations 7255, 2408 and 17526",
                 "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf",
+            },
+            {
+                "grade": "B",
+                "market": "Alankomaat",
+                "title": "VWS:n tilaama kulutusmenon markkinatutkimusarvio",
+                "value": "281,548 milj. EUR · 256,865 milj. EUR laiton arvio",
+                "detail": "Bureau Beken 5 529 vastaajan tutkimus korjasi Ipsos-otoksen 9,1 % prevalenssia CBS:n 3,5 % virallisilla ikäryhmäluvuilla. Otos, painotus, hinnat, triangulaatio ja lähdeviitteet on auditoitu.",
+                "limit": "Valtion tilaama malli, ei vero-, tullaus-, kassarekisteri- tai auditoitu retail-sarja. Tarkat ikäsolut ja SPSS-syntaksi puuttuvat; 22,8 % on Trimbos-taulukon alempi 95 % raja, ei 24,6 % piste-estimaatti.",
+                "source": "Tweede Kamer / VWS · Donkere wolken 2026D17119",
+                "url": "https://www.tweedekamer.nl/downloads/document?id=2026D17119",
             },
             {
                 "grade": "B",
@@ -1520,6 +1752,7 @@ def build_payload() -> dict:
         "spainAeat": spain_aeat,
         "franceEvidence": france_evidence,
         "polandEvidence": poland_evidence,
+        "netherlandsEvidence": netherlands_evidence,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -1582,6 +1815,20 @@ def build_payload() -> dict:
                 ],
                 "note": "Hinnat ovat kymmenen varastossa olleen 10 ml tuotteen yhden myyjän päivätty alin/mediaani/ylin. Vuoden 2025 pyöristetyn virallisen volyymin ja vuoden 2026 hintaotoksen kertolasku on plausibiliteettialue, ei markkina-arvo tai ennuste.",
             },
+            {
+                "market": "Alankomaat",
+                "basis": "VWS:n tilaama 281,548 milj. EUR:n kulutusmenomalli",
+                "scenarios": [
+                    {
+                        "name": {"lower_price_20pct": "−20 % hintastressi", "reported_reference": "Raportoitu", "upper_price_20pct": "+20 % hintastressi"}[row["scenario"]],
+                        "price": f"{row['multiplier']:.2f}×".replace(".", ","),
+                        "volume": "Kulutusrakenne vakio",
+                        "value": f"{row['totalSpendEur'] / 1e6:.3f} milj. €".replace(".", ","),
+                    }
+                    for row in netherlands_evidence["stress"]
+                ],
+                "note": "Mekaaninen ±20 % hinta-/menostressi pitää 91,233 %:n johdetun laittoman meno-osuuden vakiona. Se ei ole luottamusväli tai empiirinen ala-/yläraja.",
+            },
         ],
         "evidence": [
             {"grade": "A", "title": "Health Canada · Vaping sales", "coverage": "Kanada 2023–2024: arvo, yksiköt, litrat ja tuoteryhmät", "use": "Nykyinen virallinen markkina-ankkuri", "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/"},
@@ -1609,6 +1856,10 @@ def build_payload() -> dict:
             {"grade": "A", "title": "Puolan MF · ZEFIR2/AIS-valmisteverovirta", "coverage": "2020-2023 e-nesteen kotimaan myynti + EU-hankinta + tuonti; 2023 myöhempi julkaisu 805 441 litraa", "use": "Kansallinen ilmoitetun laillisen e-nestevirran volyymiankkuri; 2023 määrä täsmää verotuottoon 0,137 %:n sisällä", "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf"},
             {"grade": "A", "title": "Puolan MF · vuoden 2025 valmisteverototeuma", "coverage": "E-neste 993,1 milj. PLN, höyrystinlaitteet 175,3 milj. PLN ja osasarjat 2,5 milj. PLN", "use": "Toteutuneet tuoteryhmäkohtaiset valmisteverotulot; ei retail-myyntiarvo tai suora yksikkömäärä", "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf"},
             {"grade": "A", "title": "Puolan KAS · kohdennettu valvonta 2025", "coverage": "1 172 tarkastusta, 422 valmisteverorikkomusta, 3,2 milj. ml nestettä ja 49 000 kertakäyttölaitetta", "use": "Valvontamenetelmän ja rajat ylittävien riskireittien näyttö; 36,007 % on kohdennettu hit rate, ei laiton markkinaosuus", "url": "https://www.gov.pl/web/kas/kas-zwalcza-oszustwa-zwiazane-z-rynkiem-e-papierosow"},
+            {"grade": "B", "title": "VWS / Bureau Beke · Donkere wolken", "coverage": "Alankomaiden vuotuinen mallinnettu vape-kulutusmeno 281,548 milj. EUR ja laiton meno 256,865 milj. EUR", "use": "Valtion tilaama markkinatutkimusarvio; ei virallinen myynti-, vero- tai kassarekisterisarja", "url": "https://www.tweedekamer.nl/downloads/document?id=2026D17119"},
+            {"grade": "A", "title": "CBS StatLine · sähkösavukkeen käyttö 2024", "coverage": "3,5 % vähintään 12-vuotiaista; ikäryhmäkohtaiset piste-estimaatit ja 95 % välit toistettu virallisesta API:sta", "use": "Tutkimuksen prevalenssikorjauksen riippumaton virallinen lähde; käyttöä, ei myyntiä", "url": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85457NED/table"},
+            {"grade": "A", "title": "Trimbos ScholierenMonitor · 12-16-vuotiaat", "coverage": "Joskus vapettanut: piste-estimaatti 24,6 %, 95 % väli 22,8-26,4 %", "use": "Lähdeauditointi osoittaa, että tutkimuksen 22,8 % vastaa alempaa luottamusrajaa eikä piste-estimaattia", "url": "https://cijfers.trimbos.nl/scholierenmonitor/vape-snus-en-waterpijp/cijfers-2023-12-16-jaar-vape-snus-waterpijp/"},
+            {"grade": "A", "title": "Eurostat Comext · Alankomaat 2025", "coverage": "Kapea kori: 204,763 milj. EUR WORLD-tuontia, 69,809 milj. EUR vientiä ja 85,972 % extra-EU-tuontiosuus", "use": "Rotterdam-hubin virallinen rajakaupan ja partnerireittien ankkuri; ei kotimainen kysyntä", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
             {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
@@ -1627,6 +1878,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Espanjan AEAT L1/L2-veropohjat", "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.", "status": "active"},
             {"priority": "high", "title": "Ranskan ANSES 2018-2025 myyntiaggregaatit", "detail": "Douanen vuoden 2025 neljä CN8-koodia ja Eurostat-reittitäsmäytys ovat valmiit. ANSES-rekisterin 203 181 riviä on auditoitu, ja 2016-2017 raportoinnin hit rate oli 35,010 %. PX-FR-001 pyytää uudemmat kattavuusluvut, yksiköt, millilitrat ja arvon; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Puolan 2024-2025 veroaggregaatit ja revisioseloste", "detail": "MF:n 2020-2023 volyymi, 2021-2023/2025 verotulot, KAS-hit rate ja Eurostat-reitti on auditoitu. PX-PL-001 pyytää vuoden 2024 tuoton, 2024-2025 kuukausittaiset millilitrat, viralliset laite-/osasarjakappaleet ja 2023 revisiosyyn; viesti odottaa nimenomaista lähetysvahvistusta. Interpellaatio 18182 on seurannassa.", "status": "active"},
+            {"priority": "high", "title": "Alankomaiden mallisolut ja EU-CEG-sell-out", "detail": "VWS:n tilaama 281,548 milj. EUR:n arvio, 5 529 vastaajan menetelmä, Trimbos/CBS-prevalenssit, kuluttajahinnat ja vuoden 2025 Eurostat-reitti on auditoitu. PX-NL-001 pyytää ikäsolut, SPSS-syntaksin, vastausdisposition, 22,8 % -selityksen sekä Article 20(7) -yksiköt/ml/arvon; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1885,6 +2137,52 @@ def publish_poland_evidence() -> None:
     shutil.copy2(workbook, DASHBOARD_DIR / "assets" / workbook.name)
 
 
+def publish_netherlands_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "netherlands_vws"
+    public_data = DASHBOARD_DIR / "data" / "netherlands"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "netherlands_vws"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "netherlands_vws_market_estimate_2026.csv",
+        "netherlands_vws_method_audit_2026.csv",
+        "netherlands_vws_price_inputs_2026.csv",
+        "netherlands_vws_price_stress_test_2026.csv",
+        "netherlands_vws_youth_prevalence_check_2023.csv",
+        "netherlands_cbs_esigarette_prevalence_2024.csv",
+        "netherlands_eurostat_customs_bridge_2025.csv",
+        "netherlands_eurostat_route_2025.csv",
+        "netherlands_eurostat_top_partners_2025.csv",
+        "netherlands_evidence_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "cbs_lifestyle_data_properties.json",
+        "cbs_lifestyle_esigarette_2024.json",
+        "cbs_lifestyle_margin_categories.json",
+        "cbs_lifestyle_period_categories.json",
+        "cbs_lifestyle_person_categories.json",
+        "cbs_lifestyle_table_info.json",
+        "donkere_wolken_full_2026.pdf",
+        "donkere_wolken_summary_2026.pdf",
+        "eurostat_netherlands_cn8_partners_2025.json",
+        "eurostat_netherlands_cn8_route_2025.json",
+        "trimbos_scholierenmonitor_2023.html",
+        "trimbos_scholierenmonitor_ever_vaped_table_2023.js",
+        "vws_minister_letter_2026.html",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+    workbook = (
+        DASHBOARD_DIR.parent
+        / "outputs"
+        / "019f6bea-c7f5-74c0-9534-66324a4b97ae"
+        / "pixan_netherlands_market_evidence_2023_2026.xlsx"
+    )
+    (DASHBOARD_DIR / "assets").mkdir(exist_ok=True)
+    shutil.copy2(workbook, DASHBOARD_DIR / "assets" / workbook.name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
@@ -1896,6 +2194,7 @@ def main() -> None:
     publish_spain_evidence()
     publish_france_evidence()
     publish_poland_evidence()
+    publish_netherlands_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

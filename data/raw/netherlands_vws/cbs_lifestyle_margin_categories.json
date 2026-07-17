@@ -1,0 +1,11 @@
+{
+  "odata.metadata":"https://opendata.cbs.nl/ODataApi/OData/85457NED/$metadata#Cbs.OData.WebAPI.Marges","value":[
+    {
+      "Key":"MW00000","Title":"Waarde","Description":"","CategoryGroupID":null
+    },{
+      "Key":"MOG0095","Title":"Ondergrens 95%-interval","Description":"Dit is de ondergrens van het interval waarvan met 95% zekerheid verwacht wordt dat de werkelijke waarde er binnen ligt. Vanaf 2021 zijn asymmetrische betrouwbaarheidsintervallen weergegeven voor de percentages. ","CategoryGroupID":null
+    },{
+      "Key":"MBG0095","Title":"Bovengrens 95%-interval","Description":"Dit is de bovengrens van het interval waarvan met 95% zekerheid verwacht wordt dat de werkelijke waarde er binnen ligt. Vanaf 2021 zijn asymmetrische betrouwbaarheidsintervallen weergegeven voor de percentages.","CategoryGroupID":null
+    }
+  ]
+}

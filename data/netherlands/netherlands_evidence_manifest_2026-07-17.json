@@ -1,0 +1,134 @@
+{
+  "as_of": "2026-07-17",
+  "country": "Netherlands",
+  "evidence_status": "government_commissioned_market_estimate_plus_official_customs_route",
+  "headline": {
+    "reported_total_consumer_spend_eur": 281548137,
+    "reported_illegal_consumer_spend_eur": 256865383,
+    "derived_legal_residual_eur": 24682754,
+    "reported_illegal_user_incidence_pct": 87,
+    "derived_illegal_spend_share_pct": 91.233203,
+    "raw_vaper_respondents": 443,
+    "weighted_vaper_count": 501,
+    "total_survey_respondents": 5529
+  },
+  "confidence": {
+    "provenance": "A",
+    "market_estimate": "B",
+    "customs_values": "A",
+    "exact_reproducibility": "C_until_aggregate_calculation_cells_and_syntax_are_released"
+  },
+  "critical_boundaries": [
+    "The EUR 281.548m figure is a commissioned model estimate, not a tax return, retail census or audited company turnover.",
+    "The 87% figure is user incidence, not unit share or expenditure share.",
+    "The report's age-specific illegal spend implies a 91.233% spend share and differs from its direct 87% method by EUR 11.919m.",
+    "The 12-16 prevalence input is described as ever-vaped while monthly expenditure is applied, creating a material definition risk.",
+    "The report's 22.8% youth input equals the cited source's lower 95% confidence bound; the source point estimate is 24.6% (95% CI 22.8-26.4%).",
+    "Raw calculation cells, design effects and SPSS syntax are not published, so the exact headline estimate cannot be independently reproduced.",
+    "Eurostat border values include routing through the Netherlands and cannot be converted directly into Dutch consumer demand."
+  ],
+  "source_files": [
+    {
+      "path": "data/raw/netherlands_vws/donkere_wolken_full_2026.pdf",
+      "sha256": "7d0570aa9a59a5ef2de5d783f201074b917fd443ae96ce3fb62d4d5502e1b3e5"
+    },
+    {
+      "path": "data/raw/netherlands_vws/donkere_wolken_summary_2026.pdf",
+      "sha256": "e3099676143e6a4f8a5e0f25088ac1683d04c987eccc2654b45137b265877940"
+    },
+    {
+      "path": "data/raw/netherlands_vws/vws_minister_letter_2026.html",
+      "sha256": "e1c6782dc98c13224f7b1bc59b4de7f6eb2705c578f1d713c17d24f665493e57"
+    },
+    {
+      "path": "data/raw/netherlands_vws/eurostat_netherlands_cn8_route_2025.json",
+      "sha256": "d9982e28da5079b293843adc1d872d1f9a6aa2a5cc7e60c71fa18d1ad8152bf4"
+    },
+    {
+      "path": "data/raw/netherlands_vws/eurostat_netherlands_cn8_partners_2025.json",
+      "sha256": "992f73b51db62002b4eb240acce12871497953cdd76d84d19ff7aba1d0e0d306"
+    },
+    {
+      "path": "data/raw/netherlands_vws/trimbos_scholierenmonitor_2023.html",
+      "sha256": "cefd7ad4bbade6e9070b77817dd7195305ed2b494c45194905945687aa85d2ed"
+    },
+    {
+      "path": "data/raw/netherlands_vws/trimbos_scholierenmonitor_ever_vaped_table_2023.js",
+      "sha256": "363b96160074bbf2b79c61bfe33255df681fa27c0986531a4e2a00a1884c7f7f"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_table_info.json",
+      "sha256": "a997e69b3593f6137ca6b48009e227f6c120333b241c3a1979486f59782971b1"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_data_properties.json",
+      "sha256": "643a112846c1d2a8f1195ed7d38844d7ba138439a32591de9830d829d9561e73"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_person_categories.json",
+      "sha256": "f9cdffc7355bb1a7fe97dbfe47c94d1c2e7923561b0d002d17a6b9d406286879"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_period_categories.json",
+      "sha256": "c5fe7b67319349dcd91d1dcfc82423d6accb8baf6c4bb580352b1ee214b2edfd"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_margin_categories.json",
+      "sha256": "2f9f54f84cc65ed21a35a84e64402d6fc7c49632be932dac442e984475e416ff"
+    },
+    {
+      "path": "data/raw/netherlands_vws/cbs_lifestyle_esigarette_2024.json",
+      "sha256": "7330516ad765f2207a1f2996a8078e28298fae05ce4080c75e0cb83af97f5fad"
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "data/derived/netherlands_vws_market_estimate_2026.csv",
+      "sha256": "5a0cd28c8a6118774374c454f26b3041a11dc765478351b92c6aa92f47900401"
+    },
+    {
+      "path": "data/derived/netherlands_vws_method_audit_2026.csv",
+      "sha256": "42a3c50469944f6fdf670027c33c36196bf923199b60e1b191a7875cae907dbe"
+    },
+    {
+      "path": "data/derived/netherlands_vws_price_inputs_2026.csv",
+      "sha256": "5278bc36539157f518aa6da43e1c7f61856eba25a7d5fb0298e6178551430f12"
+    },
+    {
+      "path": "data/derived/netherlands_vws_price_stress_test_2026.csv",
+      "sha256": "961ca216966626b1e5af7a6a3a53ccd03f9f43dbce0b2e22121234f1d2815547"
+    },
+    {
+      "path": "data/derived/netherlands_eurostat_route_2025.csv",
+      "sha256": "3d32884e7cd89d1582c9fef155e656389e59916aeaf8cf5ef21a16c058fc8b3c"
+    },
+    {
+      "path": "data/derived/netherlands_eurostat_customs_bridge_2025.csv",
+      "sha256": "4250e3967d862b97fbc5c1c2f84c9ac4aad7867c799d20e45c701a7e0d964ab7"
+    },
+    {
+      "path": "data/derived/netherlands_eurostat_top_partners_2025.csv",
+      "sha256": "894f6021be0b6bdb46edd1ba26c199fe79169f90d7d39db21518c6be2e7f6874"
+    },
+    {
+      "path": "data/derived/netherlands_vws_youth_prevalence_check_2023.csv",
+      "sha256": "7643da6fdca6ea72528085614af391359f22c7a9c1048c18fb3e9ccf2ef48397"
+    },
+    {
+      "path": "data/derived/netherlands_cbs_esigarette_prevalence_2024.csv",
+      "sha256": "1718d3482dd37f3e2233df16c3d6c848d89b2fe1bbdbadf3d91ff5d4f50a70d3"
+    }
+  ],
+  "source_urls": {
+    "full_report": "https://www.tweedekamer.nl/downloads/document?id=2026D17119",
+    "summary": "https://open.overheid.nl/documenten/4623e58c-c186-4c00-86b6-8675b2446557/file",
+    "minister_letter": "https://www.rijksoverheid.nl/documenten/kamerstukken/2026/04/10/kamerbrief-inzake-onderzoek-naar-de-illegale-handel-in-vapes",
+    "eurostat_route": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=NL&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+    "eurostat_partners": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=NL&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&time=2025&lang=en",
+    "eurostat_method": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+    "vws_woo": "https://www.rijksoverheid.nl/ministeries/ministerie-van-volksgezondheid-welzijn-en-sport/contact/woo-verzoek-indienen",
+    "trimbos_table_page": "https://cijfers.trimbos.nl/scholierenmonitor/vape-snus-en-waterpijp/cijfers-2023-12-16-jaar-vape-snus-waterpijp/",
+    "trimbos_ever_vaped_table": "https://app.everviz.com/inject/VhUgu4jQb/?v=6",
+    "cbs_esigarette_2024": "https://opendata.cbs.nl/ODataApi/OData/85457NED/TypedDataSet?$filter=Perioden%20eq%20%272024JJ00%27&$select=Persoonskenmerken,Perioden,Marges,ESigaret12JaarOfOuder_14"
+  }
+}

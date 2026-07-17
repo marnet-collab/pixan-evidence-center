@@ -23,7 +23,7 @@ async function check(viewport, label) {
   assert.equal(await page.locator("#canada-retail-summary tbody tr").count(), 3);
   assert.equal(await page.locator("#canada-retail-observations tbody tr").count(), 10);
   assert.equal(await page.locator("#canada-retail-comparison tbody tr").count(), 3);
-  assert.equal(await page.locator("#stress-wrap .stress-card").count(), 2);
+  assert.equal(await page.locator("#stress-wrap .stress-card").count(), 3);
   assert.match(await page.locator("#canada-retail-observations").innerText(), /STLTH X Geek Bar/);
   assert.match(await page.locator("#canada-retail-observations").innerText(), /50,99 CAD/);
   assert.match(await page.locator("#canada-retail-comparison").innerText(), /2,403×/);
@@ -99,6 +99,26 @@ async function check(viewport, label) {
   assert.equal(await page.evaluate(() => window.PIXAN_DATA.polandEvidence.manifest.audit.eurostat_world_equals_intra_plus_extra_for_published_import_rows), true);
   await page.locator("#poland-summary").screenshot({ path: `/tmp/pixan-poland-summary-${label}.png` });
   await page.locator("#poland-controls").screenshot({ path: `/tmp/pixan-poland-controls-${label}.png` });
+  assert.equal(await page.locator("#netherlands-summary tbody tr").count(), 4);
+  assert.equal(await page.locator("#netherlands-method tbody tr").count(), 16);
+  assert.equal(await page.locator("#netherlands-prices tbody tr").count(), 4);
+  assert.equal(await page.locator("#netherlands-stress tbody tr").count(), 3);
+  assert.equal(await page.locator("#netherlands-youth tbody tr").count(), 3);
+  assert.equal(await page.locator("#netherlands-cbs tbody tr").count(), 10);
+  assert.equal(await page.locator("#netherlands-bridge tbody tr").count(), 2);
+  assert.equal(await page.locator("#netherlands-route tbody tr").count(), 24);
+  assert.equal(await page.locator("#netherlands-partners tbody tr").count(), 36);
+  assert.match(await page.locator("#netherlands-summary").innerText(), /281,548 milj\. €/);
+  assert.match(await page.locator("#netherlands-method").innerText(), /8,012 %/);
+  assert.match(await page.locator("#netherlands-youth").innerText(), /24,6 %/);
+  assert.match(await page.locator("#netherlands-youth").innerText(), /13[\s\u00a0]956/);
+  assert.match(await page.locator("#netherlands-bridge").innerText(), /204,763 milj\. €/);
+  assert.match(await page.locator("#netherlands-bridge").innerText(), /85,972 %/);
+  assert.match(await page.locator("#netherlands-partners").innerText(), /150,948 milj\. €/);
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.netherlandsEvidence.manifest.confidence.exact_reproducibility), "C_until_aggregate_calculation_cells_and_syntax_are_released");
+  assert.equal(await page.evaluate(() => window.PIXAN_DATA.contacts.length), 14);
+  await page.locator("#netherlands-summary").screenshot({ path: `/tmp/pixan-netherlands-summary-${label}.png` });
+  await page.locator("#netherlands-youth").screenshot({ path: `/tmp/pixan-netherlands-youth-${label}.png` });
   assert.equal(errors.length, 0, errors.join("\n"));
 
   if (label === "desktop") {
@@ -165,6 +185,23 @@ async function check(viewport, label) {
       "data/raw/poland_mf/akc_4_m_3_current.pdf",
       "data/raw/poland_mf/eurostat_poland_cn8_2025.json",
       "assets/pixan_poland_official_evidence_2020_2026.xlsx",
+      "data/netherlands/netherlands_vws_market_estimate_2026.csv",
+      "data/netherlands/netherlands_vws_method_audit_2026.csv",
+      "data/netherlands/netherlands_vws_price_inputs_2026.csv",
+      "data/netherlands/netherlands_vws_price_stress_test_2026.csv",
+      "data/netherlands/netherlands_vws_youth_prevalence_check_2023.csv",
+      "data/netherlands/netherlands_cbs_esigarette_prevalence_2024.csv",
+      "data/netherlands/netherlands_eurostat_customs_bridge_2025.csv",
+      "data/netherlands/netherlands_eurostat_route_2025.csv",
+      "data/netherlands/netherlands_eurostat_top_partners_2025.csv",
+      "data/netherlands/netherlands_evidence_manifest_2026-07-17.json",
+      "data/raw/netherlands_vws/donkere_wolken_full_2026.pdf",
+      "data/raw/netherlands_vws/donkere_wolken_summary_2026.pdf",
+      "data/raw/netherlands_vws/eurostat_netherlands_cn8_route_2025.json",
+      "data/raw/netherlands_vws/eurostat_netherlands_cn8_partners_2025.json",
+      "data/raw/netherlands_vws/cbs_lifestyle_esigarette_2024.json",
+      "data/raw/netherlands_vws/trimbos_scholierenmonitor_ever_vaped_table_2023.js",
+      "assets/pixan_netherlands_market_evidence_2023_2026.xlsx",
       "assets/pixan_pankkiliite.pdf",
     ]) {
       const asset = await context.request.get(new URL(relative, baseUrl).href);
@@ -187,7 +224,7 @@ async function check(viewport, label) {
 try {
   await check({ width: 1440, height: 1000 }, "desktop");
   await check({ width: 390, height: 844 }, "mobile");
-  process.stdout.write("Dashboard QA passed: Poland MF/KAS 4 summary/6 annual/2 revision/3 reconciliation/5 controls/4 route rows, France Douane 4 codes/48 monthly rows/4 route rows and ANSES 8 product types/3 coverage rows, Canada pricing 3/10/3, Germany pricing 1/10/3, Spain AEAT 9 revenue rows/4 rates/3 scenarios, Italy ADM 4 rates/6 forecast rows/3 reporting flows, no runtime errors, mobile body fits viewport.\n");
+  process.stdout.write("Dashboard QA passed: Netherlands 4 summary/16 method/4 price/3 stress/3 youth/10 CBS/2 bridge/24 route/36 partner rows, Poland MF/KAS 4 summary/6 annual/2 revision/3 reconciliation/5 controls/4 route rows, France Douane 4 codes/48 monthly rows/4 route rows and ANSES 8 product types/3 coverage rows, Canada/Germany/Netherlands stress cards, Spain AEAT and Italy ADM, 14 contacts, no runtime errors, mobile body fits viewport.\n");
 } finally {
   await browser.close();
 }

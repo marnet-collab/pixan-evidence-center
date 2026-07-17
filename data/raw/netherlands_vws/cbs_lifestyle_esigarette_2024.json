@@ -1,0 +1,413 @@
+{
+  "odata.metadata":"https://opendata.cbs.nl/ODataApi/OData/85457NED/$metadata#Cbs.OData.WebAPI.TypedDataSet&$select=Persoonskenmerken,Perioden,Marges,ESigaret12JaarOfOuder_14","value":[
+    {
+      "Persoonskenmerken":"T009002","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.5
+    },{
+      "Persoonskenmerken":"T009002","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"T009002","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.9
+    },{
+      "Persoonskenmerken":"3000   ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"3000   ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.9
+    },{
+      "Persoonskenmerken":"3000   ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.1
+    },{
+      "Persoonskenmerken":"4000   ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.5
+    },{
+      "Persoonskenmerken":"4000   ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"4000   ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.2
+    },{
+      "Persoonskenmerken":"80002  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80002  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80002  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80003  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80003  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80003  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80006  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"80006  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"80006  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.3
+    },{
+      "Persoonskenmerken":"53080  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":13.2
+    },{
+      "Persoonskenmerken":"53080  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":10.2
+    },{
+      "Persoonskenmerken":"53080  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":16.8
+    },{
+      "Persoonskenmerken":"60300  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":6.9
+    },{
+      "Persoonskenmerken":"60300  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":5.4
+    },{
+      "Persoonskenmerken":"60300  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":8.6
+    },{
+      "Persoonskenmerken":"60400  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.4
+    },{
+      "Persoonskenmerken":"60400  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.3
+    },{
+      "Persoonskenmerken":"60400  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.8
+    },{
+      "Persoonskenmerken":"60500  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"60500  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.6
+    },{
+      "Persoonskenmerken":"60500  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.6
+    },{
+      "Persoonskenmerken":"71100  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.8
+    },{
+      "Persoonskenmerken":"71100  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"71100  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.8
+    },{
+      "Persoonskenmerken":"53900  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":1.3
+    },{
+      "Persoonskenmerken":"53900  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.8
+    },{
+      "Persoonskenmerken":"53900  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":2.0
+    },{
+      "Persoonskenmerken":"53925  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":0.6
+    },{
+      "Persoonskenmerken":"53925  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.3
+    },{
+      "Persoonskenmerken":"53925  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":1.3
+    },{
+      "Persoonskenmerken":"21600  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":0.3
+    },{
+      "Persoonskenmerken":"21600  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.1
+    },{
+      "Persoonskenmerken":"21600  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":1.0
+    },{
+      "Persoonskenmerken":"80001  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80001  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"80001  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"52020  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":7.6
+    },{
+      "Persoonskenmerken":"52020  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":5.9
+    },{
+      "Persoonskenmerken":"52020  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":9.8
+    },{
+      "Persoonskenmerken":"20300  ","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"20300  ","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.7
+    },{
+      "Persoonskenmerken":"20300  ","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.6
+    },{
+      "Persoonskenmerken":"1012600","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"1012600","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.6
+    },{
+      "Persoonskenmerken":"1012600","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"H007933","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.9
+    },{
+      "Persoonskenmerken":"H007933","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"H007933","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.8
+    },{
+      "Persoonskenmerken":"H008859","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.9
+    },{
+      "Persoonskenmerken":"H008859","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"H008859","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.3
+    },{
+      "Persoonskenmerken":"A051735","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"A051735","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.7
+    },{
+      "Persoonskenmerken":"A051735","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.6
+    },{
+      "Persoonskenmerken":"A051760","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"A051760","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.6
+    },{
+      "Persoonskenmerken":"A051760","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"A051742","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.2
+    },{
+      "Persoonskenmerken":"A051742","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"A051742","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.8
+    },{
+      "Persoonskenmerken":"A051761","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.2
+    },{
+      "Persoonskenmerken":"A051761","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.7
+    },{
+      "Persoonskenmerken":"A051761","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.1
+    },{
+      "Persoonskenmerken":"A051762","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.7
+    },{
+      "Persoonskenmerken":"A051762","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.2
+    },{
+      "Persoonskenmerken":"A051762","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.9
+    },{
+      "Persoonskenmerken":"A051736","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":5.3
+    },{
+      "Persoonskenmerken":"A051736","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.1
+    },{
+      "Persoonskenmerken":"A051736","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.8
+    },{
+      "Persoonskenmerken":"A051763","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":6.0
+    },{
+      "Persoonskenmerken":"A051763","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.0
+    },{
+      "Persoonskenmerken":"A051763","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":9.0
+    },{
+      "Persoonskenmerken":"A051764","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.9
+    },{
+      "Persoonskenmerken":"A051764","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.5
+    },{
+      "Persoonskenmerken":"A051764","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.9
+    },{
+      "Persoonskenmerken":"1017040","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":7.7
+    },{
+      "Persoonskenmerken":"1017040","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":5.7
+    },{
+      "Persoonskenmerken":"1017040","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":10.4
+    },{
+      "Persoonskenmerken":"1017050","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"1017050","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.8
+    },{
+      "Persoonskenmerken":"1017050","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.2
+    },{
+      "Persoonskenmerken":"1017060","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":1.1
+    },{
+      "Persoonskenmerken":"1017060","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.6
+    },{
+      "Persoonskenmerken":"1017060","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"1016480","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":12.4
+    },{
+      "Persoonskenmerken":"1016480","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":7.2
+    },{
+      "Persoonskenmerken":"1016480","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":20.6
+    },{
+      "Persoonskenmerken":"1015145","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":13.6
+    },{
+      "Persoonskenmerken":"1015145","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":8.3
+    },{
+      "Persoonskenmerken":"1015145","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":21.5
+    },{
+      "Persoonskenmerken":"1016490","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":6.5
+    },{
+      "Persoonskenmerken":"1016490","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.7
+    },{
+      "Persoonskenmerken":"1016490","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":8.8
+    },{
+      "Persoonskenmerken":"1016500","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":6.9
+    },{
+      "Persoonskenmerken":"1016500","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.8
+    },{
+      "Persoonskenmerken":"1016500","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":9.8
+    },{
+      "Persoonskenmerken":"1015110","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.4
+    },{
+      "Persoonskenmerken":"1015110","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"1015110","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":7.9
+    },{
+      "Persoonskenmerken":"1015120","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"1015120","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.7
+    },{
+      "Persoonskenmerken":"1015120","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"1015131","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.8
+    },{
+      "Persoonskenmerken":"1015131","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.2
+    },{
+      "Persoonskenmerken":"1015131","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":7.2
+    },{
+      "Persoonskenmerken":"1015133","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":1.2
+    },{
+      "Persoonskenmerken":"1015133","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.7
+    },{
+      "Persoonskenmerken":"1015133","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"1015132","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":0.2
+    },{
+      "Persoonskenmerken":"1015132","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.1
+    },{
+      "Persoonskenmerken":"1015132","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":0.6
+    },{
+      "Persoonskenmerken":"A053413","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":7.0
+    },{
+      "Persoonskenmerken":"A053413","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.4
+    },{
+      "Persoonskenmerken":"A053413","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":11.1
+    },{
+      "Persoonskenmerken":"2018700","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.1
+    },{
+      "Persoonskenmerken":"2018700","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.5
+    },{
+      "Persoonskenmerken":"2018700","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"2018740","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.9
+    },{
+      "Persoonskenmerken":"2018740","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.3
+    },{
+      "Persoonskenmerken":"2018740","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"2018790","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.3
+    },{
+      "Persoonskenmerken":"2018790","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.8
+    },{
+      "Persoonskenmerken":"2018790","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"2018710","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"2018710","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.2
+    },{
+      "Persoonskenmerken":"2018710","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.9
+    },{
+      "Persoonskenmerken":"2018720","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.1
+    },{
+      "Persoonskenmerken":"2018720","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.4
+    },{
+      "Persoonskenmerken":"2018720","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"2018750","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.9
+    },{
+      "Persoonskenmerken":"2018750","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.3
+    },{
+      "Persoonskenmerken":"2018750","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"2018800","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.3
+    },{
+      "Persoonskenmerken":"2018800","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.6
+    },{
+      "Persoonskenmerken":"2018800","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.2
+    },{
+      "Persoonskenmerken":"2018810","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.3
+    },{
+      "Persoonskenmerken":"2018810","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.5
+    },{
+      "Persoonskenmerken":"2018810","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.6
+    },{
+      "Persoonskenmerken":"2018820","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"2018820","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":0.6
+    },{
+      "Persoonskenmerken":"2018820","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":9.3
+    },{
+      "Persoonskenmerken":"1014752","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.9
+    },{
+      "Persoonskenmerken":"1014752","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.0
+    },{
+      "Persoonskenmerken":"1014752","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.3
+    },{
+      "Persoonskenmerken":"1014753","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"1014753","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.7
+    },{
+      "Persoonskenmerken":"1014753","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.0
+    },{
+      "Persoonskenmerken":"1014754","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.5
+    },{
+      "Persoonskenmerken":"1014754","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.7
+    },{
+      "Persoonskenmerken":"1014754","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.6
+    },{
+      "Persoonskenmerken":"1014755","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.9
+    },{
+      "Persoonskenmerken":"1014755","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.1
+    },{
+      "Persoonskenmerken":"1014755","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.9
+    },{
+      "Persoonskenmerken":"1014756","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.9
+    },{
+      "Persoonskenmerken":"1014756","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"1014756","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.8
+    },{
+      "Persoonskenmerken":"1021200","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":5.3
+    },{
+      "Persoonskenmerken":"1021200","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":4.1
+    },{
+      "Persoonskenmerken":"1021200","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":6.9
+    },{
+      "Persoonskenmerken":"1021210","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"1021210","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.7
+    },{
+      "Persoonskenmerken":"1021210","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.0
+    },{
+      "Persoonskenmerken":"1021220","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.7
+    },{
+      "Persoonskenmerken":"1021220","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.7
+    },{
+      "Persoonskenmerken":"1021220","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.8
+    },{
+      "Persoonskenmerken":"1021230","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"1021230","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.8
+    },{
+      "Persoonskenmerken":"1021230","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.2
+    },{
+      "Persoonskenmerken":"1021240","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":1.7
+    },{
+      "Persoonskenmerken":"1021240","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.2
+    },{
+      "Persoonskenmerken":"1021240","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"2021770","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":3.4
+    },{
+      "Persoonskenmerken":"2021770","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.4
+    },{
+      "Persoonskenmerken":"2021770","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":4.9
+    },{
+      "Persoonskenmerken":"2021780","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.3
+    },{
+      "Persoonskenmerken":"2021780","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.3
+    },{
+      "Persoonskenmerken":"2021780","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.6
+    },{
+      "Persoonskenmerken":"2021790","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":4.7
+    },{
+      "Persoonskenmerken":"2021790","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":3.8
+    },{
+      "Persoonskenmerken":"2021790","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":5.9
+    },{
+      "Persoonskenmerken":"2021800","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.8
+    },{
+      "Persoonskenmerken":"2021800","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":2.1
+    },{
+      "Persoonskenmerken":"2021800","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.8
+    },{
+      "Persoonskenmerken":"2021810","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":2.2
+    },{
+      "Persoonskenmerken":"2021810","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":1.7
+    },{
+      "Persoonskenmerken":"2021810","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":3.0
+    },{
+      "Persoonskenmerken":"A053335","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053335","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053335","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053336","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053336","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053336","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053339","Perioden":"2024JJ00","Marges":"MW00000","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053339","Perioden":"2024JJ00","Marges":"MOG0095","ESigaret12JaarOfOuder_14":null
+    },{
+      "Persoonskenmerken":"A053339","Perioden":"2024JJ00","Marges":"MBG0095","ESigaret12JaarOfOuder_14":null
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "odata.metadata":"https://opendata.cbs.nl/ODataApi/OData/85457NED/$metadata#Cbs.OData.WebAPI.Persoonskenmerken","value":[
+    {
+      "Key":"T009002","Title":"Totaal personen","Description":"","CategoryGroupID":1
+    },{
+      "Key":"3000   ","Title":"Geslacht: Mannen","Description":"","CategoryGroupID":2
+    },{
+      "Key":"4000   ","Title":"Geslacht: Vrouwen","Description":"","CategoryGroupID":2
+    },{
+      "Key":"80002  ","Title":"Leeftijd: 0 tot 4 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"80003  ","Title":"Leeftijd: 4 tot 12 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"80006  ","Title":"Leeftijd: 12 tot 16 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"53080  ","Title":"Leeftijd: 16 tot 20 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"60300  ","Title":"Leeftijd: 20 tot 30 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"60400  ","Title":"Leeftijd: 30 tot 40 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"60500  ","Title":"Leeftijd: 40 tot 50 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"71100  ","Title":"Leeftijd: 50 tot 55 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"53900  ","Title":"Leeftijd: 55 tot 65 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"53925  ","Title":"Leeftijd: 65 tot 75 jaar","Description":"","CategoryGroupID":3
+    },{
+      "Key":"21600  ","Title":"Leeftijd: 75 jaar of ouder","Description":"","CategoryGroupID":3
+    },{
+      "Key":"80001  ","Title":"Leeftijd: 0 tot 12 jaar","Description":"","CategoryGroupID":4
+    },{
+      "Key":"52020  ","Title":"Leeftijd: 12 tot 18 jaar","Description":"","CategoryGroupID":4
+    },{
+      "Key":"20300  ","Title":"Leeftijd: 18 jaar of ouder","Description":"","CategoryGroupID":4
+    },{
+      "Key":"1012600","Title":"Herkomstland: Nederland","Description":null,"CategoryGroupID":5
+    },{
+      "Key":"H007933","Title":"Herkomstland: Europa (excl. Nederland) ","Description":"De landen Armeni\u00eb, Azerbeidzjan, Georgi\u00eb, Kazachstan, Kirgizi\u00eb, Oezbekistan, Tadzjikistan, Turkmenistan en Turkije vallen binnen deze indeling onder Azi\u00eb.","CategoryGroupID":5
+    },{
+      "Key":"H008859","Title":"Herkomstland: Buiten-Europa ","Description":null,"CategoryGroupID":5
+    },{
+      "Key":"A051735","Title":"Herkomst: geboren in Nederland","Description":"","CategoryGroupID":6
+    },{
+      "Key":"A051760","Title":"Herkomst: geb. in NL, ouders in NL","Description":"Persoon en beide ouders zijn geboren in Nederland.","CategoryGroupID":6
+    },{
+      "Key":"A051742","Title":"Herkomst: geb. in NL, ouder(s) buiten NL","Description":"In Nederland geboren persoon met \u00e9\u00e9n of twee in het buitenland geboren ouders.","CategoryGroupID":6
+    },{
+      "Key":"A051761","Title":"Herkomst: geb. in NL, ouder(s) in Europa","Description":"In Nederland geboren persoon met \u00e9\u00e9n of twee in Europa (exclusief Nederland) geboren ouder(s).","CategoryGroupID":6
+    },{
+      "Key":"A051762","Title":"Herkomst: geb. NL, ouder(s) buit. Europa","Description":"In Nederland geboren persoon met \u00e9\u00e9n of twee buiten-Europa geboren ouder(s).","CategoryGroupID":6
+    },{
+      "Key":"A051736","Title":"Herkomst: geboren buiten Nederland","Description":"","CategoryGroupID":6
+    },{
+      "Key":"A051763","Title":"Herkomst: geboren in Europa (excl. NL)","Description":"Persoon geboren in Europa (exclusief Nederland).","CategoryGroupID":6
+    },{
+      "Key":"A051764","Title":"Herkomst: geboren buiten Europa","Description":"Persoon geboren buiten Europa.","CategoryGroupID":6
+    },{
+      "Key":"1017040","Title":"Positie: alleenstaande <40 jaar","Description":"Positie: alleenstaande <40 jaar\r\nPositie in het huishouden: alleenstaande jonger dan 40 jaar.","CategoryGroupID":7
+    },{
+      "Key":"1017050","Title":"Positie: alleenstaande 40 tot 65 jaar","Description":"Positie in het huishouden: alleenstaande van 40 tot 65 jaar.","CategoryGroupID":7
+    },{
+      "Key":"1017060","Title":"Positie: alleenstaande >=65 jaar","Description":"Positie in het huishouden: alleenstaande van 65 jaar of ouder.","CategoryGroupID":7
+    },{
+      "Key":"1016480","Title":"Positie: kind <18 jaar, eenoudergezin","Description":"Positie in het huishouden: minderjarig kind in eenoudergezin\r\nEen persoon van 0 tot 18 jaar, ongeacht burgerlijke staat, die een kind-ouder relatie heeft met een tot het huishouden behorende ouder en deel uitmaakt van een eenoudergezin.\r\nMet een eenoudergezin wordt hier een huishouden bedoeld dat uitsluitend bestaat uit een ouder met \u00e9\u00e9n of meerdere kinderen.","CategoryGroupID":7
+    },{
+      "Key":"1015145","Title":"Positie: kind >= 18 jaar eenoudergezin","Description":"Positie in het huishouden: meerderjarig kind in eenoudergezin\r\nEen persoon van 18 jaar of ouder, ongeacht burgerlijke staat, die een kind-ouder relatie heeft met een tot het huishouden behorende ouder en deel uitmaakt van een eenoudergezin.\r\nMet een eenoudergezin wordt hier een huishouden bedoeld dat uitsluitend bestaat uit een ouder met \u00e9\u00e9n of meerdere kinderen.","CategoryGroupID":7
+    },{
+      "Key":"1016490","Title":"Positie: kind <18 jaar bij paar","Description":"Positie in het huishouden: minderjarig kind in paar\r\nEen persoon van 0 tot 18 jaar, ongeacht burgerlijke staat, die een kind-ouder relatie heeft met \u00e9\u00e9n of twee tot het huishouden behorende ouders en deel uitmaakt van een paar met kinderen.\r\nMet een \u2018paar met kinderen\u2019 wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar en hun kind(eren). ","CategoryGroupID":7
+    },{
+      "Key":"1016500","Title":"Positie: kind >=18 jaar bij paar","Description":"Positie in het huishouden: meerderjarig kind in paar\r\nEen persoon van 18 jaar of ouder, ongeacht burgerlijke staat, die een kind-ouder relatie heeft met \u00e9\u00e9n of twee tot het huishouden behorende ouders en deel uitmaakt van een paar met kinderen.\r\nMet een \u2018paar met kinderen\u2019 wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar en hun kind(eren).","CategoryGroupID":7
+    },{
+      "Key":"1015110","Title":"Positie: ouder in eenoudergezin","Description":"Positie in het huishouden: ouder in eenoudergezin\r\nEen persoon die niet samenwoont met een partner, maar wel thuiswonende kinderen heeft.\r\nMet een eenoudergezin wordt hier een huishouden bedoeld dat uitsluitend bestaat uit een ouder met \u00e9\u00e9n of meerdere kinderen.","CategoryGroupID":7
+    },{
+      "Key":"1015120","Title":"Positie: partner in paar met kind","Description":"Positie in het huishouden: partner in paar met kinderen\r\nEen persoon die een paar vormt met een andere persoon in een particulier huishouden met ten minste \u00e9\u00e9n thuiswonend kind.\r\nMet een paar met kind(eren) wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar en hun kind(eren).","CategoryGroupID":7
+    },{
+      "Key":"1015131","Title":"Positie: partner paar <40, geen kind","Description":"Positie in het huishouden: partner in paar zonder kinderen; tot 40 jaar\r\nEen persoon, jonger dan 40 jaar, die een paar vormt met een andere persoon in een particulier huishouden zonder thuiswonende kinderen.\r\nMet een paar zonder kinderen wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar.","CategoryGroupID":7
+    },{
+      "Key":"1015133","Title":"Positie: partner paar 40-65, geen kind","Description":"Positie in het huishouden: partner in paar zonder kinderen; 40 tot 65 jaar\r\nEen persoon van 40 tot 65 jaar, die een paar vormt met een andere persoon in een particulier huishouden zonder thuiswonende kinderen.\r\nMet een paar zonder kinderen wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar.","CategoryGroupID":7
+    },{
+      "Key":"1015132","Title":"Positie: partner paar >=65, geen kind","Description":"Positie in het huishouden: partner in paar zonder kinderen; 65 jaar of ouder\r\nEen persoon van 65 jaar of ouder, die een paar vormt met een andere persoon in een particulier huishouden zonder thuiswonende kinderen.\r\nMet een paar zonder kinderen wordt hier een huishouden bedoeld dat uitsluitend bestaat uit de leden van het paar.","CategoryGroupID":7
+    },{
+      "Key":"A053413","Title":"Positie: lid overig huishouden","Description":"Een persoon die deel uitmaakt van een meerpersoonshuishouden waar niet uitsluitend partners, ouders en/of thuiswonenende kinderen wonen.","CategoryGroupID":7
+    },{
+      "Key":"2018700","Title":"Basisonderwijs, vmbo, mbo1","Description":"Het behaalde onderwijsniveau omvat het basisonderwijs, het vmbo, de eerste 3 leerjaren van havo/vwo, de entreeopleiding (mbo1) en het praktijkonderwijs.\r\nHet betreft hier mensen van 25 jaar of ouder","CategoryGroupID":8
+    },{
+      "Key":"2018740","Title":"Havo, vwo, mbo2-4","Description":"Het behaalde onderwijsniveau omvat de bovenbouw van havo/vwo, de basisberoepsopleiding (mbo2), de vakopleiding (mbo3) en de middenkader- en specialistenopleidingen (mbo4).\r\nHet betreft hier mensen van 25 jaar of ouder.","CategoryGroupID":8
+    },{
+      "Key":"2018790","Title":"Hbo, wo","Description":"Het behaalde onderwijsniveau omvat de hbo- en wo-opleidingen (inclusief die leidend tot de doctorsgraad).\r\nHet betreft hier mensen van 25 jaar of ouder.","CategoryGroupID":8
+    },{
+      "Key":"2018710","Title":"Onderwijsniveau: basisonderwijs","Description":"Het hoogstbehaald onderwijsniveau is basisonderwijs. \r\nDit omvat groep 1 tot en met 8 van het basisonderwijs en het speciaal basisonderwijs\r\nHet betreft hier mensen van 25 jaar en ouder.\r\n","CategoryGroupID":9
+    },{
+      "Key":"2018720","Title":"Onderwijsniveau: vmbo,mbo1,avo onderbouw","Description":"Het hoogstbehaald onderwijsniveau is vmbo, havo-, vwo-onderbouw, mbo1. Dit omvat de eerste 3 leerjaren van havo/vwo, alle leerwegen van het vmbo en de entreeopleiding, de voormalige assistentenopleiding (mbo1).\r\nHet betreft hier mensen van 25 jaar en ouder.\r\n","CategoryGroupID":9
+    },{
+      "Key":"2018750","Title":"Onderwijsniveau: havo, vwo, mbo","Description":"Het hoogstbehaald onderwijsniveau is middelbaar onderwijs. \r\nDit omvat de bovenbouw van havo/vwo, de basisberoepsopleiding (mbo2), de vakopleiding (mbo3) en de middenkader- en specialistenopleidingen (mbo4).\r\nHet betreft hier mensen van 25 jaar en ouder.\r\nmbo-4).","CategoryGroupID":9
+    },{
+      "Key":"2018800","Title":"Onderwijsniveau: hbo, wo bachelor","Description":"Het hoogstbehaald onderwijsniveau is hbo-, wo-bachelor. \r\nDit omvat de associate degree, de hbo- en wo-bachelors en 4-jarige hbo-opleidingen.\r\nHet betreft hier mensen van 25 jaar en ouder.\r\n","CategoryGroupID":9
+    },{
+      "Key":"2018810","Title":"Onderwijsniveau: wo, master, doctor","Description":"Het hoogstbehaald onderwijsniveau is hbo-, wo-master, doctor. \r\nDit omvat de hbo- en wo-masters en wo-doctorsopleidingen.\r\nHet betreft hier mensen van 25 jaar en ouder.\r\n","CategoryGroupID":9
+    },{
+      "Key":"2018820","Title":"Onderwijsniveau: onbekend","Description":"Het hoogst behaald onderwijsniveau is onbekend.","CategoryGroupID":10
+    },{
+      "Key":"1014752","Title":"Gestandaardiseerd inkomen: 1e 20%-groep","Description":"Het gestandaardiseerd inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden.\r\n\r\nDe huishoudens zijn naar hoogte van hun gestandaardiseerd inkomen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De inkomensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":11
+    },{
+      "Key":"1014753","Title":"Gestandaardiseerd inkomen: 2e 20%-groep","Description":"Het gestandaardiseerd inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden.\r\n\r\nDe huishoudens zijn naar hoogte van hun gestandaardiseerd inkomen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De inkomensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":11
+    },{
+      "Key":"1014754","Title":"Gestandaardiseerd inkomen: 3e 20%-groep","Description":"Het gestandaardiseerd inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden.\r\n\r\nDe huishoudens zijn naar hoogte van hun gestandaardiseerd inkomen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De inkomensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":11
+    },{
+      "Key":"1014755","Title":"Gestandaardiseerd inkomen: 4e 20%-groep","Description":"Het gestandaardiseerd inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden.\r\n\r\nDe huishoudens zijn naar hoogte van hun gestandaardiseerd inkomen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De inkomensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":11
+    },{
+      "Key":"1014756","Title":"Gestandaardiseerd inkomen: 5e 20%-groep","Description":"Het gestandaardiseerd inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden.\r\nDe huishoudens zijn naar hoogte van hun gestandaardiseerd inkomen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De inkomensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.\r\n","CategoryGroupID":11
+    },{
+      "Key":"1021200","Title":"Vermogen: 1e 20%-groep","Description":"Vermogen is het saldo van bezittingen en schulden. \r\nDe bezittingen bestaan vooral uit banktegoeden, effecten, onroerend goed (waaronder de eigen woning) en ondernemingsvermogen. De schulden omvatten onder meer de schuld ten behoeve van een eigen woning en consumptief krediet.\r\n\r\nDe huishoudens zijn naar hoogte van hun vermogen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De vermogensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":12
+    },{
+      "Key":"1021210","Title":"Vermogen: 2e 20%-groep","Description":"Vermogen is het saldo van bezittingen en schulden. \r\nDe bezittingen bestaan vooral uit banktegoeden, effecten, onroerend goed (waaronder de eigen woning) en ondernemingsvermogen. De schulden omvatten onder meer de schuld ten behoeve van een eigen woning en consumptief krediet.\r\n\r\nDe huishoudens zijn naar hoogte van hun vermogen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De vermogensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":12
+    },{
+      "Key":"1021220","Title":"Vermogen: 3e 20%-groep","Description":"Vermogen is het saldo van bezittingen en schulden. \r\nDe bezittingen bestaan vooral uit banktegoeden, effecten, onroerend goed (waaronder de eigen woning) en ondernemingsvermogen. De schulden omvatten onder meer de schuld ten behoeve van een eigen woning en consumptief krediet.\r\n\r\nDe huishoudens zijn naar hoogte van hun vermogen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De vermogensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":12
+    },{
+      "Key":"1021230","Title":"Vermogen: 4e 20%-groep","Description":"Vermogen is het saldo van bezittingen en schulden. \r\nDe bezittingen bestaan vooral uit banktegoeden, effecten, onroerend goed (waaronder de eigen woning) en ondernemingsvermogen. De schulden omvatten onder meer de schuld ten behoeve van een eigen woning en consumptief krediet.\r\n\r\nDe huishoudens zijn naar hoogte van hun vermogen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De vermogensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":12
+    },{
+      "Key":"1021240","Title":"Vermogen: 5e 20%-groep","Description":"Vermogen is het saldo van bezittingen en schulden. \r\nDe bezittingen bestaan vooral uit banktegoeden, effecten, onroerend goed (waaronder de eigen woning) en ondernemingsvermogen. De schulden omvatten onder meer de schuld ten behoeve van een eigen woning en consumptief krediet.\r\n\r\nDe huishoudens zijn naar hoogte van hun vermogen in vijf groepen (kwintielen) met een gelijk aantal huishoudens verdeeld. De vermogensgrenzen tussen deze vijf 20%-groepen verschillen van jaar tot jaar.","CategoryGroupID":12
+    },{
+      "Key":"2021770","Title":"Welvaart: 1e 20%-groep","Description":"De welvaart van een huishouden (en de huishoudensleden) is gebaseerd op een maat die informatie bevat over zowel het gestandaardiseerd besteedbaar inkomen als het vermogen van huishoudens. De rangschikkingen van huishoudens naar hoogte van het inkomen en van het vermogen zijn hierbij het uitgangspunt. De welvaart van een huishouden is vastgesteld als de som van het cumulatieve aandeel in het totale inkomen van alle huishoudens en het cumulatieve aandeel in het totale vermogen (zie Van den Brakel en Gidding, 2019). Op grond van de optelling zijn huishoudens opnieuw geordend van laag naar hoog en in vijf gelijke groepen (kwintielgroepen) ingedeeld. Huishoudens in de laagste welvaartsgroep hebben een laag inkomen \u00e9n een laag vermogen hebben. Naarmate het inkomen of vermogen hoger is, wordt een huishouden in een hogere groep (kwintiel) ingedeeld. Huishoudens in de hoogste welvaartsgroep hebben een hoog inkomen \u00e9n een hoog vermogen. Alle personen in een huishouden behoren tot dezelfde kwintielgroep als het huishouden.","CategoryGroupID":13
+    },{
+      "Key":"2021780","Title":"Welvaart: 2e 20%-groep","Description":"De welvaart van een huishouden (en de huishoudensleden) is gebaseerd op een maat die informatie bevat over zowel het gestandaardiseerd besteedbaar inkomen als het vermogen van huishoudens. De rangschikkingen van huishoudens naar hoogte van het inkomen en van het vermogen zijn hierbij het uitgangspunt. De welvaart van een huishouden is vastgesteld als de som van het cumulatieve aandeel in het totale inkomen van alle huishoudens en het cumulatieve aandeel in het totale vermogen (zie Van den Brakel en Gidding, 2019). Op grond van de optelling zijn huishoudens opnieuw geordend van laag naar hoog en in vijf gelijke groepen (kwintielgroepen) ingedeeld. Huishoudens in de laagste welvaartsgroep hebben een laag inkomen \u00e9n een laag vermogen hebben. Naarmate het inkomen of vermogen hoger is, wordt een huishouden in een hogere groep ingedeeld. Huishoudens in de hoogste welvaartsgroep hebben een hoog inkomen \u00e9n een hoog vermogen. Alle personen in een huishouden behoren tot dezelfde kwintielgroep als het huishouden.","CategoryGroupID":13
+    },{
+      "Key":"2021790","Title":"Welvaart: 3e 20%-groep","Description":"De welvaart van een huishouden (en de huishoudensleden) is gebaseerd op een maat die informatie bevat over zowel het gestandaardiseerd besteedbaar inkomen als het vermogen van huishoudens. De rangschikkingen van huishoudens naar hoogte van het inkomen en van het vermogen zijn hierbij het uitgangspunt. De welvaart van een huishouden is vastgesteld als de som van het cumulatieve aandeel in het totale inkomen van alle huishoudens en het cumulatieve aandeel in het totale vermogen (zie Van den Brakel en Gidding, 2019). Op grond van de optelling zijn huishoudens opnieuw geordend van laag naar hoog en in vijf gelijke groepen (kwintielgroepen) ingedeeld. Huishoudens in de laagste welvaartsgroep hebben een laag inkomen \u00e9n een laag vermogen hebben. Naarmate het inkomen of vermogen hoger is, wordt een huishouden in een hogere groep ingedeeld. Huishoudens in de hoogste welvaartsgroep hebben een hoog inkomen \u00e9n een hoog vermogen. Alle personen in een huishouden behoren tot dezelfde kwintielgroep als het huishouden.","CategoryGroupID":13
+    },{
+      "Key":"2021800","Title":"Welvaart: 4e 20%-groep","Description":"De welvaart van een huishouden (en de huishoudensleden) is gebaseerd op een maat die informatie bevat over zowel het gestandaardiseerd besteedbaar inkomen als het vermogen van huishoudens. De rangschikkingen van huishoudens naar hoogte van het inkomen en van het vermogen zijn hierbij het uitgangspunt. De welvaart van een huishouden is vastgesteld als de som van het cumulatieve aandeel in het totale inkomen van alle huishoudens en het cumulatieve aandeel in het totale vermogen (zie Van den Brakel en Gidding, 2019). Op grond van de optelling zijn huishoudens opnieuw geordend van laag naar hoog en in vijf gelijke groepen (kwintielgroepen) ingedeeld. Huishoudens in de laagste welvaartsgroep hebben een laag inkomen \u00e9n een laag vermogen hebben. Naarmate het inkomen of vermogen hoger is, wordt een huishouden in een hogere groep ingedeeld. Huishoudens in de hoogste welvaartsgroep hebben een hoog inkomen \u00e9n een hoog vermogen. Alle personen in een huishouden behoren tot dezelfde kwintielgroep als het huishouden.","CategoryGroupID":13
+    },{
+      "Key":"2021810","Title":"Welvaart: 5e 20%-groep","Description":"De welvaart van een huishouden (en de huishoudensleden) is gebaseerd op een maat die informatie bevat over zowel het gestandaardiseerd besteedbaar inkomen als het vermogen van huishoudens. De rangschikkingen van huishoudens naar hoogte van het inkomen en van het vermogen zijn hierbij het uitgangspunt. De welvaart van een huishouden is vastgesteld als de som van het cumulatieve aandeel in het totale inkomen van alle huishoudens en het cumulatieve aandeel in het totale vermogen (zie Van den Brakel en Gidding, 2019). Op grond van de optelling zijn huishoudens opnieuw geordend van laag naar hoog en in vijf gelijke groepen (kwintielgroepen) ingedeeld. Huishoudens in de laagste welvaartsgroep hebben een laag inkomen \u00e9n een laag vermogen hebben. Naarmate het inkomen of vermogen hoger is, wordt een huishouden in een hogere groep ingedeeld. Huishoudens in de hoogste welvaartsgroep hebben een hoog inkomen \u00e9n een hoog vermogen. Alle personen in een huishouden behoren tot dezelfde kwintielgroep als het huishouden.","CategoryGroupID":13
+    },{
+      "Key":"A053335","Title":"Armoede: Arm","Description":"Personen in arme huishoudens. Als er na het betalen van de vaste lasten aan wonen, energie en de zorgpremie te weinig middelen (inkomen en eventueel spaargeld of ander direct te besteden bezit) overblijven voor de andere levensbehoeften, dan is een huishouden - en de mensen die er deel van uitmaken - arm.","CategoryGroupID":14
+    },{
+      "Key":"A053336","Title":"Armoede: Bijna-arm","Description":"Personen in bijna-arme huishoudens. Voor deze huishoudens geldt dat het inkomen tussen 100% en 125% van de armoedegrens ligt en de vermogensbuffer maximaal de armoedegrens bedraagt. De armoedegrens is gebaseerd op de minimale levensbehoeften. Als er na het betalen van de vaste lasten aan wonen, energie en de zorgpremie te weinig middelen (inkomen en eventueel spaargeld of ander direct te besteden bezit) overblijven voor de andere levensbehoeften, dan is een huishouden - en de mensen die er deel van uitmaken - arm.","CategoryGroupID":14
+    },{
+      "Key":"A053339","Title":"Armoede: Niet arm en niet bijna-arm","Description":"Personen in huishoudens die niet arm en niet bijna-arm zijn. Voor deze huishoudens geldt dat het inkomen hoger is dan 125% van de armoedegrens of de vermogensbuffer meer dan de armoedegrens bedraagt. De armoedegrens is gebaseerd op de minimale levensbehoeften. Als er na het betalen van de vaste lasten aan wonen, energie en de zorgpremie te weinig middelen (inkomen en eventueel spaargeld of ander direct te besteden bezit) overblijven voor de andere levensbehoeften, dan is een huishouden - en de mensen die er deel van uitmaken - arm.","CategoryGroupID":14
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+scenario,price_spend_multiplier,total_consumer_spend_eur,illegal_consumer_spend_eur,legal_residual_eur,illegal_share_held_constant_pct,interpretation,source_url,boundary
+lower_price_20pct,0.8,225238510,205492307,19746203,91.233203,all price/spend inputs mechanically 20% below reported level,https://www.tweedekamer.nl/downloads/document?id=2026D17119,mechanical price sensitivity only; not a confidence interval or empirical low/high estimate
+reported_reference,1.0,281548137,256865383,24682754,91.233203,published age-group estimate,https://www.tweedekamer.nl/downloads/document?id=2026D17119,mechanical price sensitivity only; not a confidence interval or empirical low/high estimate
+upper_price_20pct,1.2,337857764,308238459,29619305,91.233203,all price/spend inputs mechanically 20% above reported level,https://www.tweedekamer.nl/downloads/document?id=2026D17119,mechanical price sensitivity only; not a confidence interval or empirical low/high estimate

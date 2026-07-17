@@ -670,6 +670,97 @@
         </tr>`).join("")}</tbody>
       </table>
       <div class="meta-line table-note"><strong>Kapea kori:</strong> WORLD ${moneyEur3(poland.manifest.official_results.eurostat_narrow_world_import_eur)}, intra-EU ${moneyEur3(poland.manifest.official_results.eurostat_narrow_intra_eu_import_eur)} ja extra-EU ${moneyEur3(poland.manifest.official_results.eurostat_narrow_extra_eu_import_eur)}. Intra-EU kumppani on lähetysmaa, extra-EU kumppani alkuperämaa. 2404-nimikkeet ovat laajoja proxyja; tullivirta ei ole kotimyynti.</div>`;
+
+    const nl = data.netherlandsEvidence;
+    const nlTotal = nl.market.find((item) => item.metric === "reported_total_consumer_spend");
+    const nlIllegal = nl.market.find((item) => item.metric === "reported_illegal_consumer_spend_age_specific");
+    const nlDirect = nl.market.find((item) => item.metric === "reported_direct_illegal_87pct_method");
+    const nlNarrow = nl.bridge.find((item) => item.basket === "narrow_devices_plus_nicotine_proxy");
+    $("#netherlands-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Tulos</th><th>Todistusvoima</th><th>Rajaus / seuraava askel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>VWS:n tilaama kokonaisarvio</strong></td><td><strong>${moneyEur3(nlTotal.valueEur)}</strong></td><td>${tag("partial", "B-tason tutkimusmalli")}</td><td>Ei vero-, tulli-, kassarekisteri- tai auditoitu retail-sarja</td></tr>
+          <tr><td><strong>Ikäryhmäkohtainen laiton meno</strong></td><td><strong>${moneyEur3(nlIllegal.valueEur)} · ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(nlIllegal.sharePct)} %</strong></td><td>${tag("partial", "Raportoitu malliarvio")}</td><td>Sisältää ulkomailta fyysisesti ostaneen keskiryhmän käyttäjäluokituksessa</td></tr>
+          <tr><td><strong>Suora 87 % -menetelmä</strong></td><td><strong>${moneyEur3(nlDirect.valueEur)}</strong></td><td>${tag("partial", "Menetelmäherkkyys")}</td><td>87 % on käyttäjäinsidenssi, ei yksikkö- tai euromarkkinaosuus</td></tr>
+          <tr><td><strong>${esc(nl.request.id)}</strong></td><td>Ikäsolut · SPSS · vastausdispositio · EU-CEG-yksiköt/ml/arvo</td><td>${tag(nl.request.status)}</td><td><a class="source-link" href="${esc(nl.urls.vws_woo)}" target="_blank" rel="noopener">VWS Woo -kanava ↗</a></td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Riippumattoman toiston tila:</strong> ${esc(nl.manifest.confidence.exact_reproducibility)}. 5 529 painotetusta vastaajasta 443 oli todellisia vape-vastaajia ja analyysin painotettu määrä 501; niitä ei tulkita 501 erilliseksi ihmiseksi. Viestiä ei ole lähetetty.</div>`;
+
+    $("#netherlands-method").innerHTML = `
+      <table>
+        <thead><tr><th>Auditointikohde</th><th>Havainto</th><th>Auditointitulos</th><th>Pankkikäyttö</th><th>Lähdesivu</th></tr></thead>
+        <tbody>${nl.method.map((item) => `<tr>
+          <td><strong>${esc(item.item.replaceAll("_", " "))}</strong></td><td>${esc(item.observed)}</td><td><code>${esc(item.result)}</code></td><td>${esc(item.bankUse)}</td>
+          <td>${esc(item.sourcePage)} · <a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">raportti ↗</a></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Hit rate -raja:</strong> 443 / 5 529 = 8,012 % on raakaseulan osuus ja 501 / 5 529 = 9,061 % painotettu analyysiosuus. Varsinaista kyselyn vastausastetta ei voi laskea, koska täydellinen kutsu-/dispositiotieto puuttuu.</div>`;
+
+    $("#netherlands-prices").innerHTML = `
+      <table>
+        <thead><tr><th>Tuote</th><th>Raportoitu keskihinta</th><th>n</th><th>Ostotahti</th><th>Rajoite</th></tr></thead>
+        <tbody>${nl.prices.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num"><strong>${eur(item.averagePriceEur)}</strong></td><td class="num">${integer(item.reportedN)}</td><td>${esc(item.purchaseFrequency)}</td><td>${esc(item.boundary)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>E-nesteraja:</strong> täyttönesteen keskihinta oli 8,00 euroa ja raportoitu ostotahti neljä kertaa kuukaudessa, mutta pakkauskoko ja nikotiinipitoisuus puuttuvat. Hintaa ei muunnettu EUR/ml-luvuksi tai kansalliseksi litramääräksi.</div>`;
+
+    $("#netherlands-stress").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>Kerroin</th><th>Kokonaiskulutusmeno</th><th>Laiton meno</th><th>Laillinen jäännös</th><th>Laiton osuus vakiona</th></tr></thead>
+        <tbody>${nl.stress.map((item) => `<tr>
+          <td><strong>${esc({ lower_price_20pct: "−20 %", reported_reference: "Raportoitu", upper_price_20pct: "+20 %" }[item.scenario])}</strong></td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item.multiplier)}×</td><td class="num"><strong>${moneyEur3(item.totalSpendEur)}</strong></td><td class="num">${moneyEur3(item.illegalSpendEur)}</td><td class="num">${moneyEur3(item.legalResidualEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.illegalSharePct)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Ei luottamusväli:</strong> ±20 % muuttaa kaikkia hinta-/meno-oletuksia mekaanisesti ja pitää kulutusrakenteen vakiona. Skenaariot eivät ole empiirinen ala-, perus- ja yläennuste.</div>`;
+
+    $("#netherlands-youth").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>Prevalenssi</th><th>12–16-vuotiaita</th><th>Ero raportin 22,8 %:iin</th><th>Tila</th></tr></thead>
+        <tbody>${nl.youth.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(item.prevalencePct)} %</td><td class="num">${integer(item.impliedPeople)}</td><td class="num">${item.differencePeople ? "+" + integer(item.differencePeople) : "—"}</td><td><code>${esc(item.status)}</code></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointihavainto:</strong> 24,6 % piste-estimaatti tuottaa raportin väestöpohjalla 13 956 henkilöä enemmän kuin 22,8 %. Tarkkaa euromäärää ei voi johtaa ilman ikäryhmän kuukausimeno- ja laittomuussoluja.</div>`;
+
+    $("#netherlands-cbs").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Ikäryhmä</th><th>Piste-estimaatti</th><th>95 % ala</th><th>95 % ylä</th><th>Mittari</th></tr></thead>
+        <tbody>${nl.cbs.map((item) => `<tr>
+          <td>${item.year}</td><td><strong>${esc(item.ageGroup)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(item.pointPct)} %</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(item.lowerPct)} %</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(item.upperPct)} %</td><td>Päivittäin tai ei-päivittäin</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Määritelmäero:</strong> CBS mittaa nykykäyttöä; ScholierenMonitorin joskus kokeillut -mitta ei ole sama asia. Molemmat ovat käyttöprevalensseja, eivät myyntivolyymia tai kulutusmenoa. <a class="source-link" href="${esc(nl.urls.cbs_esigarette_2024)}" target="_blank" rel="noopener">CBS API ↗</a></div>`;
+
+    $("#netherlands-bridge").innerHTML = `
+      <table>
+        <thead><tr><th>Kori</th><th>WORLD-tuonti</th><th>WORLD-vienti</th><th>Rajavirta netto</th><th>Intra-tuonti</th><th>Extra-tuonti</th><th>Extra-osuus</th><th>Vienti / tuonti</th><th>Täsmäytys</th></tr></thead>
+        <tbody>${nl.bridge.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong><div class="meta-line">${esc(item.products)}</div></td><td class="num">${moneyEur3(item.worldImportEur)}</td><td class="num">${moneyEur3(item.worldExportEur)}</td><td class="num"><strong>${moneyEur3(item.borderNetEur)}</strong></td><td class="num">${moneyEur3(item.intraImportEur)}</td><td class="num">${moneyEur3(item.extraImportEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.extraImportSharePct)} %</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.exportImportRatioPct)} %</td><td>${item.importGapEur === 0 && item.exportGapEur === 0 ? tag("verified", "0 € / 0 €") : tag("partial")}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Rotterdam-raja:</strong> kapea ${moneyEur3(nlNarrow.borderNetEur)} tuonti miinus vienti ei ole kotimainen kysyntä. Hubi, tullivarastot, jälleenvienti, kotimainen tuotanto ja eri arvostustasot estävät suoran muunnoksen kuluttajamyyntiin.</div>`;
+
+    $("#netherlands-route").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Rajaus</th><th>Virta</th><th>Partneriryhmä</th><th>Arvo</th><th>Määrä kg</th><th>Supplementary quantity</th><th>Täsmäytysero</th></tr></thead>
+        <tbody>${nl.route.map((item) => `<tr>
+          <td><code>${esc(item.product)}</code></td><td>${esc(item.scope)}</td><td><strong>${esc(item.flow === "import" ? "Tuonti" : "Vienti")}</strong></td><td>${esc(item.partnerScope)}</td><td class="num">${moneyEur3(item.valueEur)}</td><td class="num">${item.quantityKg === null ? "—" : integer(item.quantityKg)}</td><td class="num">${item.supplementaryQuantity === null ? "—" : integer(item.supplementaryQuantity)}</td><td class="num">${item.gapEur === null ? "—" : moneyEur3(item.gapEur)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Määräraja:</strong> 85434000:n kilogrammakenttä on laaja ja supplementary quantity puuttuu. Kilogrammoja ei muunnettu laitteiksi tai millilitroiksi.</div>`;
+
+    $("#netherlands-partners").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Virta</th><th>Sija</th><th>Partneri</th><th>Partnerin rooli</th><th>Arvo</th><th>Osuus julkaistuista maariveistä</th></tr></thead>
+        <tbody>${nl.partners.map((item) => `<tr>
+          <td><code>${esc(item.product)}</code></td><td>${esc(item.flow === "import" ? "Tuonti" : "Vienti")}</td><td class="num">${item.rank}</td><td><strong>${esc(item.partnerLabel)}</strong></td><td>${esc(item.partnerRole)}</td><td class="num">${moneyEur3(item.valueEur)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.sharePct)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Partnerisemantiikka:</strong> intra-EU-tuonnissa partneri on lähetysmaa ja extra-EU-tuonnissa alkuperämaa. Laiterivin suurin tuontialkuperä oli Kiina ${moneyEur3(nl.partners.find((item) => item.product === "85434000" && item.flow === "import" && item.rank === 1).valueEur)}; 24041200-rivin Kiina-tuonti ${moneyEur3(nl.partners.find((item) => item.product === "24041200" && item.flow === "import" && item.rank === 1).valueEur)}.</div>`;
   }
 
   function renderGaps() {
@@ -724,6 +815,7 @@
     rows.push({ view: "taxes", title: "Espanja · AEAT / Modelo 573", detail: `${moneyEur3(data.spainAeat.exactNetRevenueEur)} tarkka nettokertymä, L1/L2-millilitrat ja PX-ES-001` });
     rows.push({ view: "customs", title: "Ranska · Douane / ANSES", detail: `${moneyEur3(data.franceEvidence.manifest.official_results.douane_all_four_codes_border_net_import_eur)} rajat ylittävä nettotuonti, 203 181 ANSES-ilmoitusriviä ja 35,010 % historiallinen hit rate` });
     rows.push({ view: "taxes", title: "Puola · MF / KAS / Eurostat", detail: `805 441 litraa vuoden 2023 ilmoitettua valmisteverovirtaa, ${moneyPln(data.polandEvidence.manifest.official_results.e_liquid_excise_revenue_2025_pln)} vuoden 2025 e-nesteveroa ja 36,007 % kohdennettu KAS-hit rate` });
+    rows.push({ view: "taxes", title: "Alankomaat · VWS / CBS / Trimbos / Eurostat", detail: `${moneyEur3(data.netherlandsEvidence.manifest.headline.reported_total_consumer_spend_eur)} mallinnettua kulutusmenoa, 5 529 vastaajan menetelmäauditointi, 22,8 % lähdepoikkeama ja ${moneyEur3(data.netherlandsEvidence.bridge[0].worldImportEur)} WORLD-tuontia` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }
