@@ -95,6 +95,13 @@ def build_payload() -> dict:
     us_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "us_census_vape_manifest_2025.json").read_text(encoding="utf-8")
     )
+    canada_total_rows = read_csv(PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_import_totals_2025.csv")
+    canada_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_import_origins_2025.csv")
+    canada_province_rows = read_csv(PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_import_provinces_2025.csv")
+    canada_export_rows = read_csv(PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_exports_reexports_2025.csv")
+    canada_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "canada_cimt_vape_manifest_2025.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -381,6 +388,105 @@ def build_payload() -> dict:
         for row in us_origin_rows
     ]
 
+    canada_titles = {
+        "2404120000": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "2404190000": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "8543400010": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "8543400090": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+    }
+    canada_names = {
+        "China": "Kiina", "United States of America": "Yhdysvallat", "Hong Kong": "Hongkong",
+        "Malaysia": "Malesia", "Germany": "Saksa", "Indonesia": "Indonesia",
+        "Korea, South": "Etelä-Korea", "France": "Ranska", "Finland": "Suomi",
+        "United Kingdom": "Yhdistynyt kuningaskunta", "Poland": "Puola", "Japan": "Japani",
+        "Sweden": "Ruotsi", "Italy": "Italia", "Netherlands": "Alankomaat",
+        "Morocco": "Marokko", "Colombia": "Kolumbia", "Dominican Republic": "Dominikaaninen tasavalta",
+        "Peru": "Peru", "Spain": "Espanja", "Austria": "Itävalta", "Denmark": "Tanska",
+    }
+    canada_provinces = {
+        "Newfoundland and Labrador": "Newfoundland ja Labrador", "Prince Edward Island": "Prinssi Edwardin saari",
+        "Nova Scotia": "Nova Scotia", "New Brunswick": "New Brunswick", "Quebec": "Quebec",
+        "Ontario": "Ontario", "Manitoba": "Manitoba", "Saskatchewan": "Saskatchewan",
+        "Alberta": "Alberta", "British Columbia": "Brittiläinen Kolumbia",
+    }
+    canada_origin_value_by_code = {
+        code: sum(int(row["value_cad"]) for row in canada_origin_rows if row["hs10_code"] == code)
+        for code in canada_titles
+    }
+    canada_largest_by_code = {
+        code: max((row for row in canada_origin_rows if row["hs10_code"] == code), key=lambda row: int(row["value_cad"]))
+        for code in canada_titles
+    }
+    canada_totals = [
+        {
+            "code": row["hs10_code"],
+            "title": canada_titles[row["hs10_code"]],
+            "scope": row["scope"],
+            "quantity": int(row["quantity"]),
+            "unit": row["unit"],
+            "valueCad": int(row["value_cad"]),
+            "sourceRecords": int(row["selected_record_count"]),
+            "largestOrigin": canada_names.get(
+                canada_largest_by_code[row["hs10_code"]]["country_of_origin"],
+                canada_largest_by_code[row["hs10_code"]]["country_of_origin"],
+            ),
+            "largestOriginShare": 100 * int(canada_largest_by_code[row["hs10_code"]]["value_cad"]) / int(row["value_cad"]),
+            "url": row["source_url"],
+        }
+        for row in canada_total_rows
+    ]
+    canada_origins = [
+        {
+            "code": row["hs10_code"],
+            "title": canada_titles[row["hs10_code"]],
+            "origin": canada_names.get(row["country_of_origin"], row["country_of_origin"]),
+            "quantity": int(row["quantity"]),
+            "unit": row["unit"],
+            "valueCad": int(row["value_cad"]),
+            "valueShare": 100 * int(row["value_cad"]) / canada_origin_value_by_code[row["hs10_code"]],
+        }
+        for row in canada_origin_rows
+    ]
+    canada_clearance = [
+        {
+            "code": row["hs10_code"],
+            "provinceCode": row["province_code"],
+            "province": canada_provinces.get(row["province_of_clearance"], row["province_of_clearance"]),
+            "quantity": int(row["quantity"]),
+            "unit": row["unit"],
+            "valueCad": int(row["value_cad"]),
+        }
+        for row in canada_province_rows
+    ]
+    canada_export_codes = {
+        "24041200": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "24041900": "Muut inhaloitavat tuotteet",
+        "85434000": "Sähkösavukkeet ja vastaavat höyrystinlaitteet",
+    }
+    canada_exports = []
+    for code, title in canada_export_codes.items():
+        rows = [row for row in canada_export_rows if row["hs8_code"] == code]
+        canada_exports.append(
+            {
+                "code": code,
+                "title": title,
+                "unit": next((row["unit"] for row in rows if row["unit"]), "—"),
+                "totalValueCad": sum(int(row["total_export_value_cad"]) for row in rows),
+                "domesticValueCad": sum(int(row["domestic_export_value_cad"]) for row in rows),
+                "reexportValueCad": sum(int(row["derived_reexport_value_cad"]) for row in rows),
+                "totalQuantity": sum(int(row["total_export_quantity"]) for row in rows),
+                "domesticQuantity": sum(int(row["domestic_export_quantity"]) for row in rows),
+                "reexportQuantity": sum(int(row["derived_reexport_quantity"]) for row in rows),
+            }
+        )
+
+    canada_device_value = canada_manifest["import_selection"]["device_value_cad"]
+    canada_device_quantity = canada_manifest["import_selection"]["device_quantity_nmb"]
+    canada_broad_value = canada_manifest["import_selection"]["broad_inhalation_product_value_cad"]
+    canada_broad_quantity = canada_manifest["import_selection"]["broad_inhalation_product_quantity_kg"]
+    canada_combined_value = canada_device_value + canada_broad_value
+    canada_reexport_value = sum(row["reexportValueCad"] for row in canada_exports)
+
     us_device_value = us_manifest["baskets"]["core_devices"]["general_customs_value_usd"]
     us_liquid_value = us_manifest["baskets"]["core_liquids"]["general_customs_value_usd"]
     for country in countries:
@@ -394,6 +500,19 @@ def build_payload() -> dict:
         country["missing"] = (
             "Nykyinen kuluttajamyynti, kotimainen tuotanto, varastomuutos ja laittoman markkinan arvio. "
             + country["missing"]
+        )
+    for country in countries:
+        if country["sourceName"] != "Canada":
+            continue
+        country["current"] = (
+            "Statistics Canada CIMT 2025 HS10: 14 517 957 laitetta / 89,316 milj. CAD ja "
+            "5 757 344 kg laajan inhaloitavien tuotteiden korin tuontia / 314,484 milj. CAD. "
+            "608 HS10-lähderiviä täsmäytyi viralliseen HS6-sarjaan 564 tarkastusavaimella ilman eroa; "
+            "johdettu jälleenvienti oli 1,296 milj. CAD. Health Canada 2024 toimitusmyynti on erillinen 1,161 mrd CAD:n ankkuri."
+        )
+        country["missing"] = (
+            "HS10-ristiintaulukko alkuperämaasta ja suorasta lähetys-/vientimaasta, kotimainen tuotanto, "
+            "varastomuutos sekä 2025 Health Canada -myynti."
         )
 
     contacts = []
@@ -427,6 +546,7 @@ def build_payload() -> dict:
         },
         "metrics": [
             {"label": "Kanada 2024", "value": "1,161 mrd CAD", "detail": "Viranomaiselle raportoitu toimitusmyynti", "tone": ""},
+            {"label": "Kanada tulli 2025", "value": f"{canada_combined_value / 1e6:.1f} milj. CAD".replace(".", ","), "detail": "CIMT HS10 · laitteet + laaja inhaloitavien kori", "tone": "blue"},
             {"label": "USA 2025", "value": f"{(us_device_value + us_liquid_value) / 1e6:.1f} milj. USD".replace(".", ","), "detail": "Census HTS10 · laitteet + täsmälliset nesteseokset", "tone": "blue"},
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
@@ -442,6 +562,16 @@ def build_payload() -> dict:
                 "limit": "Toimitus tukkuihin ja jälleenmyyjille, ei kassamyynti kuluttajalle. Sarja voi tarkentua.",
                 "source": "Health Canada · Vaping sales dashboard",
                 "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/",
+            },
+            {
+                "grade": "B",
+                "market": "Kanada",
+                "title": "Virallinen HS10-tuonti ja HS8-jälleenvientikorjaus",
+                "value": "403,800 milj. CAD · 14 517 957 laitetta",
+                "detail": "Statistics Canadan vuoden 2025 tullituonti: laitteet 89,316 milj. CAD ja laaja inhaloitavien tuotteiden kori 314,484 milj. CAD. Johdettu jälleenvienti oli 1,296 milj. CAD.",
+                "limit": "Tulliarvo on eri vuoden ja eri arvostustason mittari kuin Health Canadan toimitusmyynti. 2404-kilogrammoja ei nimetä kokonaan valmiiksi e-nesteeksi eikä muunnettu litroiksi.",
+                "source": "Statistics Canada · CIMT annual bulk files",
+                "url": "https://www150.statcan.gc.ca/n1/en/catalogue/71-607-X2021004",
             },
             {
                 "grade": "A",
@@ -517,6 +647,27 @@ def build_payload() -> dict:
             "method": "WHO:n vuoden 2025 maaprofiilien sivu 9 raportoi halvimpien closed-, disposable- ja open-system e-nesteiden hinnan sekä kokonaisveron, valmisteveron, ALV:n, tullin ja muut verot prosenttina vähittäishinnasta. Pixan-auditointi säilyttää puuttuvat solut puuttuvina ja johtaa €/ml- tai paikallisvaluutta/ml-luvun vain hinnan ja WHO:n specific excise -osuuden tulona. Johdettu kanta merkitään B-tason tarkistusluvuksi, ei nykyiseksi lakikannaksi.",
         },
         "customs": customs,
+        "canadaCustoms": {
+            "totals": canada_totals,
+            "origins": canada_origins,
+            "clearance": canada_clearance,
+            "exports": canada_exports,
+            "audit": canada_manifest["import_audit"],
+            "reexportAudit": canada_manifest["reexport_derivation"],
+            "archives": canada_manifest["archives"],
+            "comparison": {
+                "healthCanadaShipmentSales2024Cad": 1_160_753_796.78,
+                "customsImportBasket2025Cad": canada_combined_value,
+                "customsToPriorYearShipmentSalesPct": 100 * canada_combined_value / 1_160_753_796.78,
+                "deviceValueCad": canada_device_value,
+                "deviceQuantity": canada_device_quantity,
+                "broadInhalationValueCad": canada_broad_value,
+                "broadInhalationQuantityKg": canada_broad_quantity,
+                "derivedReexportValueCad": canada_reexport_value,
+                "derivedReexportSharePct": 100 * canada_reexport_value / canada_combined_value,
+            },
+            "limits": canada_manifest["definitions_and_limits"],
+        },
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -567,6 +718,7 @@ def build_payload() -> dict:
         ],
         "evidence": [
             {"grade": "A", "title": "Health Canada · Vaping sales", "coverage": "Kanada 2023–2024: arvo, yksiköt, litrat ja tuoteryhmät", "use": "Nykyinen virallinen markkina-ankkuri", "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/"},
+            {"grade": "B", "title": "Statistics Canada · CIMT 2025", "coverage": "Kanadan HS10-tuonti alkuperämaittain sekä HS8-kokonais-, kotimainen ja johdettu jälleenvienti", "use": "Kansallinen laite- ja inhalointituotteiden reittiankkuri; HS10 täsmää HS6:een nollaerolla", "url": "https://www150.statcan.gc.ca/n1/en/catalogue/71-607-X2021004"},
             {"grade": "A", "title": "Destatis · tabakverotilasto", "coverage": "Saksa 2025: verotettu tupakan korvike-/e-nestemäärä", "use": "Nykyinen virallinen volyymiankkuri", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html"},
             {"grade": "A", "title": "Verohallinto · valmisteverotilasto", "coverage": "Suomi 2023–2026: e-nesteiden kuukausittainen nettovolyymi ja nettovero", "use": "Nykyinen virallinen vero- ja volyymiankkuri", "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/"},
             {"grade": "A", "title": "Saksan tupakkaverolaki §2", "coverage": "Verokanta 0,26 €/ml vuonna 2025 ja 0,32 €/ml vuodesta 2026", "use": "Veropohjan auditointilaskelma", "url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html"},
@@ -583,7 +735,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "EU-27 CN8-reittimatriisi", "detail": "Valmis 2025: EU-ulkoraja 2,240 mrd EUR ja 12 jäsenmaan WORLD/intra/extra-jako, CN8 85434000 + 24041200. Kaikki ryhmärivit täsmäytyivät 0 EUR erolla.", "status": "done"},
             {"priority": "high", "title": "EU-CEG aggregoidut myyntipyynnöt", "detail": "Lähetä Article 20(7) -pyynnöt kansallisille toimivaltaisille viranomaisille, ilman yritystason luottamuksellisia tietoja.", "status": "queued"},
             {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Valmis 2025: kahdeksan HTS10-riviä, general imports ja imports for consumption, 127,747 milj. laitetta, 23,279 milj. kg täsmällisiä nesteseoksia, CIF ja 143,132 milj. USD laskettua tullia. 236 detaljiriviä täsmäytyivät ilman eroa.", "status": "done"},
-            {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "CIMT 10-digit + origin/export country + foreign-origin re-exports, täsmäytys Health Canadan toimitusmyyntiin.", "status": "requested"},
+            {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "Valmis: CIMT HS10-tuonti alkuperämaittain sekä HS8 total/domestic/re-export, 608 lähderiviä ja 564 HS6-tarkastusavainta nollaerolla. Avoinna vain alkuperämaa × suora lähetysmaa -ristiintaulukko ja 2025 Health Canada -myynti.", "status": "done"},
             {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
             {"priority": "medium", "title": "Kiina GACC tullimenettelyineen", "detail": "Hae alkuperä, lähetysmaa, tullimenettely ja maahantuojan sijainti; erottele vientihubi ja kotimarkkina.", "status": "queued"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
@@ -622,9 +774,35 @@ def publish_us_evidence() -> None:
         shutil.copy2(raw / name, public_raw / name)
 
 
+def publish_canada_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "canada_cimt"
+    public_data = DASHBOARD_DIR / "data" / "canada"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "canada_cimt"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "canada_cimt_vape_import_totals_2025.csv",
+        "canada_cimt_vape_import_origins_2025.csv",
+        "canada_cimt_vape_import_provinces_2025.csv",
+        "canada_cimt_vape_import_monthly_2025.csv",
+        "canada_cimt_vape_exports_reexports_2025.csv",
+        "canada_cimt_vape_manifest_2025.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "CIMT_import_HS10_vape_selected_2025.csv",
+        "CIMT_import_HS6_vape_selected_2025.csv",
+        "CIMT_total_exports_HS8_vape_selected_2025.csv",
+        "CIMT_domestic_exports_HS8_vape_selected_2025.csv",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
+    publish_canada_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

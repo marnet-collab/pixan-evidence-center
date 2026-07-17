@@ -25,6 +25,8 @@ Japan Customs / Ministry of Finance -viranomaisen vuoden 2025 tarkistettu 9-nume
 
 U.S. Census Bureaun vuoden 2025 HTS10-aineiston johdetut summat, alkuperämaat, nimikeluettelo ja auditointimanifesti julkaistaan `data/usa/`-kansiossa. Julkiseen repoon kopioidaan myös kompaktit kiinteälevyiset lähdeotteet; 292 Mt:n alkuperäisarkisto jää paikalliseen datahuoneeseen ja lukitaan manifestissa SHA-256-tunnisteella. Auditointi täsmäyttää 236 valittua detaljiriviä kansallisiin määriin, customs- ja CIF-arvoihin, kulutukseen luovutukseen sekä laskettuun tulliin.
 
+Statistics Canadan vuoden 2025 CIMT-aineiston HS10-tuontisummat, alkuperämaat, tullausmaakunnat, kuukausisarja sekä HS8-vienti-/jälleenvientilaskelma julkaistaan `data/canada/`-kansiossa. Julkiseen repoon kopioidaan kompaktit HS10-, HS6- ja vientilähdeotteet; kolme alkuperäistä ZIP-arkistoa jäävät paikalliseen datahuoneeseen ja niiden SHA-256-tunnisteet julkaistaan manifestissa. Auditointi täsmäyttää 608 valittua HS10-riviä viralliseen HS6-sarjaan 564 tarkastusavaimella ilman eroa.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti

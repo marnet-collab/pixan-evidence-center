@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 08:10 UTC",
+    "updated": "2026-07-17 08:40 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -12,6 +12,12 @@ window.PIXAN_DATA = {
       "value": "1,161 mrd CAD",
       "detail": "Viranomaiselle raportoitu toimitusmyynti",
       "tone": ""
+    },
+    {
+      "label": "Kanada tulli 2025",
+      "value": "403,8 milj, CAD",
+      "detail": "CIMT HS10 · laitteet + laaja inhaloitavien kori",
+      "tone": "blue"
     },
     {
       "label": "USA 2025",
@@ -48,6 +54,16 @@ window.PIXAN_DATA = {
       "limit": "Toimitus tukkuihin ja jälleenmyyjille, ei kassamyynti kuluttajalle. Sarja voi tarkentua.",
       "source": "Health Canada · Vaping sales dashboard",
       "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/"
+    },
+    {
+      "grade": "B",
+      "market": "Kanada",
+      "title": "Virallinen HS10-tuonti ja HS8-jälleenvientikorjaus",
+      "value": "403,800 milj. CAD · 14 517 957 laitetta",
+      "detail": "Statistics Canadan vuoden 2025 tullituonti: laitteet 89,316 milj. CAD ja laaja inhaloitavien tuotteiden kori 314,484 milj. CAD. Johdettu jälleenvienti oli 1,296 milj. CAD.",
+      "limit": "Tulliarvo on eri vuoden ja eri arvostustason mittari kuin Health Canadan toimitusmyynti. 2404-kilogrammoja ei nimetä kokonaan valmiiksi e-nesteeksi eikä muunnettu litroiksi.",
+      "source": "Statistics Canada · CIMT annual bulk files",
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/71-607-X2021004"
     },
     {
       "grade": "A",
@@ -187,11 +203,11 @@ window.PIXAN_DATA = {
       "sourceName": "Canada",
       "status": "verified",
       "customs": "Statistics Canada CIMT 10-digit imports and 8-digit exports; 8543400010/0090, 2404120000, 2404190000",
-      "route": "Match country of origin against country of export; subtract foreign-origin re-exports using table 12-10-0182; do not treat province of clearance as consumption destination",
+      "route": "Use country of origin; subtract foreign-origin re-exports from total minus domestic exports; do not treat province of clearance as consumption destination; direct-shipment country remains separate",
       "salesSource": "Health Canada VPRR Vaping sales",
-      "current": "National 2023-2024 shipment sales obtained; 2025 detailed route reconciliation not obtained",
-      "missing": "2025 10-digit trade, origin/export-country bridge and re-exports by vape code",
-      "how": "Use CIMT web application/API at 10-digit level; obtain tables 12-10-0178-01 and 12-10-0182-01; ask Statistics Canada for commodity-level origin/export and re-export cross-tab if public table is too aggregated",
+      "current": "Statistics Canada CIMT 2025 HS10: 14 517 957 laitetta / 89,316 milj. CAD ja 5 757 344 kg laajan inhaloitavien tuotteiden korin tuontia / 314,484 milj. CAD. 608 HS10-lähderiviä täsmäytyi viralliseen HS6-sarjaan 564 tarkastusavaimella ilman eroa; johdettu jälleenvienti oli 1,296 milj. CAD. Health Canada 2024 toimitusmyynti on erillinen 1,161 mrd CAD:n ankkuri.",
+      "missing": "HS10-ristiintaulukko alkuperämaasta ja suorasta lähetys-/vientimaasta, kotimainen tuotanto, varastomuutos sekä 2025 Health Canada -myynti.",
+      "how": "Use the saved CIMT annual bulk ZIPs and audit manifest as primary customs evidence; follow up with Statistics Canada only for the commodity-level origin/export-country cross-tab and methodology confirmation; refresh when revised; obtain the next Health Canada VPRR release",
       "tax": {
         "name": "Kanada",
         "sourceName": "Canada",
@@ -2397,6 +2413,834 @@ window.PIXAN_DATA = {
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2025&reporterCode=392&flowCode=M&partnerCode=0&cmdCode=240419&maxRecords=500"
     }
   ],
+  "canadaCustoms": {
+    "totals": [
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "scope": "extended_liquid_proxy_not_exclusive",
+        "quantity": 5751392,
+        "unit": "KGM",
+        "valueCad": 314116821,
+        "sourceRecords": 252,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 98.99332325154278,
+        "url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip"
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "scope": "extended_liquid_proxy_not_exclusive",
+        "quantity": 5952,
+        "unit": "KGM",
+        "valueCad": 366737,
+        "sourceRecords": 56,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 98.81468191101526,
+        "url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip"
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "scope": "core_device",
+        "quantity": 704797,
+        "unit": "NMB",
+        "valueCad": 5057768,
+        "sourceRecords": 80,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 93.02368159235458,
+        "url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip"
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "scope": "core_device",
+        "quantity": 13813160,
+        "unit": "NMB",
+        "valueCad": 84258543,
+        "sourceRecords": 220,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 97.52239010351745,
+        "url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip"
+      }
+    ],
+    "origins": [
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Kiina",
+        "quantity": 5727468,
+        "unit": "KGM",
+        "valueCad": 310954680,
+        "valueShare": 98.99332325154278
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Yhdysvallat",
+        "quantity": 15410,
+        "unit": "KGM",
+        "valueCad": 2517226,
+        "valueShare": 0.8013661898100006
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Hongkong",
+        "quantity": 6666,
+        "unit": "KGM",
+        "valueCad": 511068,
+        "valueShare": 0.16269997842617923
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Ranska",
+        "quantity": 1199,
+        "unit": "KGM",
+        "valueCad": 76536,
+        "valueShare": 0.024365457334104373
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Puola",
+        "quantity": 285,
+        "unit": "KGM",
+        "valueCad": 35241,
+        "valueShare": 0.011219074447464882
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 260,
+        "unit": "KGM",
+        "valueCad": 13752,
+        "valueShare": 0.004377989041217248
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Saksa",
+        "quantity": 30,
+        "unit": "KGM",
+        "valueCad": 2770,
+        "valueShare": 0.0008818375250270344
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Japani",
+        "quantity": 25,
+        "unit": "KGM",
+        "valueCad": 2422,
+        "valueShare": 0.0007710507168286922
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Malesia",
+        "quantity": 9,
+        "unit": "KGM",
+        "valueCad": 1331,
+        "valueShare": 0.0004237277060689469
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Ruotsi",
+        "quantity": 21,
+        "unit": "KGM",
+        "valueCad": 812,
+        "valueShare": 0.00025850255246279857
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Taiwan",
+        "quantity": 16,
+        "unit": "KGM",
+        "valueCad": 732,
+        "valueShare": 0.0002330343206930647
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Itävalta",
+        "quantity": 3,
+        "unit": "KGM",
+        "valueCad": 154,
+        "valueShare": 4.9026346156737654e-05
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Canada",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 82,
+        "valueShare": 2.6104937563977192e-05
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "Switzerland",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 12,
+        "valueShare": 3.820234765460077e-06
+      },
+      {
+        "code": "2404120000",
+        "title": "Nikotiinia sisältävät tuotteet inhalointiin ilman palamista",
+        "origin": "India",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 3,
+        "valueShare": 9.550586913650193e-07
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Kiina",
+        "quantity": 5853,
+        "unit": "KGM",
+        "valueCad": 362390,
+        "valueShare": 98.81468191101526
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Yhdysvallat",
+        "quantity": 40,
+        "unit": "KGM",
+        "valueCad": 3054,
+        "valueShare": 0.8327493544420116
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 11,
+        "unit": "KGM",
+        "valueCad": 599,
+        "valueShare": 0.16333230625761785
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Ruotsi",
+        "quantity": 41,
+        "unit": "KGM",
+        "valueCad": 328,
+        "valueShare": 0.08943738973705953
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "New Zealand",
+        "quantity": 2,
+        "unit": "KGM",
+        "valueCad": 179,
+        "valueShare": 0.04880881939918797
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Saksa",
+        "quantity": 1,
+        "unit": "KGM",
+        "valueCad": 75,
+        "valueShare": 0.02045062265329105
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Ranska",
+        "quantity": 1,
+        "unit": "KGM",
+        "valueCad": 68,
+        "valueShare": 0.01854189787231722
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Malesia",
+        "quantity": 2,
+        "unit": "KGM",
+        "valueCad": 28,
+        "valueShare": 0.007634899123895325
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Puola",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 10,
+        "valueShare": 0.0027267496871054733
+      },
+      {
+        "code": "2404190000",
+        "title": "Tupakka-/nikotiinikorvikkeita sisältävät tuotteet inhalointiin",
+        "origin": "Tanska",
+        "quantity": 1,
+        "unit": "KGM",
+        "valueCad": 6,
+        "valueShare": 0.001636049812263284
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Kiina",
+        "quantity": 647449,
+        "unit": "NMB",
+        "valueCad": 4704922,
+        "valueShare": 93.02368159235458
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Hongkong",
+        "quantity": 53261,
+        "unit": "NMB",
+        "valueCad": 296601,
+        "valueShare": 5.86426660930276
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Yhdysvallat",
+        "quantity": 3932,
+        "unit": "NMB",
+        "valueCad": 29060,
+        "valueShare": 0.5745617434409803
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 120,
+        "unit": "NMB",
+        "valueCad": 17774,
+        "valueShare": 0.3514198357852713
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Ranska",
+        "quantity": 6,
+        "unit": "NMB",
+        "valueCad": 8513,
+        "valueShare": 0.1683153517519981
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Saksa",
+        "quantity": 9,
+        "unit": "NMB",
+        "valueCad": 315,
+        "valueShare": 0.006228043674601128
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Japani",
+        "quantity": 3,
+        "unit": "NMB",
+        "valueCad": 159,
+        "valueShare": 0.003143679188131998
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Canada",
+        "quantity": 9,
+        "unit": "NMB",
+        "valueCad": 150,
+        "valueShare": 0.0029657350831433947
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Taiwan",
+        "quantity": 5,
+        "unit": "NMB",
+        "valueCad": 139,
+        "valueShare": 0.0027482478437128787
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Itävalta",
+        "quantity": 1,
+        "unit": "NMB",
+        "valueCad": 69,
+        "valueShare": 0.0013642381382459614
+      },
+      {
+        "code": "8543400010",
+        "title": "Sähkösavuke tai höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Alankomaat",
+        "quantity": 2,
+        "unit": "NMB",
+        "valueCad": 66,
+        "valueShare": 0.0013049234365830936
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Kiina",
+        "quantity": 13499032,
+        "unit": "NMB",
+        "valueCad": 82170945,
+        "valueShare": 97.52239010351745
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Malesia",
+        "quantity": 10959,
+        "unit": "NMB",
+        "valueCad": 602763,
+        "valueShare": 0.7153731580665951
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Yhdysvallat",
+        "quantity": 83445,
+        "unit": "NMB",
+        "valueCad": 433838,
+        "valueShare": 0.5148890362369546
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Saksa",
+        "quantity": 1274,
+        "unit": "NMB",
+        "valueCad": 372105,
+        "valueShare": 0.441622874964738
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Indonesia",
+        "quantity": 166084,
+        "unit": "NMB",
+        "valueCad": 344160,
+        "valueShare": 0.4084570985282762
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Etelä-Korea",
+        "quantity": 39693,
+        "unit": "NMB",
+        "valueCad": 199556,
+        "valueShare": 0.2368377055843465
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Hongkong",
+        "quantity": 11783,
+        "unit": "NMB",
+        "valueCad": 89193,
+        "valueShare": 0.10585632842001552
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Suomi",
+        "quantity": 125,
+        "unit": "NMB",
+        "valueCad": 38621,
+        "valueShare": 0.0458363017266985
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 58,
+        "unit": "NMB",
+        "valueCad": 3671,
+        "valueShare": 0.004356828244703923
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Ranska",
+        "quantity": 162,
+        "unit": "NMB",
+        "valueCad": 2019,
+        "valueShare": 0.0023961961934233778
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Sri Lanka",
+        "quantity": 1,
+        "unit": "NMB",
+        "valueCad": 442,
+        "valueShare": 0.0005245758878123491
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Canada",
+        "quantity": 14,
+        "unit": "NMB",
+        "valueCad": 384,
+        "valueShare": 0.0004557401378279233
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Switzerland",
+        "quantity": 21,
+        "unit": "NMB",
+        "valueCad": 200,
+        "valueShare": 0.00023736465511871004
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Ireland",
+        "quantity": 114,
+        "unit": "NMB",
+        "valueCad": 192,
+        "valueShare": 0.00022787006891396164
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Chad",
+        "quantity": 1,
+        "unit": "NMB",
+        "valueCad": 168,
+        "valueShare": 0.00019938631029971644
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Puola",
+        "quantity": 6,
+        "unit": "NMB",
+        "valueCad": 165,
+        "valueShare": 0.00019582584047293577
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Italia",
+        "quantity": 383,
+        "unit": "NMB",
+        "valueCad": 61,
+        "valueShare": 7.239621981120657e-05
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Japani",
+        "quantity": 1,
+        "unit": "NMB",
+        "valueCad": 42,
+        "valueShare": 4.984657757492911e-05
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "India",
+        "quantity": 3,
+        "unit": "NMB",
+        "valueCad": 12,
+        "valueShare": 1.4241879307122602e-05
+      },
+      {
+        "code": "8543400090",
+        "title": "Sähkösavuke tai höyrystinlaite ilman nikotiinia",
+        "origin": "Ruotsi",
+        "quantity": 1,
+        "unit": "NMB",
+        "valueCad": 6,
+        "valueShare": 7.120939653561301e-06
+      }
+    ],
+    "clearance": [
+      {
+        "code": "2404120000",
+        "provinceCode": "ON",
+        "province": "Ontario",
+        "quantity": 5097231,
+        "unit": "KGM",
+        "valueCad": 280283735
+      },
+      {
+        "code": "2404120000",
+        "provinceCode": "BC",
+        "province": "Brittiläinen Kolumbia",
+        "quantity": 595553,
+        "unit": "KGM",
+        "valueCad": 31301135
+      },
+      {
+        "code": "2404120000",
+        "provinceCode": "AB",
+        "province": "Alberta",
+        "quantity": 21027,
+        "unit": "KGM",
+        "valueCad": 1215611
+      },
+      {
+        "code": "2404120000",
+        "provinceCode": "QC",
+        "province": "Quebec",
+        "quantity": 33661,
+        "unit": "KGM",
+        "valueCad": 1090417
+      },
+      {
+        "code": "2404120000",
+        "provinceCode": "SK",
+        "province": "Saskatchewan",
+        "quantity": 3920,
+        "unit": "KGM",
+        "valueCad": 225849
+      },
+      {
+        "code": "2404120000",
+        "provinceCode": "MB",
+        "province": "Manitoba",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 74
+      },
+      {
+        "code": "2404190000",
+        "provinceCode": "ON",
+        "province": "Ontario",
+        "quantity": 4925,
+        "unit": "KGM",
+        "valueCad": 336793
+      },
+      {
+        "code": "2404190000",
+        "provinceCode": "QC",
+        "province": "Quebec",
+        "quantity": 955,
+        "unit": "KGM",
+        "valueCad": 27381
+      },
+      {
+        "code": "2404190000",
+        "provinceCode": "BC",
+        "province": "Brittiläinen Kolumbia",
+        "quantity": 71,
+        "unit": "KGM",
+        "valueCad": 2394
+      },
+      {
+        "code": "2404190000",
+        "provinceCode": "AB",
+        "province": "Alberta",
+        "quantity": 1,
+        "unit": "KGM",
+        "valueCad": 101
+      },
+      {
+        "code": "2404190000",
+        "provinceCode": "MB",
+        "province": "Manitoba",
+        "quantity": 0,
+        "unit": "KGM",
+        "valueCad": 68
+      },
+      {
+        "code": "8543400010",
+        "provinceCode": "BC",
+        "province": "Brittiläinen Kolumbia",
+        "quantity": 363921,
+        "unit": "NMB",
+        "valueCad": 2438137
+      },
+      {
+        "code": "8543400010",
+        "provinceCode": "ON",
+        "province": "Ontario",
+        "quantity": 303966,
+        "unit": "NMB",
+        "valueCad": 2038896
+      },
+      {
+        "code": "8543400010",
+        "provinceCode": "QC",
+        "province": "Quebec",
+        "quantity": 34295,
+        "unit": "NMB",
+        "valueCad": 569112
+      },
+      {
+        "code": "8543400010",
+        "provinceCode": "AB",
+        "province": "Alberta",
+        "quantity": 2615,
+        "unit": "NMB",
+        "valueCad": 11623
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "ON",
+        "province": "Ontario",
+        "quantity": 10145575,
+        "unit": "NMB",
+        "valueCad": 69906883
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "BC",
+        "province": "Brittiläinen Kolumbia",
+        "quantity": 2559095,
+        "unit": "NMB",
+        "valueCad": 8990817
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "QC",
+        "province": "Quebec",
+        "quantity": 626391,
+        "unit": "NMB",
+        "valueCad": 2387724
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "MB",
+        "province": "Manitoba",
+        "quantity": 35157,
+        "unit": "NMB",
+        "valueCad": 1750242
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "AB",
+        "province": "Alberta",
+        "quantity": 432194,
+        "unit": "NMB",
+        "valueCad": 1165122
+      },
+      {
+        "code": "8543400090",
+        "provinceCode": "SK",
+        "province": "Saskatchewan",
+        "quantity": 14748,
+        "unit": "NMB",
+        "valueCad": 57755
+      }
+    ],
+    "exports": [
+      {
+        "code": "24041200",
+        "title": "Nikotiinia sisältävät inhaloitavat tuotteet",
+        "unit": "KGM",
+        "totalValueCad": 1003115,
+        "domesticValueCad": 828964,
+        "reexportValueCad": 174151,
+        "totalQuantity": 41931,
+        "domesticQuantity": 36540,
+        "reexportQuantity": 5391
+      },
+      {
+        "code": "24041900",
+        "title": "Muut inhaloitavat tuotteet",
+        "unit": "KGM",
+        "totalValueCad": 847376,
+        "domesticValueCad": 842923,
+        "reexportValueCad": 4453,
+        "totalQuantity": 37647,
+        "domesticQuantity": 37624,
+        "reexportQuantity": 23
+      },
+      {
+        "code": "85434000",
+        "title": "Sähkösavukkeet ja vastaavat höyrystinlaitteet",
+        "unit": "N/A",
+        "totalValueCad": 1573867,
+        "domesticValueCad": 456059,
+        "reexportValueCad": 1117808,
+        "totalQuantity": 0,
+        "domesticQuantity": 0,
+        "reexportQuantity": 0
+      }
+    ],
+    "audit": {
+      "method": "Aggregate selected HS10 rows to HS6 keys and compare against the official HS6 member",
+      "comparison_key": [
+        "month",
+        "HS6",
+        "country",
+        "province",
+        "US state",
+        "unit"
+      ],
+      "keys_compared": 564,
+      "mismatch_keys": 0,
+      "value_gap_cad": 0,
+      "quantity_gap": 0,
+      "result": "pass"
+    },
+    "reexportAudit": {
+      "method": "national total exports minus nationally aggregated domestic exports, by month/HS8/destination/unit",
+      "comparison_keys": 82,
+      "negative_value_keys": 0,
+      "negative_quantity_keys": 0,
+      "identity_check": "exact by construction from the two official series"
+    },
+    "archives": {
+      "imports": {
+        "filename": "CIMT-CICM_Imp_2025.zip",
+        "bytes": 81543639,
+        "sha256": "95858d776bbf1b1073d700a5a3f6efc75d38c233cc46fce5336fcb7cfe4cd05d",
+        "source_url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip"
+      },
+      "total_exports": {
+        "filename": "CIMT-CICM_Tot_Exp_2025.zip",
+        "bytes": 18476353,
+        "sha256": "b904ff42e59c4a00efbaf7fb2d7a4fc029ecfff71946c23f529d364c5c733166",
+        "source_url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Tot_Exp_2025.zip"
+      },
+      "domestic_exports": {
+        "filename": "CIMT-CICM_Dom_Exp_2025.zip",
+        "bytes": 23393525,
+        "sha256": "789153f90027d35c3386e02abe8796c6422986d5a69119ee670a214d6e9f3665",
+        "source_url": "https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Dom_Exp_2025.zip"
+      }
+    },
+    "comparison": {
+      "healthCanadaShipmentSales2024Cad": 1160753796.78,
+      "customsImportBasket2025Cad": 403799869,
+      "customsToPriorYearShipmentSalesPct": 34.78772760598887,
+      "deviceValueCad": 89316311,
+      "deviceQuantity": 14517957,
+      "broadInhalationValueCad": 314483558,
+      "broadInhalationQuantityKg": 5757344,
+      "derivedReexportValueCad": 1296412,
+      "derivedReexportSharePct": 0.32105310068835113
+    },
+    "limits": [
+      "CIMT is customs-basis administrative data sourced from CBSA and U.S. CBP records.",
+      "Import value is Canadian dollars at the place of direct shipment to Canada and excludes freight and insurance to Canada.",
+      "The bulk import country field is used as country of origin; it is not a country-of-export/direct-shipment cross-tab.",
+      "Province identifies customs clearance and must not be interpreted as final consumption province.",
+      "Imports include immediate domestic consumption and bonded warehouse entry; re-imports are included.",
+      "Chapter 24 HS10 codes are broad inhalation-product proxies and do not prove finished e-liquid volume.",
+      "Kilograms are not converted to litres.",
+      "Customs value is not retail sales, and domestic production is absent from imports.",
+      "The 2025 files are revisable official statistics; refresh after Statistics Canada revisions."
+    ]
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -3798,6 +4642,13 @@ window.PIXAN_DATA = {
       "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/"
     },
     {
+      "grade": "B",
+      "title": "Statistics Canada · CIMT 2025",
+      "coverage": "Kanadan HS10-tuonti alkuperämaittain sekä HS8-kokonais-, kotimainen ja johdettu jälleenvienti",
+      "use": "Kansallinen laite- ja inhalointituotteiden reittiankkuri; HS10 täsmää HS6:een nollaerolla",
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/71-607-X2021004"
+    },
+    {
       "grade": "A",
       "title": "Destatis · tabakverotilasto",
       "coverage": "Saksa 2025: verotettu tupakan korvike-/e-nestemäärä",
@@ -3884,8 +4735,8 @@ window.PIXAN_DATA = {
       "market": "Kanada",
       "authority": "Statistics Canada International Trade Division",
       "channel": "infostats@statcan.gc.ca",
-      "scope": "HS 854340 monthly imports 2022-current including quantity unit and revision policy",
-      "status": "sent",
+      "scope": "HS10 origin-versus-country-of-export/direct-shipment cross-tab and confirmation of foreign-origin re-export treatment",
+      "status": "partial",
       "sent": "2026-07-16",
       "followUp": "2026-07-23"
     },
@@ -3972,8 +4823,8 @@ window.PIXAN_DATA = {
     {
       "priority": "high",
       "title": "Kanadan 2025 reittitäsmäytys",
-      "detail": "CIMT 10-digit + origin/export country + foreign-origin re-exports, täsmäytys Health Canadan toimitusmyyntiin.",
-      "status": "requested"
+      "detail": "Valmis: CIMT HS10-tuonti alkuperämaittain sekä HS8 total/domestic/re-export, 608 lähderiviä ja 564 HS6-tarkastusavainta nollaerolla. Avoinna vain alkuperämaa × suora lähetysmaa -ristiintaulukko ja 2025 Health Canada -myynti.",
+      "status": "done"
     },
     {
       "priority": "medium",

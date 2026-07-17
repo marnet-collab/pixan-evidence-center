@@ -12,6 +12,7 @@
   const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
   const money = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. USD";
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
+  const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
   const moneyJpy = (value) => value >= 1e9
     ? new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e9) + " mrd JPY"
     : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. JPY";
@@ -143,6 +144,51 @@
           <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.sharePct)} %</td><td>${esc(item.basis)}</td>
         </tr>`).join("")}</tbody>
       </table>`;
+
+    const canada = data.canadaCustoms;
+    $("#canada-summary").innerHTML = `
+      <table>
+        <thead><tr><th>HS10</th><th>Virallinen rajaus</th><th>Vuoden 2025 määrä</th><th>Tullituonnin arvo</th><th>Lähderivejä</th><th>Suurin alkuperä</th></tr></thead>
+        <tbody>${canada.totals.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.title)}</strong><div class="meta-line">${esc(item.scope)}</div></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num"><strong>${moneyCad(item.valueCad)}</strong></td>
+          <td class="num">${integer(item.sourceRecords)}</td><td>${esc(item.largestOrigin)} <span class="meta-line">(${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.largestOriginShare)} % arvosta)</span></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi hyväksytty:</strong> ${canada.audit.keys_compared} kuukausi–HS6–alkuperä–tullausmaakunta–US-osavaltio–yksikkö-avainta. HS10-summien ero viralliseen HS6-sarjaan oli ${integer(canada.audit.value_gap_cad)} CAD ja määräero ${integer(canada.audit.quantity_gap)}. Laitekori oli ${integer(canada.comparison.deviceQuantity)} kappaletta / ${moneyCad(canada.comparison.deviceValueCad)}; laaja 2404-kori ${integer(canada.comparison.broadInhalationQuantityKg)} kg / ${moneyCad(canada.comparison.broadInhalationValueCad)}.</div>
+      <div class="meta-line table-note"><strong>Vertailu Health Canada -ankkuriin:</strong> vuoden 2025 tullikorin ${moneyCad(canada.comparison.customsImportBasket2025Cad)} on ${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(canada.comparison.customsToPriorYearShipmentSalesPct)} % Health Canadan vuoden 2024 toimitusmyynnistä. Tämä ei ole kate- tai kasvulaskelma: vuodet, tuoteryhmät ja arvostustaso eroavat.</div>`;
+
+    $("#canada-origins").innerHTML = `
+      <table>
+        <thead><tr><th>HS10</th><th>Alkuperämaa</th><th>Määrä</th><th>Tullituonnin arvo</th><th>Osuus nimikkeen arvosta</th></tr></thead>
+        <tbody>${canada.origins.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.origin)}</strong></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num">${moneyCad(item.valueCad)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.valueShare)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Reittirajoite:</strong> bulk-tuonnin country-kenttä esitetään alkuperämaana. HS10-tason alkuperämaa × suora lähetys-/vientimaa -ristiintaulukkoa ei ole tässä tiedostossa; se on edelleen Statistics Canadalta pyydettävä täydennys.</div>`;
+
+    $("#canada-clearance").innerHTML = `
+      <table>
+        <thead><tr><th>HS10</th><th>Tullausmaakunta</th><th>Määrä</th><th>Tullituonnin arvo</th></tr></thead>
+        <tbody>${canada.clearance.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.province)}</strong> <span class="meta-line">${esc(item.provinceCode)}</span></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num">${moneyCad(item.valueCad)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note">Statistics Canadan määritelmän mukaan province tarkoittaa tulliselvityksen maakuntaa. Sitä ei tulkita vähittäismyynnin tai loppukulutuksen maakunnaksi.</div>`;
+
+    $("#canada-exports").innerHTML = `
+      <table>
+        <thead><tr><th>HS8</th><th>Tuoteryhmä</th><th>Kokonaisvienti</th><th>Kotimainen vienti</th><th>Johdettu jälleenvienti</th><th>Jälleenvientimäärä</th></tr></thead>
+        <tbody>${canada.exports.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.title)}</strong></td>
+          <td class="num">${moneyCad(item.totalValueCad)}</td><td class="num">${moneyCad(item.domesticValueCad)}</td>
+          <td class="num"><strong>${moneyCad(item.reexportValueCad)}</strong></td><td class="num">${item.unit === "—" ? "Ei julkaistu" : `${integer(item.reexportQuantity)} ${esc(item.unit)}`}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Jälleenvientikorjaus:</strong> total exports − domestic exports = ${moneyCad(canada.comparison.derivedReexportValueCad)}, eli ${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 2 }).format(canada.comparison.derivedReexportSharePct)} % valitun tuontikorin arvosta. ${canada.reexportAudit.comparison_keys} tarkastusavaimessa ei ollut negatiivista arvo- tai määräeroa. Tämä korjaa ulkomaisen tavaran edelleenlähetystä, mutta ei ratkaise varasto- tai kotimaisen tuotannon muutosta.</div>`;
 
     const us = data.usCustoms;
     $("#us-summary").innerHTML = `

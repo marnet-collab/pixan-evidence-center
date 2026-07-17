@@ -1,0 +1,57 @@
+period,hs10_code,scope,family,country_code,country_of_origin,unit,value_cad,quantity,source_url
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,CN,China,KGM,310954680,5727468,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,US,United States of America,KGM,2517226,15410,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,HK,Hong Kong,KGM,511068,6666,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,FR,France,KGM,76536,1199,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,PL,Poland,KGM,35241,285,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,GB,United Kingdom,KGM,13752,260,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,DE,Germany,KGM,2770,30,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,JP,Japan,KGM,2422,25,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,MY,Malaysia,KGM,1331,9,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,SE,Sweden,KGM,812,21,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,TW,Taiwan,KGM,732,16,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,AT,Austria,KGM,154,3,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,CA,Canada,KGM,82,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,CH,Switzerland,KGM,12,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,nicotine_inhalation_product,IN,India,KGM,3,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,CN,China,KGM,362390,5853,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,US,United States of America,KGM,3054,40,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,GB,United Kingdom,KGM,599,11,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,SE,Sweden,KGM,328,41,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,NZ,New Zealand,KGM,179,2,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,DE,Germany,KGM,75,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,FR,France,KGM,68,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,MY,Malaysia,KGM,28,2,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,PL,Poland,KGM,10,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,other_inhalation_product,DK,Denmark,KGM,6,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,CN,China,NMB,4704922,647449,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,HK,Hong Kong,NMB,296601,53261,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,US,United States of America,NMB,29060,3932,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,GB,United Kingdom,NMB,17774,120,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,FR,France,NMB,8513,6,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,DE,Germany,NMB,315,9,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,JP,Japan,NMB,159,3,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,CA,Canada,NMB,150,9,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,TW,Taiwan,NMB,139,5,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,AT,Austria,NMB,69,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,device_with_nicotine_substance,NL,Netherlands,NMB,66,2,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,CN,China,NMB,82170945,13499032,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,MY,Malaysia,NMB,602763,10959,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,US,United States of America,NMB,433838,83445,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,DE,Germany,NMB,372105,1274,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,ID,Indonesia,NMB,344160,166084,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,KR,"Korea, South",NMB,199556,39693,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,HK,Hong Kong,NMB,89193,11783,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,FI,Finland,NMB,38621,125,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,GB,United Kingdom,NMB,3671,58,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,FR,France,NMB,2019,162,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,LK,Sri Lanka,NMB,442,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,CA,Canada,NMB,384,14,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,CH,Switzerland,NMB,200,21,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,IE,Ireland,NMB,192,114,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,TD,Chad,NMB,168,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,PL,Poland,NMB,165,6,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,IT,Italy,NMB,61,383,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,JP,Japan,NMB,42,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,IN,India,NMB,12,3,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,device_not_containing_nicotine,SE,Sweden,NMB,6,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip

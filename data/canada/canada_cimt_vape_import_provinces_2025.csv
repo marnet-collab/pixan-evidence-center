@@ -1,0 +1,22 @@
+period,hs10_code,scope,province_code,province_of_clearance,unit,value_cad,quantity,source_url
+2025,2404120000,extended_liquid_proxy_not_exclusive,ON,Ontario,KGM,280283735,5097231,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,BC,British Columbia,KGM,31301135,595553,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,AB,Alberta,KGM,1215611,21027,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,QC,Quebec,KGM,1090417,33661,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,SK,Saskatchewan,KGM,225849,3920,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404120000,extended_liquid_proxy_not_exclusive,MB,Manitoba,KGM,74,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,ON,Ontario,KGM,336793,4925,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,QC,Quebec,KGM,27381,955,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,BC,British Columbia,KGM,2394,71,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,AB,Alberta,KGM,101,1,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,2404190000,extended_liquid_proxy_not_exclusive,MB,Manitoba,KGM,68,0,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,BC,British Columbia,NMB,2438137,363921,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,ON,Ontario,NMB,2038896,303966,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,QC,Quebec,NMB,569112,34295,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400010,core_device,AB,Alberta,NMB,11623,2615,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,ON,Ontario,NMB,69906883,10145575,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,BC,British Columbia,NMB,8990817,2559095,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,QC,Quebec,NMB,2387724,626391,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,MB,Manitoba,NMB,1750242,35157,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,AB,Alberta,NMB,1165122,432194,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
+2025,8543400090,core_device,SK,Saskatchewan,NMB,57755,14748,https://www150.statcan.gc.ca/n1/pub/71-607-x/2021004/zip/CIMT-CICM_Imp_2025.zip
