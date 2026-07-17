@@ -144,6 +144,30 @@
         </tr>`).join("")}</tbody>
       </table>`;
 
+    const us = data.usCustoms;
+    $("#us-summary").innerHTML = `
+      <table>
+        <thead><tr><th>HTS10</th><th>Virallinen rajaus</th><th>General imports määrä</th><th>General customs value</th><th>General CIF</th><th>Imports for consumption</th><th>Laskettu tulli</th><th>Suurin alkuperä</th></tr></thead>
+        <tbody>${us.totals.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.title)}</strong><div class="meta-line">${esc(item.scope)}</div></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num"><strong>${money(item.customsValueUsd)}</strong></td>
+          <td class="num">${money(item.cifValueUsd)}</td><td class="num">${money(item.consumptionValueUsd)}</td>
+          <td class="num">${money(item.calculatedDutyUsd)}</td><td>${esc(item.largestOrigin)} <span class="meta-line">(${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.largestOriginShare)} % general-arvosta)</span></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi hyväksytty:</strong> ${us.audit.selected_detail_records} detaljiriviä ja ${us.audit.selected_origin_rows} nimike–alkuperä-riviä. Jokainen määrä-, customs-, CIF-, maksu- ja tullikenttä täsmäytyi kansalliseen IMP_COMM-summaan; ero oli kaikissa kentissä nolla. Alkuperäinen 292 Mt Census-arkisto on lukittu SHA-256-tunnisteella <code>${esc(us.archiveSha256)}</code>.</div>`;
+
+    $("#us-origins").innerHTML = `
+      <table>
+        <thead><tr><th>HTS10</th><th>Alkuperämaa</th><th>General imports määrä</th><th>Customs value</th><th>CIF</th><th>Osuus nimikkeen arvosta</th></tr></thead>
+        <tbody>${us.origins.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.origin)}</strong></td>
+          <td class="num">${integer(item.quantity)} ${esc(item.unit)}</td><td class="num">${money(item.customsValueUsd)}</td>
+          <td class="num">${money(item.cifValueUsd)}</td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.valueShare)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kapea patenttikori:</strong> laitteet ${integer(us.baskets.core_devices.general_quantity_units)} kpl / ${money(us.baskets.core_devices.general_customs_value_usd)} ja täsmällisesti nimetyt sähkösavukeseokset ${integer(us.baskets.core_liquids.general_quantity_kg)} kg / ${money(us.baskets.core_liquids.general_customs_value_usd)}. Koodit 2404129000 ja 2404199000 näytetään erikseen, mutta niitä ei lasketa kapeaan nestekoriin. Tullivirtaa ei merkitä Yhdysvaltain kuluttajamyynniksi.</div>`;
+
     const japan = data.japanCustoms;
     $("#japan-summary").innerHTML = `
       <table>

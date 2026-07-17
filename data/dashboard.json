@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 07:45 UTC",
+    "updated": "2026-07-17 08:10 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -12,6 +12,12 @@
       "value": "1,161 mrd CAD",
       "detail": "Viranomaiselle raportoitu toimitusmyynti",
       "tone": ""
+    },
+    {
+      "label": "USA 2025",
+      "value": "577,8 milj, USD",
+      "detail": "Census HTS10 · laitteet + täsmälliset nesteseokset",
+      "tone": "blue"
     },
     {
       "label": "Suomi 2025",
@@ -62,6 +68,16 @@
       "limit": "Veroankkuri kattaa e-nesteet, ei erillisiä laitteita. PXWebin 2026 tieto on vielä osavuosi tammi–huhtikuu.",
       "source": "Verohallinto · valmisteverotilasto",
       "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/"
+    },
+    {
+      "grade": "B",
+      "market": "Yhdysvallat",
+      "title": "Virallinen HTS10-tuonti alkuperämaittain",
+      "value": "577,764 milj. USD · 127 747 232 laitetta",
+      "detail": "Censusin vuoden 2025 general imports: laitteet 256,840 milj. USD ja 127,747 milj. kappaletta; nimenomaiset sähkösavukeseokset 320,924 milj. USD ja 23,279 milj. kg. Kulutukseen luovutettujen ydinkoodien laskettu tulli oli 143,132 milj. USD.",
+      "limit": "Tulliarvo ei ole vähittäismyyntiä eikä kata Yhdysvalloissa valmistettuja tuotteita, vähittäis-/tukkukatetta, varastoja tai laitonta kauppaa.",
+      "source": "U.S. Census Bureau · Merchandise Trade Imports",
+      "url": "https://www.census.gov/foreign-trade/data/IMDB.html"
     },
     {
       "grade": "B",
@@ -116,12 +132,12 @@
       "name": "Yhdysvallat",
       "sourceName": "United States",
       "status": "partial",
-      "customs": "Census 10-digit HTS imports for consumption and general imports; Schedule B exports; 8543400000 plus all 240412/240419 national suffixes",
+      "customs": "Census 10-digit HTS imports for consumption and general imports; Schedule B exports; 8543400030/0040 plus 2404120500/1000/9000 and 2404190500/1000/9000",
       "route": "Use country of origin; separate imports for consumption from bonded/general imports; subtract foreign exports (re-exports); compare origin exports to US imports",
       "salesSource": "FTC compulsory-process e-cigarette reports; current equivalent requires new FTC release or aggregated FDA/state excise/retail evidence",
-      "current": "2025 UN Comtrade aggregate and FTC 2021 historical sales obtained; national 2025 10-digit extract not obtained",
-      "missing": "Current device/refill sales by type and current 10-digit customs rows",
-      "how": "Download monthly 2025 Census Merchandise Trade Imports/Exports data products or use International Trade API with Census key; request FTC aggregated 2022-2025 sales update; request state excise aggregates where vaping tax exists",
+      "current": "U.S. Census 2025 HTS10: 127 747 232 laitetta / 256,840 milj. USD ja 23 279 189 kg nimenomaisia sähkösavukeseoksia / 320,924 milj. USD. Kaikki kansalliset summat täsmäytyivät alkuperämaariveihin ilman eroa. 2025 Census HTS10 national extract obtained: 127,747,232 devices / 256.840077m USD and 23,279,189 kg explicit personal-vaporizer mixtures / 320.923830m USD; 236 detail rows reconcile to national totals with zero gap",
+      "missing": "Nykyinen kuluttajamyynti, kotimainen tuotanto, varastomuutos ja laittoman markkinan arvio. Current consumer sell-out by type; domestic production; inventory change; illegal-market estimate; export/re-export bridge",
+      "how": "Use the saved Census December 2025 bulk archive and audit manifest as primary customs evidence; obtain Schedule B exports/re-exports and request FTC aggregated 2022-2025 sales update plus state excise or licensed retail aggregates",
       "tax": {
         "name": "Yhdysvallat",
         "sourceName": "United States",
@@ -2595,6 +2611,736 @@
       "rank": 5
     }
   ],
+  "usCustoms": {
+    "totals": [
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "scope": "core_liquid",
+        "quantity": 21598855,
+        "unit": "KG",
+        "customsValueUsd": 205487468,
+        "cifValueUsd": 216308611,
+        "consumptionValueUsd": 205476432,
+        "calculatedDutyUsd": 57928236,
+        "originCount": 7,
+        "detailRecords": 48,
+        "largestOrigin": "Indonesia",
+        "largestOriginShare": 59.249626356776176,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "2404121000",
+        "title": "Muu nikotiiniseos sähkösavukkeeseen",
+        "scope": "core_liquid",
+        "quantity": 1205838,
+        "unit": "KG",
+        "customsValueUsd": 112728647,
+        "cifValueUsd": 114619458,
+        "consumptionValueUsd": 112717627,
+        "calculatedDutyUsd": 17805937,
+        "originCount": 4,
+        "detailRecords": 35,
+        "largestOrigin": "Indonesia",
+        "largestOriginShare": 94.9061776639615,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "2404129000",
+        "title": "Muu nikotiinituote inhalointiin",
+        "scope": "extended_not_exclusive",
+        "quantity": 3958284,
+        "unit": "KG",
+        "customsValueUsd": 12134812,
+        "cifValueUsd": 16864297,
+        "consumptionValueUsd": 12134812,
+        "calculatedDutyUsd": 5290142,
+        "originCount": 2,
+        "detailRecords": 8,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 99.90053409974543,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "2404190500",
+        "title": "Aromaattinen muu seos sähkösavukkeeseen",
+        "scope": "core_liquid",
+        "quantity": 470095,
+        "unit": "KG",
+        "customsValueUsd": 2496933,
+        "cifValueUsd": 3623588,
+        "consumptionValueUsd": 2496933,
+        "calculatedDutyUsd": 1779527,
+        "originCount": 2,
+        "detailRecords": 6,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 97.92805814172827,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "2404191000",
+        "title": "Muu seos sähkösavukkeeseen",
+        "scope": "core_liquid",
+        "quantity": 4401,
+        "unit": "KG",
+        "customsValueUsd": 210782,
+        "cifValueUsd": 233130,
+        "consumptionValueUsd": 210782,
+        "calculatedDutyUsd": 40246,
+        "originCount": 3,
+        "detailRecords": 4,
+        "largestOrigin": "Malesia",
+        "largestOriginShare": 77.08390659543983,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "2404199000",
+        "title": "Muu inhaloitava tuote",
+        "scope": "extended_not_exclusive",
+        "quantity": 19132,
+        "unit": "KG",
+        "customsValueUsd": 292499,
+        "cifValueUsd": 306062,
+        "consumptionValueUsd": 292499,
+        "calculatedDutyUsd": 3454,
+        "originCount": 1,
+        "detailRecords": 3,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 100.0,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "scope": "core_device",
+        "quantity": 13630808,
+        "unit": "NO",
+        "customsValueUsd": 56159421,
+        "cifValueUsd": 57522296,
+        "consumptionValueUsd": 56146829,
+        "calculatedDutyUsd": 7599624,
+        "originCount": 5,
+        "detailRecords": 28,
+        "largestOrigin": "Indonesia",
+        "largestOriginShare": 86.3880256172869,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "scope": "core_device",
+        "quantity": 114116424,
+        "unit": "NO",
+        "customsValueUsd": 200680656,
+        "cifValueUsd": 235104399,
+        "consumptionValueUsd": 198367296,
+        "calculatedDutyUsd": 57978305,
+        "originCount": 18,
+        "detailRecords": 104,
+        "largestOrigin": "Kiina",
+        "largestOriginShare": 87.38033624924965,
+        "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP"
+      }
+    ],
+    "origins": [
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Indonesia",
+        "quantity": 1072014,
+        "unit": "KG",
+        "customsValueUsd": 121750557,
+        "cifValueUsd": 122452585,
+        "valueShare": 59.249626356776176
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Kiina",
+        "quantity": 20526475,
+        "unit": "KG",
+        "customsValueUsd": 83707624,
+        "cifValueUsd": 93821306,
+        "valueShare": 40.736121192558564
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Hongkong",
+        "quantity": 216,
+        "unit": "KG",
+        "customsValueUsd": 14497,
+        "cifValueUsd": 18497,
+        "valueShare": 0.007054931447206309
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Tšekki",
+        "quantity": 129,
+        "unit": "KG",
+        "customsValueUsd": 6605,
+        "cifValueUsd": 8013,
+        "valueShare": 0.0032143079401805662
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Uusi-Kaledonia",
+        "quantity": 16,
+        "unit": "KG",
+        "customsValueUsd": 3576,
+        "cifValueUsd": 3601,
+        "valueShare": 0.001740252111140909
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Saksa",
+        "quantity": 2,
+        "unit": "KG",
+        "customsValueUsd": 2362,
+        "cifValueUsd": 2362,
+        "valueShare": 0.001149461825088039
+      },
+      {
+        "code": "2404120500",
+        "title": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "origin": "Sveitsi",
+        "quantity": 3,
+        "unit": "KG",
+        "customsValueUsd": 2247,
+        "cifValueUsd": 2247,
+        "valueShare": 0.0010934973416481047
+      },
+      {
+        "code": "2404121000",
+        "title": "Muu nikotiiniseos sähkösavukkeeseen",
+        "origin": "Indonesia",
+        "quantity": 1089013,
+        "unit": "KG",
+        "customsValueUsd": 106986450,
+        "cifValueUsd": 108692897,
+        "valueShare": 94.9061776639615
+      },
+      {
+        "code": "2404121000",
+        "title": "Muu nikotiiniseos sähkösavukkeeseen",
+        "origin": "Kiina",
+        "quantity": 101284,
+        "unit": "KG",
+        "customsValueUsd": 3434793,
+        "cifValueUsd": 3512046,
+        "valueShare": 3.046956644480972
+      },
+      {
+        "code": "2404121000",
+        "title": "Muu nikotiiniseos sähkösavukkeeseen",
+        "origin": "Malesia",
+        "quantity": 15330,
+        "unit": "KG",
+        "customsValueUsd": 2300760,
+        "cifValueUsd": 2406372,
+        "valueShare": 2.0409718924418563
+      },
+      {
+        "code": "2404121000",
+        "title": "Muu nikotiiniseos sähkösavukkeeseen",
+        "origin": "Italia",
+        "quantity": 211,
+        "unit": "KG",
+        "customsValueUsd": 6644,
+        "cifValueUsd": 8143,
+        "valueShare": 0.005893799115676427
+      },
+      {
+        "code": "2404129000",
+        "title": "Muu nikotiinituote inhalointiin",
+        "origin": "Kiina",
+        "quantity": 3958238,
+        "unit": "KG",
+        "customsValueUsd": 12122742,
+        "cifValueUsd": 16851891,
+        "valueShare": 99.90053409974543
+      },
+      {
+        "code": "2404129000",
+        "title": "Muu nikotiinituote inhalointiin",
+        "origin": "Ruotsi",
+        "quantity": 46,
+        "unit": "KG",
+        "customsValueUsd": 12070,
+        "cifValueUsd": 12406,
+        "valueShare": 0.09946590025457337
+      },
+      {
+        "code": "2404190500",
+        "title": "Aromaattinen muu seos sähkösavukkeeseen",
+        "origin": "Kiina",
+        "quantity": 470015,
+        "unit": "KG",
+        "customsValueUsd": 2445198,
+        "cifValueUsd": 3571203,
+        "valueShare": 97.92805814172827
+      },
+      {
+        "code": "2404190500",
+        "title": "Aromaattinen muu seos sähkösavukkeeseen",
+        "origin": "Japani",
+        "quantity": 80,
+        "unit": "KG",
+        "customsValueUsd": 51735,
+        "cifValueUsd": 52385,
+        "valueShare": 2.0719418582717277
+      },
+      {
+        "code": "2404191000",
+        "title": "Muu seos sähkösavukkeeseen",
+        "origin": "Malesia",
+        "quantity": 1888,
+        "unit": "KG",
+        "customsValueUsd": 162479,
+        "cifValueUsd": 171279,
+        "valueShare": 77.08390659543983
+      },
+      {
+        "code": "2404191000",
+        "title": "Muu seos sähkösavukkeeseen",
+        "origin": "Puola",
+        "quantity": 252,
+        "unit": "KG",
+        "customsValueUsd": 41122,
+        "cifValueUsd": 44622,
+        "valueShare": 19.509256008577584
+      },
+      {
+        "code": "2404191000",
+        "title": "Muu seos sähkösavukkeeseen",
+        "origin": "Kiina",
+        "quantity": 2261,
+        "unit": "KG",
+        "customsValueUsd": 7181,
+        "cifValueUsd": 17229,
+        "valueShare": 3.4068373959825795
+      },
+      {
+        "code": "2404199000",
+        "title": "Muu inhaloitava tuote",
+        "origin": "Kiina",
+        "quantity": 19132,
+        "unit": "KG",
+        "customsValueUsd": 292499,
+        "cifValueUsd": 306062,
+        "valueShare": 100.0
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Indonesia",
+        "quantity": 10103795,
+        "unit": "NO",
+        "customsValueUsd": 48515015,
+        "cifValueUsd": 48741443,
+        "valueShare": 86.3880256172869
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Kiina",
+        "quantity": 3117588,
+        "unit": "NO",
+        "customsValueUsd": 5943602,
+        "cifValueUsd": 7072035,
+        "valueShare": 10.583446008106103
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Malesia",
+        "quantity": 397950,
+        "unit": "NO",
+        "customsValueUsd": 1527974,
+        "cifValueUsd": 1532886,
+        "valueShare": 2.720779475272724
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Dominikaaninen tasavalta",
+        "quantity": 475,
+        "unit": "NO",
+        "customsValueUsd": 95000,
+        "cifValueUsd": 95102,
+        "valueShare": 0.16916128818350887
+      },
+      {
+        "code": "8543400030",
+        "title": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "origin": "Yhdistyneet arabiemiirikunnat",
+        "quantity": 11000,
+        "unit": "NO",
+        "customsValueUsd": 77830,
+        "cifValueUsd": 80830,
+        "valueShare": 0.13858761115076312
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Kiina",
+        "quantity": 105329981,
+        "unit": "NO",
+        "customsValueUsd": 175355432,
+        "cifValueUsd": 207597404,
+        "valueShare": 87.38033624924965
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Indonesia",
+        "quantity": 7710196,
+        "unit": "NO",
+        "customsValueUsd": 11520545,
+        "cifValueUsd": 13276168,
+        "valueShare": 5.740735170807893
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Malesia",
+        "quantity": 680175,
+        "unit": "NO",
+        "customsValueUsd": 11385825,
+        "cifValueUsd": 11766169,
+        "valueShare": 5.673603638210152
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Singapore",
+        "quantity": 28060,
+        "unit": "NO",
+        "customsValueUsd": 1233591,
+        "cifValueUsd": 1247990,
+        "valueShare": 0.6147034919000862
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Saksa",
+        "quantity": 1004,
+        "unit": "NO",
+        "customsValueUsd": 596842,
+        "cifValueUsd": 609162,
+        "valueShare": 0.2974088344618527
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Kanada",
+        "quantity": 324234,
+        "unit": "NO",
+        "customsValueUsd": 276338,
+        "cifValueUsd": 276340,
+        "valueShare": 0.13770036709467404
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Israel",
+        "quantity": 54,
+        "unit": "NO",
+        "customsValueUsd": 120306,
+        "cifValueUsd": 120307,
+        "valueShare": 0.05994897684607928
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Japani",
+        "quantity": 1,
+        "unit": "NO",
+        "customsValueUsd": 43653,
+        "cifValueUsd": 44095,
+        "valueShare": 0.021752470253037243
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Ranska",
+        "quantity": 153,
+        "unit": "NO",
+        "customsValueUsd": 40548,
+        "cifValueUsd": 40680,
+        "valueShare": 0.02020523592468225
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Alankomaat",
+        "quantity": 2050,
+        "unit": "NO",
+        "customsValueUsd": 39500,
+        "cifValueUsd": 41500,
+        "valueShare": 0.01968301319485422
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Yhdistynyt kuningaskunta",
+        "quantity": 4800,
+        "unit": "NO",
+        "customsValueUsd": 19200,
+        "cifValueUsd": 28700,
+        "valueShare": 0.009567439325093696
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Etelä-Afrikka",
+        "quantity": 29,
+        "unit": "NO",
+        "customsValueUsd": 15892,
+        "cifValueUsd": 15897,
+        "valueShare": 0.007919049258041095
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Intia",
+        "quantity": 34979,
+        "unit": "NO",
+        "customsValueUsd": 12502,
+        "cifValueUsd": 17503,
+        "valueShare": 0.006229798252204238
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Itävalta",
+        "quantity": 1,
+        "unit": "NO",
+        "customsValueUsd": 6500,
+        "cifValueUsd": 6950,
+        "valueShare": 0.003238976854849428
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Espanja",
+        "quantity": 51,
+        "unit": "NO",
+        "customsValueUsd": 5305,
+        "cifValueUsd": 6146,
+        "valueShare": 0.0026435034176886486
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Taiwan",
+        "quantity": 236,
+        "unit": "NO",
+        "customsValueUsd": 3410,
+        "cifValueUsd": 3455,
+        "valueShare": 0.0016992170884671616
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Sveitsi",
+        "quantity": 400,
+        "unit": "NO",
+        "customsValueUsd": 3011,
+        "cifValueUsd": 3677,
+        "valueShare": 0.0015003937399925582
+      },
+      {
+        "code": "8543400040",
+        "title": "Muu henkilökohtainen höyrystinlaite",
+        "origin": "Vietnam",
+        "quantity": 20,
+        "unit": "NO",
+        "customsValueUsd": 2256,
+        "cifValueUsd": 2256,
+        "valueShare": 0.0011241741206985093
+      }
+    ],
+    "audit": {
+      "selected_codes": [
+        "2404120500",
+        "2404121000",
+        "2404129000",
+        "2404190500",
+        "2404191000",
+        "2404199000",
+        "8543400030",
+        "8543400040"
+      ],
+      "selected_origin_rows": 42,
+      "selected_detail_records": 236,
+      "national_vs_detail_gaps": {
+        "2404120500": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "2404121000": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "2404129000": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "2404190500": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "2404191000": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "2404199000": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "8543400030": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        },
+        "8543400040": {
+          "con_quantity_1": 0,
+          "con_quantity_2": 0,
+          "con_customs_value_usd": 0,
+          "con_dutiable_value_usd": 0,
+          "con_calculated_duty_usd": 0,
+          "con_import_charges_usd": 0,
+          "con_cif_value_usd": 0,
+          "gen_quantity_1": 0,
+          "gen_quantity_2": 0,
+          "gen_customs_value_usd": 0,
+          "gen_import_charges_usd": 0,
+          "gen_cif_value_usd": 0
+        }
+      },
+      "status": "pass"
+    },
+    "baskets": {
+      "core_devices": {
+        "codes": [
+          "8543400030",
+          "8543400040"
+        ],
+        "general_quantity_units": 127747232,
+        "general_customs_value_usd": 256840077,
+        "general_cif_value_usd": 292626695
+      },
+      "core_liquids": {
+        "codes": [
+          "2404120500",
+          "2404121000",
+          "2404190500",
+          "2404191000"
+        ],
+        "general_quantity_kg": 23279189,
+        "general_customs_value_usd": 320923830,
+        "general_cif_value_usd": 334784787
+      },
+      "extended_not_exclusive": {
+        "codes": [
+          "2404129000",
+          "2404199000"
+        ],
+        "general_quantity_kg": 3977416,
+        "general_customs_value_usd": 12427311,
+        "warning": "These .90 codes are inhalation products but are not exclusive to e-liquids and are excluded from the narrow basket."
+      }
+    },
+    "method": {
+      "source": "U.S. import documentation, compiled primarily from Automated Commercial Environment (ACE)",
+      "classification": "10-digit Harmonized Tariff Schedule of the United States (HTSUSA)",
+      "partner_basis": "country of origin",
+      "general_import_value": "customs value for merchandise arriving in the U.S.; includes warehouse entries",
+      "consumption_value": "customs value entered directly for consumption plus warehouse withdrawals",
+      "cif_value": "customs value plus freight, insurance and other charges to the U.S. port",
+      "duty": "calculated duty reported for imports for consumption"
+    },
+    "boundary": {
+      "is_sales": false,
+      "use": "official national import-flow and route evidence; not retail sell-through",
+      "narrow_liquid_definition": "Only the four 24041205/10 and 24041905/10 codes whose official descriptions explicitly identify mixtures for personal electric/electronic vaporizing devices.",
+      "device_definition": "Both 2025 statistical suffixes under 85434000; one with nicotine-containing substance and one NESOI."
+    },
+    "archiveSha256": "c6f1c92d5c6fc35ac1957db788276b6112a169545415338b3a0d045ed9125480"
+  },
   "japanCustoms": {
     "version": "Revised, published 2026-03-12; fixed version expected in November 2026 under the official revision cycle",
     "totals": [
@@ -3088,6 +3834,13 @@
     },
     {
       "grade": "B",
+      "title": "U.S. Census · Merchandise Trade Imports 2025",
+      "coverage": "Yhdysvaltain HTS10 general imports, imports for consumption, CIF, määrä, laskettu tulli ja 42 nimike–alkuperämaariviä",
+      "use": "Kansallinen laite- ja nestetuonnin reittiankkuri; detaljisummat täsmäävät kansallisiin lukuihin",
+      "url": "https://www.census.gov/foreign-trade/data/IMDB.html"
+    },
+    {
+      "grade": "B",
       "title": "Eurostat Comext DS-045409",
       "coverage": "EU:n extra- ja intra-EU CN8-kauppa alkuperä- ja lähetysmaittain",
       "use": "EU:n reitti- ja hubikorjaus",
@@ -3122,9 +3875,9 @@
       "authority": "U.S. Census Bureau International Trade",
       "channel": "eid.international.trade.data@census.gov",
       "scope": "HS 854340 monthly imports 2022-current including quantity unit and revision policy",
-      "status": "sent",
+      "status": "done",
       "sent": "2026-07-16",
-      "followUp": "2026-07-23"
+      "followUp": "—"
     },
     {
       "id": "PX-CA-001",
@@ -3213,8 +3966,8 @@
     {
       "priority": "high",
       "title": "USA HTS10 kulutukseen luovutettu tuonti",
-      "detail": "Hanki Census-avain tai dataote; erota general imports, imports for consumption ja re-exports.",
-      "status": "requested"
+      "detail": "Valmis 2025: kahdeksan HTS10-riviä, general imports ja imports for consumption, 127,747 milj. laitetta, 23,279 milj. kg täsmällisiä nesteseoksia, CIF ja 143,132 milj. USD laskettua tullia. 236 detaljiriviä täsmäytyivät ilman eroa.",
+      "status": "done"
     },
     {
       "priority": "high",

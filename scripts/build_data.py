@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -88,6 +89,11 @@ def build_payload() -> dict:
     japan_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "japan_customs_vape_origins_2025.csv")
     japan_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "japan_customs_vape_manifest_2025.json").read_text(encoding="utf-8")
+    )
+    us_total_rows = read_csv(PROJECT_DIR / "data" / "derived" / "us_census_vape_totals_2025.csv")
+    us_origin_rows = read_csv(PROJECT_DIR / "data" / "derived" / "us_census_vape_origins_2025.csv")
+    us_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "us_census_vape_manifest_2025.json").read_text(encoding="utf-8")
     )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
@@ -316,6 +322,80 @@ def build_payload() -> dict:
         for row in japan_origin_rows
     ]
 
+    us_titles = {
+        "2404120500": "Aromaattinen nikotiiniseos sähkösavukkeeseen",
+        "2404121000": "Muu nikotiiniseos sähkösavukkeeseen",
+        "2404129000": "Muu nikotiinituote inhalointiin",
+        "2404190500": "Aromaattinen muu seos sähkösavukkeeseen",
+        "2404191000": "Muu seos sähkösavukkeeseen",
+        "2404199000": "Muu inhaloitava tuote",
+        "8543400030": "Höyrystinlaite nikotiinia sisältävällä aineella",
+        "8543400040": "Muu henkilökohtainen höyrystinlaite",
+    }
+    us_names = {
+        "CHINA": "Kiina", "INDONESIA": "Indonesia", "MALAYSIA": "Malesia",
+        "SINGAPORE": "Singapore", "GERMANY": "Saksa", "CANADA": "Kanada",
+        "ISRAEL": "Israel", "DOMINICAN REPUBLIC": "Dominikaaninen tasavalta",
+        "UNITED ARAB EMIRATES": "Yhdistyneet arabiemiirikunnat", "JAPAN": "Japani",
+        "POLAND": "Puola", "HONG KONG": "Hongkong", "ITALY": "Italia",
+        "CZECH REPUBLIC": "Tšekki", "NEW CALEDONIA": "Uusi-Kaledonia",
+        "UNITED KINGDOM": "Yhdistynyt kuningaskunta", "MEXICO": "Meksiko",
+        "SWITZERLAND": "Sveitsi", "TAIWAN": "Taiwan", "VIETNAM": "Vietnam",
+        "KOREA, SOUTH": "Etelä-Korea", "FRANCE": "Ranska", "NETHERLANDS": "Alankomaat",
+        "SOUTH AFRICA": "Etelä-Afrikka", "INDIA": "Intia", "AUSTRIA": "Itävalta",
+        "SPAIN": "Espanja", "SWEDEN": "Ruotsi",
+    }
+    us_totals = [
+        {
+            "code": row["hts10_code"],
+            "title": us_titles[row["hts10_code"]],
+            "scope": row["scope"],
+            "quantity": int(row["gen_quantity_1"]),
+            "unit": row["quantity_unit_1"],
+            "customsValueUsd": int(row["gen_customs_value_usd"]),
+            "cifValueUsd": int(row["gen_cif_value_usd"]),
+            "consumptionValueUsd": int(row["con_customs_value_usd"]),
+            "calculatedDutyUsd": int(row["con_calculated_duty_usd"]),
+            "originCount": int(row["origin_count"]),
+            "detailRecords": int(row["detail_record_count"]),
+            "largestOrigin": us_names.get(row["largest_origin"], row["largest_origin"].title()),
+            "largestOriginShare": float(row["largest_origin_share_pct"]),
+            "url": row["source_url"],
+        }
+        for row in us_total_rows
+    ]
+    us_origins = [
+        {
+            "code": row["hts10_code"],
+            "title": us_titles[row["hts10_code"]],
+            "origin": us_names.get(row["country_of_origin"], row["country_of_origin"].title()),
+            "quantity": int(row["gen_quantity_1"]),
+            "unit": row["quantity_unit_1"],
+            "customsValueUsd": int(row["gen_customs_value_usd"]),
+            "cifValueUsd": int(row["gen_cif_value_usd"]),
+            "valueShare": int(row["gen_customs_value_usd"]) / next(
+                int(total["gen_customs_value_usd"])
+                for total in us_total_rows if total["hts10_code"] == row["hts10_code"]
+            ) * 100,
+        }
+        for row in us_origin_rows
+    ]
+
+    us_device_value = us_manifest["baskets"]["core_devices"]["general_customs_value_usd"]
+    us_liquid_value = us_manifest["baskets"]["core_liquids"]["general_customs_value_usd"]
+    for country in countries:
+        if country["sourceName"] != "United States":
+            continue
+        country["current"] = (
+            "U.S. Census 2025 HTS10: 127 747 232 laitetta / 256,840 milj. USD ja "
+            "23 279 189 kg nimenomaisia sähkösavukeseoksia / 320,924 milj. USD. "
+            "Kaikki kansalliset summat täsmäytyivät alkuperämaariveihin ilman eroa. " + country["current"]
+        )
+        country["missing"] = (
+            "Nykyinen kuluttajamyynti, kotimainen tuotanto, varastomuutos ja laittoman markkinan arvio. "
+            + country["missing"]
+        )
+
     contacts = []
     for row in requests:
         contacts.append(
@@ -347,6 +427,7 @@ def build_payload() -> dict:
         },
         "metrics": [
             {"label": "Kanada 2024", "value": "1,161 mrd CAD", "detail": "Viranomaiselle raportoitu toimitusmyynti", "tone": ""},
+            {"label": "USA 2025", "value": f"{(us_device_value + us_liquid_value) / 1e6:.1f} milj. USD".replace(".", ","), "detail": "Census HTS10 · laitteet + täsmälliset nesteseokset", "tone": "blue"},
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
@@ -381,6 +462,16 @@ def build_payload() -> dict:
                 "limit": "Veroankkuri kattaa e-nesteet, ei erillisiä laitteita. PXWebin 2026 tieto on vielä osavuosi tammi–huhtikuu.",
                 "source": "Verohallinto · valmisteverotilasto",
                 "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/",
+            },
+            {
+                "grade": "B",
+                "market": "Yhdysvallat",
+                "title": "Virallinen HTS10-tuonti alkuperämaittain",
+                "value": "577,764 milj. USD · 127 747 232 laitetta",
+                "detail": "Censusin vuoden 2025 general imports: laitteet 256,840 milj. USD ja 127,747 milj. kappaletta; nimenomaiset sähkösavukeseokset 320,924 milj. USD ja 23,279 milj. kg. Kulutukseen luovutettujen ydinkoodien laskettu tulli oli 143,132 milj. USD.",
+                "limit": "Tulliarvo ei ole vähittäismyyntiä eikä kata Yhdysvalloissa valmistettuja tuotteita, vähittäis-/tukkukatetta, varastoja tai laitonta kauppaa.",
+                "source": "U.S. Census Bureau · Merchandise Trade Imports",
+                "url": "https://www.census.gov/foreign-trade/data/IMDB.html",
             },
             {
                 "grade": "B",
@@ -428,6 +519,15 @@ def build_payload() -> dict:
         "customs": customs,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
+        "usCustoms": {
+            "totals": us_totals,
+            "origins": us_origins,
+            "audit": us_manifest["audit"],
+            "baskets": us_manifest["baskets"],
+            "method": us_manifest["method"],
+            "boundary": us_manifest["boundary"],
+            "archiveSha256": us_manifest["source_archive"]["sha256"],
+        },
         "japanCustoms": {
             "version": japan_manifest["version"],
             "totals": japan_totals,
@@ -472,6 +572,7 @@ def build_payload() -> dict:
             {"grade": "A", "title": "Saksan tupakkaverolaki §2", "coverage": "Verokanta 0,26 €/ml vuonna 2025 ja 0,32 €/ml vuodesta 2026", "use": "Veropohjan auditointilaskelma", "url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html"},
             {"grade": "A", "title": "EU Tobacco Products Directive 20(7)", "coverage": "Vuosittaiset myyntimäärät tuotemerkki- ja tyyppitasolla kansallisille viranomaisille", "use": "Oikeusperusta aggregoitujen tietopyyntöjen kohdentamiseen", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32014L0040"},
             {"grade": "B", "title": "UN Comtrade", "coverage": "USA, Kanada ja Japani 2025: HS 854340, 240412 ja 240419", "use": "Rajakaupan suuruusluokka ja ristiintarkastus", "url": "https://comtradeplus.un.org/"},
+            {"grade": "B", "title": "U.S. Census · Merchandise Trade Imports 2025", "coverage": "Yhdysvaltain HTS10 general imports, imports for consumption, CIF, määrä, laskettu tulli ja 42 nimike–alkuperämaariviä", "use": "Kansallinen laite- ja nestetuonnin reittiankkuri; detaljisummat täsmäävät kansallisiin lukuihin", "url": "https://www.census.gov/foreign-trade/data/IMDB.html"},
             {"grade": "B", "title": "Eurostat Comext DS-045409", "coverage": "EU:n extra- ja intra-EU CN8-kauppa alkuperä- ja lähetysmaittain", "use": "EU:n reitti- ja hubikorjaus", "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"},
             {"grade": "B", "title": "Japan Customs / MOF · 2025 revised", "coverage": "Japanin 9-numeroinen tuonti 854340000, 240412000, 240419100 ja 240419200 alkuperämaittain", "use": "Kansallinen laite- ja inhalointituotteiden tullisarja; 28 alkuperäriviä ja kuukausitäsmäytys", "url": "https://www.e-stat.go.jp/en/stat-search/files?bunya_l=16&cycle=1&layout=dataset&page=1&second=1&tclass1=000001013180&tclass2=000001013182&tclass3val=0&toukei=00350300&tstat=000001013141"},
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
@@ -481,7 +582,7 @@ def build_payload() -> dict:
         "tasks": [
             {"priority": "high", "title": "EU-27 CN8-reittimatriisi", "detail": "Valmis 2025: EU-ulkoraja 2,240 mrd EUR ja 12 jäsenmaan WORLD/intra/extra-jako, CN8 85434000 + 24041200. Kaikki ryhmärivit täsmäytyivät 0 EUR erolla.", "status": "done"},
             {"priority": "high", "title": "EU-CEG aggregoidut myyntipyynnöt", "detail": "Lähetä Article 20(7) -pyynnöt kansallisille toimivaltaisille viranomaisille, ilman yritystason luottamuksellisia tietoja.", "status": "queued"},
-            {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Hanki Census-avain tai dataote; erota general imports, imports for consumption ja re-exports.", "status": "requested"},
+            {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Valmis 2025: kahdeksan HTS10-riviä, general imports ja imports for consumption, 127,747 milj. laitetta, 23,279 milj. kg täsmällisiä nesteseoksia, CIF ja 143,132 milj. USD laskettua tullia. 236 detaljiriviä täsmäytyivät ilman eroa.", "status": "done"},
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "CIMT 10-digit + origin/export country + foreign-origin re-exports, täsmäytys Health Canadan toimitusmyyntiin.", "status": "requested"},
             {"priority": "medium", "title": "Japani 9-numeroinen tuonti", "detail": "Valmis: vuoden 2025 tarkistettu sarja, neljä kansallista nimikettä, 28 alkuperämaariviä ja 12 kuukauden täsmäytys ilman eroa. Seuraava kiinteä 2025-versio marraskuussa 2026.", "status": "done"},
             {"priority": "medium", "title": "Kiina GACC tullimenettelyineen", "detail": "Hae alkuperä, lähetysmaa, tullimenettely ja maahantuojan sijainti; erottele vientihubi ja kotimarkkina.", "status": "queued"},
@@ -499,8 +600,31 @@ def build_payload() -> dict:
     return data
 
 
+def publish_us_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "us_census"
+    public_data = DASHBOARD_DIR / "data" / "usa"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "us_census"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "us_census_vape_totals_2025.csv",
+        "us_census_vape_origins_2025.csv",
+        "us_census_vape_concordance_2025.csv",
+        "us_census_vape_manifest_2025.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "CONCORD_2025_vape_selected_fixed_width.txt",
+        "IMP_COMM_2025_vape_selected_fixed_width.txt",
+        "IMP_DETL_2025_vape_selected_fixed_width.txt",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
+    publish_us_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

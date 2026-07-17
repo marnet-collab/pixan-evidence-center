@@ -23,6 +23,8 @@ Vuoden 2025 Eurostat Comext DS-045409 -reittimatriisin johdetut CSV:t, hakumanif
 
 Japan Customs / Ministry of Finance -viranomaisen vuoden 2025 tarkistettu 9-numeroinen tuontisarja julkaistaan `data/japan/`-kansiossa. Kaksi alkuperäistä e-Stat-CSV:tä säilytetään `data/raw/japan_customs/`-kansiossa. Auditointi täsmäyttää jokaisen valitun nimike–alkuperä-rivin vuosisumman 12 kuukauteen ja säilyttää raakatiedostojen SHA-256-tarkistussummat.
 
+U.S. Census Bureaun vuoden 2025 HTS10-aineiston johdetut summat, alkuperämaat, nimikeluettelo ja auditointimanifesti julkaistaan `data/usa/`-kansiossa. Julkiseen repoon kopioidaan myös kompaktit kiinteälevyiset lähdeotteet; 292 Mt:n alkuperäisarkisto jää paikalliseen datahuoneeseen ja lukitaan manifestissa SHA-256-tunnisteella. Auditointi täsmäyttää 236 valittua detaljiriviä kansallisiin määriin, customs- ja CIF-arvoihin, kulutukseen luovutukseen sekä laskettuun tulliin.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti

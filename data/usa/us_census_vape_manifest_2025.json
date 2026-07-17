@@ -1,0 +1,199 @@
+{
+  "dataset": "U.S. Census Bureau Merchandise Trade Imports, December 2025",
+  "publisher": "U.S. Census Bureau, International Trade",
+  "downloaded_at_utc": "2026-07-17T08:00:48+00:00",
+  "period": "2025",
+  "source_archive": {
+    "url": "https://www.census.gov/trade/downloads/2025/Merch/im_m/IMDB2512.ZIP",
+    "path": "data/raw/us_census/IMDB2512.ZIP",
+    "bytes": 292255561,
+    "sha256": "c6f1c92d5c6fc35ac1957db788276b6112a169545415338b3a0d045ed9125480",
+    "last_modified_reported_by_server": "2026-06-30"
+  },
+  "member_sha256": {
+    "CONCORD.txt": "04bf730ecf09f5859b01d8d56620c481ad076de1fe9b5dbc87fa7d11c117a17d",
+    "COUNTRY.txt": "250ec27c3fcc74d8a29ee2357d184d41c0c0b8f09345b24b8ad5e6690b3f7913",
+    "IMP_COMM.txt": "a898191b43b2874a85f063e908e62ce86fed5ce3a89f5a242c3c3bd1920718ac",
+    "IMP_DETL.txt": "60d20d7db5c49c9ce2c3d1bc1ad550a20271a45a140aaeda384f6a728014144e"
+  },
+  "method": {
+    "source": "U.S. import documentation, compiled primarily from Automated Commercial Environment (ACE)",
+    "classification": "10-digit Harmonized Tariff Schedule of the United States (HTSUSA)",
+    "partner_basis": "country of origin",
+    "general_import_value": "customs value for merchandise arriving in the U.S.; includes warehouse entries",
+    "consumption_value": "customs value entered directly for consumption plus warehouse withdrawals",
+    "cif_value": "customs value plus freight, insurance and other charges to the U.S. port",
+    "duty": "calculated duty reported for imports for consumption"
+  },
+  "official_links": {
+    "product_page": "https://www.census.gov/foreign-trade/data/IMDB.html",
+    "record_layout": "https://www.census.gov/foreign-trade/reference/products/layouts/imdb.html",
+    "api_and_compilation_method": "https://www.census.gov/data/developers/data-sets/international-trade.html"
+  },
+  "baskets": {
+    "core_devices": {
+      "codes": [
+        "8543400030",
+        "8543400040"
+      ],
+      "general_quantity_units": 127747232,
+      "general_customs_value_usd": 256840077,
+      "general_cif_value_usd": 292626695
+    },
+    "core_liquids": {
+      "codes": [
+        "2404120500",
+        "2404121000",
+        "2404190500",
+        "2404191000"
+      ],
+      "general_quantity_kg": 23279189,
+      "general_customs_value_usd": 320923830,
+      "general_cif_value_usd": 334784787
+    },
+    "extended_not_exclusive": {
+      "codes": [
+        "2404129000",
+        "2404199000"
+      ],
+      "general_quantity_kg": 3977416,
+      "general_customs_value_usd": 12427311,
+      "warning": "These .90 codes are inhalation products but are not exclusive to e-liquids and are excluded from the narrow basket."
+    }
+  },
+  "audit": {
+    "selected_codes": [
+      "2404120500",
+      "2404121000",
+      "2404129000",
+      "2404190500",
+      "2404191000",
+      "2404199000",
+      "8543400030",
+      "8543400040"
+    ],
+    "selected_origin_rows": 42,
+    "selected_detail_records": 236,
+    "national_vs_detail_gaps": {
+      "2404120500": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "2404121000": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "2404129000": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "2404190500": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "2404191000": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "2404199000": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "8543400030": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      },
+      "8543400040": {
+        "con_quantity_1": 0,
+        "con_quantity_2": 0,
+        "con_customs_value_usd": 0,
+        "con_dutiable_value_usd": 0,
+        "con_calculated_duty_usd": 0,
+        "con_import_charges_usd": 0,
+        "con_cif_value_usd": 0,
+        "gen_quantity_1": 0,
+        "gen_quantity_2": 0,
+        "gen_customs_value_usd": 0,
+        "gen_import_charges_usd": 0,
+        "gen_cif_value_usd": 0
+      }
+    },
+    "status": "pass"
+  },
+  "boundary": {
+    "is_sales": false,
+    "use": "official national import-flow and route evidence; not retail sell-through",
+    "narrow_liquid_definition": "Only the four 24041205/10 and 24041905/10 codes whose official descriptions explicitly identify mixtures for personal electric/electronic vaporizing devices.",
+    "device_definition": "Both 2025 statistical suffixes under 85434000; one with nicotine-containing substance and one NESOI."
+  }
+}
