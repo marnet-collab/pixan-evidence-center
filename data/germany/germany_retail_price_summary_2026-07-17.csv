@@ -1,0 +1,2 @@
+segment,capture_date,seller_count,observation_count,in_stock_count,minimum_price_eur_including_vat,median_price_eur_including_vat,maximum_price_eur_including_vat,statutory_excise_2025_eur_per_10ml,statutory_excise_2026_eur_per_10ml,minimum_price_2026_excise_share_pct,median_price_2026_excise_share_pct,maximum_price_2026_excise_share_pct,interpretation
+10 ml e-liquid bottles,2026-07-17,1,10,10,7.12,9.49,11.95,2.60,3.20,26.7782,33.7197,44.9438,"One-seller, point-in-time, unweighted retail range; prices include VAT and exclude shipping."

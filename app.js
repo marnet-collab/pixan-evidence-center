@@ -14,6 +14,7 @@
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
   const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
+  const eur = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " €";
   const moneyJpy = (value) => value >= 1e9
     ? new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e9) + " mrd JPY"
     : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. JPY";
@@ -336,6 +337,46 @@
         </tr>`).join("")}</tbody>
       </table>
       <div class="meta-line table-note"><strong>Ei katelaskelma:</strong> Health Canadan arvo/yksikkö on koko tuoteryhmän raportoitu toimituskeskiarvo. Julkinen otos sisältää eri kokoisia ja eri tekniikan tuotteita, joten suhdeluku kertoo vain suuruusluokan.</div>`;
+
+    const germany = data.germanyRetail;
+    $("#germany-retail-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Segmentti</th><th>Myyjiä</th><th>Havaintoja</th><th>Varastossa</th><th>Alin hinta</th><th>Mediaani</th><th>Ylin hinta</th><th>Valmistevero / 10 ml</th><th>2026 veron osuus havaituista hinnoista*</th></tr></thead>
+        <tbody>${germany.summary.map((item) => `<tr>
+          <td><strong>${esc(item.segment)}</strong><div class="meta-line">Kaappaus ${esc(item.captureDate)}</div></td>
+          <td class="num">${integer(item.sellerCount)}</td><td class="num">${integer(item.count)}</td><td class="num">${integer(item.inStockCount)}</td>
+          <td class="num">${eur(item.minPriceEur)}</td><td class="num"><strong>${eur(item.medianPriceEur)}</strong></td><td class="num">${eur(item.maxPriceEur)}</td>
+          <td class="num">2025: ${eur(item.excise2025Per10mlEur)}<br>2026: ${eur(item.excise2026Per10mlEur)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.minExciseSharePct)}–${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.maxExciseSharePct)} %</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Rajaus:</strong> ${esc(germany.scope)} *Valmisteveron osuus ei ole kokonaisvero-osuus, koska hinnassa on mukana myös ALV. <a class="source-link" href="${esc(germany.statutoryRateSource)}" target="_blank" rel="noopener">Virallinen verolaki ↗</a></div>`;
+
+    $("#germany-retail-observations").innerHTML = `
+      <table>
+        <thead><tr><th>ID</th><th>Tuote</th><th>SKU</th><th>Pakkaus</th><th>Hinta sis. ALV</th><th>Hinta/ml</th><th>2026 valmisteveron osuus</th><th>Tila</th><th>Lähdetunniste</th></tr></thead>
+        <tbody>${germany.observations.map((item) => `<tr>
+          <td><code>${esc(item.id)}</code></td>
+          <td><strong>${esc(item.product)}</strong><div class="meta-line">${esc(item.brand)} · ${esc(item.seller)}</div><a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">Avaa tuotesivu ↗</a></td>
+          <td><code>${esc(item.sku)}</code></td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(item.volumeMl)} ml</td>
+          <td class="num"><strong>${eur(item.priceEur)}</strong></td><td class="num">${eur(item.pricePerMlEur, 4)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.exciseSharePct)} %</td>
+          <td>${esc(item.availability)}<div class="meta-line">Hinta voimassa -kenttä: ${esc(item.priceValidUntil || "ei ilmoitettu")}</div></td>
+          <td><code title="${esc(item.rawSha256)}">${esc(item.rawSha256.slice(0, 12))}…</code></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Hintaperusta:</strong> ${esc(germany.observations[0]?.priceBasis || "")} Tuotesivut muuttuvat; auditointimanifesti sitoo havainnot täysiin SHA-256-tunnisteisiin.</div>`;
+
+    $("#germany-retail-stress").innerHTML = `
+      <table>
+        <thead><tr><th>Skenaario</th><th>Virallinen 2025 volyymi</th><th>Havaittu 10 ml hinta</th><th>Mekaaninen kertolasku</th><th>2025 valmisteveropohja</th><th>Tulkinta</th></tr></thead>
+        <tbody>${germany.stress.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.officialVolumeLitres / 1e6)} milj. l</td>
+          <td class="num">${eur(item.retailPriceEur)} / 10 ml</td><td class="num"><strong>${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 4 }).format(item.mechanicalValueEur / 1e9)} mrd €</strong></td>
+          <td class="num">${moneyEur(item.mechanicalExciseBaseEur)}</td><td>${esc(item.interpretation)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kaava:</strong> 1,5 milj. litraa × 100 kpl 10 ml pakkausta/litra × havaittu hinta. Vuoden 2025 volyymi on pyöristetty viranomaisluku ja hinnat ovat 17.7.2026 yhdeltä myyjältä. <a class="source-link" href="${esc(germany.officialVolumeSource)}" target="_blank" rel="noopener">Destatis ↗</a></div>`;
   }
 
   function renderEvidence() {

@@ -27,6 +27,13 @@ async function check(viewport, label) {
   assert.match(await page.locator("#canada-retail-observations").innerText(), /STLTH X Geek Bar/);
   assert.match(await page.locator("#canada-retail-observations").innerText(), /50,99 CAD/);
   assert.match(await page.locator("#canada-retail-comparison").innerText(), /2,403×/);
+  assert.equal(await page.locator("#germany-retail-summary tbody tr").count(), 1);
+  assert.equal(await page.locator("#germany-retail-observations tbody tr").count(), 10);
+  assert.equal(await page.locator("#germany-retail-stress tbody tr").count(), 3);
+  assert.match(await page.locator("#germany-retail-summary").innerText(), /9,49 €/);
+  assert.match(await page.locator("#germany-retail-stress").innerText(), /1,4235 mrd €/);
+  await page.locator("#germany-retail-summary").screenshot({ path: `/tmp/pixan-germany-summary-${label}.png` });
+  await page.locator("#germany-retail-stress").screenshot({ path: `/tmp/pixan-germany-stress-${label}.png` });
 
   await page.locator('[data-view="customs"]').dispatchEvent("click");
   await page.waitForSelector('[data-view-panel="customs"].active');
@@ -47,6 +54,13 @@ async function check(viewport, label) {
       "data/canada/canada_retail_stress_test_2026-07-17.csv",
       "data/canada/canada_retail_price_manifest_2026-07-17.json",
       "data/raw/canada_retail/canada_retail_capture_manifest_2026-07-17.json",
+      "data/germany/germany_retail_price_observations_2026-07-17.csv",
+      "data/germany/germany_retail_price_summary_2026-07-17.csv",
+      "data/germany/germany_retail_stress_test_2026-07-17.csv",
+      "data/germany/germany_retail_source_excerpts_2026-07-17.json",
+      "data/germany/germany_retail_price_manifest_2026-07-17.json",
+      "data/raw/germany_official/destatis_2025_taxed_substitutes.html",
+      "data/raw/germany_official/tobacco_tax_act_section_2.html",
       "data/china/china_gacc_access_manifest_2026-07-17.json",
       "data/korea/korea_customs_hs6_totals_2025.csv",
       "data/korea/korea_customs_hs6_monthly_2025.csv",
@@ -76,7 +90,7 @@ async function check(viewport, label) {
 try {
   await check({ width: 1440, height: 1000 }, "desktop");
   await check({ width: 390, height: 844 }, "mobile");
-  process.stdout.write("Dashboard QA passed: pricing tables 3/10/3, no runtime errors, mobile body fits viewport.\n");
+  process.stdout.write("Dashboard QA passed: Canada pricing 3/10/3, Germany pricing 1/10/3, no runtime errors, mobile body fits viewport.\n");
 } finally {
   await browser.close();
 }

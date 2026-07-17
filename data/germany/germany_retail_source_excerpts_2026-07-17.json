@@ -1,0 +1,324 @@
+{
+  "captures": [
+    {
+      "observation_id": "DE-RET-001",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/revoltage/tobacco-blue-10ml-hybrid-nikotinsalz-liquid/rvns-tbl",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/revoltage_tobacco_blue_2026-07-17.html",
+      "raw_snapshot_sha256": "fe629628bad44934e927cb082efeb6f5442f59a37d9472c39a116c42f34d3a8a",
+      "raw_snapshot_bytes": 322428,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Tobacco Blue - 10ml Hybrid-Nikotinsalz Liquid",
+        "sku": "RVNS_TBL-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "Revoltage"
+        },
+        "description": " Revoltage - Tobacco Blue 10ml Hybrid-Nikotinsalz Liquid\n\nDas Revoltage Tobacco Blue Hybrid-Nikotinsalz Liquid bietet ein ausgewogenes Zusammenspiel von Tabak und Minzaromen, das beim Dampfen für ein erfrischendes Erlebnis sorgt. Entwickelt für den direkten Gebrauch in E-Zigaretten, sorgt das Nikotinsalz für eine sanfte und schnelle Nikotinaufnahme, wodurch auch höhere Nikotindosen angenehm konsumiert werden können. Erhältlich in den Stärken 0mg/ml, 10mg/ml und 20mg/ml, wird das Liquid in praktischen 10ml Flaschen geliefert.\n\nFrischer Geschmack mit Tabak und Minze \nDas Tobacco Blue Liquid von Revoltage verbindet den klassischen Tabakgeschmack mit einer kühlen Minznote. So bekommst Du einen frischen und angenehmen Geschmack, der nicht zu stark ist und genauso für den Alltag passt.\n\nVerschiedene Nikotinstärken zur Wahl \nDu kannst zwischen drei Nikotinstärken wählen: 0mg, 10mg und 20mg pro Milliliter. So findest Du genau das Liquid, das zu Deinem Bedarf passt, egal ob Du gerade reduzierst oder einen niedrigeren Nikotingehalt bevorzugst.\n\nKleine 10ml Flasche für unterwegs \nDas Tobacco Blue Liquid bekommst Du in einer praktischen 10ml Flasche. Sie passt gut in die Tasche und Du kannst Dein Liquid immer dabei haben. So ist das Nachfüllen schnell gemacht, wann immer Du möchtest.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n\t•1x Revoltage Tobacco Blue 10ml Hybrid-Nikotinsalz Liquid\n",
+        "offer": {
+          "price": 11.95,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/revoltage/tobacco-blue-10ml-hybrid-nikotinsalz-liquid/rvns-tbl-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-002",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/zazo/classics-tobacco-4-10ml-liquid/zazs-tb4-001",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/zazo_tobacco_4_2026-07-17.html",
+      "raw_snapshot_sha256": "23aa294e5e91b6e594feb8c3c36cff1274cfeefa6e1e32a371ed52ca6c27a49c",
+      "raw_snapshot_bytes": 555568,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Classics Tobacco 4 - 10ml Liquid",
+        "sku": "ZAZS_TB4-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "ZAZO"
+        },
+        "description": "ZAZO - Classics Tobacco 4 - 10ml Liquid\n\nMit dem \"Tobacco 4\" Liquid aus unserer ZAZO Liquid-Kollektion werden wir vor allem Zigarettenliebhaber voll begeistern. Hierbei handelt es sich um einen aromatischen und angenehm milden American Blend Tabak, der in vielen Zigaretten verwendet wird und durch seinen ausgewogenen und milden Charakter überzeugt. Mit diesem Liquid im Tank Ihrer E-Zigarette, insbesondere beim klassischen MTL-Verdampfen, entsteht ein authentisches und intensives Zigarettengefühl, das besonders Ex-Raucher und Umsteiger überzeugen wird!\n\n10ml Fertig-Liquids\n10ml Liquids sind gebrauchsfertige E-Liquids zur Verwendung in E-Zigaretten. Die Nikotinstärke pro ml Liquid kann vorab ausgewählt und das Liquid dann direkt ohne weiteren Aufwand in die E-Zigarette gefüllt und verdampft werden. Durch eine gesetzliche Regelung ist der maximale Inhalt pro Flasche auf 10ml begrent, wenn diese Flüssigkeit Nikotin enthält, deshalb sind Fertig-Liquids mit Nikotin leider nicht in größeren Gebinden erhältlich.\n\nLieferumfang\n\n\t1x ZAZO Classics Tobacco 4 Liquid in einer 10ml Flasche\n\n\n\n\n\n\n\n\nEinordnung nach CLP-Verordnung\n\n\n\nAchtung\n\n\nH302: Gesundheitsschädlich bei Verschlucken. Enthält Nicotin (ISO); 3-[(2S)-1-Methylpyrrolidin-2-yl]pyridin.\n\n\n \n",
+        "offer": {
+          "price": 8.99,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/zazo/classics-tobacco-4-10ml-liquid/zazs-tb4-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-003",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/sc/american-tobacco-10ml-nikotinsalz-liquid/scns-ato",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/sc_american_tobacco_2026-07-17.html",
+      "raw_snapshot_sha256": "0e4b74fd4b0278a10051e9c97c9a3b1b6ea4f231845cfec3d9d96614289edd4c",
+      "raw_snapshot_bytes": 317713,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "American Tobacco - 10ml Nikotinsalz-Liquid",
+        "sku": "SCNS_ATO-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "SC"
+        },
+        "description": "SC Liquid - American Tobacco - 10ml Nikotinsalz-Liquid\n\nDas SC Nikotinsalz Liquid American Tobacco überzeugt durch sein vollmundiges und ausgewogenes Aroma, das den klassischen Tabakgeschmack authentisch widerspiegelt. Es ist speziell für MTL- und Pod-Systeme konzipiert und bietet dank der Nikotinsalz-Technologie eine besonders sanfte und schnelle Nikotinaufnahme – selbst bei höheren Nikotinstärken. Jede 10 ml Flasche ist gebrauchsfertig und lässt sich dank der praktischen Tropfspitze einfach und sauber befüllen. Dieses Liquid ist die ideale Wahl für alle, die ein verlässliches und aromatisch ausgewogenes Tabak-Liquid für den täglichen Gebrauch suchen.\n\nAuthentischer Tabakgeschmack \nDas SC American Tobacco Liquid bietet dir den typischen Geschmack von amerikanischem Tabak. Es ist vollmundig und leicht herb, perfekt, wenn du den echten Tabakgeschmack magst. So bekommst du ein vertrautes Aroma, das dich täglich begleitet.\n\nEinfache Nutzung für E-Zigaretten \nDas Liquid ist fertig gemischt und kommt in einer 10 ml Flasche mit praktischer Tropfspitze. Damit kannst du deine E-Zigarette schnell und sauber befüllen. Kein Mischen oder Anrühren nötig – einfach aufdrehen, einfüllen und dampfen.\n\nPassend für verschiedene Geräte \nDieses Liquid ist ideal für MTL- und Pod-Systeme. Es funktioniert zuverlässig und sorgt dafür, dass du überall und jederzeit den klassischen Tabakgeschmack genießen kannst. So hast du immer dein Lieblingsliquid griffbereit.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n 1x SC Liquid - American Tobacco - Nikotinsalz Liquid - 10ml Liquid\n\n",
+        "offer": {
+          "price": 9.49,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/sc/american-tobacco-10ml-nikotinsalz-liquid/scns-ato-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-004",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/zazo/classics-fresh-mint-10ml-liquid/zazs-frm",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/zazo_fresh_mint_2026-07-17.html",
+      "raw_snapshot_sha256": "7e9fdf2cd082f74f05f71f5a1397c4adc21d89cc509714c4fb6b77b0d4e22b80",
+      "raw_snapshot_bytes": 548122,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Classics Fresh Mint - 10ml Liquid",
+        "sku": "ZAZS_FRM-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "ZAZO"
+        },
+        "description": "ZAZO - Classics Fresh Mint - 10ml Liquid\n\n\"Fresh Mint\" erinnert geschmacklich an die bekannten Minzbonbons und wird Fans von frischen Aromen begeistern. In diesem exklusiven Single-Aroma von ZAZO zeigt sich die frische, grüne Minze in absoluter Bestform. Mit jedem Zug am Dampf erleben Sie den intensiven und authentischen Minzgeschmack mit seiner charakteristischen, dezenten Süße und aromatisch-würzigen Noten. Hinzu kommt das angenehm erfrischende Gefühl, das Fresh Mint beim Dampfen in Mund und Rachen hinterlässt und Ihnen das Gefühl von frischem Atem gibt. Fresh Mint ist MTL und DL ein absolutes Frische-Highlight, das Ihre Geschmacksnerven auf angenehme Weise kitzelt und Ihnen eine willkommene Erfrischung bietet.\n\n\n10ml Fertig-Liquids\n10ml Liquids sind gebrauchsfertige E-Liquids zur Verwendung in E-Zigaretten. Die Nikotinstärke pro ml Liquid kann vorab ausgewählt und das Liquid dann direkt ohne weiteren Aufwand in die E-Zigarette gefüllt und verdampft werden. Durch eine gesetzliche Regelung ist der maximale Inhalt pro Flasche auf 10ml begrent, wenn diese Flüssigkeit Nikotin enthält, deshalb sind Fertig-Liquids mit Nikotin leider nicht in größeren Gebinden erhältlich.\n\nLieferumfang\n\n\t1x ZAZO Classics Fresh Mint Liquid in einer 10ml Flasche\n\n\n\n\n\n\n\n\nEinordnung nach CLP-Verordnung\n\n\n\nAchtung\n\n\nH302: Gesundheitsschädlich bei Verschlucken. H319: Verursacht schwere Augenreizung. EUH208: Enthält Pfefferminzöl(8006-90-4), trans-Menthon(89-80-5). Kann allergische Reaktionen hervorrufen. Enthält Nicotin (ISO); 3-[(2S)-1-Methylpyrrolidin-2-yl]pyridin.\n\n\n \n",
+        "offer": {
+          "price": 8.99,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/zazo/classics-fresh-mint-10ml-liquid/zazs-frm-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-005",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/sc/spearmint-10ml-nikotinsalz-liquid/scns-spe",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/sc_spearmint_2026-07-17.html",
+      "raw_snapshot_sha256": "1fdfa37bb390b08137ee078c90852c2a2043ae267109cb7fa53df582dca2bff4",
+      "raw_snapshot_bytes": 317651,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Spearmint - 10ml Nikotinsalz-Liquid",
+        "sku": "SCNS_SPE-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "SC"
+        },
+        "description": "SC Liquid - Spearmint - 10ml Nikotinsalz-Liquid\n\nDas SC Nikotinsalz Liquid Spearmint überzeugt mit seinem kühlen und belebenden Geschmack, der an frische Pfefferminzblätter erinnert und für einen klaren, erfrischenden Nachgeschmack sorgt. Durch die Verwendung von Nikotinsalz wird das Nikotin besonders sanft und schnell vom Körper aufgenommen, was ein angenehmes, kratzfreies Dampferlebnis ermöglicht. Erhältlich in zwei unterschiedlichen Nikotinstärken ist das Liquid ideal für den täglichen Gebrauch und perfekt für alle, die eine unkomplizierte und erfrischende All-Day-Option suchen. Die handliche 10 ml Flasche ist direkt einsatzbereit und macht das Liquid zum idealen Begleiter für unterwegs.\n\nFrischer Minzgeschmack für den Alltag \nMit dem SC Liquid Spearmint bekommst Du einen klaren, erfrischenden Minzgeschmack, der nicht zu stark und nicht zu mild ist. Es eignet sich perfekt für den täglichen Gebrauch, wenn Du eine kühle und belebende Alternative suchst. So bleibt Dein Dampfen angenehm frisch, ohne zu überladen.\n\nPraktische 10 ml Flasche für unterwegs \nDie handliche 10 ml Flasche passt in jede Tasche und ist ideal, wenn Du unterwegs dampfen möchtest. Du kannst das Liquid direkt und ohne Aufwand in Deine E-Zigarette oder Dein Pod-System füllen. So hast Du immer Deine Minzfrische dabei, egal wo Du bist.\n\nVerschiedene Nikotinstärken für Deinen Bedarf \nDu kannst zwischen 10 mg/ml und 20 mg/ml Nikotin wählen. Dadurch ist das Liquid sowohl für Anfänger als auch für erfahrene Dampfer geeignet. So findest Du genau die Stärke, die zu Deinem täglichen Bedarf passt und kannst Deine Dampferfahrung individuell gestalten.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n 1x SC Liquid - Spearmint- Nikotinsalz Liquid - 10ml Liquid\n\n",
+        "offer": {
+          "price": 9.49,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/sc/spearmint-10ml-nikotinsalz-liquid/scns-spe-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-006",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/innocigs/first-money-orangenlimonade-10ml-liquid/inls-fmo",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/first_money_orange_2026-07-17.html",
+      "raw_snapshot_sha256": "f465a68422826f2da30eead6163ecdfa012b43587312ec8bed4b9f201b817240",
+      "raw_snapshot_bytes": 472846,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "First Money Orangenlimonade - 10ml Liquid",
+        "sku": "INLS_FMO-005",
+        "brand": {
+          "@type": "Brand",
+          "name": "Innocigs"
+        },
+        "description": "InnoCigs Liquid - First Money Orangenlimonade - 10ml Liquid\n\nBei dem Liquid First Money des Hamburger Unternehmens InnoCigs steht der Geschmack von Orangenlimonade im Vordergrund. Das Liquid ist ein komplett einsatzfähiges E-Liquid, welches Sie sofort mit Ihrer E-Zigarette dampfen können. Es gibt dieses Liquid in 4 Varianten, die Nikotin enthalten. Ebenso ist aber auch eine komplett nikotinfreie Ausführung erhältlich. Das First Money Liquid wird Ihnen in einer praktischen 10ml Flasche ausgeliefert.\n\nInhaltsstoffe für die Stärke: 0mg/ml\nPropylenglycol (80% PG), Glycerin (15% VG), Aroma, Ethanol (5%)\n\nInhaltsstoffe für die Stärken: 3mg/ml & 6mg/ml & 9mg/ml & 18mg/ml\nPropylenglycol (80% PG), Glycerin (15% VG), Aroma, Ethanol (5%), Nikotin\n\n\n\n10ml Fertig-Liquids\n10ml Liquids sind gebrauchsfertige E-Liquids zur Verwendung in E-Zigaretten. Die Nikotinstärke pro ml Liquid kann vorab ausgewählt und das Liquid dann direkt ohne weiteren Aufwand in die E-Zigarette gefüllt und verdampft werden. Durch eine gesetzliche Regelung ist der maximale Inhalt pro Flasche auf 10ml begrent, wenn diese Flüssigkeit Nikotin enthält, deshalb sind Fertig-Liquids mit Nikotin leider nicht in größeren Gebinden erhältlich.\n\nLieferumfang\n\n\t1x First Money Orangenlimonade - 10ml Liquid\n",
+        "offer": {
+          "price": 7.12,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/innocigs/first-money-orangenlimonade-10ml-liquid/inls-fmo-005"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-007",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/podsalt/podsalt-cigarette-10ml-nikotinsalz-liquid/pdss-cig",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/podsalt_cigarette_2026-07-17.html",
+      "raw_snapshot_sha256": "2d36774544bedf35a79842a28ab6d8dc497ddb07bf2cf9629474011e03338af5",
+      "raw_snapshot_bytes": 673306,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "PodSalt - Cigarette - 10ml Nikotinsalz-Liquid",
+        "sku": "PDSS_CIG-002",
+        "brand": {
+          "@type": "Brand",
+          "name": "PodSalt"
+        },
+        "description": "Pod Salt - Cigarette - 10ml Nikotinsalz-Liquid\n\nCigarette von Pod Salt ist, wie der Name schon vermuten lässt, ein E-Liquid, das sich geschmacklich an den Geschmack einer Zigarette anlehnt. Jedoch weniger rauchig und dafür nuancenreich, spannend und geschmacksintensiv, mit herben sowie leicht süßlichen Noten, die die perfekte Balance für ein gutes Allday Liquid bilden. Mit dieser vollmundigen Komposition aus verschiedenen Tabaksorten, die zu einem würzig Mix verschmelzen, ist Pod Salt Cigarette für all jene interessant, die rauchfrei bleiben aber auf den gewohnten Geschmack von echtem Tabak nicht verzichten wollen.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n\t1x Pod Salt Cigarette Nikotinsalz Liquid 10 ml\n\n\n\n\n\n\n\n\nEinordnung nach CLP-Verordnung\n\n\n\nGefahr\n\n\nH301: Giftig bei Verschlucken. H310: Lebensgefahr bei Hautkontakt. H332: Gesundheitsschädlich bei Einatmen. H412: Schädlich für Wasserorganismen, mit langfristiger Wirkung. Enthält Nikotinsalicylat.\n\n\n \n",
+        "offer": {
+          "price": 11.9,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/podsalt/podsalt-cigarette-10ml-nikotinsalz-liquid/pdss-cig-002"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-008",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/schwarze-taube-10ml-nikotinsalz-liquid/187n-stb",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/187_schwarze_taube_2026-07-17.html",
+      "raw_snapshot_sha256": "45ea854dae5c0c4eedc1c462bcfb9dc9599ed9bd2b1624d332fe4eb27f4dc800",
+      "raw_snapshot_bytes": 320889,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Schwarze Taube - 10ml Nikotinsalz-Liquid",
+        "sku": "187N_STB-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "187 Strassenbande"
+        },
+        "description": "187 Strassenbande Schwarze Taube - 10ml Nicotinsalz-Liquid\n\nDas 187 Strassenbande Schwarze Taube Nicotinsalz-Liquid begeistert mit einer einzigartigen Mischung aus reifen, dunklen Trauben und der eisigen Frische eines blauen Eisbonbons. Die Trauben verleihen dem Liquid eine spritzige Süße mit leicht herben Tönen, während das Eisbonbon für eine belebende Kälte sorgt, die die Sinne erfrischt und die Geschmacksknospen verführt. Dank der besonderen Eigenschaften von Nikotinsalzen wird das Nikotin langsamer und sanfter aufgenommen, was einen milden Throat Hit ermöglicht und dennoch eine effektive Nikotinversorgung gewährleistet. Dieses 10 ml Fertig-Liquid ist perfekt für Dampfer, die ein intensives und dennoch sanftes Geschmackserlebnis suchen, ohne komplizierte Vorbereitungen. Ideal für Umsteiger von Tabakzigaretten und Nutzer von Pod Systemen.\n\nIntensiver Geschmackserlebnis\nMit dem 187 Strassenbande Schwarze Taube Liquid tauchst Du in eine neue Welt des Geschmacks ein. Die Kombination aus süßen, dunklen Trauben und einem Hauch von eisigem Bonbon sorgt für ein unvergleichbares Aroma. Jedes Mal, wenn Du Deine E-Zigarette genießt, erlebst Du die perfekte Balance aus Frische und Süße, die Deine Sinne anregt und begeistert.\n\nVorteile von Nikotinsalz\nErlebe die sanfte Seite des Nikotins mit warum Nikotinsalz die bessere Wahl ist. Dieses Liquid nutzt Nikotinsalz, eine innovative Form des Nikotins, die Deinem Körper auf sanfte Weise die gewünschte Nikotindosis liefert. Ideal für Einsteiger und erfahrene Nutzer von Vapes, die eine geschmeidige Erfahrung ohne den typischen Kratzen im Hals suchen.\n\nPraktische 10ml Flasche\nUnsere 10ml Schwarze Taube Liquid Flasche ist optimal für Deinen alltäglichen Bedarf. Die handliche Größe bedeutet, dass Du Dein Lieblingsliquid überall mit hinnehmen kannst. Kein Mischen oder Verdünnen – einfach die Flasche öffnen und losdampfen. So hast Du jederzeit und überall ein vollmundiges Dampferlebnis zur Hand.\n\nLieferumfang und Bestellung\nMit der Bestellung erhältst Du eine 10ml Flasche des einzigartigen 187 Strassenbande Schwarze Taube Nikotinsalz-Liquids. Dieses hochwertige Produkt ist bereit, in Deine E-Zigarette gefüllt zu werden. Bestell heute noch und freue Dich auf eine schnelle Lieferung, damit Du Dein Dampferlebnis bald auf das nächste Level heben kannst.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n\t1x 187 Strassenbande Schwarze Taube Nikotinsalz-Liquid 10 ml\n\n\n\n\n\n\n\n\nEinordnung nach CLP-Verordnung\n\n\n\nGefahr\n\n\nH301: Giftig bei Verschlucken. H412: Schädlich für Wasserorganismen, mit langfristiger Wirkung. Enthält Nikotinlävulinat.\n\n\n \n",
+        "offer": {
+          "price": 11.49,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/schwarze-taube-10ml-nikotinsalz-liquid/187n-stb-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-009",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/sc/ry4-tobacco-10ml-nikotinsalz-liquid/scns-ryt",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/sc_ry4_tobacco_2026-07-17.html",
+      "raw_snapshot_sha256": "aa07536eedcc8a757db854abe64279e350cb3ab31cf923f6a35c55614fbcbb44",
+      "raw_snapshot_bytes": 317285,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "RY4 Tobacco - 10ml Nikotinsalz-Liquid",
+        "sku": "SCNS_RYT-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "SC"
+        },
+        "description": "SC Liquid - RY4 Tobacco - 10ml Nikotinsalz-Liquid\n\nDas SC Nikotinsalz Liquid RY4 Tobacco vereint ein kräftiges Tabakaroma mit einer angenehmen, dezenten Süße, die sowohl Neueinsteiger als auch erfahrene Dampfer anspricht. Durch die Verwendung von Nikotinsalz erfolgt die Nikotinaufnahme besonders schnell und sanft, was den typischen Kratzeffekt im Hals deutlich reduziert. Das Liquid wird in einer handlichen 10 ml Flasche mit praktischer Einfüllspitze geliefert, sodass das Befüllen des Tanks oder Pods einfach und sauber gelingt. Es ist sofort gebrauchsfertig und sowohl in 10 mg/ml als auch 20 mg/ml Nikotinstärke erhältlich. Mit seinem harmonischen Geschmacksprofil eignet sich das RY4 Tobacco Liquid perfekt für den täglichen Gebrauch und den komfortablen Umstieg von der Zigarette zur E-Zigarette.\n\nAuthentischer Tabakgeschmack \nDas RY4 Tobacco Liquid bietet Dir den echten Geschmack von Tabak. Dabei ist es nicht zu streng, sondern hat eine leichte, angenehme Süße. So kannst Du täglich Deinen bekannten Tabakgenuss mit einem sanften Aroma genießen.\n\nPraktische Anwendung \nDie 10 ml Flasche ist handlich und lässt sich dank der feinen Einfüllspitze leicht befüllen. Du brauchst nichts selbst zu mischen, sondern kannst das Liquid sofort in Deine E-Zigarette füllen und loslegen.\n\nFlexible Nikotinstärken \nDu kannst das Liquid in 10 mg/ml oder 20 mg/ml Nikotin bekommen. So findest Du die Stärke, die am besten zu Dir passt. Ob Du wenig oder mehr Nikotin magst, hier hast Du die Wahl.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n 1x SC Liquid - RY4 Tobacco- Nikotinsalz Liquid - 10ml Liquid\n\n",
+        "offer": {
+          "price": 9.49,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/sc/ry4-tobacco-10ml-nikotinsalz-liquid/scns-ryt-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    },
+    {
+      "observation_id": "DE-RET-010",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/pille-10ml-nikotinsalz-liquid/187n-ple",
+      "http_content_type": "text/html; charset=UTF-8",
+      "raw_snapshot": "data/raw/germany_retail/187_pille_2026-07-17.html",
+      "raw_snapshot_sha256": "67bca81016f4ec0827768a6bed6ceb329bc2851b13a58902f3372d8839e4f3d6",
+      "raw_snapshot_bytes": 329930,
+      "product_json_ld": {
+        "@type": "Product",
+        "name": "Pille - 10ml Nikotinsalz-Liquid",
+        "sku": "187N_PLE-001",
+        "brand": {
+          "@type": "Brand",
+          "name": "187 Strassenbande"
+        },
+        "description": "187 Strassenbande - Pille - 10ml Nikotinsalz-Liquid\n\nDas 187 Strassenbande Pille Nikotinsalz-Liquid begeistert mit einem außergewöhnlichen Geschmack, der fruchtige Süße mit der Frische von Candy-Noten kombiniert und durch eine deutliche Honigmelonen-Note geprägt ist. Jeder Zug wird durch eine perfekt dosierte Prise Koolada erfrischt, die für einen vitalisierenden Kühleffekt sorgt. Dieses Liquid richtet sich an Genießer, die eine intensivere Nikotinerfahrung suchen, dabei jedoch einen sanften Throat Hit bevorzugen. Dank Nikotinsalz-Technologie wird das Nikotin effektiver und sanfter aufgenommen als bei herkömmlichen Liquids. Ideal für Umsteiger und Nutzer von Pod-Systemen, bietet es ein hochkonzentriertes Nikotinerlebnis bei minimalem Verbrauch.\n\nIntensive Geschmackserlebnisse \nMit dem 187 Strassenbande Pille Liquid erlebst Du einen ganz besonderen Fruchtmix. Der Geschmack der saftigen Honigmelone wird durch süße Candy-Noten ergänzt, die Deinem Vape eine einzigartige Note verleihen. Dieses Liquid ist perfekt für Dich, wenn Du auf fruchtige und süße Aromen stehst. Jeder Zug verspricht eine wahre Geschmacksexplosion, die Dich begeistern wird.\n\nKühlender Effekt bei jedem Zug \nDie Zugabe von Koolada sorgt für einen erfrischenden Kühleffekt, der Deine Sinne belebt. Bei jedem Zug spürst Du den eisigen Hauch, der das Geschmackserlebnis perfekt abrundet. So erhältst Du nicht nur einen intensiven Fruchtgeschmack, sondern auch eine angenehme Erfrischung, die ideal für warme Tage ist oder einfach, um Dich zwischendurch aufzufrischen.\n\nVorteile von Nikotinsalz-Liquid \nDas 187 Strassenbande Pille Liquid mit Nikotinsalz bietet Dir eine sanfte Möglichkeit, Nikotin zu genießen, ohne dass Deine Schleimhäute gereizt werden. Besonders für Umsteiger von Tabakzigaretten ist es ideal, da es den Nikotinbedarf effizient decken kann. Es ist zudem für Pod-Systeme und niedrigere Wattzahlen optimal geeignet, wodurch es sehr vielseitig einsetzbar ist.\n\nEinfache Anwendung garantiert \nDas Liquid kommt in einer praktischen 10 ml Flasche, die sich leicht transportieren lässt und Dir das Nachfüllen Deiner E-Zigarette erleichtert. Die Dosierung ist unkompliziert, sodass Du schnell einsatzbereit bist. Ideal für unterwegs oder wenn Du einfach mal schnell die Geschmacksrichtung wechseln möchtest.\n\nNikotinsalz Liquids\nNikotin ist in Liquids bekannt dafür, dass es einen scharfen, reizenden Eigengeschmack hat. Mit Nikotinsalz (oder auch NicSalt) ist es einerseits möglich, Nikotin sanft auch in höheren Dosen pro Zug aufzunehmen, andererseits erfolgt die Aufnahme des Nikotins schneller als gewohnt. Natürlich ist bei höheren Nikotingehalten darauf zu achten, dass es weniger Züge braucht um die gleiche Nikotinaufnahme zu erreichen.\n\nLieferumfang\n\n\t1x 187 Strassenbande Pille Nikotinsalz-Liquid 10 ml\n\n\n\n\n\n\n\n\nEinordnung nach CLP-Verordnung\n\n\n\nGefahr\n\n\nH301: Giftig bei Verschlucken. H412: Schädlich für Wasserorganismen, mit langfristiger Wirkung. 208: Enthält Cineole. Kann allergische Reaktionen hervorrufen Enthält Nikotinlävulinat, 2-Isopropyl-N,2,3-trimethylbuty- ramide.\n\n\n \n",
+        "offer": {
+          "price": 11.49,
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-07-24",
+          "url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/pille-10ml-nikotinsalz-liquid/187n-ple-001"
+        }
+      },
+      "page_assertions": {
+        "ten_ml_in_product_json_ld": true,
+        "price_includes_vat": true,
+        "shipping_additional": true,
+        "offer_in_stock": true
+      }
+    }
+  ]
+}

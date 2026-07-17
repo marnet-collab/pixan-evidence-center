@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 10:15 UTC",
+    "updated": "2026-07-17 10:28 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -316,9 +316,9 @@ window.PIXAN_DATA = {
       "customs": "Eurostat Comext CN8 plus Destatis foreign trade; extra-EU origin and intra-EU consignment",
       "route": "Subtract dispatches and re-exports from hub flows; use taxed domestic volume as market anchor",
       "salesSource": "Destatis tobacco-tax statistics 73411; BVL EU-CEG annual market-share/sales reports",
-      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 980,8 milj. EUR; intra-EU 129,7 milj. EUR ja extra-EU 851,1 milj. EUR. 2025 taxed substitutes obtained: 1.5 million litres, +18.2%; device units and sales value missing",
-      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Device sales units/value, average retail price, EU-CEG brand/type aggregation",
-      "how": "Extract GENESIS table 73411; request aggregated Article 20(7) sales from BVL; download CN8 import/export flows from Comext and Destatis; obtain official CPI/price observation for e-liquids if available",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 980,8 milj. EUR; intra-EU 129,7 milj. EUR ja extra-EU 851,1 milj. EUR. 2025 taxed substitutes obtained: 1.5 million litres, +18.2%. Statutory rate verified at 0.26 EUR/ml for 2025 and 0.32 EUR/ml from 2026. Ten in-stock 10 ml one-seller prices captured 2026-07-17: 7.12/9.49/11.95 EUR low/median/high; mechanical volume-times-price range 1.068/1.4235/1.7925bn EUR, not market value.",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Device sales units/value, official or sales-weighted average retail price, actual e-liquid excise revenue, EU-CEG brand/type aggregation",
+      "how": "Extract GENESIS table 73411; request aggregated Article 20(7) sales from BVL; obtain official tax accounts and any CPI price observation; add a multi-retailer or licensed sell-out panel before presenting a consumer-market value",
       "tax": {
         "name": "Saksa",
         "sourceName": "Germany",
@@ -3608,6 +3608,338 @@ window.PIXAN_DATA = {
     "taxRule": "1,12 CAD / alkava 2 ml ensimmäisestä 10 ml:sta; sen jälkeen 1,12 CAD / alkava 10 ml. Määrätyissä provinsseissa lisävero on samansuuruinen.",
     "scope": "C-tason täydentävä, päivämääräkohtainen julkinen hintaotos; ei myyntipainotettu hintaindeksi, kassakuitti tai katelaskelma."
   },
+  "germanyRetail": {
+    "observations": [
+      {
+        "id": "DE-RET-001",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Tobacco Blue - 10ml Hybrid-Nikotinsalz Liquid",
+        "brand": "Revoltage",
+        "sku": "RVNS_TBL-001",
+        "volumeMl": 10.0,
+        "priceEur": 11.95,
+        "pricePerMlEur": 1.195,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 26.7782,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/revoltage/tobacco-blue-10ml-hybrid-nikotinsalz-liquid/rvns-tbl",
+        "sourceTier": "C",
+        "rawSha256": "fe629628bad44934e927cb082efeb6f5442f59a37d9472c39a116c42f34d3a8a"
+      },
+      {
+        "id": "DE-RET-002",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Classics Tobacco 4 - 10ml Liquid",
+        "brand": "ZAZO",
+        "sku": "ZAZS_TB4-001",
+        "volumeMl": 10.0,
+        "priceEur": 8.99,
+        "pricePerMlEur": 0.899,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 35.5951,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/zazo/classics-tobacco-4-10ml-liquid/zazs-tb4-001",
+        "sourceTier": "C",
+        "rawSha256": "23aa294e5e91b6e594feb8c3c36cff1274cfeefa6e1e32a371ed52ca6c27a49c"
+      },
+      {
+        "id": "DE-RET-003",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "American Tobacco - 10ml Nikotinsalz-Liquid",
+        "brand": "SC",
+        "sku": "SCNS_ATO-001",
+        "volumeMl": 10.0,
+        "priceEur": 9.49,
+        "pricePerMlEur": 0.949,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 33.7197,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/sc/american-tobacco-10ml-nikotinsalz-liquid/scns-ato",
+        "sourceTier": "C",
+        "rawSha256": "0e4b74fd4b0278a10051e9c97c9a3b1b6ea4f231845cfec3d9d96614289edd4c"
+      },
+      {
+        "id": "DE-RET-004",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Classics Fresh Mint - 10ml Liquid",
+        "brand": "ZAZO",
+        "sku": "ZAZS_FRM-001",
+        "volumeMl": 10.0,
+        "priceEur": 8.99,
+        "pricePerMlEur": 0.899,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 35.5951,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/zazo/classics-fresh-mint-10ml-liquid/zazs-frm",
+        "sourceTier": "C",
+        "rawSha256": "7e9fdf2cd082f74f05f71f5a1397c4adc21d89cc509714c4fb6b77b0d4e22b80"
+      },
+      {
+        "id": "DE-RET-005",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Spearmint - 10ml Nikotinsalz-Liquid",
+        "brand": "SC",
+        "sku": "SCNS_SPE-001",
+        "volumeMl": 10.0,
+        "priceEur": 9.49,
+        "pricePerMlEur": 0.949,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 33.7197,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/sc/spearmint-10ml-nikotinsalz-liquid/scns-spe",
+        "sourceTier": "C",
+        "rawSha256": "1fdfa37bb390b08137ee078c90852c2a2043ae267109cb7fa53df582dca2bff4"
+      },
+      {
+        "id": "DE-RET-006",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "First Money Orangenlimonade - 10ml Liquid",
+        "brand": "Innocigs",
+        "sku": "INLS_FMO-005",
+        "volumeMl": 10.0,
+        "priceEur": 7.12,
+        "pricePerMlEur": 0.712,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 44.9438,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/innocigs/first-money-orangenlimonade-10ml-liquid/inls-fmo",
+        "sourceTier": "C",
+        "rawSha256": "f465a68422826f2da30eead6163ecdfa012b43587312ec8bed4b9f201b817240"
+      },
+      {
+        "id": "DE-RET-007",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "PodSalt - Cigarette - 10ml Nikotinsalz-Liquid",
+        "brand": "PodSalt",
+        "sku": "PDSS_CIG-002",
+        "volumeMl": 10.0,
+        "priceEur": 11.9,
+        "pricePerMlEur": 1.19,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 26.8908,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/podsalt/podsalt-cigarette-10ml-nikotinsalz-liquid/pdss-cig",
+        "sourceTier": "C",
+        "rawSha256": "2d36774544bedf35a79842a28ab6d8dc497ddb07bf2cf9629474011e03338af5"
+      },
+      {
+        "id": "DE-RET-008",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Schwarze Taube - 10ml Nikotinsalz-Liquid",
+        "brand": "187 Strassenbande",
+        "sku": "187N_STB-001",
+        "volumeMl": 10.0,
+        "priceEur": 11.49,
+        "pricePerMlEur": 1.149,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 27.8503,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/schwarze-taube-10ml-nikotinsalz-liquid/187n-stb",
+        "sourceTier": "C",
+        "rawSha256": "45ea854dae5c0c4eedc1c462bcfb9dc9599ed9bd2b1624d332fe4eb27f4dc800"
+      },
+      {
+        "id": "DE-RET-009",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "RY4 Tobacco - 10ml Nikotinsalz-Liquid",
+        "brand": "SC",
+        "sku": "SCNS_RYT-001",
+        "volumeMl": 10.0,
+        "priceEur": 9.49,
+        "pricePerMlEur": 0.949,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 33.7197,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/sc/ry4-tobacco-10ml-nikotinsalz-liquid/scns-ryt",
+        "sourceTier": "C",
+        "rawSha256": "aa07536eedcc8a757db854abe64279e350cb3ab31cf923f6a35c55614fbcbb44"
+      },
+      {
+        "id": "DE-RET-010",
+        "captureDate": "2026-07-17",
+        "seller": "Dampf-Shop GmbH",
+        "product": "Pille - 10ml Nikotinsalz-Liquid",
+        "brand": "187 Strassenbande",
+        "sku": "187N_PLE-001",
+        "volumeMl": 10.0,
+        "priceEur": 11.49,
+        "pricePerMlEur": 1.149,
+        "excise2026Per10mlEur": 3.2,
+        "exciseSharePct": 27.8503,
+        "availability": "Varastossa",
+        "priceValidUntil": "2026-07-24",
+        "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+        "url": "https://dampf-shop.de/liquid-mischen/187-strassenbande/pille-10ml-nikotinsalz-liquid/187n-ple",
+        "sourceTier": "C",
+        "rawSha256": "67bca81016f4ec0827768a6bed6ceb329bc2851b13a58902f3372d8839e4f3d6"
+      }
+    ],
+    "summary": [
+      {
+        "segment": "10 ml e-nestepullot",
+        "captureDate": "2026-07-17",
+        "sellerCount": 1,
+        "count": 10,
+        "inStockCount": 10,
+        "minPriceEur": 7.12,
+        "medianPriceEur": 9.49,
+        "maxPriceEur": 11.95,
+        "excise2025Per10mlEur": 2.6,
+        "excise2026Per10mlEur": 3.2,
+        "minExciseSharePct": 26.7782,
+        "medianExciseSharePct": 33.7197,
+        "maxExciseSharePct": 44.9438
+      }
+    ],
+    "stress": [
+      {
+        "scenario": "low_observed",
+        "label": "Havaitun otoksen alin",
+        "officialVolumeLitres": 1500000,
+        "retailPriceEur": 7.12,
+        "mechanicalValueEur": 1068000000.0,
+        "mechanicalExciseBaseEur": 390000000.0,
+        "interpretation": "Mekaaninen plausibiliteettitesti; ei markkina-arvo, ennuste tai toteutunut verotuotto."
+      },
+      {
+        "scenario": "median_observed",
+        "label": "Havaitun otoksen mediaani",
+        "officialVolumeLitres": 1500000,
+        "retailPriceEur": 9.49,
+        "mechanicalValueEur": 1423500000.0,
+        "mechanicalExciseBaseEur": 390000000.0,
+        "interpretation": "Mekaaninen plausibiliteettitesti; ei markkina-arvo, ennuste tai toteutunut verotuotto."
+      },
+      {
+        "scenario": "high_observed",
+        "label": "Havaitun otoksen ylin",
+        "officialVolumeLitres": 1500000,
+        "retailPriceEur": 11.95,
+        "mechanicalValueEur": 1792500000.0,
+        "mechanicalExciseBaseEur": 390000000.0,
+        "interpretation": "Mekaaninen plausibiliteettitesti; ei markkina-arvo, ennuste tai toteutunut verotuotto."
+      }
+    ],
+    "manifest": {
+      "dataset": "Germany 10 ml e-liquid retail price sample and official volume/rate anchors",
+      "version": "2026-07-17",
+      "captured_at_utc": "2026-07-17T10:24:22Z",
+      "source_tiers": {
+        "A": "Official Destatis taxed-volume statement and federal statute",
+        "C": "Dated public retail observations from one seller"
+      },
+      "official_anchor": {
+        "taxed_volume_2025_litres": 1500000,
+        "year_on_year_change_pct": 18.2,
+        "statutory_excise_2025_eur_per_ml": 0.26,
+        "statutory_excise_2026_eur_per_ml": 0.32,
+        "mechanical_2025_excise_base_eur": 390000000.0,
+        "actual_excise_revenue_status": "not_obtained",
+        "interpretation": "The calculated excise base is rate × rounded taxed volume, not reported tax revenue."
+      },
+      "retail_sample": {
+        "market": "Germany",
+        "seller": "Dampf-Shop GmbH",
+        "capture_date": "2026-07-17",
+        "observations": 10,
+        "in_stock_observations": 10,
+        "package_volume_ml": 10,
+        "prices_include_vat": true,
+        "shipping_included": false,
+        "minimum_price_eur": 7.12,
+        "median_price_eur": 9.49,
+        "maximum_price_eur": 11.95,
+        "price_weighting": "unweighted"
+      },
+      "audit": {
+        "product_json_ld_parsed": 10,
+        "ten_ml_assertions_passed": 10,
+        "eur_offer_assertions_passed": 10,
+        "in_stock_assertions_passed": 10,
+        "vat_and_shipping_basis_assertions_passed": 10,
+        "official_source_assertions_passed": 5
+      },
+      "official_sources": [
+        {
+          "title": "Destatis 026/2026",
+          "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+          "raw_path": "data/raw/germany_official/destatis_2025_taxed_substitutes.html",
+          "captured_at": "2026-07-17T10:24:22Z",
+          "sha256": "361b9e8b3a85147106a3cf0c27b79833ab1e02097852113f9089020c67422d64",
+          "bytes": 73916,
+          "content_type": "text/html;charset=utf-8"
+        },
+        {
+          "title": "Tabaksteuergesetz § 2",
+          "source_url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+          "raw_path": "data/raw/germany_official/tobacco_tax_act_section_2.html",
+          "captured_at": "2026-07-17T10:24:22Z",
+          "sha256": "e47935d70b11e6c2b3f23dfa9d20702966b4477c0cd5ab08bec1f851cd4f55f6",
+          "bytes": 15712,
+          "content_type": "text/html"
+        }
+      ],
+      "derived_files": [
+        {
+          "path": "data/derived/germany_retail_price_observations_2026-07-17.csv",
+          "sha256": "b9d681d43b899e0b7fb555ef316a74ee9a0cb2297287760aff08c0312aca7a29",
+          "bytes": 6953
+        },
+        {
+          "path": "data/derived/germany_retail_price_summary_2026-07-17.csv",
+          "sha256": "14a00ae8a0be3a9a5f66e186efc2a7aca99a3d87c926f733577cb683284c872a",
+          "bytes": 541
+        },
+        {
+          "path": "data/derived/germany_retail_stress_test_2026-07-17.csv",
+          "sha256": "655b651ec31a899d8f8386e454df5a39a3e406b89bca3dc4da4b9b5875afd0e8",
+          "bytes": 1023
+        },
+        {
+          "path": "data/derived/germany_retail_source_excerpts_2026-07-17.json",
+          "sha256": "95b89f9bbd8670788e39bcd2489105d24a727f387e31e3fbad7628f0831d84b4",
+          "bytes": 32422
+        }
+      ],
+      "limitations": [
+        "The retail sample covers one seller and ten currently available 10 ml bottles; it is not sales weighted or statistically representative.",
+        "Retail pages and variant prices can change. The local full HTML captures are hash locked; the public compact excerpts preserve the parsed source fields and original hashes.",
+        "The 2025 Destatis volume is rounded and refers to taxed substitutes for tobacco, exemplified by e-cigarette/vaporiser liquids; it is not device sales or checkout sell-out.",
+        "Multiplying the 2025 rounded volume by 2026 retail observations is a mechanical stress range, not a contemporaneous market-size estimate or forecast.",
+        "Advertised prices include VAT and exclude shipping. The 2026 specific excise share is not the total tax share because VAT is also embedded in price."
+      ]
+    },
+    "officialVolumeSource": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+    "statutoryRateSource": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+    "scope": "A-tason virallinen 2025 volyymi ja verokanta on pidetty erillään C-tason yhden myyjän 17.7.2026 hintaotoksesta. Hinnat sisältävät ALV:n ja toimituskulut lisätään."
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -5813,25 +6145,25 @@ window.PIXAN_DATA = {
       "basis": "2025 virallinen verotettu määrä 1,5 milj. litraa",
       "scenarios": [
         {
-          "name": "Alhainen hinta",
-          "price": "5 €/10 ml",
+          "name": "Havaitun otoksen alin",
+          "price": "7,12 €/10 ml",
           "volume": "1,5 milj. l",
-          "value": "750 milj. €"
+          "value": "1,0680 mrd €"
         },
         {
-          "name": "Keskihinta",
-          "price": "7,5 €/10 ml",
+          "name": "Havaitun otoksen mediaani",
+          "price": "9,49 €/10 ml",
           "volume": "1,5 milj. l",
-          "value": "1 125 milj. €"
+          "value": "1,4235 mrd €"
         },
         {
-          "name": "Korkea hinta",
-          "price": "10 €/10 ml",
+          "name": "Havaitun otoksen ylin",
+          "price": "11,95 €/10 ml",
           "volume": "1,5 milj. l",
-          "value": "1 500 milj. €"
+          "value": "1,7925 mrd €"
         }
       ],
-      "note": "Hinnat ovat havainnollistavia. Ennen pankkikäyttöä ne täsmäytetään dokumentoituun vähittäishintaotokseen."
+      "note": "Hinnat ovat kymmenen varastossa olleen 10 ml tuotteen yhden myyjän päivätty alin/mediaani/ylin. Vuoden 2025 pyöristetyn virallisen volyymin ja vuoden 2026 hintaotoksen kertolasku on plausibiliteettialue, ei markkina-arvo tai ennuste."
     }
   ],
   "evidence": [
@@ -5939,6 +6271,13 @@ window.PIXAN_DATA = {
       "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa",
       "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite",
       "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"
+    },
+    {
+      "grade": "C",
+      "title": "Saksan dokumentoitu 10 ml vähittäishintaotos",
+      "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu",
+      "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo",
+      "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"
     }
   ],
   "contacts": [
@@ -6085,8 +6424,8 @@ window.PIXAN_DATA = {
     {
       "priority": "medium",
       "title": "Saksan vähittäishintaotos",
-      "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.",
-      "status": "active"
+      "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.",
+      "status": "done"
     },
     {
       "priority": "high",

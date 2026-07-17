@@ -1,0 +1,89 @@
+{
+  "dataset": "Germany 10 ml e-liquid retail price sample and official volume/rate anchors",
+  "version": "2026-07-17",
+  "captured_at_utc": "2026-07-17T10:24:22Z",
+  "source_tiers": {
+    "A": "Official Destatis taxed-volume statement and federal statute",
+    "C": "Dated public retail observations from one seller"
+  },
+  "official_anchor": {
+    "taxed_volume_2025_litres": 1500000,
+    "year_on_year_change_pct": 18.2,
+    "statutory_excise_2025_eur_per_ml": 0.26,
+    "statutory_excise_2026_eur_per_ml": 0.32,
+    "mechanical_2025_excise_base_eur": 390000000.0,
+    "actual_excise_revenue_status": "not_obtained",
+    "interpretation": "The calculated excise base is rate × rounded taxed volume, not reported tax revenue."
+  },
+  "retail_sample": {
+    "market": "Germany",
+    "seller": "Dampf-Shop GmbH",
+    "capture_date": "2026-07-17",
+    "observations": 10,
+    "in_stock_observations": 10,
+    "package_volume_ml": 10,
+    "prices_include_vat": true,
+    "shipping_included": false,
+    "minimum_price_eur": 7.12,
+    "median_price_eur": 9.49,
+    "maximum_price_eur": 11.95,
+    "price_weighting": "unweighted"
+  },
+  "audit": {
+    "product_json_ld_parsed": 10,
+    "ten_ml_assertions_passed": 10,
+    "eur_offer_assertions_passed": 10,
+    "in_stock_assertions_passed": 10,
+    "vat_and_shipping_basis_assertions_passed": 10,
+    "official_source_assertions_passed": 5
+  },
+  "official_sources": [
+    {
+      "title": "Destatis 026/2026",
+      "source_url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+      "raw_path": "data/raw/germany_official/destatis_2025_taxed_substitutes.html",
+      "captured_at": "2026-07-17T10:24:22Z",
+      "sha256": "361b9e8b3a85147106a3cf0c27b79833ab1e02097852113f9089020c67422d64",
+      "bytes": 73916,
+      "content_type": "text/html;charset=utf-8"
+    },
+    {
+      "title": "Tabaksteuergesetz § 2",
+      "source_url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+      "raw_path": "data/raw/germany_official/tobacco_tax_act_section_2.html",
+      "captured_at": "2026-07-17T10:24:22Z",
+      "sha256": "e47935d70b11e6c2b3f23dfa9d20702966b4477c0cd5ab08bec1f851cd4f55f6",
+      "bytes": 15712,
+      "content_type": "text/html"
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "data/derived/germany_retail_price_observations_2026-07-17.csv",
+      "sha256": "b9d681d43b899e0b7fb555ef316a74ee9a0cb2297287760aff08c0312aca7a29",
+      "bytes": 6953
+    },
+    {
+      "path": "data/derived/germany_retail_price_summary_2026-07-17.csv",
+      "sha256": "14a00ae8a0be3a9a5f66e186efc2a7aca99a3d87c926f733577cb683284c872a",
+      "bytes": 541
+    },
+    {
+      "path": "data/derived/germany_retail_stress_test_2026-07-17.csv",
+      "sha256": "655b651ec31a899d8f8386e454df5a39a3e406b89bca3dc4da4b9b5875afd0e8",
+      "bytes": 1023
+    },
+    {
+      "path": "data/derived/germany_retail_source_excerpts_2026-07-17.json",
+      "sha256": "95b89f9bbd8670788e39bcd2489105d24a727f387e31e3fbad7628f0831d84b4",
+      "bytes": 32422
+    }
+  ],
+  "limitations": [
+    "The retail sample covers one seller and ten currently available 10 ml bottles; it is not sales weighted or statistically representative.",
+    "Retail pages and variant prices can change. The local full HTML captures are hash locked; the public compact excerpts preserve the parsed source fields and original hashes.",
+    "The 2025 Destatis volume is rounded and refers to taxed substitutes for tobacco, exemplified by e-cigarette/vaporiser liquids; it is not device sales or checkout sell-out.",
+    "Multiplying the 2025 rounded volume by 2026 retail observations is a mechanical stress range, not a contemporaneous market-size estimate or forecast.",
+    "Advertised prices include VAT and exclude shipping. The 2026 specific excise share is not the total tax share because VAT is also embedded in price."
+  ]
+}

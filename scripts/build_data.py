@@ -124,6 +124,18 @@ def build_payload() -> dict:
     canada_retail_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "canada_retail_price_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
+    germany_retail_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "germany_retail_price_observations_2026-07-17.csv"
+    )
+    germany_retail_summary_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "germany_retail_price_summary_2026-07-17.csv"
+    )
+    germany_retail_stress_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "germany_retail_stress_test_2026-07-17.csv"
+    )
+    germany_retail_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "germany_retail_price_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -729,6 +741,70 @@ def build_payload() -> dict:
         "scope": "C-tason täydentävä, päivämääräkohtainen julkinen hintaotos; ei myyntipainotettu hintaindeksi, kassakuitti tai katelaskelma.",
     }
 
+    germany_scenario_labels = {
+        "low_observed": "Havaitun otoksen alin",
+        "median_observed": "Havaitun otoksen mediaani",
+        "high_observed": "Havaitun otoksen ylin",
+    }
+    germany_retail = {
+        "observations": [
+            {
+                "id": row["observation_id"],
+                "captureDate": row["capture_date"],
+                "seller": row["seller"],
+                "product": row["product"],
+                "brand": row["brand"],
+                "sku": row["sku"],
+                "volumeMl": float(row["package_volume_ml"]),
+                "priceEur": float(row["advertised_price_eur_including_vat"]),
+                "pricePerMlEur": float(row["price_per_ml_eur_including_vat"]),
+                "excise2026Per10mlEur": float(row["statutory_excise_2026_eur_per_10ml"]),
+                "exciseSharePct": float(row["statutory_excise_share_of_advertised_price_pct"]),
+                "availability": "Varastossa" if row["availability"] == "InStock" else row["availability"],
+                "priceValidUntil": row["price_valid_until"],
+                "priceBasis": "Hinta sisältää Saksan ALV:n; toimituskulut lisätään. Kassalla ei tehty ostoa.",
+                "url": row["source_url"],
+                "sourceTier": row["source_tier"],
+                "rawSha256": row["raw_snapshot_sha256"],
+            }
+            for row in germany_retail_rows
+        ],
+        "summary": [
+            {
+                "segment": "10 ml e-nestepullot",
+                "captureDate": row["capture_date"],
+                "sellerCount": int(row["seller_count"]),
+                "count": int(row["observation_count"]),
+                "inStockCount": int(row["in_stock_count"]),
+                "minPriceEur": float(row["minimum_price_eur_including_vat"]),
+                "medianPriceEur": float(row["median_price_eur_including_vat"]),
+                "maxPriceEur": float(row["maximum_price_eur_including_vat"]),
+                "excise2025Per10mlEur": float(row["statutory_excise_2025_eur_per_10ml"]),
+                "excise2026Per10mlEur": float(row["statutory_excise_2026_eur_per_10ml"]),
+                "minExciseSharePct": float(row["minimum_price_2026_excise_share_pct"]),
+                "medianExciseSharePct": float(row["median_price_2026_excise_share_pct"]),
+                "maxExciseSharePct": float(row["maximum_price_2026_excise_share_pct"]),
+            }
+            for row in germany_retail_summary_rows
+        ],
+        "stress": [
+            {
+                "scenario": row["scenario"],
+                "label": germany_scenario_labels[row["scenario"]],
+                "officialVolumeLitres": int(row["official_taxed_volume_2025_litres"]),
+                "retailPriceEur": float(row["retail_price_eur_per_10ml_including_vat"]),
+                "mechanicalValueEur": float(row["mechanical_retail_value_eur"]),
+                "mechanicalExciseBaseEur": float(row["mechanical_2025_excise_base_eur"]),
+                "interpretation": "Mekaaninen plausibiliteettitesti; ei markkina-arvo, ennuste tai toteutunut verotuotto.",
+            }
+            for row in germany_retail_stress_rows
+        ],
+        "manifest": germany_retail_manifest,
+        "officialVolumeSource": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+        "statutoryRateSource": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+        "scope": "A-tason virallinen 2025 volyymi ja verokanta on pidetty erillään C-tason yhden myyjän 17.7.2026 hintaotoksesta. Hinnat sisältävät ALV:n ja toimituskulut lisätään.",
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -883,6 +959,7 @@ def build_payload() -> dict:
             "limits": canada_manifest["definitions_and_limits"],
         },
         "canadaRetail": canada_retail,
+        "germanyRetail": germany_retail,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -935,11 +1012,15 @@ def build_payload() -> dict:
                 "market": "Saksa",
                 "basis": "2025 virallinen verotettu määrä 1,5 milj. litraa",
                 "scenarios": [
-                    {"name": "Alhainen hinta", "price": "5 €/10 ml", "volume": "1,5 milj. l", "value": "750 milj. €"},
-                    {"name": "Keskihinta", "price": "7,5 €/10 ml", "volume": "1,5 milj. l", "value": "1 125 milj. €"},
-                    {"name": "Korkea hinta", "price": "10 €/10 ml", "volume": "1,5 milj. l", "value": "1 500 milj. €"},
+                    {
+                        "name": row["label"],
+                        "price": f"{row['retailPriceEur']:.2f} €/10 ml".replace(".", ","),
+                        "volume": "1,5 milj. l",
+                        "value": f"{row['mechanicalValueEur'] / 1e9:.4f} mrd €".rstrip("0").rstrip(",").replace(".", ","),
+                    }
+                    for row in germany_retail["stress"]
                 ],
-                "note": "Hinnat ovat havainnollistavia. Ennen pankkikäyttöä ne täsmäytetään dokumentoituun vähittäishintaotokseen.",
+                "note": "Hinnat ovat kymmenen varastossa olleen 10 ml tuotteen yhden myyjän päivätty alin/mediaani/ylin. Vuoden 2025 pyöristetyn virallisen volyymin ja vuoden 2026 hintaotoksen kertolasku on plausibiliteettialue, ei markkina-arvo tai ennuste.",
             },
         ],
         "evidence": [
@@ -958,6 +1039,7 @@ def build_payload() -> dict:
             {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
             {"grade": "B", "title": "China Customs · virallinen tilastopalvelu", "coverage": "Maksuton kansallinen hakemusreitti, 2025 HS8 -nimikkeet ja enintään viiden ryhmittelyn taulukkorakenne", "use": "Kiinan alkuperä-/kohdemaan, lähetys-/saapumismaan, tullimenettelyn ja kotimaisen reitin hankintaperusta; ei vielä markkina-arvoluku", "url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
+            {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
         "contacts": contacts,
         "tasks": [
@@ -969,7 +1051,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Etelä-Korea HSK10-nestearvot", "detail": "HS6-vaihe valmis: 2025 laitteet 148,534 milj. USD ja laajat 2404-proxyt 123,731 milj. USD; 36 kuukausiriviä, 53 alkuperämaariviä ja 2025 HSK10-luokitus auditoitu. Jonossa virallinen Itemtrade API-/tulliote, joka erottaa 2404121000 ja 2404199010 nestearvot ilman oletusjakoa.", "status": "active"},
             {"priority": "medium", "title": "Kanadan vähittäishintaotos", "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.", "status": "done"},
             {"priority": "high", "title": "Kiina GACC tullimenettelyineen", "detail": "Virallinen maksuton reitti, kansallinen vastaanottaja ja 2025 HS8 85434000/24041200/24041910/24041990 on varmistettu. Kiinankielinen hakemus pyytää neljä taulukkoa: kohde vs. läpikulkumaa + tullimenettely, tullipaikka + kotimainen alue, rekisteröintialue + omistus sekä kuljetustapa. PRH:n 17.7.2026 yritystodiste on tarkastettu ja yksityinen lähetyspaketti odottaa lähetysvahvistusta.", "status": "active"},
-            {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Dokumentoi 10 ml -vertailuhinnat veroineen ja ilman veroa; korvaa havainnollistavat hintastressit todistetulla otoksella.", "status": "active"},
+            {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.", "status": "done"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1075,12 +1157,35 @@ def publish_korea_evidence() -> None:
         shutil.copy2(raw / name, public_raw / name)
 
 
+def publish_germany_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "germany_official"
+    public_data = DASHBOARD_DIR / "data" / "germany"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "germany_official"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "germany_retail_price_observations_2026-07-17.csv",
+        "germany_retail_price_summary_2026-07-17.csv",
+        "germany_retail_stress_test_2026-07-17.csv",
+        "germany_retail_source_excerpts_2026-07-17.json",
+        "germany_retail_price_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "destatis_2025_taxed_substitutes.html",
+        "tobacco_tax_act_section_2.html",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
     publish_canada_evidence()
     publish_china_access_evidence()
     publish_korea_evidence()
+    publish_germany_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

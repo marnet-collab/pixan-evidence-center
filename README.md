@@ -31,6 +31,8 @@ Kiinan GACC-reitin julkinen manifesti julkaistaan `data/china/`-kansiossa. Se to
 
 Korea Customs Servicen vuoden 2025 julkiset HS6-vuosi-, kuukausi- ja alkuperämaasarjat sekä virallinen HSK10-luokitus julkaistaan `data/korea/`-kansiossa. Auditointi hyväksyy 24 kuukausi- ja alkuperämaatäsmäytystä virallisen taulukon kokonaiskilogramman ja tuhannen USD:n komponenttipyöristyksen rajoissa. HSK10 2404121000 ja 2404199010 ovat virallisesti sähkösavukenesteen nimikkeitä, mutta niiden erillisiä kauppa-arvoja ei johdeta HS6-aggregaateista ilman Itemtrade API- tai viranomaisotetta.
 
+Saksan 17.7.2026 hintaotos julkaistaan `data/germany/`-kansiossa. Se sisältää kymmenen varastossa ollutta 10 ml tuotetta yhdeltä myyjältä, parsitut Product/Offer-lähdeotteet, alkuperäisten sivujen SHA-256-tunnisteet ja kolme mekaanista stressitestiä. Täydet noin 4 Mt:n kauppasivukaappaukset säilyvät paikallisessa datahuoneessa; julkisessa repossa ovat kompaktit lähdeotteet sekä Destatisin ja Saksan verolain lähdekaappaukset. Virallinen 1,5 miljoonan litran vuoden 2025 volyymi ja lakisääteinen verokanta ovat A-tason näyttöä, mutta yhden myyjän hintaotos ja siitä laskettu 1,068–1,7925 mrd euron vaihteluväli ovat C-tason plausibiliteettitesti, eivät markkina-arvo tai ennuste.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti
