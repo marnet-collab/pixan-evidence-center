@@ -1,9 +1,9 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 06:38 UTC",
+    "updated": "2026-07-17 07:07 UTC",
     "dataDate": "2026-07-17",
-    "repo": "https://github.com/jounirautio78-ops/pixan-evidence-center",
+    "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
   },
   "metrics": [
@@ -14,9 +14,9 @@ window.PIXAN_DATA = {
       "tone": ""
     },
     {
-      "label": "Kanada 2024",
-      "value": "1,252 milj. l",
-      "detail": "Vaping substance / e-nestevolyymi",
+      "label": "Suomi 2025",
+      "value": "3,547 milj. €",
+      "detail": "E-nesteiden nettovero · 11 823,5 l",
       "tone": "gold"
     },
     {
@@ -52,6 +52,16 @@ window.PIXAN_DATA = {
       "limit": "Litramäärä ei sisällä erillisten laitteiden myyntiarvoa. 390 milj. € on verolaskelma, ei vähittäismyynti.",
       "source": "Destatis · tiedote 026/2026",
       "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html"
+    },
+    {
+      "grade": "A",
+      "market": "Suomi",
+      "title": "E-nesteiden nettovero ja verotettu nettovolyymi",
+      "value": "3 547 047 € · 11 823,492 l",
+      "detail": "Verohallinnon vuoden 2025 täysi sarja: nikotiinilliset 11 802,602 litraa / 3 540 780 € ja nikotiinittomat 20,890 litraa / 6 267 €.",
+      "limit": "Veroankkuri kattaa e-nesteet, ei erillisiä laitteita. PXWebin 2026 tieto on vielä osavuosi tammi–huhtikuu.",
+      "source": "Verohallinto · valmisteverotilasto",
+      "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/"
     },
     {
       "grade": "B",
@@ -129,7 +139,21 @@ window.PIXAN_DATA = {
         "verification": "Federal and state-level current e-cigarette tax treatment must be assembled separately; WHO profile has no numeric e-liquid observation",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-usa.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2024-09-30",
+          "status": "partial",
+          "rate": "Ei yhtä liittovaltion e-savukeveroa; CDC:n mukaan 33 osavaltiota sekä DC Puerto Rico ja US Virgin Islands olivat säätäneet e-savukeveron",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Osavaltiotason valmisteverolainsäädäntö",
+          "caveat": "CDC-aineisto on tarkistettu viimeksi 2024 ja on päivitettävä osavaltioittain vuodelle 2026",
+          "rateUrl": "https://www.cdc.gov/statesystem/factsheets/ecigarette/ECigTax.html",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -169,7 +193,21 @@ window.PIXAN_DATA = {
         "verification": "Federal/provincial vaping excise rates require current CRA verification; WHO profile has no numeric e-liquid observation",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-can.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "1,12 CAD / alkava 2 ml ensimmäisestä 10 ml:sta; sen jälkeen 1,12 CAD / alkava 10 ml; määrätyissä provinsseissa samansuuruinen lisävero",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "130,362 milj. CAD",
+          "revenuePeriod": "1.4.2024–31.3.2025",
+          "forecast": "not_obtained",
+          "scope": "Koordinoitujen verosopimusten provinssien vaping-lisäveron receipts and other credits",
+          "caveat": "Ei koko liittovaltion ja provinssien vaping-verotuotto; tilinpäätös on tilintarkastamaton ja luku on tax collection agreements -taulukossa",
+          "rateUrl": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+          "volumeUrl": "",
+          "revenueUrl": "https://www.canada.ca/en/department-finance/corporate/transparency/plans-performance/financial-statements/2025.html"
+        }
       }
     },
     {
@@ -209,7 +247,8 @@ window.PIXAN_DATA = {
         "verification": "No harmonised e-liquid excise in the WHO snapshot; use member-state rows and monitor the Commission Tobacco Taxation Directive proposal",
         "url": "https://taxation-customs.ec.europa.eu/taxation/excise-duties/excise-duties-tobacco/revision-tobacco-taxation-directive-proposal_en",
         "tier": "A",
-        "period": "EU policy status; member states shown separately"
+        "period": "EU policy status; member states shown separately",
+        "national": null
       }
     },
     {
@@ -249,7 +288,21 @@ window.PIXAN_DATA = {
         "verification": "National law verified: 0.26 EUR/ml in 2025 and 0.32 EUR/ml in 2026",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-deu.pdf",
         "tier": "B",
-        "period": "WHO price/tax snapshot; national 2025 volume and rate separately verified"
+        "period": "WHO price/tax snapshot; national 2025 volume and rate separately verified",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0.26 EUR/ml vuonna 2025; 0.32 EUR/ml vuonna 2026",
+          "taxedVolume": "1500000 L",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "2025",
+          "forecast": "not_obtained",
+          "scope": "Verotettu tupakan korvike-/e-nestevolyymi",
+          "caveat": "390 milj. EUR on läpinäkyvä vuoden 2025 verokanta × volyymi -laskelma eikä toteutunut verokertymä",
+          "rateUrl": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+          "volumeUrl": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -289,7 +342,8 @@ window.PIXAN_DATA = {
         "verification": "Current national treatment must be rechecked after the 2025 EU-wide WHO snapshot",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fra.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -329,7 +383,21 @@ window.PIXAN_DATA = {
         "verification": "WHO snapshot shows excise; current national rate requires ADM verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-ita.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0,172623 EUR/ml nikotiinia sisältävälle e-nesteelle; 0,124672 EUR/ml nikotiinittomalle e-nesteelle ja aromeille 1.2.2026 alkaen",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Palamattomat nestemäiset inhalaatiotuotteet nikotiinilla tai ilman sekä aromit",
+          "caveat": "ADM:n johtajapäätös vahvistaa kannan; PLI-järjestelmä kerää kuukausi- ja puolikuukausitietoja mutta julkista kokonaisvolyymiä tai verokertymää ei löytynyt",
+          "rateUrl": "https://www.adm.gov.it/portale/documents/20182/242317381/DET+%E2%80%93+74240-2026.pdf/92ecf170-16f0-d012-d0b6-f4630f192dca?t=1769851126925",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -369,7 +437,21 @@ window.PIXAN_DATA = {
         "verification": "Spanish 2025 law introduced 0.15/0.20 EUR per ml depending on nicotine strength; effective date and 2026 application require AEAT confirmation",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-esp.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 snapshot predates national change"
+        "period": "WHO Report 2025 snapshot predates national change",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; 0,20 EUR/ml yli 15 mg/ml",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "30 milj. EUR",
+          "revenuePeriod": "2025",
+          "forecast": "not_obtained",
+          "scope": "Kansallinen erityinen valmistusvero e-savukenesteille ja muille siihen liittyville nikotiinituotteille",
+          "caveat": "Veroraportti kohdistaa 30 milj. EUR uudelle verolle mutta yhteenveto ei julkaise pelkkää e-nesteiden verotettua litramäärää",
+          "rateUrl": "https://sede.agenciatributaria.gob.es/Sede/en_gb/impuestos-especiales-medioambientales/impuestos-especiales-fabricacion/liquidos-cigarrillos-electronicos-otros-productos-tabaco/base-imponible-tipo-gravamen.html",
+          "volumeUrl": "",
+          "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_sobre_Impuestos_Especiales/Contenidos/InformeIIEE.pdf"
+        }
       }
     },
     {
@@ -409,7 +491,21 @@ window.PIXAN_DATA = {
         "verification": "WHO snapshot shows excise; current national rate requires Ministry of Finance verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-pol.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "1,44 PLN/ml e-savukenesteelle; kertakäyttöisessä e-savukkeessa lisäksi 40 PLN/laitetta; höyrystinlaitteet ja osasarjat 40 PLN/kpl tai sarja",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "E-savukenesteet, kertakäyttölaitteet, uudelleenkäytettävät höyrystimet ja osasarjat",
+          "caveat": "Vuoden 2026 virallinen verokantataulukko vahvistaa kannat mutta ei julkaise samalla taulukolla verotettua määrää tai kertymää",
+          "rateUrl": "https://www.podatki.gov.pl/akcyza/stawki-podatkowe",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -449,7 +545,8 @@ window.PIXAN_DATA = {
         "verification": "Current national treatment requires Belastingdienst verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nld.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -489,7 +586,21 @@ window.PIXAN_DATA = {
         "verification": "WHO snapshot shows excise; current national rate requires FPS Finance verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-bel.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "partial",
+          "rate": "0,1500 EUR/ml erityistä valmisteveroa kulutukseen luovutetuille e-nesteille",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Kaikki Belgiassa kulutukseen luovutetut e-nesteet",
+          "caveat": "Kanta täsmää WHO:n riippumattomaan tarkistukseen ja Belgian säädöksen toisintolähteeseen, mutta FOD Finances ohjaa nykyiset tariffit kirjautumista vaativaan Fisconetplus/TarBel-järjestelmään; suora virallinen tariffirivi on vielä tallentamatta",
+          "rateUrl": "https://financien.belgium.be/nl/douane_accijnzen/ondernemingen/accijnzen/algemene_informatie/accijnstarieven",
+          "volumeUrl": "",
+          "revenueUrl": "https://etaamb.openjustice.be/fr/loiprogramme-du-22-decembre-2023_n2023048600.html"
+        }
       }
     },
     {
@@ -529,13 +640,14 @@ window.PIXAN_DATA = {
         "verification": "Current national treatment requires customs/excise verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-lux.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
       "name": "Suomi",
       "sourceName": "Finland",
-      "status": "missing",
+      "status": "verified",
       "customs": "Eurostat Comext CN8 and Finnish Customs Uljas",
       "route": "Origin versus consignment; subtract exports/re-exports",
       "salesSource": "Valvira EU-CEG; Finnish Tax Administration excise data",
@@ -569,7 +681,21 @@ window.PIXAN_DATA = {
         "verification": "National tax rate and taxed-volume PXWeb series require direct Vero extraction",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fin.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0,40 EUR/ml vuonna 2026; sekä nikotiinilliset että käyttötarkoituksen perusteella verolliset nikotiinittomat e-nesteet",
+          "taxedVolume": "11823.492 L",
+          "actualRevenue": "3 547 047 EUR",
+          "revenuePeriod": "2025",
+          "forecast": "not_obtained",
+          "scope": "Verohallinnon nettovolyymi ja nettoveron määrä tuoteryhmille TBC07 ja TBC7A",
+          "caveat": "Vuosi 2025 on täysi 12 kuukauden sarja; vuoden 2026 tieto kattaa tällä hetkellä tammi–huhtikuun",
+          "rateUrl": "https://www.vero.fi/yritykset-ja-yhteisot/verot-ja-maksut/valmisteverotus/tupakkavero/",
+          "volumeUrl": "https://vero2.stat.fi/PXWeb/api/v1/en/Vero/Valmistevero/vvt_010.px",
+          "revenueUrl": "https://vero2.stat.fi/PXWeb/api/v1/en/Vero/Valmistevero/vvt_010.px"
+        }
       }
     },
     {
@@ -609,7 +735,21 @@ window.PIXAN_DATA = {
         "verification": "Current national rate requires Skatteverket verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "2 087 SEK/litra eli 2,087 SEK/ml; vahva 15–20 mg/ml e-neste 4 174 SEK/litra eli 4,174 SEK/ml",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Nikotiinia sisältävät e-nesteet",
+          "caveat": "Skatteverketin sivu antaa vuoden 2026 kannan mutta ei samalla sivulla verotettua litramäärää tai verokertymää",
+          "rateUrl": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -649,7 +789,21 @@ window.PIXAN_DATA = {
         "verification": "Current national rate requires Skattestyrelsen verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-dnk.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "1,50 DKK/ml kun nikotiinia on enintään 12 mg/ml; 2,50 DKK/ml yli 12 mg/ml",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Nikotiinia sisältävät nesteet",
+          "caveat": "Verohallinnon oikeudellinen ohje vahvistaa kannan mutta ei julkaise samalla sivulla volyymia tai verokertymää",
+          "rateUrl": "https://info.skat.dk/data.aspx?oid=2350652",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -689,7 +843,8 @@ window.PIXAN_DATA = {
         "verification": "WHO profile reports sale banned for all three e-liquid formats in its observation; current legal route must be checked nationally",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nor.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -729,7 +884,21 @@ window.PIXAN_DATA = {
         "verification": "Current national treatment requires Ministry of Finance verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-aut.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "200 EUR/litra eli 0,20 EUR/ml 1.4.2026–31.1.2027; 230 EUR/litra 1.2.2027 alkaen; 260 EUR/litra 1.2.2028 alkaen",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "55 milj. EUR lisätuloa vuonna 2026 veromuutoksista yhteensä",
+          "scope": "E-nesteet niiden nikotiinipitoisuudesta riippumatta",
+          "caveat": "55 milj. EUR ei ole e-nesteiden erillinen ennuste vaan sisältää myös nikotiinipussit ja muut tabaksteuermuutokset; toteutunutta e-nestekertymää ei vielä ole",
+          "rateUrl": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Anlage=&Artikel=&Gesetzesnummer=10004877&Paragraf=4&Uebergangsrecht=",
+          "volumeUrl": "",
+          "revenueUrl": "https://www.parlament.gv.at/fachinfos/budgetdienst/Betrugsbekaempfungspaket-und-Abgabenaenderungsgesetz-2025"
+        }
       }
     },
     {
@@ -769,7 +938,21 @@ window.PIXAN_DATA = {
         "verification": "Current national treatment requires Federal Customs/FOCBS verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-che.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0,20 CHF/ml nikotiinia sisältäville uudelleenkäytettävien e-savukkeiden nesteille; 1,00 CHF/ml kertakäyttöisille e-savukkeille nikotiinista riippumatta",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Uudelleenkäytettävien laitteiden nikotiininesteet ja kaikki kertakäyttöiset e-savukkeet",
+          "caveat": "BAZG:n 2026 vero-ohje vahvistaa kannat ja tullinimikkeet mutta ei erota julkisesti e-savukkeiden verokertymää koko tupakkaverosta",
+          "rateUrl": "https://www.bazg.admin.ch/dam/de/sd-web/LOdB10XnvqWr/R-120-3%20Tabaksteuer_01.03.26_Korrektur.pdf",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -809,7 +992,21 @@ window.PIXAN_DATA = {
         "verification": "WHO snapshot has no specific excise; monitor announced Vaping Products Duty and verify effective date with HMRC",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-gbr.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "2.20 GBP / 10 ml eli 0.22 GBP/ml 1.10.2026 alkaen; kaikki e-nesteet nikotiinista riippumatta",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "135 milj. GBP 2026-27; 400 milj. GBP 2027-28; 465 milj. GBP 2028-29; 530 milj. GBP 2029-30; 565 milj. GBP 2030-31",
+          "scope": "Tuleva Vaping Products Duty",
+          "caveat": "Ennuste on OBR:n sertifioima julkisen talouden vaikutus eikä toteutunut verotuotto",
+          "rateUrl": "https://www.gov.uk/guidance/how-to-pay-vaping-products-duty",
+          "volumeUrl": "",
+          "revenueUrl": "https://www.gov.uk/government/publications/introduction-of-vaping-products-duty-from-1-october-2026/introduction-of-vaping-products-duty-from-1-october-2026"
+        }
       }
     },
     {
@@ -849,7 +1046,21 @@ window.PIXAN_DATA = {
         "verification": "Current production/import and wholesale consumption-tax treatment requires Ministry of Finance/STA evidence; WHO profile has no numeric retail observation",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-chn.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "36 % tuotanto-/tuontivaiheessa ja 11 % tukkumyyntivaiheessa",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "E-savukkeet mukaan lukien patruunat laitteet ja yhdistelmät",
+          "caveat": "Tuotekohtaista verotettua volyymia tai verokertymää ei saatu; vientiin sovelletaan veronpalautus-/vapautuspolitiikkaa",
+          "rateUrl": "https://jsz.mof.gov.cn/zhengcefagui/202210/t20221028_3848463.htm",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -889,7 +1100,8 @@ window.PIXAN_DATA = {
         "verification": "WHO profile has no numeric retail e-liquid tax observation; verify legal product classification and consumption tax nationally",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-jpn.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -929,7 +1141,8 @@ window.PIXAN_DATA = {
         "verification": "WHO profile has no numeric retail observation; liquid nicotine and synthetic nicotine taxes require Ministry of Economy and Finance/NTS evidence",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-kor.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -969,7 +1182,8 @@ window.PIXAN_DATA = {
         "verification": "WHO profile reports retail sale banned for observed formats; lawful pharmacy supply and GST/excise treatment require separate TGA/ATO analysis",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-aus.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -1009,7 +1223,8 @@ window.PIXAN_DATA = {
         "verification": "WHO profile reports sale banned; no lawful retail excise market should be inferred",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-bra.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     },
     {
@@ -1049,7 +1264,8 @@ window.PIXAN_DATA = {
         "verification": "WHO snapshot shows excise; current national rate and legal status require official Russian verification",
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-rus.pdf",
         "tier": "B",
-        "period": "WHO Report 2025 country profile"
+        "period": "WHO Report 2025 country profile",
+        "national": null
       }
     }
   ],
@@ -1081,7 +1297,21 @@ window.PIXAN_DATA = {
       "verification": "Federal and state-level current e-cigarette tax treatment must be assembled separately; WHO profile has no numeric e-liquid observation",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-usa.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2024-09-30",
+        "status": "partial",
+        "rate": "Ei yhtä liittovaltion e-savukeveroa; CDC:n mukaan 33 osavaltiota sekä DC Puerto Rico ja US Virgin Islands olivat säätäneet e-savukeveron",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Osavaltiotason valmisteverolainsäädäntö",
+        "caveat": "CDC-aineisto on tarkistettu viimeksi 2024 ja on päivitettävä osavaltioittain vuodelle 2026",
+        "rateUrl": "https://www.cdc.gov/statesystem/factsheets/ecigarette/ECigTax.html",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Kanada",
@@ -1110,7 +1340,21 @@ window.PIXAN_DATA = {
       "verification": "Federal/provincial vaping excise rates require current CRA verification; WHO profile has no numeric e-liquid observation",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-can.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "1,12 CAD / alkava 2 ml ensimmäisestä 10 ml:sta; sen jälkeen 1,12 CAD / alkava 10 ml; määrätyissä provinsseissa samansuuruinen lisävero",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "130,362 milj. CAD",
+        "revenuePeriod": "1.4.2024–31.3.2025",
+        "forecast": "not_obtained",
+        "scope": "Koordinoitujen verosopimusten provinssien vaping-lisäveron receipts and other credits",
+        "caveat": "Ei koko liittovaltion ja provinssien vaping-verotuotto; tilinpäätös on tilintarkastamaton ja luku on tax collection agreements -taulukossa",
+        "rateUrl": "https://www.canada.ca/en/revenue-agency/services/tax/technical-information/excise-duty/rates.html",
+        "volumeUrl": "",
+        "revenueUrl": "https://www.canada.ca/en/department-finance/corporate/transparency/plans-performance/financial-statements/2025.html"
+      }
     },
     {
       "name": "EU-27",
@@ -1139,7 +1383,8 @@ window.PIXAN_DATA = {
       "verification": "No harmonised e-liquid excise in the WHO snapshot; use member-state rows and monitor the Commission Tobacco Taxation Directive proposal",
       "url": "https://taxation-customs.ec.europa.eu/taxation/excise-duties/excise-duties-tobacco/revision-tobacco-taxation-directive-proposal_en",
       "tier": "A",
-      "period": "EU policy status; member states shown separately"
+      "period": "EU policy status; member states shown separately",
+      "national": null
     },
     {
       "name": "Saksa",
@@ -1168,7 +1413,21 @@ window.PIXAN_DATA = {
       "verification": "National law verified: 0.26 EUR/ml in 2025 and 0.32 EUR/ml in 2026",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-deu.pdf",
       "tier": "B",
-      "period": "WHO price/tax snapshot; national 2025 volume and rate separately verified"
+      "period": "WHO price/tax snapshot; national 2025 volume and rate separately verified",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0.26 EUR/ml vuonna 2025; 0.32 EUR/ml vuonna 2026",
+        "taxedVolume": "1500000 L",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "2025",
+        "forecast": "not_obtained",
+        "scope": "Verotettu tupakan korvike-/e-nestevolyymi",
+        "caveat": "390 milj. EUR on läpinäkyvä vuoden 2025 verokanta × volyymi -laskelma eikä toteutunut verokertymä",
+        "rateUrl": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
+        "volumeUrl": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Ranska",
@@ -1197,7 +1456,8 @@ window.PIXAN_DATA = {
       "verification": "Current national treatment must be rechecked after the 2025 EU-wide WHO snapshot",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fra.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Italia",
@@ -1226,7 +1486,21 @@ window.PIXAN_DATA = {
       "verification": "WHO snapshot shows excise; current national rate requires ADM verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-ita.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0,172623 EUR/ml nikotiinia sisältävälle e-nesteelle; 0,124672 EUR/ml nikotiinittomalle e-nesteelle ja aromeille 1.2.2026 alkaen",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Palamattomat nestemäiset inhalaatiotuotteet nikotiinilla tai ilman sekä aromit",
+        "caveat": "ADM:n johtajapäätös vahvistaa kannan; PLI-järjestelmä kerää kuukausi- ja puolikuukausitietoja mutta julkista kokonaisvolyymiä tai verokertymää ei löytynyt",
+        "rateUrl": "https://www.adm.gov.it/portale/documents/20182/242317381/DET+%E2%80%93+74240-2026.pdf/92ecf170-16f0-d012-d0b6-f4630f192dca?t=1769851126925",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Espanja",
@@ -1255,7 +1529,21 @@ window.PIXAN_DATA = {
       "verification": "Spanish 2025 law introduced 0.15/0.20 EUR per ml depending on nicotine strength; effective date and 2026 application require AEAT confirmation",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-esp.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 snapshot predates national change"
+      "period": "WHO Report 2025 snapshot predates national change",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0,15 EUR/ml kun nikotiinia on enintään 15 mg/ml tai ei lainkaan; 0,20 EUR/ml yli 15 mg/ml",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "30 milj. EUR",
+        "revenuePeriod": "2025",
+        "forecast": "not_obtained",
+        "scope": "Kansallinen erityinen valmistusvero e-savukenesteille ja muille siihen liittyville nikotiinituotteille",
+        "caveat": "Veroraportti kohdistaa 30 milj. EUR uudelle verolle mutta yhteenveto ei julkaise pelkkää e-nesteiden verotettua litramäärää",
+        "rateUrl": "https://sede.agenciatributaria.gob.es/Sede/en_gb/impuestos-especiales-medioambientales/impuestos-especiales-fabricacion/liquidos-cigarrillos-electronicos-otros-productos-tabaco/base-imponible-tipo-gravamen.html",
+        "volumeUrl": "",
+        "revenueUrl": "https://sede.agenciatributaria.gob.es/static_files/AEAT/Estudios/Estadisticas/Informes_Estadisticos/Informes_sobre_Impuestos_Especiales/Contenidos/InformeIIEE.pdf"
+      }
     },
     {
       "name": "Puola",
@@ -1284,7 +1572,21 @@ window.PIXAN_DATA = {
       "verification": "WHO snapshot shows excise; current national rate requires Ministry of Finance verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-pol.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "1,44 PLN/ml e-savukenesteelle; kertakäyttöisessä e-savukkeessa lisäksi 40 PLN/laitetta; höyrystinlaitteet ja osasarjat 40 PLN/kpl tai sarja",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "E-savukenesteet, kertakäyttölaitteet, uudelleenkäytettävät höyrystimet ja osasarjat",
+        "caveat": "Vuoden 2026 virallinen verokantataulukko vahvistaa kannat mutta ei julkaise samalla taulukolla verotettua määrää tai kertymää",
+        "rateUrl": "https://www.podatki.gov.pl/akcyza/stawki-podatkowe",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Alankomaat",
@@ -1313,7 +1615,8 @@ window.PIXAN_DATA = {
       "verification": "Current national treatment requires Belastingdienst verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nld.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Belgia",
@@ -1342,7 +1645,21 @@ window.PIXAN_DATA = {
       "verification": "WHO snapshot shows excise; current national rate requires FPS Finance verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-bel.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "partial",
+        "rate": "0,1500 EUR/ml erityistä valmisteveroa kulutukseen luovutetuille e-nesteille",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Kaikki Belgiassa kulutukseen luovutetut e-nesteet",
+        "caveat": "Kanta täsmää WHO:n riippumattomaan tarkistukseen ja Belgian säädöksen toisintolähteeseen, mutta FOD Finances ohjaa nykyiset tariffit kirjautumista vaativaan Fisconetplus/TarBel-järjestelmään; suora virallinen tariffirivi on vielä tallentamatta",
+        "rateUrl": "https://financien.belgium.be/nl/douane_accijnzen/ondernemingen/accijnzen/algemene_informatie/accijnstarieven",
+        "volumeUrl": "",
+        "revenueUrl": "https://etaamb.openjustice.be/fr/loiprogramme-du-22-decembre-2023_n2023048600.html"
+      }
     },
     {
       "name": "Luxemburg",
@@ -1371,7 +1688,8 @@ window.PIXAN_DATA = {
       "verification": "Current national treatment requires customs/excise verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-lux.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Suomi",
@@ -1400,7 +1718,21 @@ window.PIXAN_DATA = {
       "verification": "National tax rate and taxed-volume PXWeb series require direct Vero extraction",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fin.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0,40 EUR/ml vuonna 2026; sekä nikotiinilliset että käyttötarkoituksen perusteella verolliset nikotiinittomat e-nesteet",
+        "taxedVolume": "11823.492 L",
+        "actualRevenue": "3 547 047 EUR",
+        "revenuePeriod": "2025",
+        "forecast": "not_obtained",
+        "scope": "Verohallinnon nettovolyymi ja nettoveron määrä tuoteryhmille TBC07 ja TBC7A",
+        "caveat": "Vuosi 2025 on täysi 12 kuukauden sarja; vuoden 2026 tieto kattaa tällä hetkellä tammi–huhtikuun",
+        "rateUrl": "https://www.vero.fi/yritykset-ja-yhteisot/verot-ja-maksut/valmisteverotus/tupakkavero/",
+        "volumeUrl": "https://vero2.stat.fi/PXWeb/api/v1/en/Vero/Valmistevero/vvt_010.px",
+        "revenueUrl": "https://vero2.stat.fi/PXWeb/api/v1/en/Vero/Valmistevero/vvt_010.px"
+      }
     },
     {
       "name": "Ruotsi",
@@ -1429,7 +1761,21 @@ window.PIXAN_DATA = {
       "verification": "Current national rate requires Skatteverket verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-swe.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "2 087 SEK/litra eli 2,087 SEK/ml; vahva 15–20 mg/ml e-neste 4 174 SEK/litra eli 4,174 SEK/ml",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Nikotiinia sisältävät e-nesteet",
+        "caveat": "Skatteverketin sivu antaa vuoden 2026 kannan mutta ei samalla sivulla verotettua litramäärää tai verokertymää",
+        "rateUrl": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Tanska",
@@ -1458,7 +1804,21 @@ window.PIXAN_DATA = {
       "verification": "Current national rate requires Skattestyrelsen verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-dnk.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "1,50 DKK/ml kun nikotiinia on enintään 12 mg/ml; 2,50 DKK/ml yli 12 mg/ml",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Nikotiinia sisältävät nesteet",
+        "caveat": "Verohallinnon oikeudellinen ohje vahvistaa kannan mutta ei julkaise samalla sivulla volyymia tai verokertymää",
+        "rateUrl": "https://info.skat.dk/data.aspx?oid=2350652",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Norja",
@@ -1487,7 +1847,8 @@ window.PIXAN_DATA = {
       "verification": "WHO profile reports sale banned for all three e-liquid formats in its observation; current legal route must be checked nationally",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nor.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Itävalta",
@@ -1516,7 +1877,21 @@ window.PIXAN_DATA = {
       "verification": "Current national treatment requires Ministry of Finance verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-aut.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "200 EUR/litra eli 0,20 EUR/ml 1.4.2026–31.1.2027; 230 EUR/litra 1.2.2027 alkaen; 260 EUR/litra 1.2.2028 alkaen",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "55 milj. EUR lisätuloa vuonna 2026 veromuutoksista yhteensä",
+        "scope": "E-nesteet niiden nikotiinipitoisuudesta riippumatta",
+        "caveat": "55 milj. EUR ei ole e-nesteiden erillinen ennuste vaan sisältää myös nikotiinipussit ja muut tabaksteuermuutokset; toteutunutta e-nestekertymää ei vielä ole",
+        "rateUrl": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Anlage=&Artikel=&Gesetzesnummer=10004877&Paragraf=4&Uebergangsrecht=",
+        "volumeUrl": "",
+        "revenueUrl": "https://www.parlament.gv.at/fachinfos/budgetdienst/Betrugsbekaempfungspaket-und-Abgabenaenderungsgesetz-2025"
+      }
     },
     {
       "name": "Sveitsi",
@@ -1545,7 +1920,21 @@ window.PIXAN_DATA = {
       "verification": "Current national treatment requires Federal Customs/FOCBS verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-che.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0,20 CHF/ml nikotiinia sisältäville uudelleenkäytettävien e-savukkeiden nesteille; 1,00 CHF/ml kertakäyttöisille e-savukkeille nikotiinista riippumatta",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Uudelleenkäytettävien laitteiden nikotiininesteet ja kaikki kertakäyttöiset e-savukkeet",
+        "caveat": "BAZG:n 2026 vero-ohje vahvistaa kannat ja tullinimikkeet mutta ei erota julkisesti e-savukkeiden verokertymää koko tupakkaverosta",
+        "rateUrl": "https://www.bazg.admin.ch/dam/de/sd-web/LOdB10XnvqWr/R-120-3%20Tabaksteuer_01.03.26_Korrektur.pdf",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Yhdistynyt kuningaskunta",
@@ -1574,7 +1963,21 @@ window.PIXAN_DATA = {
       "verification": "WHO snapshot has no specific excise; monitor announced Vaping Products Duty and verify effective date with HMRC",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-gbr.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "2.20 GBP / 10 ml eli 0.22 GBP/ml 1.10.2026 alkaen; kaikki e-nesteet nikotiinista riippumatta",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "135 milj. GBP 2026-27; 400 milj. GBP 2027-28; 465 milj. GBP 2028-29; 530 milj. GBP 2029-30; 565 milj. GBP 2030-31",
+        "scope": "Tuleva Vaping Products Duty",
+        "caveat": "Ennuste on OBR:n sertifioima julkisen talouden vaikutus eikä toteutunut verotuotto",
+        "rateUrl": "https://www.gov.uk/guidance/how-to-pay-vaping-products-duty",
+        "volumeUrl": "",
+        "revenueUrl": "https://www.gov.uk/government/publications/introduction-of-vaping-products-duty-from-1-october-2026/introduction-of-vaping-products-duty-from-1-october-2026"
+      }
     },
     {
       "name": "Kiina",
@@ -1603,7 +2006,21 @@ window.PIXAN_DATA = {
       "verification": "Current production/import and wholesale consumption-tax treatment requires Ministry of Finance/STA evidence; WHO profile has no numeric retail observation",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-chn.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "36 % tuotanto-/tuontivaiheessa ja 11 % tukkumyyntivaiheessa",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "E-savukkeet mukaan lukien patruunat laitteet ja yhdistelmät",
+        "caveat": "Tuotekohtaista verotettua volyymia tai verokertymää ei saatu; vientiin sovelletaan veronpalautus-/vapautuspolitiikkaa",
+        "rateUrl": "https://jsz.mof.gov.cn/zhengcefagui/202210/t20221028_3848463.htm",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Japani",
@@ -1632,7 +2049,8 @@ window.PIXAN_DATA = {
       "verification": "WHO profile has no numeric retail e-liquid tax observation; verify legal product classification and consumption tax nationally",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-jpn.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Etelä-Korea",
@@ -1661,7 +2079,8 @@ window.PIXAN_DATA = {
       "verification": "WHO profile has no numeric retail observation; liquid nicotine and synthetic nicotine taxes require Ministry of Economy and Finance/NTS evidence",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-kor.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Australia",
@@ -1690,7 +2109,8 @@ window.PIXAN_DATA = {
       "verification": "WHO profile reports retail sale banned for observed formats; lawful pharmacy supply and GST/excise treatment require separate TGA/ATO analysis",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-aus.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Brasilia",
@@ -1719,7 +2139,8 @@ window.PIXAN_DATA = {
       "verification": "WHO profile reports sale banned; no lawful retail excise market should be inferred",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-bra.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     },
     {
       "name": "Venäjä",
@@ -1748,7 +2169,8 @@ window.PIXAN_DATA = {
       "verification": "WHO snapshot shows excise; current national rate and legal status require official Russian verification",
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-rus.pdf",
       "tier": "B",
-      "period": "WHO Report 2025 country profile"
+      "period": "WHO Report 2025 country profile",
+      "national": null
     }
   ],
   "taxAudit": {
@@ -1756,8 +2178,9 @@ window.PIXAN_DATA = {
     "numericCount": 15,
     "specificExciseCount": 8,
     "banCount": 3,
-    "officialVolumeCount": 1,
-    "officialRevenueCount": 0,
+    "nationalVerifiedCount": 12,
+    "officialVolumeCount": 2,
+    "officialRevenueCount": 3,
     "method": "WHO:n vuoden 2025 maaprofiilien sivu 9 raportoi halvimpien closed-, disposable- ja open-system e-nesteiden hinnan sekä kokonaisveron, valmisteveron, ALV:n, tullin ja muut verot prosenttina vähittäishinnasta. Pixan-auditointi säilyttää puuttuvat solut puuttuvina ja johtaa €/ml- tai paikallisvaluutta/ml-luvun vain hinnan ja WHO:n specific excise -osuuden tulona. Johdettu kanta merkitään B-tason tarkistusluvuksi, ei nykyiseksi lakikannaksi."
   },
   "customs": [
@@ -1970,6 +2393,13 @@ window.PIXAN_DATA = {
       "coverage": "Saksa 2025: verotettu tupakan korvike-/e-nestemäärä",
       "use": "Nykyinen virallinen volyymiankkuri",
       "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html"
+    },
+    {
+      "grade": "A",
+      "title": "Verohallinto · valmisteverotilasto",
+      "coverage": "Suomi 2023–2026: e-nesteiden kuukausittainen nettovolyymi ja nettovero",
+      "use": "Nykyinen virallinen vero- ja volyymiankkuri",
+      "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/"
     },
     {
       "grade": "A",

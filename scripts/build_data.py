@@ -28,7 +28,7 @@ def public_contact(value: str) -> str:
 
 
 def status_for_country(name: str) -> str:
-    if name in {"Canada", "Germany"}:
+    if name in {"Canada", "Germany", "Finland"}:
         return "verified"
     if name in {"United States", "Japan"}:
         return "partial"
@@ -75,8 +75,11 @@ def choose_customs_file() -> Path:
 def build_payload() -> dict:
     matrix = read_csv(PROJECT_DIR / "country_data_acquisition_matrix.csv")
     tax_rows = read_csv(PROJECT_DIR / "country_tax_evidence.csv")
+    national_tax_rows = read_csv(PROJECT_DIR / "current_national_tax_verification.csv")
     requests = read_csv(PROJECT_DIR / "requests.csv")
     customs_rows = read_csv(choose_customs_file())
+
+    national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
     def number(value: str) -> float | None:
         value = (value or "").strip()
@@ -84,6 +87,7 @@ def build_payload() -> dict:
 
     taxes = []
     for row in tax_rows:
+        national = national_tax_by_country.get(row["country_or_region"])
         taxes.append(
             {
                 "name": fi_country(row["country_or_region"]),
@@ -113,6 +117,20 @@ def build_payload() -> dict:
                 "url": row["source_url"],
                 "tier": row["source_tier"],
                 "period": row["period_note"],
+                "national": None if not national else {
+                    "asOf": national["as_of"],
+                    "status": national["status"],
+                    "rate": national["current_rate_text"],
+                    "taxedVolume": national["official_taxed_volume"],
+                    "actualRevenue": national["actual_tax_revenue"],
+                    "revenuePeriod": national["revenue_period"],
+                    "forecast": national["official_revenue_forecast"],
+                    "scope": national["evidence_scope"],
+                    "caveat": national["caveat"],
+                    "rateUrl": national["rate_source_url"],
+                    "volumeUrl": national["volume_source_url"],
+                    "revenueUrl": national["revenue_source_url"],
+                },
             }
         )
 
@@ -179,12 +197,12 @@ def build_payload() -> dict:
             "title": "Pixan markkina- ja evidenssikeskus",
             "updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
             "dataDate": "2026-07-17",
-            "repo": "https://github.com/jounirautio78-ops/pixan-evidence-center",
+            "repo": "https://github.com/marnet-collab/pixan-evidence-center",
             "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio.",
         },
         "metrics": [
             {"label": "Kanada 2024", "value": "1,161 mrd CAD", "detail": "Viranomaiselle raportoitu toimitusmyynti", "tone": ""},
-            {"label": "Kanada 2024", "value": "1,252 milj. l", "detail": "Vaping substance / e-nestevolyymi", "tone": "gold"},
+            {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
             {"label": "Tulliproxy 2025", "value": f"{sum(narrow.values()) / 1e9:.3f} mrd USD".replace(".", ","), "detail": "USA + Kanada + Japani, kapea HS-kori", "tone": "red"},
         ],
@@ -208,6 +226,16 @@ def build_payload() -> dict:
                 "limit": "Litramäärä ei sisällä erillisten laitteiden myyntiarvoa. 390 milj. € on verolaskelma, ei vähittäismyynti.",
                 "source": "Destatis · tiedote 026/2026",
                 "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html",
+            },
+            {
+                "grade": "A",
+                "market": "Suomi",
+                "title": "E-nesteiden nettovero ja verotettu nettovolyymi",
+                "value": "3 547 047 € · 11 823,492 l",
+                "detail": "Verohallinnon vuoden 2025 täysi sarja: nikotiinilliset 11 802,602 litraa / 3 540 780 € ja nikotiinittomat 20,890 litraa / 6 267 €.",
+                "limit": "Veroankkuri kattaa e-nesteet, ei erillisiä laitteita. PXWebin 2026 tieto on vielä osavuosi tammi–huhtikuu.",
+                "source": "Verohallinto · valmisteverotilasto",
+                "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/",
             },
             {
                 "grade": "B",
@@ -234,8 +262,12 @@ def build_payload() -> dict:
             "numericCount": sum(row["status"] == "numeric_data" for row in taxes),
             "specificExciseCount": sum((row["excisePct"]["open"] or 0) > 0 for row in taxes),
             "banCount": sum(row["status"] == "sale_banned" for row in taxes),
-            "officialVolumeCount": sum(row["taxedVolume"] != "not_obtained" for row in taxes),
-            "officialRevenueCount": sum(row["taxRevenue"] != "not_obtained" and "calculated" not in row["taxRevenue"] for row in taxes),
+            "nationalVerifiedCount": sum(
+                row["national"] is not None and row["national"].get("status") == "verified"
+                for row in taxes
+            ),
+            "officialVolumeCount": sum(row["national"] is not None and row["national"]["taxedVolume"] != "not_obtained" for row in taxes),
+            "officialRevenueCount": sum(row["national"] is not None and row["national"]["actualRevenue"] != "not_obtained" for row in taxes),
             "method": "WHO:n vuoden 2025 maaprofiilien sivu 9 raportoi halvimpien closed-, disposable- ja open-system e-nesteiden hinnan sekä kokonaisveron, valmisteveron, ALV:n, tullin ja muut verot prosenttina vähittäishinnasta. Pixan-auditointi säilyttää puuttuvat solut puuttuvina ja johtaa €/ml- tai paikallisvaluutta/ml-luvun vain hinnan ja WHO:n specific excise -osuuden tulona. Johdettu kanta merkitään B-tason tarkistusluvuksi, ei nykyiseksi lakikannaksi.",
         },
         "customs": customs,
@@ -270,6 +302,7 @@ def build_payload() -> dict:
         "evidence": [
             {"grade": "A", "title": "Health Canada · Vaping sales", "coverage": "Kanada 2023–2024: arvo, yksiköt, litrat ja tuoteryhmät", "use": "Nykyinen virallinen markkina-ankkuri", "url": "https://health-infobase.canada.ca/substance-use/vaping/sales/"},
             {"grade": "A", "title": "Destatis · tabakverotilasto", "coverage": "Saksa 2025: verotettu tupakan korvike-/e-nestemäärä", "use": "Nykyinen virallinen volyymiankkuri", "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/01/PD26_026_73.html"},
+            {"grade": "A", "title": "Verohallinto · valmisteverotilasto", "coverage": "Suomi 2023–2026: e-nesteiden kuukausittainen nettovolyymi ja nettovero", "use": "Nykyinen virallinen vero- ja volyymiankkuri", "url": "https://vero2.stat.fi/PXWeb/pxweb/en/Vero/Vero__Valmistevero/vvt_010.px/"},
             {"grade": "A", "title": "Saksan tupakkaverolaki §2", "coverage": "Verokanta 0,26 €/ml vuonna 2025 ja 0,32 €/ml vuodesta 2026", "use": "Veropohjan auditointilaskelma", "url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html"},
             {"grade": "A", "title": "EU Tobacco Products Directive 20(7)", "coverage": "Vuosittaiset myyntimäärät tuotemerkki- ja tyyppitasolla kansallisille viranomaisille", "use": "Oikeusperusta aggregoitujen tietopyyntöjen kohdentamiseen", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32014L0040"},
             {"grade": "B", "title": "UN Comtrade", "coverage": "USA, Kanada ja Japani 2025: HS 854340, 240412 ja 240419", "use": "Rajakaupan suuruusluokka ja ristiintarkastus", "url": "https://comtradeplus.un.org/"},

@@ -167,6 +167,7 @@
     }, {});
     const filters = [
       ["all", "Kaikki", data.taxes.length],
+      ["national_verified", "Kansallinen lähde", data.taxes.filter((item) => item.national).length],
       ["numeric_data", "Numeroaineisto", counts.numeric_data || 0],
       ["no_numeric_data", "Luku puuttuu", counts.no_numeric_data || 0],
       ["sale_banned", "Myyntikielto", counts.sale_banned || 0],
@@ -193,29 +194,30 @@
     $("#tax-metrics").innerHTML = [
       { label: "WHO-profiilit", value: `${audit.profileCount} maata`, detail: "Yhtenäinen sivu-9 auditointi", tone: "" },
       { label: "Numeerinen osuma", value: `${audit.numericCount} / ${audit.profileCount}`, detail: `${hitRate} % profiileista`, tone: "gold" },
-      { label: "Valmistevero havaittu", value: `${audit.specificExciseCount} maata`, detail: "WHO:n open-system otoksessa > 0 %", tone: "blue" },
+      { label: "Kansallinen varmennus", value: `${audit.nationalVerifiedCount} maata`, detail: "Nykykanta tai kansallinen veroraportti", tone: "blue" },
       { label: "Virallinen volyymi", value: `${audit.officialVolumeCount} maa`, detail: "Saksa; muiden maiden haku auki", tone: "red" },
     ].map((item) => `<article class="metric-card ${item.tone}"><span class="metric-label">${esc(item.label)} <span>↗</span></span><strong class="metric-value">${esc(item.value)}</strong><span class="metric-detail">${esc(item.detail)}</span></article>`).join("");
 
-    const items = (taxFilter === "all" ? data.taxes : data.taxes.filter((item) => item.status === taxFilter))
+    const items = (taxFilter === "all" ? data.taxes : taxFilter === "national_verified" ? data.taxes.filter((item) => item.national) : data.taxes.filter((item) => item.status === taxFilter))
       .sort((a, b) => a.name.localeCompare(b.name, "fi"));
     $("#tax-count").textContent = `${items.length} maata/aluetta`;
     $("#tax-table").innerHTML = `
       <table>
-        <thead><tr><th>Maa</th><th>WHO-tila</th><th>Closed 1 ml<br>hinta / kokonaisvero</th><th>Disposable 1 ml<br>hinta / kokonaisvero</th><th>Open 10 ml<br>hinta / kokonaisvero</th><th>Johdettu specific<br>excise / ml</th><th>Verotettu volyymi</th><th>Verotuotto</th><th>Kansallinen tarkistus</th></tr></thead>
+        <thead><tr><th>Maa</th><th>Todistustila</th><th>Kansallinen nykykanta</th><th>Closed 1 ml<br>hinta / kokonaisvero</th><th>Disposable 1 ml<br>hinta / kokonaisvero</th><th>Open 10 ml<br>hinta / kokonaisvero</th><th>WHO:sta johdettu<br>specific excise / ml</th><th>Verotettu volyymi</th><th>Toteutunut verotuotto</th><th>Rajaus ja lähde</th></tr></thead>
         <tbody>${items.map((item) => `<tr>
           <td><a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener"><strong>${esc(item.name)}</strong> ↗</a><div class="meta-line">${esc(item.period)}</div></td>
-          <td>${tag(item.status)}</td>
+          <td>${item.national ? tag(item.national.status, item.national.status === "verified" ? "A-tason kansallinen" : "Kansallinen osittainen") : tag(item.status)}</td>
+          <td>${item.national ? `<strong>${esc(item.national.rate)}</strong><div class="meta-line">Tilanne ${esc(item.national.asOf)}</div>${item.national.rateUrl ? `<a class="source-link" href="${esc(item.national.rateUrl)}" target="_blank" rel="noopener">Verolähde ↗</a>` : ""}` : '<span class="meta-line">Kansallinen varmennus puuttuu</span>'}</td>
           <td class="num">${price(item.prices.closed1ml, item.currency)}<br><small>${pct(item.totalPct.closed)}</small></td>
           <td class="num">${price(item.prices.disposable1ml, item.currency)}<br><small>${pct(item.totalPct.disposable)}</small></td>
           <td class="num">${price(item.prices.open10ml, item.currency)}<br><small>${pct(item.totalPct.open)}</small></td>
           <td class="num"><strong>${item.derivedRate === null ? "—" : price(item.derivedRate, item.currency) + "/ml"}</strong><div class="meta-line">${item.derivedRate !== null ? "WHO-hinnasta johdettu" : ""}</div></td>
-          <td>${item.taxedVolume === "not_obtained" ? "Ei saatu" : esc(item.taxedVolume)}</td>
-          <td>${item.taxRevenue === "not_obtained" ? "Ei saatu" : esc(item.taxRevenue)}</td>
-          <td><div class="meta-line">${esc(item.verification)}</div></td>
+          <td>${!item.national || item.national.taxedVolume === "not_obtained" ? "Ei saatu" : `<strong>${esc(item.national.taxedVolume)}</strong>${item.national.volumeUrl ? `<a class="source-link" href="${esc(item.national.volumeUrl)}" target="_blank" rel="noopener">Volyymilähde ↗</a>` : ""}`}</td>
+          <td>${!item.national || item.national.actualRevenue === "not_obtained" ? "Ei saatu" : `<strong>${esc(item.national.actualRevenue)}</strong><div class="meta-line">${esc(item.national.revenuePeriod)}</div>${item.national.revenueUrl ? `<a class="source-link" href="${esc(item.national.revenueUrl)}" target="_blank" rel="noopener">Tulolähde ↗</a>` : ""}`}</td>
+          <td><div class="meta-line">${esc(item.national ? `${item.national.scope}. ${item.national.caveat}${item.national.forecast !== "not_obtained" ? ` Ennuste: ${item.national.forecast}.` : ""}` : item.verification)}</div></td>
         </tr>`).join("")}</tbody>
       </table>`;
-    $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} numeerista osumaa (${hitRate} %); ${audit.banCount} profiilia ilmoitti myyntikiellon.</strong><p>${esc(audit.method)}</p><p>Varsinaisen maakohtaisen verotuoton osuma tällä hetkellä: ${audit.officialRevenueCount}/${data.taxes.length}. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi.</p>`;
+    $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} WHO-numeerista osumaa (${hitRate} %); ${audit.nationalVerifiedCount} kansallista varmennusta; ${audit.officialRevenueCount} toteutunutta verotuottosarjaa.</strong><p>${esc(audit.method)}</p><p>WHO:n open-system-otoksessa specific excise oli yli nollan ${audit.specificExciseCount} maassa ja ${audit.banCount} profiilia ilmoitti myyntikiellon. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi.</p>`;
   }
 
   function renderGaps() {
