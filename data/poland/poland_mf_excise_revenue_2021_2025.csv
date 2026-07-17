@@ -1,0 +1,6 @@
+year,official_e_liquid_excise_revenue_pln,status,preliminary,source_url,boundary
+2021,179500000,official_actual,false,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,excise_revenue_not_retail_sales_value
+2022,229900000,official_actual,false,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,excise_revenue_not_retail_sales_value
+2023,443600000,official_actual,true,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,excise_revenue_not_retail_sales_value
+2024,,not_obtained_pending_interpellation_18182,false,https://api.sejm.gov.pl/sejm/term10/interpellations/18182,excise_revenue_not_retail_sales_value
+2025,993100000,official_actual,false,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf,2025_combines_Jan_Feb_0.55_Mar_Dec_0.96_and_disposable_surcharge_from_July

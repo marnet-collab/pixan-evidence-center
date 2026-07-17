@@ -14,6 +14,7 @@
   const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
   const moneyEur3 = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. €";
   const moneyCad = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(value / 1e6) + " milj. CAD";
+  const moneyPln = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 1, maximumFractionDigits: 3 }).format(value / 1e6) + " milj. PLN";
   const cad = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " CAD";
   const eur = (value, digits = 2) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value) + " €";
   const moneyJpy = (value) => value >= 1e9
@@ -477,7 +478,7 @@
       { label: "WHO-profiilit", value: `${audit.profileCount} maata`, detail: "Yhtenäinen sivu-9 auditointi", tone: "" },
       { label: "Numeerinen osuma", value: `${audit.numericCount} / ${audit.profileCount}`, detail: `${hitRate} % profiileista`, tone: "gold" },
       { label: "Kansallinen varmennus", value: `${audit.nationalVerifiedCount} maata`, detail: "Nykykanta tai kansallinen veroraportti", tone: "blue" },
-      { label: "Virallinen volyymi", value: `${audit.officialVolumeCount} maata`, detail: "Suomi, Saksa ja Ruotsi", tone: "red" },
+      { label: "Virallinen volyymi", value: `${audit.officialVolumeCount} maata`, detail: "Mm. Suomi, Saksa, Ruotsi ja Puola", tone: "red" },
     ].map((item) => `<article class="metric-card ${item.tone}"><span class="metric-label">${esc(item.label)} <span>↗</span></span><strong class="metric-value">${esc(item.value)}</strong><span class="metric-detail">${esc(item.detail)}</span></article>`).join("");
 
     const items = (taxFilter === "all" ? data.taxes : taxFilter === "national_verified" ? data.taxes.filter((item) => item.national) : data.taxes.filter((item) => item.status === taxFilter))
@@ -597,6 +598,78 @@
         </tr>`).join("")}</tbody>
       </table>
       <div class="meta-line table-note"><strong>Kaksinkertaisen laskennan esto:</strong> verovarastojen välisiä siirtoja ei lisätä myyntipistetoimituksiin tai suoriin loppukuluttajatoimituksiin. ADM:ltä pyydetään myös viranomaisen oma määritelmä kulutukseen luovutuksesta ja mahdollisten oikaisujen käsittelystä.</div>`;
+
+    const poland = data.polandEvidence;
+    const poland2023Volume = poland.volume.find((item) => item.year === 2023);
+    const poland2023Revenue = poland.revenue.find((item) => item.year === 2023);
+    const poland2025Revenue = poland.revenue.find((item) => item.year === 2025);
+    const polandLiquid2025 = poland.categories2025.find((item) => item.category === "e_liquid");
+    const polandDevice2025 = poland.categories2025.find((item) => item.category === "vaporisation_devices");
+    const polandKit2025 = poland.categories2025.find((item) => item.category === "vaporisation_device_part_kits");
+    $("#poland-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Virallinen tulos</th><th>Todistusvoima</th><th>Rajaus / seuraava askel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MF ZEFIR2 / AIS 2023</strong></td><td><strong>${integer(poland2023Volume.litres)} litraa</strong></td><td>${tag("verified", "A-tason ilmoitettu laillinen virta")}</td><td>Kotimaan myynti + EU-hankinta + tuonti; ei retail-arvo</td></tr>
+          <tr><td><strong>MF e-nesteverotuotto 2023</strong></td><td><strong>${moneyPln(poland2023Revenue.revenuePln)}</strong></td><td>${tag("verified", "A-tason verototeuma")}</td><td>Määrä × 0,55 PLN/ml eroaa tuotosta vain ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(poland.manifest.audit["2023_gap_pct_of_official_revenue"])} %</td></tr>
+          <tr><td><strong>MF vuoden 2025 toteuma</strong></td><td>${moneyPln(poland2025Revenue.revenuePln)} e-neste · ${moneyPln(polandDevice2025.actualMillionPln * 1e6)} laitteet · ${moneyPln(polandKit2025.actualMillionPln * 1e6)} osasarjat</td><td>${tag("verified", "A-tason tuoteryhmäkohtainen vero")}</td><td>E-nesteen 86,507 % talousarviototeuma; ei yhden kannan ml-muunnosta</td></tr>
+          <tr><td><strong>${esc(poland.request.id)}</strong></td><td>2023 revisiosyy · 2024 tuotto · 2024–2025 kuukausittaiset ml ja laiteyksiköt</td><td>${tag(poland.request.status)}</td><td><a class="source-link" href="${esc(poland.publicInformationUrl)}" target="_blank" rel="noopener">MF:n virallinen julkisen tiedon kanava ↗</a></td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Vuoden 2025 veroraja:</strong> e-nestekanta oli tammi-helmikuussa 0,55 PLN/ml ja maalis-joulukuussa 0,96 PLN/ml. Kertakäyttölaitteen nesteeseen tuli 40 PLN:n lisävero ja höyrystinlaitteisiin/osasarjoihin 40 PLN:n yksikkövero 1.7.2025. <a class="source-link" href="${esc(poland.ratesUrl)}" target="_blank" rel="noopener">Virkasäädös ↗</a></div>`;
+
+    const polandYears = [2020, 2021, 2022, 2023, 2024, 2025];
+    $("#poland-volume").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Virallinen e-nestemäärä</th><th>Virallinen e-nesteverotuotto</th><th>Tila / tulkinta</th></tr></thead>
+        <tbody>${polandYears.map((year) => {
+          const volume = poland.volume.find((item) => item.year === year);
+          const revenue = poland.revenue.find((item) => item.year === year);
+          return `<tr><td><strong>${year}</strong></td><td>${volume ? `<strong>${integer(volume.litres)} l</strong>` : "Ei saatu"}</td><td>${revenue?.revenuePln ? `<strong>${moneyPln(revenue.revenuePln)}</strong>` : "Ei saatu"}</td><td>${year === 2024 ? "Interpellaatio 18182 odottaa vastausta" : year === 2025 ? "E-nestetulo sisältää kannanmuutoksen ja kertakäyttölisän" : volume ? "Ilmoitettu laillinen valmisteverovirta; ei sell-out" : "Vain julkaistu verotuotto"}</td></tr>`;
+        }).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Lähdejärjestelmät:</strong> kotimaan myynti ja EU-hankinta ZEFIR2 / IAS Kraków; tuonti AIS. <a class="source-link" href="${esc(poland.volumeUrl)}" target="_blank" rel="noopener">MF:n virallinen volyymivastaus ↗</a></div>`;
+
+    $("#poland-revision").innerHTML = `
+      <table>
+        <thead><tr><th>Julkaisu</th><th>Vuoden 2023 määrä</th><th>Lähderajaus</th><th>Auditointipäätös</th></tr></thead>
+        <tbody>${poland.revision.map((item) => `<tr>
+          <td><strong>${esc(item.releaseDate)}</strong></td><td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(item.litres)} l</td>
+          <td>${esc(item.sourceDetail)}</td><td>${item.maturity.startsWith("later") ? tag("verified", "Myöhempi julkaisu — käytetään") : tag("partial", "Aikaisempi julkaisu")}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Revisio:</strong> myöhempi määrä on ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 4, maximumFractionDigits: 4 }).format(Math.abs(poland.manifest.official_results.revision_delta_litres))} litraa eli ${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(poland.manifest.official_results.revision_delta_pct_vs_earlier))} % pienempi. Syy pyydetään PX-PL-001:llä; sitä ei arvata.</div>`;
+
+    $("#poland-reconciliation").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Virallinen määrä</th><th>Määrä × 0,55 PLN/ml</th><th>Virallinen verotuotto</th><th>Ero</th><th>Ero / verotuotto</th></tr></thead>
+        <tbody>${poland.reconciliation.map((item) => `<tr>
+          <td><strong>${item.year}</strong></td><td class="num">${integer(item.officialMl)} ml</td><td class="num">${moneyPln(item.mechanicalExcisePln)}</td><td class="num">${moneyPln(item.officialRevenuePln)}</td><td class="num">${moneyPln(item.gapPln)}</td>
+          <td class="num"><strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.gapPct)} %</strong></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Ei veronkiertolaskelma:</strong> ristiintarkistus testaa suuruusluokan. Erityisesti vuoden 2021 ero voi sisältää jaksotusta, siirtymäsääntöjä ja myöhempiä oikaisuja.</div>`;
+
+    $("#poland-controls").innerHTML = `
+      <table>
+        <thead><tr><th>Jakso</th><th>Kontrollit</th><th>Rikkomukset / onnistuneet kontrollit</th><th>Uudelleen laskettu hit rate</th><th>Takavarikoitu / havaittu e-neste</th><th>Kertakäyttölaitteet</th></tr></thead>
+        <tbody>${poland.controls.map((item) => `<tr>
+          <td><strong>${esc(item.period)}</strong></td><td class="num">${item.controls === null ? "Ei julkaistu" : integer(item.controls)}</td><td class="num">${integer(item.findingsOrSuccessful)}</td>
+          <td class="num">${item.hitRatePct === null ? "Ei laskettavissa" : `<strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.hitRatePct)} %</strong>`}</td>
+          <td class="num">${item.liquidMl === null ? "—" : integer(item.liquidMl) + " ml"}</td><td class="num">${item.disposableDevices === null ? "—" : integer(item.disposableDevices)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Otantaraja:</strong> vuoden 2025 36,007 % kuvaa kohdennettuja vähittäismyyntipisteiden tarkastuksia. Vuoden 2026 Q1 665 “onnistuneelle kontrollille” ei julkaistu kokonaisnimittäjää, joten hit ratea ei lasketa. <a class="source-link" href="${esc(poland.kasUrl)}" target="_blank" rel="noopener">KAS ↗</a></div>`;
+
+    $("#poland-route").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Rajaus</th><th>WORLD-tuonti</th><th>Intra-EU</th><th>Extra-EU</th><th>Extra-osuus</th><th>WORLD-vienti</th></tr></thead>
+        <tbody>${poland.route.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.label)}</strong></td><td class="num">${moneyEur3(item.worldImportEur)}</td><td class="num">${moneyEur3(item.intraImportEur)}</td><td class="num">${moneyEur3(item.extraImportEur)}</td>
+          <td class="num">${item.extraSharePct === null ? "—" : new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(item.extraSharePct) + " %"}</td><td class="num">${moneyEur3(item.worldExportEur)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kapea kori:</strong> WORLD ${moneyEur3(poland.manifest.official_results.eurostat_narrow_world_import_eur)}, intra-EU ${moneyEur3(poland.manifest.official_results.eurostat_narrow_intra_eu_import_eur)} ja extra-EU ${moneyEur3(poland.manifest.official_results.eurostat_narrow_extra_eu_import_eur)}. Intra-EU kumppani on lähetysmaa, extra-EU kumppani alkuperämaa. 2404-nimikkeet ovat laajoja proxyja; tullivirta ei ole kotimyynti.</div>`;
   }
 
   function renderGaps() {
@@ -650,6 +723,7 @@
     rows.push({ view: "taxes", title: "Italia · ADM PLI-PAT", detail: `Vuoden 2025 verokannat, ${italy2026Search()} ml:n virallinen 2026 budjettiennuste ja PX-IT-001 toteumapyyntö` });
     rows.push({ view: "taxes", title: "Espanja · AEAT / Modelo 573", detail: `${moneyEur3(data.spainAeat.exactNetRevenueEur)} tarkka nettokertymä, L1/L2-millilitrat ja PX-ES-001` });
     rows.push({ view: "customs", title: "Ranska · Douane / ANSES", detail: `${moneyEur3(data.franceEvidence.manifest.official_results.douane_all_four_codes_border_net_import_eur)} rajat ylittävä nettotuonti, 203 181 ANSES-ilmoitusriviä ja 35,010 % historiallinen hit rate` });
+    rows.push({ view: "taxes", title: "Puola · MF / KAS / Eurostat", detail: `805 441 litraa vuoden 2023 ilmoitettua valmisteverovirtaa, ${moneyPln(data.polandEvidence.manifest.official_results.e_liquid_excise_revenue_2025_pln)} vuoden 2025 e-nesteveroa ja 36,007 % kohdennettu KAS-hit rate` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
   }

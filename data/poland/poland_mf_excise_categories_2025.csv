@@ -1,0 +1,4 @@
+year,category,budget_plan_million_pln,actual_million_pln,variance_million_pln,execution_rate_pct,tax_start,source_url
+2025,e_liquid,1148.0,993.1,-154.9,86.506969,existing; rates changed 2025-03-01; disposable surcharge 2025-07-01,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf
+2025,vaporisation_devices,,175.3,,,2025-07-01; 40 PLN per unit,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf
+2025,vaporisation_device_part_kits,,2.5,,,2025-07-01; 40 PLN per kit,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf

@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-07-17",
+  "market": "Poland",
+  "method": {
+    "volume": "Official Ministry of Finance response; domestic sales and intra-EU acquisition from ZEFIR2 and IAS Krakow analysis, imports from AIS.",
+    "revenue": "Official Ministry of Finance excise revenue and 2025 budget-execution response.",
+    "controls": "Recomputed irregularity rate only where both controls and irregularities are published; targeted enforcement is not a market-share estimator.",
+    "trade": "Eurostat Comext DS-045409; extra-EU uses origin, intra-EU uses Member State of consignment."
+  },
+  "official_results": {
+    "e_liquid_volume_2023_litres_later_release": 805441,
+    "e_liquid_volume_2023_litres_earlier_release": 883641.3342,
+    "revision_delta_litres": -78200.33420000004,
+    "revision_delta_pct_vs_earlier": -8.849782,
+    "e_liquid_excise_revenue_2023_pln": 443600000,
+    "e_liquid_excise_revenue_2025_pln": 993100000,
+    "e_liquid_2025_budget_execution_rate_pct": 86.506969,
+    "vaporisation_device_excise_revenue_2025_pln": 175300000,
+    "vaporisation_part_kit_excise_revenue_2025_pln": 2500000,
+    "kas_2025_controls": 1172,
+    "kas_2025_irregularities": 422,
+    "kas_2025_targeted_hit_rate_pct": 36.006826,
+    "kas_2021_2023_combined_targeted_hit_rate_pct": 31.509507,
+    "eurostat_narrow_world_import_eur": 210579736,
+    "eurostat_narrow_intra_eu_import_eur": 117476629,
+    "eurostat_narrow_extra_eu_import_eur": 93103107,
+    "eurostat_narrow_extra_eu_share_pct": 44.212757
+  },
+  "audit": {
+    "source_assertions_passed": 36,
+    "2023_later_volume_times_0_55_pln": 442992550.00000006,
+    "2023_official_minus_mechanical_pln": 607449.9999999404,
+    "2023_gap_pct_of_official_revenue": 0.136936,
+    "eurostat_world_equals_intra_plus_extra_for_published_import_rows": true,
+    "2024_excise_revenue_status": "not_obtained; interpellation_18182_pending"
+  },
+  "boundaries": [
+    "Official volume is declared legal excise flow, not retail value or consumer sell-out.",
+    "2025 e-liquid revenue cannot be divided by one rate because statutory rates changed and a disposable surcharge began in July.",
+    "Device revenue divided by 40 PLN would be a conditional mechanical scenario, not an official unit count.",
+    "KAS hit rates come from targeted enforcement and are not illegal-market share or sales-data accuracy.",
+    "The two official 2023 volume releases differ by 8.85%; the later release is preferred but the reason is requested, not inferred.",
+    "CN 2404 categories are broad inhalation proxies and trade is not domestic sales."
+  ],
+  "sources": [
+    {
+      "name": "mf_interpellation_7255_volume_2020_2023.pdf",
+      "sha256": "fc91bbe6619e0936a60b7e18be62d80fb90109bc77978a65338fafb49db51099",
+      "bytes": 208183
+    },
+    {
+      "name": "mf_interpellation_2408_revenue_controls_2021_2023.pdf",
+      "sha256": "7aa9384945d63801874a1ae3854f3d300b08bae039d084014dc694693678cbec",
+      "bytes": 116844
+    },
+    {
+      "name": "mf_interpellation_17526_excise_execution_2025.pdf",
+      "sha256": "3e7adaf7dbd1d40320088fcc98b4f2f5000bd89b5609532206afad21fc5fb78e",
+      "bytes": 152361
+    },
+    {
+      "name": "kas_e_cigarette_enforcement_2025.html",
+      "sha256": "be86a32f7a6628893c1c84dd85d54577313c3ceece01f03c3c3777c586ae3069",
+      "bytes": 30035
+    },
+    {
+      "name": "e_liquid_rates_2025_2026_law.pdf",
+      "sha256": "53bec20dd0fbbdbb7b54b2279006894ca0acb2a0584695b8d4f62871c4f9bbb3",
+      "bytes": 171148
+    },
+    {
+      "name": "excise_devices_2025_law.pdf",
+      "sha256": "5341d4f05b8e7d19c9848fc8e73cd977eb1d50754de88886c411204c93922110",
+      "bytes": 258061
+    },
+    {
+      "name": "akc_4_m_3_current.pdf",
+      "sha256": "5771de29e493a743dec87c7bc441db0fd4c55647d6fa922a2615a7b65774e15e",
+      "bytes": 72534
+    },
+    {
+      "name": "akc_ua_2025_form_law.pdf",
+      "sha256": "ef16537d5a3ab88a4c09c297c1f330aaa5d74db951f4ba8ced81060f128304f2",
+      "bytes": 522016
+    },
+    {
+      "name": "eurostat_poland_cn8_2025.json",
+      "sha256": "bbb20cc26a10956093680cce2e6403672671e48a964a170d90ba8983eff1266d",
+      "bytes": 3089
+    },
+    {
+      "name": "sejm_interpellations_metadata_2026-07-17.json",
+      "sha256": "120bb108f4fd3b0e49f36847b062f40b881514dfaaf136180f771567c6d37120",
+      "bytes": 7354
+    }
+  ],
+  "urls": {
+    "volume": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf",
+    "revenue": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf",
+    "execution": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf",
+    "kas": "https://www.gov.pl/web/kas/kas-zwalcza-oszustwa-zwiazane-z-rynkiem-e-papierosow",
+    "rates": "https://api.sejm.gov.pl/eli/acts/DU/2024/1681/text.pdf",
+    "devices": "https://api.sejm.gov.pl/eli/acts/DU/2025/340/text.pdf",
+    "akc4m": "https://podatki.gov.pl/akcyza/formularze",
+    "akcua": "https://api.sejm.gov.pl/eli/acts/DU/2025/822/text.pdf",
+    "eurostat_method": "https://ec.europa.eu/eurostat/cache/metadata/en/ext_go_detail_sims.htm",
+    "pending_18182": "https://api.sejm.gov.pl/sejm/term10/interpellations/18182",
+    "eurostat_query": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=PL&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&flow=2&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+  }
+}

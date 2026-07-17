@@ -35,6 +35,8 @@ Saksan 17.7.2026 hintaotos julkaistaan `data/germany/`-kansiossa. Se sisältää
 
 Italian ADM:n PLI-PAT-palvelun, julkisen kuukausiraportin XLSX-mallipohjan ja vuoden 2025 veropäätösten johdetut aineistot julkaistaan `data/italy/`-kansiossa. Mallipohja sisältää kolme erillistä virtaa: myyntipisteisiin toimitetut tuotteet, verovarastoihin toimitetut tuotteet ja suoraan loppukuluttajille toimitetut tuotteet. Verovarastosiirtoja ei lisätä kulutussummaan. Italian parlamentin vuoden 2026 budjettiselvityksen taulukko 17 julkaistaan vain virallisena ennusteena: 1 107 249 007 ml ja 167 733 820 euroa eivät ole toteutunutta myyntiä tai verokertymää. Toteutuneet 2023-2025 kansalliset aggregaatit ovat edelleen pyynnössä PX-IT-001.
 
+Puolan valtiovarainministeriön ja KAS:n johdetut aineistot julkaistaan `data/poland/`-kansiossa ja tarkat viranomaislähteet `data/raw/poland_mf/`-kansiossa. Vuoden 2023 myöhempi ZEFIR2/IAS Kraków/AIS -sarja antaa 805 441 litraa ilmoitettua laillista e-nesteen valmisteverovirtaa; sen mekaaninen verolaskelma eroaa 443,6 milj. PLN:n virallisesta verotuotosta 0,137 %. Vuoden 2025 e-nesteen verototeuma oli 993,1 milj. PLN, laitteiden 175,3 milj. PLN ja osasarjojen 2,5 milj. PLN. KAS:n 36,007 %:n vuoden 2025 osumaprosentti koskee kohdennettuja tarkastuksia eikä ole laittoman markkinan osuus. Aikaisemman ja myöhemmän vuoden 2023 määrän 8,85 %:n revisio pidetään näkyvissä ja sen syy pyydetään PX-PL-001:llä.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti

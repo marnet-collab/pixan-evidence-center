@@ -29,7 +29,7 @@ def public_contact(value: str) -> str:
 
 
 def status_for_country(name: str) -> str:
-    if name in {"Canada", "Germany", "Finland"}:
+    if name in {"Canada", "Germany", "Finland", "Poland"}:
         return "verified"
     if name in {
         "United States", "Japan", "EU-27", "France", "Italy", "Spain",
@@ -183,6 +183,30 @@ def build_payload() -> dict:
     )
     france_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "france_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
+    poland_volume_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_mf_e_liquid_volume_2020_2023.csv"
+    )
+    poland_revenue_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_mf_excise_revenue_2021_2025.csv"
+    )
+    poland_category_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_mf_excise_categories_2025.csv"
+    )
+    poland_control_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_kas_controls_2021_2026.csv"
+    )
+    poland_revision_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_2023_revision_bridge.csv"
+    )
+    poland_reconciliation_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_excise_volume_reconciliation_2021_2023.csv"
+    )
+    poland_route_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "poland_eurostat_route_2025.csv"
+    )
+    poland_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "poland_evidence_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
@@ -728,6 +752,24 @@ def build_payload() -> dict:
             "varastomuutos ovat edelleen erillisiä puutteita. "
             + country["missing"]
         )
+    for country in countries:
+        if country["sourceName"] != "Poland":
+            continue
+        country["current"] = (
+            "Puolan valtiovarainministeriön myöhempi vuoden 2023 ZEFIR2/IAS Kraków/AIS -sarja antaa "
+            "805 441 litraa ilmoitettua laillista e-nesteen valmisteverovirtaa. Virallinen vuoden 2023 "
+            "e-nesteverotuotto oli 443,6 milj. PLN; määrä × 0,55 PLN/ml jää vain 0,137 % sen alle. "
+            "Vuoden 2025 toteuma oli e-nesteille 993,1 milj. PLN, höyrystinlaitteille 175,3 milj. PLN "
+            "ja osasarjoille 2,5 milj. PLN. KAS:n 422 osumaa 1 172 kohdennetussa vuoden 2025 tarkastuksessa "
+            "antaa 36,007 %:n valvonta-hit raten, ei laitonta markkinaosuutta. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "Vuoden 2024 e-nesteverotuotto, vuosien 2024-2025 kuukausittaiset ml:t kotimaan myynnille, "
+            "EU-hankinnalle ja tuonnille, vuoden 2025 laite-/osasarjakappaleet, Article 20(7) -myynti, "
+            "kotimainen tuotanto, varastomuutos ja vähittäismyynti sekä vuoden 2023 revisiosyy. "
+            + country["missing"]
+        )
 
     contacts = []
     for row in requests:
@@ -1178,6 +1220,125 @@ def build_payload() -> dict:
         "ansesCoverageUrl": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf",
     }
 
+    poland_scope_labels = {
+        "core_devices": "Sähkösavukelaitteet",
+        "broad_nicotine_inhalation_proxy": "Laaja nikotiinia sisältävä inhalaatioproxy",
+        "broad_nicotine_free_tobacco_substitute_inhalation_proxy": "Laaja nikotiiniton tupakankorvikeproxy",
+        "broad_other_substitute_inhalation_proxy": "Laaja muu inhalaatioproxy",
+    }
+    poland_category_labels = {
+        "e_liquid": "E-savukeneste",
+        "vaporisation_devices": "Höyrystinlaitteet",
+        "vaporisation_device_part_kits": "Laitteiden osasarjat",
+    }
+    poland_request = next(row for row in requests if row["request_id"] == "PX-PL-001")
+    poland_evidence = {
+        "volume": [
+            {
+                "year": int(row["year"]),
+                "litres": int(row["official_e_liquid_litres"]),
+                "ml": int(row["official_e_liquid_ml"]),
+                "measure": row["measure"],
+                "sourceSystems": row["source_systems"],
+                "status": row["evidence_status"],
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in poland_volume_rows
+        ],
+        "revenue": [
+            {
+                "year": int(row["year"]),
+                "revenuePln": int(row["official_e_liquid_excise_revenue_pln"]) if row["official_e_liquid_excise_revenue_pln"] else None,
+                "status": row["status"],
+                "preliminary": row["preliminary"] == "true",
+                "url": row["source_url"],
+                "boundary": row["boundary"],
+            }
+            for row in poland_revenue_rows
+        ],
+        "categories2025": [
+            {
+                "category": row["category"],
+                "label": poland_category_labels[row["category"]],
+                "planMillionPln": number(row["budget_plan_million_pln"]),
+                "actualMillionPln": float(row["actual_million_pln"]),
+                "varianceMillionPln": number(row["variance_million_pln"]),
+                "executionRatePct": number(row["execution_rate_pct"]),
+                "taxStart": row["tax_start"],
+                "url": row["source_url"],
+            }
+            for row in poland_category_rows
+        ],
+        "controls": [
+            {
+                "period": row["period"],
+                "controls": int(row["controls_total"]) if row["controls_total"] else None,
+                "findingsOrSuccessful": int(row["controls_with_irregularities_or_successful"]),
+                "hitRatePct": number(row["recomputed_hit_rate_pct"]),
+                "liquidMl": int(row["seized_or_revealed_e_liquid_ml"]) if row["seized_or_revealed_e_liquid_ml"] else None,
+                "disposableDevices": int(row["seized_disposable_devices"]) if row["seized_disposable_devices"] else None,
+                "url": row["source_url"],
+                "boundary": row["sampling_boundary"],
+            }
+            for row in poland_control_rows
+        ],
+        "revision": [
+            {
+                "releaseDate": row["release_date"],
+                "ml": float(row["official_e_liquid_ml"]),
+                "litres": float(row["official_e_liquid_litres"]),
+                "url": row["source_url"],
+                "sourceDetail": row["source_system_detail"],
+                "maturity": row["maturity"],
+            }
+            for row in poland_revision_rows
+        ],
+        "reconciliation": [
+            {
+                "year": int(row["year"]),
+                "officialMl": int(row["official_later_release_ml"]),
+                "ratePlnPerMl": float(row["statutory_rate_pln_per_ml"]),
+                "mechanicalExcisePln": float(row["mechanical_excise_pln"]),
+                "officialRevenuePln": int(row["official_excise_revenue_pln"]),
+                "gapPln": float(row["official_minus_mechanical_pln"]),
+                "gapPct": float(row["gap_pct_of_official_revenue"]),
+            }
+            for row in poland_reconciliation_rows
+        ],
+        "route": [
+            {
+                "code": row["cn8"],
+                "scope": row["scope"],
+                "label": poland_scope_labels[row["scope"]],
+                "worldImportEur": int(row["world_import_eur"]) if row["world_import_eur"] else None,
+                "intraImportEur": int(row["intra_eu_import_eur"]) if row["intra_eu_import_eur"] else None,
+                "extraImportEur": int(row["extra_eu_import_eur"]) if row["extra_eu_import_eur"] else None,
+                "extraSharePct": number(row["extra_eu_share_pct"]),
+                "worldExportEur": int(row["world_export_eur"]) if row["world_export_eur"] else None,
+                "publicationStatus": row["import_publication_status"],
+                "url": row["source_url"],
+            }
+            for row in poland_route_rows
+        ],
+        "manifest": poland_manifest,
+        "request": {
+            "id": poland_request["request_id"],
+            "authority": poland_request["authority"],
+            "status": poland_request["status"],
+            "recipient": poland_request["recipient"],
+            "scope": poland_request["scope"],
+        },
+        "volumeUrl": poland_manifest["urls"]["volume"],
+        "revenueUrl": poland_manifest["urls"]["revenue"],
+        "executionUrl": poland_manifest["urls"]["execution"],
+        "kasUrl": poland_manifest["urls"]["kas"],
+        "ratesUrl": poland_manifest["urls"]["rates"],
+        "devicesUrl": poland_manifest["urls"]["devices"],
+        "formsUrl": poland_manifest["urls"]["akc4m"],
+        "publicInformationUrl": "https://www.gov.pl/web/finanse/uzyskaj-informacje-publiczna",
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -1200,6 +1361,7 @@ def build_payload() -> dict:
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
             {"label": "Espanja 2025", "value": "29,568 milj. €", "detail": "AEAT:n tarkka L1-L4-nettokertymä", "tone": "gold"},
+            {"label": "Puola 2025", "value": "993,1 milj. PLN", "detail": "Virallinen e-nesteen valmisteverototeuma", "tone": "gold"},
             {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
         ],
         "anchors": [
@@ -1262,6 +1424,16 @@ def build_payload() -> dict:
                 "limit": "Kassakertymä kattaa kaikki neljä epigrafia. Se ei ole pelkkä e-nestevero, nestemäärä, vähittäismyynti tai markkina-arvo. L1/L2-veropohjat on pyydettävä erikseen.",
                 "source": "AEAT / BOE · vuoden 2025 veroraportit ja Modelo 573",
                 "url": "https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria/informe-anual/ejercicio-2025/5-impuestos-especiales.html",
+            },
+            {
+                "grade": "A",
+                "market": "Puola",
+                "title": "Ilmoitettu e-nesteen valmisteverovirta ja verototeuma",
+                "value": "805 441 l · 443,6 milj. PLN (2023)",
+                "detail": "MF:n myöhempi ZEFIR2/IAS Kraków/AIS -sarja yhdistää kotimaan myynnin, EU-hankinnan ja tuonnin. Vuoden 2023 määrä × 0,55 PLN/ml jää 0,137 % virallisen verotuoton alle. Vuoden 2025 e-nesteverototeuma oli 993,1 milj. PLN.",
+                "limit": "Ilmoitettu laillinen valmisteverovirta ja verotuotto eivät ole retail-arvoa tai kuluttajien sell-outia. Vuoden 2023 määrä on 8,85 % alempi kuin aikaisempi julkaisu; revisiosyy odottaa vastausta.",
+                "source": "Polish Ministry of Finance · interpellations 7255, 2408 and 17526",
+                "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf",
             },
             {
                 "grade": "B",
@@ -1347,6 +1519,7 @@ def build_payload() -> dict:
         "italyAdm": italy_adm,
         "spainAeat": spain_aeat,
         "franceEvidence": france_evidence,
+        "polandEvidence": poland_evidence,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -1433,6 +1606,9 @@ def build_payload() -> dict:
             {"grade": "A", "title": "Ranska Douane · National 2025 import/export", "coverage": "Neljä CN8-nimikettä, 48 kuukausiriviä, 363,940 milj. EUR tuontia ja 127,863 milj. EUR vientiä", "use": "Kansallinen rajakaupan ankkuri; Douane ja Eurostat täsmäävät alle 0,5 %:n erolla", "url": "https://www.douane.gouv.fr/la-douane/opendata?f%5B0%5D=categorie_opendata_facet%3A458&title="},
             {"grade": "A", "title": "ANSES · vaping-ilmoitusrekisteri", "coverage": "1.7.2026: 203 181 ilmoitusriviä ja 111 556 yksilöllistä tuotenumeroa; julkisessa aineistossa ei vuosimyyntikenttää", "use": "Tuoterakenteen näyttö, ei myynnin, aktiivisten SKU-tuotteiden tai yritysmäärän näyttö", "url": "https://www.data.gouv.fr/en/datasets/produits-du-tabac-et-produits-connexes-declares-sur-le-marche-francais/"},
             {"grade": "A", "title": "ANSES · myyntiraportoinnin kattavuusauditointi", "coverage": "2016-2017: 23 036 myyntitietoa / 65 799 odotettua esitystä, hit rate 35,010 %", "use": "Viranomaisen oma kattavuusmittaus; ANSES katsoi volyymit puutteiden vuoksi käyttökelvottomiksi", "url": "https://www.anses.fr/fr/system/files/CONSO2018SA0189Ra-2.pdf"},
+            {"grade": "A", "title": "Puolan MF · ZEFIR2/AIS-valmisteverovirta", "coverage": "2020-2023 e-nesteen kotimaan myynti + EU-hankinta + tuonti; 2023 myöhempi julkaisu 805 441 litraa", "use": "Kansallinen ilmoitetun laillisen e-nestevirran volyymiankkuri; 2023 määrä täsmää verotuottoon 0,137 %:n sisällä", "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDDEJZ5/i07255-o1.pdf"},
+            {"grade": "A", "title": "Puolan MF · vuoden 2025 valmisteverototeuma", "coverage": "E-neste 993,1 milj. PLN, höyrystinlaitteet 175,3 milj. PLN ja osasarjat 2,5 milj. PLN", "use": "Toteutuneet tuoteryhmäkohtaiset valmisteverotulot; ei retail-myyntiarvo tai suora yksikkömäärä", "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf"},
+            {"grade": "A", "title": "Puolan KAS · kohdennettu valvonta 2025", "coverage": "1 172 tarkastusta, 422 valmisteverorikkomusta, 3,2 milj. ml nestettä ja 49 000 kertakäyttölaitetta", "use": "Valvontamenetelmän ja rajat ylittävien riskireittien näyttö; 36,007 % on kohdennettu hit rate, ei laiton markkinaosuus", "url": "https://www.gov.pl/web/kas/kas-zwalcza-oszustwa-zwiazane-z-rynkiem-e-papierosow"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
             {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
@@ -1450,6 +1626,7 @@ def build_payload() -> dict:
             {"priority": "high", "title": "Italian ADM:n toteutuneet PLI-aggregaatit", "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Espanjan AEAT L1/L2-veropohjat", "detail": "Tarkka 2025 nettokassasarja 29,568 milj. EUR, neljä verokantaa ja Modelo 573:n kentät on auditoitu. PX-ES-001 pyytää L1/L2-millilitrat, L3/L4-grammat, vähennykset, palautukset ja huhtikuun alkuvarastot; virallinen portaali vaatii hyväksytyn sähköisen tunnistautumisen.", "status": "active"},
             {"priority": "high", "title": "Ranskan ANSES 2018-2025 myyntiaggregaatit", "detail": "Douanen vuoden 2025 neljä CN8-koodia ja Eurostat-reittitäsmäytys ovat valmiit. ANSES-rekisterin 203 181 riviä on auditoitu, ja 2016-2017 raportoinnin hit rate oli 35,010 %. PX-FR-001 pyytää uudemmat kattavuusluvut, yksiköt, millilitrat ja arvon; viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
+            {"priority": "high", "title": "Puolan 2024-2025 veroaggregaatit ja revisioseloste", "detail": "MF:n 2020-2023 volyymi, 2021-2023/2025 verotulot, KAS-hit rate ja Eurostat-reitti on auditoitu. PX-PL-001 pyytää vuoden 2024 tuoton, 2024-2025 kuukausittaiset millilitrat, viralliset laite-/osasarjakappaleet ja 2023 revisiosyyn; viesti odottaa nimenomaista lähetysvahvistusta. Interpellaatio 18182 on seurannassa.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1667,6 +1844,47 @@ def publish_france_evidence() -> None:
     shutil.copy2(workbook, DASHBOARD_DIR / "assets" / workbook.name)
 
 
+def publish_poland_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "poland_mf"
+    public_data = DASHBOARD_DIR / "data" / "poland"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "poland_mf"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "poland_mf_e_liquid_volume_2020_2023.csv",
+        "poland_mf_excise_revenue_2021_2025.csv",
+        "poland_mf_excise_categories_2025.csv",
+        "poland_kas_controls_2021_2026.csv",
+        "poland_2023_revision_bridge.csv",
+        "poland_excise_volume_reconciliation_2021_2023.csv",
+        "poland_eurostat_route_2025.csv",
+        "poland_evidence_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "mf_interpellation_7255_volume_2020_2023.pdf",
+        "mf_interpellation_2408_revenue_controls_2021_2023.pdf",
+        "mf_interpellation_17526_excise_execution_2025.pdf",
+        "kas_e_cigarette_enforcement_2025.html",
+        "e_liquid_rates_2025_2026_law.pdf",
+        "excise_devices_2025_law.pdf",
+        "akc_4_m_3_current.pdf",
+        "akc_ua_2025_form_law.pdf",
+        "eurostat_poland_cn8_2025.json",
+        "sejm_interpellations_metadata_2026-07-17.json",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+    workbook = (
+        DASHBOARD_DIR.parent
+        / "outputs"
+        / "019f6bea-c7f5-74c0-9534-66324a4b97ae"
+        / "pixan_poland_official_evidence_2020_2026.xlsx"
+    )
+    (DASHBOARD_DIR / "assets").mkdir(exist_ok=True)
+    shutil.copy2(workbook, DASHBOARD_DIR / "assets" / workbook.name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
@@ -1677,6 +1895,7 @@ def main() -> None:
     publish_italy_evidence()
     publish_spain_evidence()
     publish_france_evidence()
+    publish_poland_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

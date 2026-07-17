@@ -1,0 +1,4 @@
+year,official_later_release_ml,statutory_rate_pln_per_ml,mechanical_excise_pln,official_excise_revenue_pln,official_minus_mechanical_pln,gap_pct_of_official_revenue,interpretation
+2021,277265000,0.55,152495750.0,179500000,27004250.0,15.04415,plausibility_check_not_proof_of_evasion_or_exact_accrual_timing
+2022,416088000,0.55,228848400.0,229900000,1051600.0,0.457416,plausibility_check_not_proof_of_evasion_or_exact_accrual_timing
+2023,805441000,0.55,442992550.0,443600000,607450.0,0.136936,plausibility_check_not_proof_of_evasion_or_exact_accrual_timing

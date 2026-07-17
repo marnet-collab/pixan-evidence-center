@@ -1,0 +1,6 @@
+period,controls_total,controls_with_irregularities_or_successful,recomputed_hit_rate_pct,seized_or_revealed_e_liquid_ml,seized_disposable_devices,source_url,sampling_boundary
+2021,754,187,24.801061,,,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,enforcement_targeted_sample_not_illegal_market_share_or_sales_data_accuracy
+2022,904,330,36.504425,,,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,enforcement_targeted_sample_not_illegal_market_share_or_sales_data_accuracy
+2023,919,295,32.100109,4500000,,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTD4DHUB/i02408-o1.pdf,enforcement_targeted_sample_not_illegal_market_share_or_sales_data_accuracy
+2025,1172,422,36.006826,3200000,49000,https://www.gov.pl/web/kas/kas-zwalcza-oszustwa-zwiazane-z-rynkiem-e-papierosow,enforcement_targeted_sample_not_illegal_market_share_or_sales_data_accuracy
+2026_Q1,,665,,3810000,332000,https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDVKHSJ/i17526-o1.pdf,denominator_not_published; 665 described as successful_controls
