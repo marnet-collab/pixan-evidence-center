@@ -136,6 +136,18 @@ def build_payload() -> dict:
     germany_retail_manifest = json.loads(
         (PROJECT_DIR / "data" / "derived" / "germany_retail_price_manifest_2026-07-17.json").read_text(encoding="utf-8")
     )
+    italy_rate_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "italy_adm_rate_schedule_2025.csv"
+    )
+    italy_reporting_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "italy_adm_reporting_fields_2026-07-17.csv"
+    )
+    italy_forecast_rows = read_csv(
+        PROJECT_DIR / "data" / "derived" / "italy_fiscal_forecast_2026_2028.csv"
+    )
+    italy_manifest = json.loads(
+        (PROJECT_DIR / "data" / "derived" / "italy_adm_access_manifest_2026-07-17.json").read_text(encoding="utf-8")
+    )
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -627,6 +639,24 @@ def build_payload() -> dict:
             "Tarkat HSK10-arvot laitteille ja kahdelle sähkösavukenesteen nimikkeelle, vienti-/jälleenvientisilta, "
             "verotettu nestemäärä ja -tuotto sekä laitteiden ja nesteiden kuluttajamyynti."
         )
+    for country in countries:
+        if country["sourceName"] != "Italy":
+            continue
+        country["current"] = (
+            "ADM:n PLI-PAT-palvelu ja julkinen kuukausiraportin mallipohja vahvistavat, että viranomainen "
+            "kerää tuotekoodin, pakkauskoon, nikotiinipitoisuuden, pakkausmäärän ja kokonaismäärän erikseen "
+            "myymälätoimituksista, varastosiirroista ja suorista loppukuluttajatoimituksista. Vuoden 2025 "
+            "viralliset kannat olivat tammikuussa 0,143849/0,098896 EUR/ml ja helmikuusta alkaen "
+            "0,146966/0,101039 EUR/ml nikotiinillisille ja nikotiinittomille/aromeille. Parlamentin "
+            "1 107 249 007 ml:n vuoden 2026 määrä on budjettiennuste, ei toteutunut myynti. "
+            + country["current"]
+        )
+        country["missing"] = (
+            "ADM:n toteutuneet kansalliset 2023-2025 kuukausi- ja vuosisummat: pakkaukset, millilitrat, "
+            "vero maksettavaksi, vero maksettu ja oikaisut kategorioittain. Varastosiirrot on poistettava "
+            "kulutussummasta ja laitemyynti haettava erillisestä lähteestä. "
+            + country["missing"]
+        )
 
     contacts = []
     for row in requests:
@@ -805,6 +835,100 @@ def build_payload() -> dict:
         "scope": "A-tason virallinen 2025 volyymi ja verokanta on pidetty erillään C-tason yhden myyjän 17.7.2026 hintaotoksesta. Hinnat sisältävät ALV:n ja toimituskulut lisätään.",
     }
 
+    italy_rate_labels = {
+        "e-liquid containing nicotine": "Nikotiinia sisältävä PLI/e-neste",
+        "e-liquid without nicotine and flavours": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+    }
+    italy_flow_labels = {
+        "retail_points_supplied": "Myyntipisteisiin toimitettu",
+        "tax_warehouses_supplied": "Verovarastoihin toimitettu",
+        "direct_final_consumers": "Suoraan loppukuluttajille toimitettu",
+    }
+    italy_flow_notes = {
+        "retail_points_supplied": "Tukkutoimitukset tunnistetuille myyntipisteille",
+        "tax_warehouses_supplied": "Toimitusketjun sisäinen virta; ei saa lisätä kulutukseen sellaisenaan",
+        "direct_final_consumers": "Suorat toimitukset loppukuluttajille",
+    }
+    italy_forecast_labels = {
+        "containing_nicotine": "Nikotiinia sisältävä PLI/e-neste",
+        "without_nicotine_and_flavours": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+    }
+    italy_reporting_flows = []
+    for flow in italy_flow_labels:
+        rows = [row for row in italy_reporting_rows if row["reporting_flow"] == flow]
+        italy_reporting_flows.append(
+            {
+                "flow": flow,
+                "label": italy_flow_labels[flow],
+                "officialSheet": rows[0]["official_sheet"],
+                "fieldCount": len(rows),
+                "quantityUnit": next(row["quantity_unit"] for row in rows if row["normalized_field"] == "total_quantity"),
+                "fields": [row["official_italian_label"] for row in rows],
+                "interpretation": italy_flow_notes[flow],
+                "url": rows[0]["source_url"],
+            }
+        )
+    italy_forecast = [
+        {
+            "year": int(row["forecast_year"]),
+            "category": row["product_category"],
+            "label": italy_forecast_labels[row["product_category"]],
+            "proposedUnitTaxEurPerMl": float(row["proposed_unit_tax_eur_per_ml"]),
+            "estimatedQuantityMl": int(row["estimated_annual_quantity_ml"]),
+            "estimatedQuantityLitres": float(row["estimated_annual_quantity_litres"]),
+            "estimatedTaxRevenueEur": int(row["estimated_annual_tax_revenue_eur"]),
+            "estimatedIncrementalRevenueEur": int(row["estimated_incremental_revenue_eur"]),
+            "status": row["evidence_status"],
+            "limitation": row["limitation"],
+            "url": row["source_url"],
+        }
+        for row in italy_forecast_rows
+    ]
+    italy_forecast_totals = []
+    for year in sorted({row["year"] for row in italy_forecast}):
+        rows = [row for row in italy_forecast if row["year"] == year]
+        italy_forecast_totals.append(
+            {
+                "year": year,
+                "estimatedQuantityMl": sum(row["estimatedQuantityMl"] for row in rows),
+                "estimatedQuantityLitres": sum(row["estimatedQuantityLitres"] for row in rows),
+                "estimatedTaxRevenueEur": sum(row["estimatedTaxRevenueEur"] for row in rows),
+                "estimatedIncrementalRevenueEur": sum(row["estimatedIncrementalRevenueEur"] for row in rows),
+            }
+        )
+    italy_request = next(row for row in requests if row["request_id"] == "PX-IT-001")
+    italy_adm = {
+        "rates": [
+            {
+                "effectiveFrom": row["effective_from"],
+                "effectiveTo": row["effective_to"],
+                "category": row["product_category"],
+                "label": italy_rate_labels[row["product_category"]],
+                "rateEurPerMl": float(row["rate_eur_per_ml"]),
+                "rateEurPer10Ml": float(row["rate_eur_per_ml"]) * 10,
+                "legalScope": row["legal_scope"],
+                "url": row["source_url"],
+                "tier": row["source_tier"],
+            }
+            for row in italy_rate_rows
+        ],
+        "reportingFlows": italy_reporting_flows,
+        "forecast": italy_forecast,
+        "forecastTotals": italy_forecast_totals,
+        "manifest": italy_manifest,
+        "actualStatus": italy_manifest["actual_2025_national_aggregate"]["status"],
+        "actualNeeded": italy_manifest["actual_2025_national_aggregate"]["needed"],
+        "request": {
+            "id": italy_request["request_id"],
+            "authority": italy_request["authority"],
+            "status": italy_request["status"],
+            "recipient": italy_request["recipient"],
+            "scope": italy_request["scope"],
+        },
+        "serviceUrl": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1",
+        "budgetUrl": italy_forecast_rows[0]["source_url"],
+    }
+
     narrow = {}
     for row in customs:
         if row["code"] not in {"854340", "240412"}:
@@ -960,6 +1084,7 @@ def build_payload() -> dict:
         },
         "canadaRetail": canada_retail,
         "germanyRetail": germany_retail,
+        "italyAdm": italy_adm,
         "eurostatRoutes": eurostat_routes,
         "eurostatOrigins": eurostat_origins,
         "usCustoms": {
@@ -1038,6 +1163,9 @@ def build_payload() -> dict:
             {"grade": "A", "title": "FTC E-Cigarette Report 2021", "coverage": "Yhdeksän valmistajan cartridge/disposable-myynti 2,763 mrd USD", "use": "Historiallinen USA-vertailu, ei nykyinen kokonaismarkkina", "url": "https://www.ftc.gov/reports/e-cigarette-report-2021"},
             {"grade": "B", "title": "Japan Customs methodology", "coverage": "Tulliselvitykset, JPY 1 000, CIF-tuonti, alkuperämaa ja 9-numeroinen kansallinen nimike", "use": "Japanin sarjan arvostus- ja luokitteluperusta", "url": "https://www.customs.go.jp/toukei/sankou/howto/gaiyou_e.htm"},
             {"grade": "B", "title": "China Customs · virallinen tilastopalvelu", "coverage": "Maksuton kansallinen hakemusreitti, 2025 HS8 -nimikkeet ja enintään viiden ryhmittelyn taulukkorakenne", "use": "Kiinan alkuperä-/kohdemaan, lähetys-/saapumismaan, tullimenettelyn ja kotimaisen reitin hankintaperusta; ei vielä markkina-arvoluku", "url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html"},
+            {"grade": "A", "title": "Italia ADM · PLI-PAT ja kuukausiraportin mallipohja", "coverage": "Puolikuukausi- ja kuukausiraportointi: tuotekoodi, pakkauskoko, nikotiinipitoisuus, pakkausmäärä ja kokonaismäärä kolmessa toimitusvirrassa", "use": "Todistaa viranomaisen keräämän datan rakenteen ja täsmällisen aggregaattipyynnön toteutettavuuden; ei vielä kansallinen myyntisumma", "url": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1"},
+            {"grade": "A", "title": "Italia ADM · vuoden 2025 PLI-verokannat", "coverage": "Nikotiinillinen 0,143849 EUR/ml tammikuussa ja 0,146966 EUR/ml helmikuusta; nikotiiniton/aromit 0,098896 ja 0,101039 EUR/ml", "use": "Lakisääteinen verokanta kuukausikohtaiseen toteumalaskentaan, kun toteutuneet kategoriavolyymit saadaan", "url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530"},
+            {"grade": "B", "title": "Italian parlamentti · budjettiselvityksen taulukko 17", "coverage": "Vuoden 2026 virallinen tekninen ennuste 1 107 249 007 ml ja 167 733 820 EUR verotuottoa", "use": "Viranomaisennuste markkinan suuruusluokan vertailuun; pidetään erillään toteutuneesta myynnistä ja verokertymästä", "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"},
             {"grade": "C", "title": "Kanadan dokumentoitu vähittäishintaotos", "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa", "use": "Health Canadan toimitushintojen suuruusluokan tarkistus; ei keskihinta-, kate- tai myyntiväite", "url": "data/canada/canada_retail_price_observations_2026-07-17.csv"},
             {"grade": "C", "title": "Saksan dokumentoitu 10 ml vähittäishintaotos", "coverage": "10 varastossa ollutta tuotetta yhdeltä myyjältä 17.7.2026; hinta sisältää ALV:n ja toimitus on lisäkulu", "use": "Destatisin pyöristetyn volyymin plausibiliteettialue; ei tilastollinen keskihinta, myynti tai markkina-arvo", "url": "data/germany/germany_retail_price_observations_2026-07-17.csv"},
         ],
@@ -1052,6 +1180,7 @@ def build_payload() -> dict:
             {"priority": "medium", "title": "Kanadan vähittäishintaotos", "detail": "Valmis: 10 hash-lukittua julkista havaintoa, pakkauskoot, hinnat, nestemäärät ja CRA:n veroporrastuksen laskentatarkistus. Otos on C-tason järkevyystarkistus, ei markkinakeskihinta.", "status": "done"},
             {"priority": "high", "title": "Kiina GACC tullimenettelyineen", "detail": "Virallinen maksuton reitti, kansallinen vastaanottaja ja 2025 HS8 85434000/24041200/24041910/24041990 on varmistettu. Kiinankielinen hakemus pyytää neljä taulukkoa: kohde vs. läpikulkumaa + tullimenettely, tullipaikka + kotimainen alue, rekisteröintialue + omistus sekä kuljetustapa. PRH:n 17.7.2026 yritystodiste on tarkastettu ja yksityinen lähetyspaketti odottaa lähetysvahvistusta.", "status": "active"},
             {"priority": "medium", "title": "Saksan vähittäishintaotos", "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.", "status": "done"},
+            {"priority": "high", "title": "Italian ADM:n toteutuneet PLI-aggregaatit", "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.", "status": "active"},
             {"priority": "high", "title": "Kaikkien maiden verovarmennus", "detail": "WHO 2025 -vertailu on tehty 23 maalle. Varmista seuraavaksi kansallinen nykykanta, verotettu volyymi ja e-nesteisiin kohdistettu verotuotto erillisinä kenttinä.", "status": "active"},
             {"priority": "low", "title": "Patenttistatuksen erillinen varmennus", "detail": "Tarkista oikeudellinen voimassaolo ja maksut maa kerrallaan virallisista rekistereistä. Ei sekoiteta markkinakoon näyttöön.", "status": "queued"},
         ],
@@ -1179,6 +1308,31 @@ def publish_germany_evidence() -> None:
         shutil.copy2(raw / name, public_raw / name)
 
 
+def publish_italy_evidence() -> None:
+    derived = PROJECT_DIR / "data" / "derived"
+    raw = PROJECT_DIR / "data" / "raw" / "italy_adm"
+    public_data = DASHBOARD_DIR / "data" / "italy"
+    public_raw = DASHBOARD_DIR / "data" / "raw" / "italy_adm"
+    public_data.mkdir(parents=True, exist_ok=True)
+    public_raw.mkdir(parents=True, exist_ok=True)
+    for name in (
+        "italy_adm_rate_schedule_2025.csv",
+        "italy_adm_reporting_fields_2026-07-17.csv",
+        "italy_fiscal_forecast_2026_2028.csv",
+        "italy_adm_request_scope_2026-07-17.csv",
+        "italy_adm_access_manifest_2026-07-17.json",
+    ):
+        shutil.copy2(derived / name, public_data / name)
+    for name in (
+        "adm_pli_reporting_service_2026-07-17.html",
+        "adm_pli_monthly_reporting_template.xlsx",
+        "adm_pli_rate_2025-01.pdf",
+        "adm_pli_rate_2025-02.pdf",
+        "italy_budget_2026_table17_page.pdf",
+    ):
+        shutil.copy2(raw / name, public_raw / name)
+
+
 def main() -> None:
     data = build_payload()
     publish_us_evidence()
@@ -1186,6 +1340,7 @@ def main() -> None:
     publish_china_access_evidence()
     publish_korea_evidence()
     publish_germany_evidence()
+    publish_italy_evidence()
     (DASHBOARD_DIR / "data").mkdir(exist_ok=True)
     json_text = json.dumps(data, ensure_ascii=False, indent=2)
     (DASHBOARD_DIR / "data" / "dashboard.json").write_text(json_text + "\n", encoding="utf-8")

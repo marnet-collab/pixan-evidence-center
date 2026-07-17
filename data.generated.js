@@ -1,7 +1,7 @@
 window.PIXAN_DATA = {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 10:28 UTC",
+    "updated": "2026-07-17 10:54 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -422,11 +422,11 @@ window.PIXAN_DATA = {
       "sourceName": "Italy",
       "status": "partial",
       "customs": "Eurostat Comext CN8 and ADM customs/excise data",
-      "route": "Separate extra-EU origin, intra-EU consignment and dispatches; flag hub re-exports",
-      "salesSource": "Italian Ministry of Health EU-CEG; ADM excise/market monitoring where applicable",
-      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 419,0 milj. EUR; intra-EU 294,7 milj. EUR ja extra-EU 124,3 milj. EUR. No official sales aggregate obtained",
-      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and re-export correction",
-      "how": "Download Italy Comext rows; request aggregated Article 20(7) data from the national EU-CEG authority; request ADM public aggregate for e-liquids/devices and tax stamps",
+      "route": "Separate extra-EU origin, intra-EU consignment and dispatches; flag hub re-exports; exclude inter-warehouse PLI transfers from consumption",
+      "salesSource": "Italian Ministry of Health EU-CEG; ADM PLI-PAT monthly and half-monthly reporting",
+      "current": "ADM:n PLI-PAT-palvelu ja julkinen kuukausiraportin mallipohja vahvistavat, että viranomainen kerää tuotekoodin, pakkauskoon, nikotiinipitoisuuden, pakkausmäärän ja kokonaismäärän erikseen myymälätoimituksista, varastosiirroista ja suorista loppukuluttajatoimituksista. Vuoden 2025 viralliset kannat olivat tammikuussa 0,143849/0,098896 EUR/ml ja helmikuusta alkaen 0,146966/0,101039 EUR/ml nikotiinillisille ja nikotiinittomille/aromeille. Parlamentin 1 107 249 007 ml:n vuoden 2026 määrä on budjettiennuste, ei toteutunut myynti. Eurostat 2025 kapea CN8-kori: WORLD-tuonti 419,0 milj. EUR; intra-EU 294,7 milj. EUR ja extra-EU 124,3 milj. EUR. ADM reporting capability verified: product code, package capacity, nicotine mg/ml, package count and total quantity for retail supply, inter-warehouse transfers and direct final-consumer transfers. 2025 rates verified at 0.143849/0.098896 EUR/ml in January and 0.146966/0.101039 EUR/ml from February. Official budget technical report estimates 1.107249007bn ml and 167.733820m EUR tax revenue for the proposed 2026 intervention; forecast only, not actual sales.",
+      "missing": "ADM:n toteutuneet kansalliset 2023-2025 kuukausi- ja vuosisummat: pakkaukset, millilitrat, vero maksettavaksi, vero maksettu ja oikaisut kategorioittain. Varastosiirrot on poistettava kulutussummasta ja laitemyynti haettava erillisestä lähteestä. Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Actual 2023-2025 monthly and annual national ml/packages/tax paid split by nicotine non-nicotine and flavours; device units/value; EU-CEG sell-out; route re-export correction",
+      "how": "Send PX-IT-001 to ADM Direzione Accise after confirmation using the exact public reporting fields; request national aggregates only and exclude inter-warehouse transfers; separately request Article 20(7) aggregate from the Italian EU-CEG authority",
       "tax": {
         "name": "Italia",
         "sourceName": "Italy",
@@ -3940,6 +3940,340 @@ window.PIXAN_DATA = {
     "statutoryRateSource": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
     "scope": "A-tason virallinen 2025 volyymi ja verokanta on pidetty erillään C-tason yhden myyjän 17.7.2026 hintaotoksesta. Hinnat sisältävät ALV:n ja toimituskulut lisätään."
   },
+  "italyAdm": {
+    "rates": [
+      {
+        "effectiveFrom": "2025-01-01",
+        "effectiveTo": "2025-01-31",
+        "category": "e-liquid containing nicotine",
+        "label": "Nikotiinia sisältävä PLI/e-neste",
+        "rateEurPerMl": 0.143849,
+        "rateEurPer10Ml": 1.43849,
+        "legalScope": "Products for inhalation without combustion made of liquid substances containing nicotine",
+        "url": "https://www.adm.gov.it/portale/documents/20182/156158378/DETT+PER+PUBBLICAZIONE+0804595.23-12-2024-U.pdf/e52d9cf7-4b1d-d6a4-0d42-1f82dfa48520?t=1735555384661",
+        "tier": "A"
+      },
+      {
+        "effectiveFrom": "2025-01-01",
+        "effectiveTo": "2025-01-31",
+        "category": "e-liquid without nicotine and flavours",
+        "label": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+        "rateEurPerMl": 0.098896,
+        "rateEurPer10Ml": 0.98896,
+        "legalScope": "Products for inhalation without combustion made of liquid substances without nicotine and flavours",
+        "url": "https://www.adm.gov.it/portale/documents/20182/156158378/DETT+PER+PUBBLICAZIONE+0804595.23-12-2024-U.pdf/e52d9cf7-4b1d-d6a4-0d42-1f82dfa48520?t=1735555384661",
+        "tier": "A"
+      },
+      {
+        "effectiveFrom": "2025-02-01",
+        "effectiveTo": "2025-12-31",
+        "category": "e-liquid containing nicotine",
+        "label": "Nikotiinia sisältävä PLI/e-neste",
+        "rateEurPerMl": 0.146966,
+        "rateEurPer10Ml": 1.4696600000000002,
+        "legalScope": "Products for inhalation without combustion made of liquid substances containing nicotine",
+        "url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530",
+        "tier": "A"
+      },
+      {
+        "effectiveFrom": "2025-02-01",
+        "effectiveTo": "2025-12-31",
+        "category": "e-liquid without nicotine and flavours",
+        "label": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+        "rateEurPerMl": 0.101039,
+        "rateEurPer10Ml": 1.0103900000000001,
+        "legalScope": "Products for inhalation without combustion made of liquid substances without nicotine and flavours",
+        "url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530",
+        "tier": "A"
+      }
+    ],
+    "reportingFlows": [
+      {
+        "flow": "retail_points_supplied",
+        "label": "Myyntipisteisiin toimitettu",
+        "officialSheet": "MENSILE PUNTI VENDITA RIFORNITI",
+        "fieldCount": 7,
+        "quantityUnit": "litres",
+        "fields": [
+          "Data mese",
+          "Denominazione prodotto",
+          "Codice prodotto",
+          "Capacità della confezione (ml) (A)",
+          "Nicotina (mg/ml)",
+          "Numero di confezioni (B)",
+          "Quantità totale C = A*B"
+        ],
+        "interpretation": "Tukkutoimitukset tunnistetuille myyntipisteille",
+        "url": "https://www.adm.gov.it/portale/documents/20182/17630432/TRACCIATI+PLI+PROSPETTO+RIEPILOGATIVO+MENSILE090222.xlsx/093b06f2-5ad9-731c-dca3-031d4e567850?t=1644407225462"
+      },
+      {
+        "flow": "tax_warehouses_supplied",
+        "label": "Verovarastoihin toimitettu",
+        "officialSheet": "MENSILE DEPOSITI RIFORNITI",
+        "fieldCount": 7,
+        "quantityUnit": "litres",
+        "fields": [
+          "Data mese",
+          "Denominazione prodotto",
+          "Codice prodotto",
+          "Capacità della confezione (ml) (A)",
+          "Nicotina (mg/ml)",
+          "Numero di confezioni (B)",
+          "Quantità totale C = A*B"
+        ],
+        "interpretation": "Toimitusketjun sisäinen virta; ei saa lisätä kulutukseen sellaisenaan",
+        "url": "https://www.adm.gov.it/portale/documents/20182/17630432/TRACCIATI+PLI+PROSPETTO+RIEPILOGATIVO+MENSILE090222.xlsx/093b06f2-5ad9-731c-dca3-031d4e567850?t=1644407225462"
+      },
+      {
+        "flow": "direct_final_consumers",
+        "label": "Suoraan loppukuluttajille toimitettu",
+        "officialSheet": "MENSILE DIRETTI CONSUMATORI",
+        "fieldCount": 7,
+        "quantityUnit": "millilitres",
+        "fields": [
+          "Data mese",
+          "Denominazione prodotto",
+          "Codice prodotto",
+          "Capacità della confezione (ml) (A)",
+          "Nicotina (mg/ml)",
+          "Numero di confezioni (B)",
+          "Quantità totale C = A*B"
+        ],
+        "interpretation": "Suorat toimitukset loppukuluttajille",
+        "url": "https://www.adm.gov.it/portale/documents/20182/17630432/TRACCIATI+PLI+PROSPETTO+RIEPILOGATIVO+MENSILE090222.xlsx/093b06f2-5ad9-731c-dca3-031d4e567850?t=1644407225462"
+      }
+    ],
+    "forecast": [
+      {
+        "year": 2026,
+        "category": "containing_nicotine",
+        "label": "Nikotiinia sisältävä PLI/e-neste",
+        "proposedUnitTaxEurPerMl": 0.165336,
+        "estimatedQuantityMl": 773357695,
+        "estimatedQuantityLitres": 773357.695,
+        "estimatedTaxRevenueEur": 127864030,
+        "estimatedIncrementalRevenueEur": 7103557,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      },
+      {
+        "year": 2026,
+        "category": "without_nicotine_and_flavours",
+        "label": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+        "proposedUnitTaxEurPerMl": 0.119409,
+        "estimatedQuantityMl": 333891312,
+        "estimatedQuantityLitres": 333891.312,
+        "estimatedTaxRevenueEur": 39869790,
+        "estimatedIncrementalRevenueEur": 3066907,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      },
+      {
+        "year": 2027,
+        "category": "containing_nicotine",
+        "label": "Nikotiinia sisältävä PLI/e-neste",
+        "proposedUnitTaxEurPerMl": 0.183707,
+        "estimatedQuantityMl": 773357695,
+        "estimatedQuantityLitres": 773357.695,
+        "estimatedTaxRevenueEur": 142071145,
+        "estimatedIncrementalRevenueEur": 21310672,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      },
+      {
+        "year": 2027,
+        "category": "without_nicotine_and_flavours",
+        "label": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+        "proposedUnitTaxEurPerMl": 0.13778,
+        "estimatedQuantityMl": 333891312,
+        "estimatedQuantityLitres": 333891.312,
+        "estimatedTaxRevenueEur": 46003603,
+        "estimatedIncrementalRevenueEur": 9200721,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      },
+      {
+        "year": 2028,
+        "category": "containing_nicotine",
+        "label": "Nikotiinia sisältävä PLI/e-neste",
+        "proposedUnitTaxEurPerMl": 0.202078,
+        "estimatedQuantityMl": 773357695,
+        "estimatedQuantityLitres": 773357.695,
+        "estimatedTaxRevenueEur": 156278259,
+        "estimatedIncrementalRevenueEur": 35517786,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      },
+      {
+        "year": 2028,
+        "category": "without_nicotine_and_flavours",
+        "label": "Nikotiiniton PLI/e-neste ja veronalaiset aromit",
+        "proposedUnitTaxEurPerMl": 0.156151,
+        "estimatedQuantityMl": 333891312,
+        "estimatedQuantityLitres": 333891.312,
+        "estimatedTaxRevenueEur": 52137417,
+        "estimatedIncrementalRevenueEur": 15334534,
+        "status": "official_government_budget_forecast_not_actual",
+        "limitation": "Quantity and revenue are official technical-report estimates for the proposed intervention, not observed sales, tax returns or actual revenue.",
+        "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+      }
+    ],
+    "forecastTotals": [
+      {
+        "year": 2026,
+        "estimatedQuantityMl": 1107249007,
+        "estimatedQuantityLitres": 1107249.007,
+        "estimatedTaxRevenueEur": 167733820,
+        "estimatedIncrementalRevenueEur": 10170464
+      },
+      {
+        "year": 2027,
+        "estimatedQuantityMl": 1107249007,
+        "estimatedQuantityLitres": 1107249.007,
+        "estimatedTaxRevenueEur": 188074748,
+        "estimatedIncrementalRevenueEur": 30511393
+      },
+      {
+        "year": 2028,
+        "estimatedQuantityMl": 1107249007,
+        "estimatedQuantityLitres": 1107249.007,
+        "estimatedTaxRevenueEur": 208415676,
+        "estimatedIncrementalRevenueEur": 50852320
+      }
+    ],
+    "manifest": {
+      "dataset": "Italy ADM e-liquid reporting access, 2025 statutory rates and official fiscal forecast",
+      "version": "2026-07-17",
+      "accessed_at_utc": "2026-07-17T10:46:30Z",
+      "authority": "Agenzia delle Dogane e dei Monopoli (ADM) and Italian Parliament budget technical report",
+      "verified_reporting_system": {
+        "status": "verified",
+        "frequency": [
+          "half-monthly",
+          "monthly"
+        ],
+        "tax_payment_in_same_service": true,
+        "monthly_sheets": [
+          "MENSILE PUNTI VENDITA RIFORNITI",
+          "MENSILE DEPOSITI RIFORNITI",
+          "MENSILE DIRETTI CONSUMATORI"
+        ],
+        "field_assertions_passed": 8,
+        "aggregate_feasibility": "ADM already receives product code, package capacity, nicotine concentration, package count and total quantity for retail supply, inter-warehouse transfer and direct final-consumer flows."
+      },
+      "official_2025_rate_schedule": {
+        "status": "verified",
+        "rows": 4,
+        "january_pdf_pages": 2,
+        "february_pdf_pages": 2,
+        "do_not_use_single_full_year_rate": "The rate changed on 1 February 2025; a full-year tax calculation requires monthly category volumes."
+      },
+      "official_fiscal_forecast": {
+        "status": "official_government_budget_forecast_not_actual",
+        "source_pdf_page": 177,
+        "printed_page": 175,
+        "estimated_quantity_2026_ml": 1107249007,
+        "estimated_quantity_2026_litres": 1107249.007,
+        "estimated_tax_revenue_2026_eur": 167733820,
+        "interpretation": "Technical-report assumptions for the proposed 2026 intervention; not actual 2025 or 2026 sales or tax receipts."
+      },
+      "actual_2025_national_aggregate": {
+        "status": "not_obtained",
+        "needed": "Monthly and annual package count, millilitres, tax due, tax paid and adjustments by nicotine / non-nicotine / flavour category, with inter-warehouse transfers excluded from the consumption total.",
+        "request_id": "PX-IT-001"
+      },
+      "audit": {
+        "service_assertions_passed": 3,
+        "workbook_assertions_passed": 8,
+        "rate_assertions_passed": 6,
+        "budget_assertions_passed": 3,
+        "budget_page_found": 177
+      },
+      "raw_files": [
+        {
+          "file": "adm_pli_reporting_service_2026-07-17.html",
+          "source_url": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1",
+          "sha256": "5a788ea4f448a045fec25ac38dce8fee2c7860a22a0b823394c0c7833630bb41",
+          "bytes": 93686
+        },
+        {
+          "file": "adm_pli_monthly_reporting_template.xlsx",
+          "source_url": "https://www.adm.gov.it/portale/documents/20182/17630432/TRACCIATI+PLI+PROSPETTO+RIEPILOGATIVO+MENSILE090222.xlsx/093b06f2-5ad9-731c-dca3-031d4e567850?t=1644407225462",
+          "sha256": "abb667258fdc4580a251a031071aa17f8620b82e398935c9064f3f8100d64d17",
+          "bytes": 14475
+        },
+        {
+          "file": "adm_pli_rate_2025-01.pdf",
+          "source_url": "https://www.adm.gov.it/portale/documents/20182/156158378/DETT+PER+PUBBLICAZIONE+0804595.23-12-2024-U.pdf/e52d9cf7-4b1d-d6a4-0d42-1f82dfa48520?t=1735555384661",
+          "sha256": "8a54f5cede37e427d35e83b1338bdc971976bbe0a736ef7ddb9526cea5fffafd",
+          "bytes": 153501
+        },
+        {
+          "file": "adm_pli_rate_2025-02.pdf",
+          "source_url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530",
+          "sha256": "518ec911fc6d4edc3370e9f1211653abc3cb4796629767ca723be45281a3abf3",
+          "bytes": 152037
+        },
+        {
+          "file": "italy_budget_2026_technical_report.pdf",
+          "source_url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf",
+          "sha256": "4a759765b4020092e6c7dca48f5006728da6ddfecd9cf002d9c4b3946b351371",
+          "bytes": 5810721
+        },
+        {
+          "file": "italy_budget_2026_table17_page.pdf",
+          "source_url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf",
+          "sha256": "eb607bf57f5f7ac74947eec67b1c676a69a2b396cb8a70664200c54a38ec6d96",
+          "bytes": 230217
+        }
+      ],
+      "derived_files": [
+        {
+          "path": "data/derived/italy_adm_rate_schedule_2025.csv",
+          "sha256": "dc53fde405219f1fa10ee83725f580f864fd4cd7727e804a87fe3e4bf2415ddf",
+          "bytes": 1348
+        },
+        {
+          "path": "data/derived/italy_adm_reporting_fields_2026-07-17.csv",
+          "sha256": "57704c0891b299e31fb4e85d97ad9ab115e83303ef1d491ec96de37913b8dfed",
+          "bytes": 6468
+        },
+        {
+          "path": "data/derived/italy_fiscal_forecast_2026_2028.csv",
+          "sha256": "ea87a97c638ed3c6f718a960a9b786d25bfcf04a8892877a76015b3053a56623",
+          "bytes": 2302
+        },
+        {
+          "path": "data/derived/italy_adm_request_scope_2026-07-17.csv",
+          "sha256": "fb00c5df8d270e75166764430f94b1ea199d576b47df50cbf5b3de621e9f540a",
+          "bytes": 2616
+        }
+      ],
+      "limitations": [
+        "The reporting template proves collection capability and field definitions, not the national totals.",
+        "The three reporting flows overlap in the supply chain. Inter-warehouse transfers must not be added to retail supply or direct final-consumer flows as consumption.",
+        "The budget technical report quantities and tax revenue are forecasts for a proposed intervention and are not actual sales or tax receipts.",
+        "The 2025 statutory rate changed on 1 February; actual annual tax cannot be calculated without monthly category volumes.",
+        "Device units and device retail value are outside the liquid reporting template and require a separate source."
+      ]
+    },
+    "actualStatus": "not_obtained",
+    "actualNeeded": "Monthly and annual package count, millilitres, tax due, tax paid and adjustments by nicotine / non-nicotine / flavour category, with inter-warehouse transfers excluded from the consumption total.",
+    "request": {
+      "id": "PX-IT-001",
+      "authority": "Agenzia delle Dogane e dei Monopoli - Direzione Accise",
+      "status": "ready_for_confirmation",
+      "recipient": "dir.accise@adm.gov.it",
+      "scope": "2023-2025 monthly and annual national PLI aggregates by nicotine non-nicotine and taxable flavours: packages millilitres tax due tax paid adjustments/refunds and retail-versus-direct-final-consumer flow excluding inter-warehouse transfers"
+    },
+    "serviceUrl": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1",
+    "budgetUrl": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+  },
   "eurostatRoutes": [
     {
       "reporter": "EU27_2020",
@@ -6266,6 +6600,27 @@ window.PIXAN_DATA = {
       "url": "https://online.customs.gov.cn/static/pages/guides/002029004002/002029004002.html"
     },
     {
+      "grade": "A",
+      "title": "Italia ADM · PLI-PAT ja kuukausiraportin mallipohja",
+      "coverage": "Puolikuukausi- ja kuukausiraportointi: tuotekoodi, pakkauskoko, nikotiinipitoisuus, pakkausmäärä ja kokonaismäärä kolmessa toimitusvirrassa",
+      "use": "Todistaa viranomaisen keräämän datan rakenteen ja täsmällisen aggregaattipyynnön toteutettavuuden; ei vielä kansallinen myyntisumma",
+      "url": "https://www.adm.gov.it/portale/-/portale-prodotti-liquidi-da-inalazione-pli-e-prodotti-accessori-dei-tabacchi-pat-1"
+    },
+    {
+      "grade": "A",
+      "title": "Italia ADM · vuoden 2025 PLI-verokannat",
+      "coverage": "Nikotiinillinen 0,143849 EUR/ml tammikuussa ja 0,146966 EUR/ml helmikuusta; nikotiiniton/aromit 0,098896 ja 0,101039 EUR/ml",
+      "use": "Lakisääteinen verokanta kuukausikohtaiseen toteumalaskentaan, kun toteutuneet kategoriavolyymit saadaan",
+      "url": "https://www.adm.gov.it/portale/documents/20182/208222724/DET+PRE+PUBB+71960.27-01-2025-U.pdf/f08b0d67-49a2-c5ca-074b-2111240054ad?t=1738229866530"
+    },
+    {
+      "grade": "B",
+      "title": "Italian parlamentti · budjettiselvityksen taulukko 17",
+      "coverage": "Vuoden 2026 virallinen tekninen ennuste 1 107 249 007 ml ja 167 733 820 EUR verotuottoa",
+      "use": "Viranomaisennuste markkinan suuruusluokan vertailuun; pidetään erillään toteutuneesta myynnistä ja verokertymästä",
+      "url": "https://documenti.camera.it/leg19/dossier/pdf/VQ2750_1.pdf"
+    },
+    {
       "grade": "C",
       "title": "Kanadan dokumentoitu vähittäishintaotos",
       "coverage": "10 julkista havaintoa 17.7.2026: 8 nestettä sisältävää tuotetta ja 2 tyhjää laitetta/osaa",
@@ -6370,6 +6725,16 @@ window.PIXAN_DATA = {
       "status": "queued",
       "sent": "—",
       "followUp": "—"
+    },
+    {
+      "id": "PX-IT-001",
+      "market": "Italia",
+      "authority": "Agenzia delle Dogane e dei Monopoli - Direzione Accise",
+      "channel": "dir.accise@adm.gov.it",
+      "scope": "2023-2025 monthly and annual national PLI aggregates by nicotine non-nicotine and taxable flavours: packages millilitres tax due tax paid adjustments/refunds and retail-versus-direct-final-consumer flow excluding inter-warehouse transfers",
+      "status": "ready_for_confirmation",
+      "sent": "—",
+      "followUp": "—"
     }
   ],
   "tasks": [
@@ -6426,6 +6791,12 @@ window.PIXAN_DATA = {
       "title": "Saksan vähittäishintaotos",
       "detail": "Valmis: 10 varastossa ollutta 10 ml tuotetta, yhden myyjän 17.7.2026 hinnat 7,12/9,49/11,95 €, ALV mukana ja toimitus erikseen. Mekaaninen 1,068/1,4235/1,7925 mrd € vaihteluväli on merkitty plausibiliteettitestiksi, ei markkina-arvoksi.",
       "status": "done"
+    },
+    {
+      "priority": "high",
+      "title": "Italian ADM:n toteutuneet PLI-aggregaatit",
+      "detail": "Raportointirakenne, 21 kenttää, vuoden 2025 lakisääteiset verokannat ja parlamentin 2026-2028 budjettiennuste on auditoitu. PX-IT-001 pyytää toteutuneet 2023-2025 kuukausi- ja vuosisummat kategorioittain sekä veron maksettuna; varastosiirrot poistetaan kulutussummasta. Viesti odottaa nimenomaista lähetysvahvistusta.",
+      "status": "active"
     },
     {
       "priority": "high",

@@ -27,6 +27,7 @@
     sent: "Lähetetty",
     queued: "Jonossa",
     requested: "Pyydetty",
+    ready_for_confirmation: "Odottaa lähetysvahvistusta",
     active: "Työn alla",
     done: "Valmis",
     blocked: "Estynyt",
@@ -448,6 +449,55 @@
         </tr>`).join("")}</tbody>
       </table>`;
     $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} WHO-numeerista osumaa (${hitRate} %); ${audit.nationalVerifiedCount} kansallista varmennusta; ${audit.officialRevenueCount} toteutunutta, laskennallista tai rajattua verotuottoriviä.</strong><p>${esc(audit.method)}</p><p>WHO:n open-system-otoksessa specific excise oli yli nollan ${audit.specificExciseCount} maassa ja ${audit.banCount} profiilia ilmoitti myyntikiellon. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi; ennuste säilytetään eri kentässä.</p>`;
+
+    const italy = data.italyAdm;
+    const italy2026 = italy.forecastTotals.find((item) => item.year === 2026);
+    $("#italy-adm-summary").innerHTML = `
+      <table>
+        <thead><tr><th>Todiste</th><th>Varmennettu sisältö</th><th>Todistusvoima</th><th>Tila / seuraava askel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ADM PLI-PAT</strong></td><td>Puolikuukausi- ja kuukausiraportointi sekä kulutusveron maksu samassa palvelussa</td><td>${tag("verified", "A-tason raportointijärjestelmä")}</td><td><a class="source-link" href="${esc(italy.serviceUrl)}" target="_blank" rel="noopener">ADM:n palvelu ↗</a></td></tr>
+          <tr><td><strong>Julkinen kuukausimallipohja</strong></td><td>${integer(italy.reportingFlows.reduce((sum, item) => sum + item.fieldCount, 0))} kenttäriviä kolmessa toimitusvirrassa</td><td>${tag("verified", "A-tason kenttärakenne")}</td><td>Kansalliset toteumasummat eivät ole mallipohjassa</td></tr>
+          <tr><td><strong>Vuoden 2026 tekninen arvio</strong></td><td>${integer(italy2026.estimatedQuantityMl)} ml · ${moneyEur(italy2026.estimatedTaxRevenueEur)}</td><td>${tag("partial", "B-tason viranomaisennuste")}</td><td><strong>Ei toteutunut myynti tai verokertymä</strong></td></tr>
+          <tr><td><strong>${esc(italy.request.id)}</strong></td><td>${esc(italy.actualNeeded)}</td><td>${tag(italy.request.status)}</td><td>${esc(italy.request.authority)}</td></tr>
+        </tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Auditointi:</strong> ${integer(italy.manifest.audit.service_assertions_passed)} palveluväitettä, ${integer(italy.manifest.audit.workbook_assertions_passed)} taulukkoväitettä, ${integer(italy.manifest.audit.rate_assertions_passed)} verokantaväitettä ja ${integer(italy.manifest.audit.budget_assertions_passed)} budjettitaulukon lukua tarkistettiin. Toteutuneen vuoden 2025 kansallisen aggregaatin tila on <code>${esc(italy.actualStatus)}</code>.</div>`;
+
+    $("#italy-adm-rates").innerHTML = `
+      <table>
+        <thead><tr><th>Voimassa</th><th>Tuoteryhmä</th><th>Virallinen kanta</th><th>Vero / 10 ml</th><th>Käyttöraja</th></tr></thead>
+        <tbody>${italy.rates.map((item) => `<tr>
+          <td>${esc(item.effectiveFrom)} - ${esc(item.effectiveTo)}</td><td><strong>${esc(item.label)}</strong></td>
+          <td class="num"><strong>${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 6, maximumFractionDigits: 6 }).format(item.rateEurPerMl)} €/ml</strong></td>
+          <td class="num">${eur(item.rateEurPer10Ml, 5)}</td><td>Kuukausikohtainen kategoriavolyymi tarvitaan vuositason verolaskelmaan. <a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener">ADM-päätös ↗</a></td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Ei yhtä koko vuoden kantaa:</strong> verokanta muuttui 1.2.2025. Tammikuun ja helmi-joulukuun määrät sekä nikotiinilliset ja nikotiinittomat/aromit on pidettävä erillään.</div>`;
+
+    $("#italy-adm-forecast").innerHTML = `
+      <table>
+        <thead><tr><th>Vuosi</th><th>Tuoteryhmä</th><th>Ehdotettu kanta</th><th>Arvioitu vuotuinen määrä</th><th>Arvioitu verotuotto</th><th>Lisätuotto</th><th>Luokitus</th></tr></thead>
+        <tbody>${italy.forecast.map((item) => `<tr>
+          <td><strong>${item.year}</strong></td><td>${esc(item.label)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { minimumFractionDigits: 6, maximumFractionDigits: 6 }).format(item.proposedUnitTaxEurPerMl)} €/ml</td>
+          <td class="num">${integer(item.estimatedQuantityMl)} ml<div class="meta-line">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 3 }).format(item.estimatedQuantityLitres)} l</div></td>
+          <td class="num"><strong>${moneyEur(item.estimatedTaxRevenueEur)}</strong></td><td class="num">${moneyEur(item.estimatedIncrementalRevenueEur)}</td>
+          <td>${tag("partial", "Virallinen ennuste - ei toteuma")}</td>
+        </tr>`).join("")}</tbody>
+        <tfoot>${italy.forecastTotals.map((item) => `<tr><td><strong>${item.year} yhteensä</strong></td><td>Kaksi tuoteryhmää</td><td>—</td><td class="num"><strong>${integer(item.estimatedQuantityMl)} ml</strong></td><td class="num"><strong>${moneyEur(item.estimatedTaxRevenueEur)}</strong></td><td class="num">${moneyEur(item.estimatedIncrementalRevenueEur)}</td><td>Budjettiennuste</td></tr>`).join("")}</tfoot>
+      </table>
+      <div class="meta-line table-note"><strong>Oikea käyttö:</strong> vertailu- ja plausibiliteettitieto. Taulukko 17 on merkitty “intervento proposto” ja “quantità annua stimata”; se ei korvaa ADM:n toteutuneita veroilmoitus- tai myyntisummia. <a class="source-link" href="${esc(italy.budgetUrl)}" target="_blank" rel="noopener">Italian parlamentin lähde ↗</a></div>`;
+
+    $("#italy-adm-flows").innerHTML = `
+      <table>
+        <thead><tr><th>Toimitusvirta</th><th>ADM:n taulukkonimi</th><th>Kenttiä</th><th>Kokonaismäärän yksikkö</th><th>Keskeiset kentät</th><th>Käsittely</th></tr></thead>
+        <tbody>${italy.reportingFlows.map((item) => `<tr>
+          <td><strong>${esc(item.label)}</strong></td><td><code>${esc(item.officialSheet)}</code></td><td class="num">${integer(item.fieldCount)}</td>
+          <td>${esc(item.quantityUnit === "millilitres" ? "millilitra" : "litra")}</td><td>${esc(item.fields.join(" · "))}</td><td>${esc(item.interpretation)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kaksinkertaisen laskennan esto:</strong> verovarastojen välisiä siirtoja ei lisätä myyntipistetoimituksiin tai suoriin loppukuluttajatoimituksiin. ADM:ltä pyydetään myös viranomaisen oma määritelmä kulutukseen luovutuksesta ja mahdollisten oikaisujen käsittelystä.</div>`;
   }
 
   function renderGaps() {
@@ -498,8 +548,14 @@
     data.contacts.forEach((item) => rows.push({ view: "contacts", title: `${item.authority} · ${item.market}`, detail: item.scope }));
     data.codes.forEach((item) => rows.push({ view: "customs", title: `HS ${item.code} · ${item.title}`, detail: item.detail }));
     data.taxes.forEach((item) => rows.push({ view: "taxes", title: `${item.name} · verotus`, detail: `${item.verification} ${item.period}` }));
+    rows.push({ view: "taxes", title: "Italia · ADM PLI-PAT", detail: `Vuoden 2025 verokannat, ${italy2026Search()} ml:n virallinen 2026 budjettiennuste ja PX-IT-001 toteumapyyntö` });
     data.canadaRetail.observations.forEach((item) => rows.push({ view: "pricing", title: `${item.product} · ${cad(item.priceCad)}`, detail: `${item.seller} ${item.category} ${item.priceBasis}` }));
     return rows;
+  }
+
+  function italy2026Search() {
+    const total = data.italyAdm.forecastTotals.find((item) => item.year === 2026);
+    return integer(total.estimatedQuantityMl);
   }
 
   function initSearch() {

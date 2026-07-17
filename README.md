@@ -33,6 +33,8 @@ Korea Customs Servicen vuoden 2025 julkiset HS6-vuosi-, kuukausi- ja alkuperäma
 
 Saksan 17.7.2026 hintaotos julkaistaan `data/germany/`-kansiossa. Se sisältää kymmenen varastossa ollutta 10 ml tuotetta yhdeltä myyjältä, parsitut Product/Offer-lähdeotteet, alkuperäisten sivujen SHA-256-tunnisteet ja kolme mekaanista stressitestiä. Täydet noin 4 Mt:n kauppasivukaappaukset säilyvät paikallisessa datahuoneessa; julkisessa repossa ovat kompaktit lähdeotteet sekä Destatisin ja Saksan verolain lähdekaappaukset. Virallinen 1,5 miljoonan litran vuoden 2025 volyymi ja lakisääteinen verokanta ovat A-tason näyttöä, mutta yhden myyjän hintaotos ja siitä laskettu 1,068–1,7925 mrd euron vaihteluväli ovat C-tason plausibiliteettitesti, eivät markkina-arvo tai ennuste.
 
+Italian ADM:n PLI-PAT-palvelun, julkisen kuukausiraportin XLSX-mallipohjan ja vuoden 2025 veropäätösten johdetut aineistot julkaistaan `data/italy/`-kansiossa. Mallipohja sisältää kolme erillistä virtaa: myyntipisteisiin toimitetut tuotteet, verovarastoihin toimitetut tuotteet ja suoraan loppukuluttajille toimitetut tuotteet. Verovarastosiirtoja ei lisätä kulutussummaan. Italian parlamentin vuoden 2026 budjettiselvityksen taulukko 17 julkaistaan vain virallisena ennusteena: 1 107 249 007 ml ja 167 733 820 euroa eivät ole toteutunutta myyntiä tai verokertymää. Toteutuneet 2023-2025 kansalliset aggregaatit ovat edelleen pyynnössä PX-IT-001.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti
