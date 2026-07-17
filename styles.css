@@ -270,6 +270,13 @@ a { color: inherit; }
 .route-flow small { margin-top: 2px; color: var(--muted); font-size: 10px; }
 .route-flow > b { color: var(--gold); }
 .customs-table { overflow: auto; background: white; border: 1px solid var(--line); border-radius: var(--radius); }
+#eurostat-summary table { min-width: 1040px; }
+#eurostat-origins table { min-width: 760px; }
+.table-note { padding: 13px 14px; border-top: 1px solid var(--line); }
+.table-note strong { color: var(--ink); }
+.download-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 20px; }
+.download-links a { padding: 8px 11px; color: var(--teal); background: white; border: 1px solid var(--line); border-radius: 9px; font-size: 11px; font-weight: 850; text-decoration: none; }
+.download-links a:hover { border-color: var(--teal); }
 #tax-table table { min-width: 1900px; }
 #tax-table th:nth-child(1) { min-width: 150px; }
 #tax-table th:nth-child(3) { min-width: 230px; }

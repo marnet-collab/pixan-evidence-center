@@ -30,7 +30,11 @@ def public_contact(value: str) -> str:
 def status_for_country(name: str) -> str:
     if name in {"Canada", "Germany", "Finland"}:
         return "verified"
-    if name in {"United States", "Japan"}:
+    if name in {
+        "United States", "Japan", "EU-27", "France", "Italy", "Spain",
+        "Poland", "Netherlands", "Belgium", "Luxembourg", "Sweden",
+        "Denmark", "Austria",
+    }:
         return "partial"
     return "missing"
 
@@ -78,6 +82,8 @@ def build_payload() -> dict:
     national_tax_rows = read_csv(PROJECT_DIR / "current_national_tax_verification.csv")
     requests = read_csv(PROJECT_DIR / "requests.csv")
     customs_rows = read_csv(choose_customs_file())
+    eurostat_route_rows = read_csv(PROJECT_DIR / "data" / "derived" / "eurostat_comext_cn8_route_shares_2025.csv")
+    eurostat_top_rows = read_csv(PROJECT_DIR / "data" / "derived" / "eurostat_comext_cn8_top_partners_2025.csv")
 
     national_tax_by_country = {row["country_or_region"]: row for row in national_tax_rows}
 
@@ -139,11 +145,14 @@ def build_payload() -> dict:
     countries = []
     for row in matrix:
         name = row["country_or_region"]
+        country_status = status_for_country(name)
+        if country_status == "missing" and name in national_tax_by_country:
+            country_status = "partial"
         countries.append(
             {
                 "name": fi_country(name),
                 "sourceName": name,
-                "status": status_for_country(name),
+                "status": country_status,
                 "customs": row["customs_detail_needed"],
                 "route": row["route_correction"],
                 "salesSource": row["official_sales_or_market_source"],
@@ -170,6 +179,82 @@ def build_payload() -> dict:
                 "url": row["source_url"],
             }
         )
+
+    eurostat_names = {
+        "EU27_2020": "EU-27", "AT": "Itävalta", "BE": "Belgia",
+        "DE": "Saksa", "DK": "Tanska", "ES": "Espanja", "FI": "Suomi",
+        "FR": "Ranska", "IT": "Italia", "LU": "Luxemburg",
+        "NL": "Alankomaat", "PL": "Puola", "SE": "Ruotsi",
+    }
+    partner_names = {
+        "CN": "Kiina", "MY": "Malesia", "ID": "Indonesia", "US": "Yhdysvallat",
+        "HK": "Hongkong", "GB": "Iso-Britannia", "LA": "Laos", "NL": "Alankomaat",
+        "HR": "Kroatia", "DE": "Saksa", "FR": "Ranska", "BE": "Belgia",
+        "PL": "Puola", "IT": "Italia", "LV": "Latvia",
+    }
+    eurostat_sums: dict[str, dict[str, float]] = {}
+    eurostat_source_url = "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"
+    for row in eurostat_route_rows:
+        if row["cn8_code"] not in {"85434000", "24041200"}:
+            continue
+        bucket = eurostat_sums.setdefault(row["reporter"], {"world": 0.0, "intra": 0.0, "extra": 0.0})
+        bucket["world"] += float(row["world_import_value_eur"] or 0)
+        bucket["intra"] += float(row["intra_eu_import_value_eur"] or 0)
+        bucket["extra"] += float(row["extra_eu_import_value_eur"] or 0)
+        eurostat_source_url = row["source_url"]
+
+    eurostat_routes = []
+    for reporter, values in eurostat_sums.items():
+        is_eu = reporter == "EU27_2020"
+        denominator = values["world"] if values["world"] else values["extra"]
+        eurostat_routes.append(
+            {
+                "reporter": reporter,
+                "market": eurostat_names[reporter],
+                "worldEur": None if is_eu else values["world"],
+                "intraEur": None if is_eu else values["intra"],
+                "extraEur": values["extra"],
+                "extraShare": 100 * values["extra"] / denominator if denominator else None,
+                "basis": "EU:n ulkoraja; vain extra-EU-tuonti" if is_eu else "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+                "url": eurostat_source_url,
+            }
+        )
+    eurostat_routes.sort(key=lambda row: (row["reporter"] != "EU27_2020", -(row["worldEur"] or row["extraEur"])))
+
+    eurostat_by_market = {row["market"]: row for row in eurostat_routes}
+    for country in countries:
+        route = eurostat_by_market.get(country["name"])
+        if not route:
+            continue
+        if route["reporter"] == "EU27_2020":
+            extra_bn = f"{route['extraEur'] / 1e9:.3f}".replace(".", ",")
+            route_text = f"Eurostat 2025 kapea CN8-kori: extra-EU-tuonti {extra_bn} mrd EUR."
+        else:
+            world_m = f"{route['worldEur'] / 1e6:.1f}".replace(".", ",")
+            intra_m = f"{route['intraEur'] / 1e6:.1f}".replace(".", ",")
+            extra_m = f"{route['extraEur'] / 1e6:.1f}".replace(".", ",")
+            route_text = (
+                f"Eurostat 2025 kapea CN8-kori: WORLD-tuonti {world_m} milj. EUR; "
+                f"intra-EU {intra_m} milj. EUR ja extra-EU {extra_m} milj. EUR."
+            )
+        country["current"] = route_text + " " + country["current"]
+        country["missing"] = "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. " + country["missing"]
+
+    eurostat_origins = []
+    for row in eurostat_top_rows:
+        if row["reporter"] != "EU27_2020" or row["cn8_code"] not in {"85434000", "24041200"}:
+            continue
+        eurostat_origins.append(
+            {
+                "code": row["cn8_code"],
+                "partner": partner_names.get(row["partner"], row["partner_label"].split(" (incl.")[0]),
+                "valueEur": float(row["value_eur"] or 0),
+                "sharePct": float(row["share_of_country_partner_rows_pct"] or 0),
+                "basis": "Alkuperämaa EU:n ulkopuolella",
+                "rank": int(row["rank"]),
+            }
+        )
+    eurostat_origins.sort(key=lambda row: (row["code"], row["rank"]))
 
     contacts = []
     for row in requests:
@@ -204,7 +289,7 @@ def build_payload() -> dict:
             {"label": "Kanada 2024", "value": "1,161 mrd CAD", "detail": "Viranomaiselle raportoitu toimitusmyynti", "tone": ""},
             {"label": "Suomi 2025", "value": "3,547 milj. €", "detail": "E-nesteiden nettovero · 11 823,5 l", "tone": "gold"},
             {"label": "Saksa 2025", "value": "1,5 milj. l", "detail": "Verotetut tupakan korvikkeet, +18,2 %", "tone": "blue"},
-            {"label": "Tulliproxy 2025", "value": f"{sum(narrow.values()) / 1e9:.3f} mrd USD".replace(".", ","), "detail": "USA + Kanada + Japani, kapea HS-kori", "tone": "red"},
+            {"label": "EU-ulkoraja 2025", "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd €".replace(".", ","), "detail": "CN8 85434000 + 24041200 · extra-EU", "tone": "red"},
         ],
         "anchors": [
             {
@@ -239,13 +324,13 @@ def build_payload() -> dict:
             },
             {
                 "grade": "B",
-                "market": "USA · Kanada · Japani",
-                "title": "Virallinen rajat ylittävä tullivirta",
-                "value": f"{sum(narrow.values()) / 1e9:.3f} mrd USD".replace(".", ","),
-                "detail": "Vuoden 2025 HS 8543.40 + 2404.12 -tuonnin yhteenlaskettu arvo UN Comtrade -aggregaatissa.",
-                "limit": "Ei kuluttajamyynti. Aggregate-rivejä ei saa kutsua kansallisen tullin lopulliseksi vahvistukseksi.",
-                "source": "UN Statistics Division · UN Comtrade",
-                "url": "https://comtradeplus.un.org/",
+                "market": "EU-27",
+                "title": "Virallinen extra-EU-tullivirta",
+                "value": f"{eurostat_sums['EU27_2020']['extra'] / 1e9:.3f} mrd EUR".replace(".", ","),
+                "detail": "Vuoden 2025 CN8 85434000 + 24041200 -tuonti EU:n ulkorajan yli. Jäsenmaiden sisäisiä saapumisia ei lisätä summaan.",
+                "limit": "CIF-tulliarvo, ei kuluttajamyyntiä; ei kata EU:n kotimaista tuotantoa eikä vähittäiskaupan katetta.",
+                "source": "Eurostat Comext · DS-045409",
+                "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database",
             },
         ],
         "report": [
@@ -271,6 +356,8 @@ def build_payload() -> dict:
             "method": "WHO:n vuoden 2025 maaprofiilien sivu 9 raportoi halvimpien closed-, disposable- ja open-system e-nesteiden hinnan sekä kokonaisveron, valmisteveron, ALV:n, tullin ja muut verot prosenttina vähittäishinnasta. Pixan-auditointi säilyttää puuttuvat solut puuttuvina ja johtaa €/ml- tai paikallisvaluutta/ml-luvun vain hinnan ja WHO:n specific excise -osuuden tulona. Johdettu kanta merkitään B-tason tarkistusluvuksi, ei nykyiseksi lakikannaksi.",
         },
         "customs": customs,
+        "eurostatRoutes": eurostat_routes,
+        "eurostatOrigins": eurostat_origins,
         "narrowCustoms": [{"market": market, "valueUsd": value} for market, value in sorted(narrow.items(), key=lambda item: item[1], reverse=True)],
         "codes": [
             {"code": "8543.40", "title": "Sähköiset höyrystinlaitteet", "detail": "Personal electric vaporising devices. Kansallinen 8–10-numeroinen alanimike tarvitaan osien ja laitteiden erotteluun.", "include": "Laitteet ja mahdolliset laiteosat nimikerajauksen mukaan."},
@@ -312,7 +399,7 @@ def build_payload() -> dict:
         ],
         "contacts": contacts,
         "tasks": [
-            {"priority": "high", "title": "EU-27 CN8-reittimatriisi", "detail": "Lataa DS-045409 reporter × origin × consignment × flow; erota extra-EU kokonaisuus ja jäsenmaiden sisäiset hubivirrat.", "status": "active"},
+            {"priority": "high", "title": "EU-27 CN8-reittimatriisi", "detail": "Valmis 2025: EU-ulkoraja 2,240 mrd EUR ja 12 jäsenmaan WORLD/intra/extra-jako, CN8 85434000 + 24041200. Kaikki ryhmärivit täsmäytyivät 0 EUR erolla.", "status": "done"},
             {"priority": "high", "title": "EU-CEG aggregoidut myyntipyynnöt", "detail": "Lähetä Article 20(7) -pyynnöt kansallisille toimivaltaisille viranomaisille, ilman yritystason luottamuksellisia tietoja.", "status": "queued"},
             {"priority": "high", "title": "USA HTS10 kulutukseen luovutettu tuonti", "detail": "Hanki Census-avain tai dataote; erota general imports, imports for consumption ja re-exports.", "status": "requested"},
             {"priority": "high", "title": "Kanadan 2025 reittitäsmäytys", "detail": "CIMT 10-digit + origin/export country + foreign-origin re-exports, täsmäytys Health Canadan toimitusmyyntiin.", "status": "requested"},

@@ -1,0 +1,31 @@
+{
+  "dataset": "DS-045409",
+  "period": "2025",
+  "downloaded_at_utc": "2026-07-17T07:16:27+00:00",
+  "grouped_query": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en",
+  "partner_query": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&time=2025&lang=en",
+  "raw_grouped_file": "data/raw/eurostat_comext/ds045409_cn8_groups_2025_2026-07-17T071627Z.json",
+  "raw_partner_file": "data/raw/eurostat_comext/ds045409_cn8_partners_2025_2026-07-17T071627Z.json",
+  "reporters": [
+    "EU27_2020",
+    "AT",
+    "BE",
+    "DE",
+    "DK",
+    "ES",
+    "FI",
+    "FR",
+    "IT",
+    "LU",
+    "NL",
+    "PL",
+    "SE"
+  ],
+  "products": [
+    "85434000",
+    "24041200",
+    "24041910",
+    "24041990"
+  ],
+  "methodology": "Member State WORLD imports include intra-EU arrivals and extra-EU imports. For extra-EU imports the partner is country of origin; for intra-EU imports it is country of consignment. EU27_2020 is shown only against EXT_EU27_2020. Imports are CIF-valued trade flows, not consumer sales."
+}

@@ -11,6 +11,7 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
   const money = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. USD";
+  const moneyEur = (value) => value === null || value === undefined ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(value / 1e6) + " milj. €";
   const integer = (value) => new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 0 }).format(value);
 
   const statusLabels = {
@@ -119,6 +120,27 @@
   }
 
   function renderCustoms() {
+    $("#eurostat-summary").innerHTML = `
+      <table class="eurostat-table">
+        <thead><tr><th>Maa/alue</th><th>WORLD-tuonti</th><th>EU:n sisäinen saapuminen</th><th>Extra-EU</th><th>Extra-osuus</th><th>Tulkintaperusta</th></tr></thead>
+        <tbody>${data.eurostatRoutes.map((item) => `<tr>
+          <td><strong>${esc(item.market)}</strong></td>
+          <td class="num">${moneyEur(item.worldEur)}</td><td class="num">${moneyEur(item.intraEur)}</td><td class="num">${moneyEur(item.extraEur)}</td>
+          <td class="num">${item.extraShare === null ? "—" : new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.extraShare) + " %"}</td>
+          <td>${esc(item.basis)}</td>
+        </tr>`).join("")}</tbody>
+      </table>
+      <div class="meta-line table-note"><strong>Kapea CN8-kori:</strong> 85434000 laitteet + 24041200 nikotiinia sisältävät inhaloitavat tuotteet. Jäsenmaan WORLD-rivi täsmäytyy intra + extra; EU-27-rivi näyttää vain ulkorajan. Tulliarvo on CIF-arvo, ei vähittäismyynti.</div>`;
+
+    $("#eurostat-origins").innerHTML = `
+      <table>
+        <thead><tr><th>CN8</th><th>Extra-EU-alkuperä</th><th>Tuontiarvo</th><th>Osuus maapartneririveistä</th><th>Perusta</th></tr></thead>
+        <tbody>${data.eurostatOrigins.map((item) => `<tr>
+          <td><code>${esc(item.code)}</code></td><td><strong>${esc(item.partner)}</strong></td><td class="num">${moneyEur(item.valueEur)}</td>
+          <td class="num">${new Intl.NumberFormat("fi-FI", { maximumFractionDigits: 1 }).format(item.sharePct)} %</td><td>${esc(item.basis)}</td>
+        </tr>`).join("")}</tbody>
+      </table>`;
+
     const rows = [...data.customs].sort((a, b) => a.market.localeCompare(b.market, "fi") || a.code.localeCompare(b.code));
     $("#customs-table").innerHTML = `
       <table>
@@ -195,7 +217,7 @@
       { label: "WHO-profiilit", value: `${audit.profileCount} maata`, detail: "Yhtenäinen sivu-9 auditointi", tone: "" },
       { label: "Numeerinen osuma", value: `${audit.numericCount} / ${audit.profileCount}`, detail: `${hitRate} % profiileista`, tone: "gold" },
       { label: "Kansallinen varmennus", value: `${audit.nationalVerifiedCount} maata`, detail: "Nykykanta tai kansallinen veroraportti", tone: "blue" },
-      { label: "Virallinen volyymi", value: `${audit.officialVolumeCount} maa`, detail: "Saksa; muiden maiden haku auki", tone: "red" },
+      { label: "Virallinen volyymi", value: `${audit.officialVolumeCount} maata`, detail: "Suomi, Saksa ja Ruotsi", tone: "red" },
     ].map((item) => `<article class="metric-card ${item.tone}"><span class="metric-label">${esc(item.label)} <span>↗</span></span><strong class="metric-value">${esc(item.value)}</strong><span class="metric-detail">${esc(item.detail)}</span></article>`).join("");
 
     const items = (taxFilter === "all" ? data.taxes : taxFilter === "national_verified" ? data.taxes.filter((item) => item.national) : data.taxes.filter((item) => item.status === taxFilter))
@@ -203,7 +225,7 @@
     $("#tax-count").textContent = `${items.length} maata/aluetta`;
     $("#tax-table").innerHTML = `
       <table>
-        <thead><tr><th>Maa</th><th>Todistustila</th><th>Kansallinen nykykanta</th><th>Closed 1 ml<br>hinta / kokonaisvero</th><th>Disposable 1 ml<br>hinta / kokonaisvero</th><th>Open 10 ml<br>hinta / kokonaisvero</th><th>WHO:sta johdettu<br>specific excise / ml</th><th>Verotettu volyymi</th><th>Toteutunut verotuotto</th><th>Rajaus ja lähde</th></tr></thead>
+        <thead><tr><th>Maa</th><th>Todistustila</th><th>Kansallinen nykykanta</th><th>Closed 1 ml<br>hinta / kokonaisvero</th><th>Disposable 1 ml<br>hinta / kokonaisvero</th><th>Open 10 ml<br>hinta / kokonaisvero</th><th>WHO:sta johdettu<br>specific excise / ml</th><th>Verotettu / rekisteröity volyymi</th><th>Toteutunut / rajattu verotuotto</th><th>Rajaus ja lähde</th></tr></thead>
         <tbody>${items.map((item) => `<tr>
           <td><a class="source-link" href="${esc(item.url)}" target="_blank" rel="noopener"><strong>${esc(item.name)}</strong> ↗</a><div class="meta-line">${esc(item.period)}</div></td>
           <td>${item.national ? tag(item.national.status, item.national.status === "verified" ? "A-tason kansallinen" : "Kansallinen osittainen") : tag(item.status)}</td>
@@ -217,7 +239,7 @@
           <td><div class="meta-line">${esc(item.national ? `${item.national.scope}. ${item.national.caveat}${item.national.forecast !== "not_obtained" ? ` Ennuste: ${item.national.forecast}.` : ""}` : item.verification)}</div></td>
         </tr>`).join("")}</tbody>
       </table>`;
-    $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} WHO-numeerista osumaa (${hitRate} %); ${audit.nationalVerifiedCount} kansallista varmennusta; ${audit.officialRevenueCount} toteutunutta verotuottosarjaa.</strong><p>${esc(audit.method)}</p><p>WHO:n open-system-otoksessa specific excise oli yli nollan ${audit.specificExciseCount} maassa ja ${audit.banCount} profiilia ilmoitti myyntikiellon. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi.</p>`;
+    $("#tax-audit").innerHTML = `<span>MENETELMÄ JA HIT RATE</span><strong>${audit.numericCount}/${audit.profileCount} WHO-numeerista osumaa (${hitRate} %); ${audit.nationalVerifiedCount} kansallista varmennusta; ${audit.officialRevenueCount} toteutunutta, laskennallista tai rajattua verotuottoriviä.</strong><p>${esc(audit.method)}</p><p>WHO:n open-system-otoksessa specific excise oli yli nollan ${audit.specificExciseCount} maassa ja ${audit.banCount} profiilia ilmoitti myyntikiellon. Puuttuva verotuotto on merkitty puutteeksi, ei nollaksi; ennuste säilytetään eri kentässä.</p>`;
   }
 
   function renderGaps() {

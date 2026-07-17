@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Pixan markkina- ja evidenssikeskus",
-    "updated": "2026-07-17 07:07 UTC",
+    "updated": "2026-07-17 07:33 UTC",
     "dataDate": "2026-07-17",
     "repo": "https://github.com/marnet-collab/pixan-evidence-center",
     "disclaimer": "Ei oikeudellinen lausunto eikä tilintarkastettu markkina-arvio."
@@ -26,9 +26,9 @@
       "tone": "blue"
     },
     {
-      "label": "Tulliproxy 2025",
-      "value": "1,307 mrd USD",
-      "detail": "USA + Kanada + Japani, kapea HS-kori",
+      "label": "EU-ulkoraja 2025",
+      "value": "2,240 mrd €",
+      "detail": "CN8 85434000 + 24041200 · extra-EU",
       "tone": "red"
     }
   ],
@@ -65,13 +65,13 @@
     },
     {
       "grade": "B",
-      "market": "USA · Kanada · Japani",
-      "title": "Virallinen rajat ylittävä tullivirta",
-      "value": "1,307 mrd USD",
-      "detail": "Vuoden 2025 HS 8543.40 + 2404.12 -tuonnin yhteenlaskettu arvo UN Comtrade -aggregaatissa.",
-      "limit": "Ei kuluttajamyynti. Aggregate-rivejä ei saa kutsua kansallisen tullin lopulliseksi vahvistukseksi.",
-      "source": "UN Statistics Division · UN Comtrade",
-      "url": "https://comtradeplus.un.org/"
+      "market": "EU-27",
+      "title": "Virallinen extra-EU-tullivirta",
+      "value": "2,240 mrd EUR",
+      "detail": "Vuoden 2025 CN8 85434000 + 24041200 -tuonti EU:n ulkorajan yli. Jäsenmaiden sisäisiä saapumisia ei lisätä summaan.",
+      "limit": "CIF-tulliarvo, ei kuluttajamyyntiä; ei kata EU:n kotimaista tuotantoa eikä vähittäiskaupan katetta.",
+      "source": "Eurostat Comext · DS-045409",
+      "url": "https://ec.europa.eu/eurostat/web/international-trade-in-goods/database"
     }
   ],
   "report": [
@@ -213,13 +213,13 @@
     {
       "name": "EU-27",
       "sourceName": "EU-27",
-      "status": "missing",
-      "customs": "Eurostat Comext DS-045409 CN8: 85434000, 24041200, 240419xx and national CN suffixes",
-      "route": "EU total: use extra-EU imports/exports only; member-state market: combine extra-EU origin with intra-EU arrivals/dispatches but never add member-state flows to EU total; inspect Netherlands/Belgium/Germany logistics hubs",
+      "status": "partial",
+      "customs": "Eurostat Comext DS-045409 CN8: 85434000, 24041200, 24041910 and 24041990",
+      "route": "EU total: use extra-EU imports only; member-state market: WORLD equals extra-EU origin plus intra-EU consignment; never add member-state WORLD flows to the EU total; inspect Netherlands/Belgium/Germany logistics hubs",
       "salesSource": "TPD Article 20(7) annual sales volumes held by each national competent authority through EU-CEG or national channel",
-      "current": "No harmonised public EU sales aggregate obtained",
-      "missing": "Member-state sales volumes, refill ml, device units and product type; CN8 route matrix",
-      "how": "Download Comext DS-045409 by reporter/partner/origin/consignment and flow; send aggregated disclosure requests to every national EU-CEG authority using the Commission contact list; request non-identifiable annual totals by product type",
+      "current": "Eurostat 2025 kapea CN8-kori: extra-EU-tuonti 2,240 mrd EUR. 2025 CN8 route matrix obtained for EU-27 and 12 member states; narrow extra-EU basket 2.240456135bn EUR; no harmonised public EU sales aggregate",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Member-state sales volumes, refill ml, device units and product type; domestic production and consumer sell-out",
+      "how": "Use saved DS-045409 query and raw JSON as official customs evidence; send aggregated disclosure requests to every national EU-CEG authority using the Commission contact list; request non-identifiable annual totals by product type",
       "tax": {
         "name": "EU-27",
         "sourceName": "EU-27",
@@ -258,8 +258,8 @@
       "customs": "Eurostat Comext CN8 plus Destatis foreign trade; extra-EU origin and intra-EU consignment",
       "route": "Subtract dispatches and re-exports from hub flows; use taxed domestic volume as market anchor",
       "salesSource": "Destatis tobacco-tax statistics 73411; BVL EU-CEG annual market-share/sales reports",
-      "current": "2025 taxed substitutes obtained: 1.5 million litres, +18.2%; device units and sales value missing",
-      "missing": "Device sales units/value, average retail price, EU-CEG brand/type aggregation",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 980,8 milj. EUR; intra-EU 129,7 milj. EUR ja extra-EU 851,1 milj. EUR. 2025 taxed substitutes obtained: 1.5 million litres, +18.2%; device units and sales value missing",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Device sales units/value, average retail price, EU-CEG brand/type aggregation",
       "how": "Extract GENESIS table 73411; request aggregated Article 20(7) sales from BVL; download CN8 import/export flows from Comext and Destatis; obtain official CPI/price observation for e-liquids if available",
       "tax": {
         "name": "Saksa",
@@ -308,12 +308,12 @@
     {
       "name": "Ranska",
       "sourceName": "France",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and French customs data",
       "route": "Separate country of origin from EU country of consignment; subtract exports/dispatches",
       "salesSource": "Direction Generale de la Sante / EU-CEG Article 20(7)",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual device units, refill ml and sales value; detailed route flows",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 347,1 milj. EUR; intra-EU 134,8 milj. EUR ja extra-EU 212,3 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual device units, refill ml and sales value; detailed route flows",
       "how": "Download France reporter rows from Comext DS-045409; request aggregated annual sales from info-industrie-vapotage@sante.gouv.fr under Article 20(7), excluding company-identifiable detail",
       "tax": {
         "name": "Ranska",
@@ -343,18 +343,31 @@
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fra.pdf",
         "tier": "B",
         "period": "WHO Report 2025 country profile",
-        "national": null
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 virallisessa tupakkatuotteiden valmisteveroluettelossa",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Légifrancen vuoden 2026 tyhjentävä tupakkatuotteiden valmisteverotaulukko ja Douanen veroluokkakuvaus; e-neste ei ole veroluokka",
+          "caveat": "Nollakanta on dokumentoitu oikeudellinen luokituspäätelmä virallisesta täydestä tariffiluettelosta, ei viranomaisen erikseen julkaisema nollatodistus; ALV ja mahdolliset tuontimaksut ovat erillisiä; kertakäyttöiset e-savukkeet kiellettiin 26.2.2025",
+          "rateUrl": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000050932002",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
       "name": "Italia",
       "sourceName": "Italy",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and ADM customs/excise data",
       "route": "Separate extra-EU origin, intra-EU consignment and dispatches; flag hub re-exports",
       "salesSource": "Italian Ministry of Health EU-CEG; ADM excise/market monitoring where applicable",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual units/ml/value and re-export correction",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 419,0 milj. EUR; intra-EU 294,7 milj. EUR ja extra-EU 124,3 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and re-export correction",
       "how": "Download Italy Comext rows; request aggregated Article 20(7) data from the national EU-CEG authority; request ADM public aggregate for e-liquids/devices and tax stamps",
       "tax": {
         "name": "Italia",
@@ -403,12 +416,12 @@
     {
       "name": "Espanja",
       "sourceName": "Spain",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Spanish customs tax agency data",
       "route": "Origin versus EU consignment; subtract dispatches",
       "salesSource": "Spanish Ministry of Health EU-CEG Article 20(7)",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual units/ml/value and detailed CN8 route data",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 143,4 milj. EUR; intra-EU 67,7 milj. EUR ja extra-EU 75,7 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and detailed CN8 route data",
       "how": "Download Spain Comext rows; request aggregated sales from the EU-CEG contact listed by the European Commission; request customs CN8 import/export by origin and destination",
       "tax": {
         "name": "Espanja",
@@ -457,12 +470,12 @@
     {
       "name": "Puola",
       "sourceName": "Poland",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Polish customs/excise data",
       "route": "Origin versus consignment; subtract dispatches/re-exports",
       "salesSource": "Inspector for Chemical Substances EU-CEG; Ministry of Finance e-liquid excise",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual ml/units/value, excise-released volume and route data",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 210,6 milj. EUR; intra-EU 117,5 milj. EUR ja extra-EU 93,1 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual ml/units/value, excise-released volume and route data",
       "how": "Download Poland Comext rows; request Article 20(7) aggregate from tyton@chemikalia.gov.pl; request Ministry of Finance excise-paid e-liquid volume and revenue",
       "tax": {
         "name": "Puola",
@@ -511,12 +524,12 @@
     {
       "name": "Alankomaat",
       "sourceName": "Netherlands",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Dutch customs",
       "route": "Treat Netherlands as a logistics hub; country of dispatch is not origin or final consumption; subtract dispatches/re-exports",
       "salesSource": "RIVM EU-CEG Article 20(7)",
-      "current": "No official sales aggregate obtained",
-      "missing": "Domestic sales separated from Rotterdam hub flows",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 204,8 milj. EUR; intra-EU 28,7 milj. EUR ja extra-EU 176,0 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Domestic sales separated from Rotterdam hub flows",
       "how": "Download Comext origin/consignment/dispatch matrix; request aggregated sales from RIVM; exclude goods placed in transit/customs warehousing from domestic market",
       "tax": {
         "name": "Alankomaat",
@@ -546,18 +559,31 @@
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nld.pdf",
         "tier": "B",
         "period": "WHO Report 2025 country profile",
-        "national": null
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 Wet op de accijns -lain verotuoteluettelossa",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Vuonna 2026 voimassa oleva Wet op de accijns luettelee valmisteveron kohteiksi alkoholin, mineraaliöljyt ja tupakkatuotteet; e-nesteitä säännellään tupakkaan liittyvinä tuotteina mutta niitä ei lisätä valmisteverotuotteeksi",
+          "caveat": "Nollakanta on dokumentoitu oikeudellinen luokituspäätelmä lain tyhjentävästä tuoteluettelosta; ALV ja tuonnin tullit ovat erillisiä; myyntikanavia ja makuja koskee erillinen sääntely",
+          "rateUrl": "https://wetten.overheid.nl/jci1.3:c:BWBR0005251&g=2026-04-10&z=2026-04-10",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
       "name": "Belgia",
       "sourceName": "Belgium",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Belgian customs",
       "route": "Treat Antwerp flows as possible hub/re-export; origin and domestic release required",
       "salesSource": "FPS Health / EU-CEG Article 20(7)",
-      "current": "No official sales aggregate obtained; disposable sales prohibition changes comparability",
-      "missing": "Domestic sales by product type and legal-regime break",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 127,3 milj. EUR; intra-EU 19,6 milj. EUR ja extra-EU 107,8 milj. EUR. No official sales aggregate obtained; disposable sales prohibition changes comparability",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Domestic sales by product type and legal-regime break",
       "how": "Download Comext rows; request Article 20(7) aggregates from the Commission-listed national authority; split time series before/after disposable ban",
       "tax": {
         "name": "Belgia",
@@ -606,12 +632,12 @@
     {
       "name": "Luxemburg",
       "sourceName": "Luxembourg",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8",
       "route": "Origin, consignment and dispatch; subtract exports",
       "salesSource": "Ministry of Health EU-CEG Article 20(7)",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual units/ml/value",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 11,0 milj. EUR; intra-EU 11,0 milj. EUR ja extra-EU 0,0 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value",
       "how": "Download Comext rows; request aggregated Article 20(7) data from ministere-sante@ms.etat.lu",
       "tax": {
         "name": "Luxemburg",
@@ -641,7 +667,20 @@
         "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-lux.pdf",
         "tier": "B",
         "period": "WHO Report 2025 country profile",
-        "national": null
+        "national": {
+          "asOf": "2026-07-17",
+          "status": "verified",
+          "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 virallisessa valmisteverotuoteluettelossa",
+          "taxedVolume": "not_obtained",
+          "actualRevenue": "not_obtained",
+          "revenuePeriod": "",
+          "forecast": "not_obtained",
+          "scope": "Guichet.lu ja vuoden 2026 Douanes et Accises -lupahakemus luettelevat valmisteverotuotteiksi alkoholin, energiatuotteet sekä savukkeet, sikarit ja polttotupakan; e-nesteelle ei ole omaa veroluokkaa",
+          "caveat": "Nollakanta on dokumentoitu luokituspäätelmä virallisista täydellisiksi ilmoitetuista tavaraluetteloista, ei erillinen viranomaisen nollatodistus; ALV ja tuontitulli ovat erillisiä; vuoden 2025 valvontatiedotteen 12 897 EUR vältetyt valmisteverot koskevat sekoitettua takavarikkoa eikä niitä saa kohdistaa 90 litraan e-nestettä",
+          "rateUrl": "https://guichet.public.lu/fr/entreprises/import-export/intra-ue/echanges-intra-ue/commerce-accises.html",
+          "volumeUrl": "",
+          "revenueUrl": ""
+        }
       }
     },
     {
@@ -651,8 +690,8 @@
       "customs": "Eurostat Comext CN8 and Finnish Customs Uljas",
       "route": "Origin versus consignment; subtract exports/re-exports",
       "salesSource": "Valvira EU-CEG; Finnish Tax Administration excise data",
-      "current": "No official vape-specific sales aggregate obtained",
-      "missing": "Annual ml/units/value and excise released volume",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 5,6 milj. EUR; intra-EU 5,1 milj. EUR ja extra-EU 0,5 milj. EUR. No official vape-specific sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual ml/units/value and excise released volume",
       "how": "Download Uljas/Comext CN8 rows; request aggregated EU-CEG sales from Valvira and excise-paid e-liquid volumes/revenue from Finnish Tax Administration",
       "tax": {
         "name": "Suomi",
@@ -701,12 +740,12 @@
     {
       "name": "Ruotsi",
       "sourceName": "Sweden",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Statistics Sweden",
       "route": "Origin versus consignment; subtract dispatches",
       "salesSource": "Public Health Agency of Sweden EU-CEG",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual units/ml/value and excise data",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 50,0 milj. EUR; intra-EU 12,2 milj. EUR ja extra-EU 37,8 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and excise data",
       "how": "Download Comext/SCB trade rows; request Article 20(7) aggregate from euceg@folkhalsomyndigheten.se",
       "tax": {
         "name": "Ruotsi",
@@ -740,27 +779,27 @@
           "asOf": "2026-07-17",
           "status": "verified",
           "rate": "2 087 SEK/litra eli 2,087 SEK/ml; vahva 15–20 mg/ml e-neste 4 174 SEK/litra eli 4,174 SEK/ml",
-          "taxedVolume": "not_obtained",
-          "actualRevenue": "not_obtained",
-          "revenuePeriod": "",
+          "taxedVolume": "26 000 litraa vuonna 2024: 14 000 litraa vahvoja ja 12 000 litraa muita e-nesteitä",
+          "actualRevenue": "80 milj. SEK: 60 milj. vahvoista ja 20 milj. muista e-nesteistä",
+          "revenuePeriod": "2024",
           "forecast": "not_obtained",
           "scope": "Nikotiinia sisältävät e-nesteet",
-          "caveat": "Skatteverketin sivu antaa vuoden 2026 kannan mutta ei samalla sivulla verotettua litramäärää tai verokertymää",
+          "caveat": "Finansdepartementin Beräkningskonventioner 2026 taulukko 7.5 yhdistää Ekonomistyrningsverketin, Skatteverketin ja ministeriön laskennan. Vuosi 2024 on viimeisin täysi vertailuvuosi, mutta luku ei ole julkaistu raakaverotilin tapahtumaotteena; sarjaa päivitetään ja pyöristetään.",
           "rateUrl": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
-          "volumeUrl": "",
-          "revenueUrl": ""
+          "volumeUrl": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+          "revenueUrl": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
         }
       }
     },
     {
       "name": "Tanska",
       "sourceName": "Denmark",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Statistics Denmark",
       "route": "Origin versus consignment; subtract exports",
       "salesSource": "Danish national EU-CEG authority and excise authority",
-      "current": "No official sales aggregate obtained",
-      "missing": "Annual units/ml/value and excise-paid volume",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 14,4 milj. EUR; intra-EU 8,3 milj. EUR ja extra-EU 6,1 milj. EUR. No official sales aggregate obtained",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and excise-paid volume",
       "how": "Download Comext/Statbank trade data; use Commission EU-CEG contact list for aggregated Article 20(7) request; request e-liquid excise aggregates",
       "tax": {
         "name": "Tanska",
@@ -797,12 +836,12 @@
           "taxedVolume": "not_obtained",
           "actualRevenue": "not_obtained",
           "revenuePeriod": "",
-          "forecast": "not_obtained",
+          "forecast": "90 milj. DKK vuoden 2025 vuotuinen verotuotto voimassa olevilla säännöillä",
           "scope": "Nikotiinia sisältävät nesteet",
-          "caveat": "Verohallinnon oikeudellinen ohje vahvistaa kannan mutta ei julkaise samalla sivulla volyymia tai verokertymää",
-          "rateUrl": "https://info.skat.dk/data.aspx?oid=2350652",
+          "caveat": "Skatteministerietin vastaus Folketingetille ilmoittaa 2025 vuotuisen tuoton pyöristettynä lähimpään 5 milj. DKK:hon; kyse on arviosta, ei toteutuneesta tilinpäätösluvusta. Nimelliskannoilla 90 milj. DKK vastaa noin 36 000–60 000 litran haarukkaa ennen pyöristyksen ja sekoitetun vahvuusjakauman huomiointia.",
+          "rateUrl": "https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven",
           "volumeUrl": "",
-          "revenueUrl": ""
+          "revenueUrl": "https://www.ft.dk/samling/20231/almdel/sau/spm/678/svar/2074316/2914215.pdf"
         }
       }
     },
@@ -850,12 +889,12 @@
     {
       "name": "Itävalta",
       "sourceName": "Austria",
-      "status": "missing",
+      "status": "partial",
       "customs": "Eurostat Comext CN8 and Statistics Austria",
       "route": "Origin versus consignment; subtract dispatches",
       "salesSource": "National EU-CEG authority; excise authority",
-      "current": "No official sales aggregate obtained; disposable prohibition must be time-stamped",
-      "missing": "Annual units/ml/value and policy-break series",
+      "current": "Eurostat 2025 kapea CN8-kori: WORLD-tuonti 73,1 milj. EUR; intra-EU 27,5 milj. EUR ja extra-EU 45,6 milj. EUR. No official sales aggregate obtained; disposable prohibition must be time-stamped",
+      "missing": "Kuluttajamyynti, kotimainen tuotanto ja tullivirran täsmäytys vero-/EU-CEG-sarjaan. Annual units/ml/value and policy-break series",
       "how": "Download Austria Comext rows; request Article 20(7) aggregate from national authority; separate periods around disposable ban",
       "tax": {
         "name": "Itävalta",
@@ -904,7 +943,7 @@
     {
       "name": "Sveitsi",
       "sourceName": "Switzerland",
-      "status": "missing",
+      "status": "partial",
       "customs": "Swiss-Impex detailed tariff data",
       "route": "Use origin and dispatch; subtract re-exports and customs-warehouse flows",
       "salesSource": "Federal Office of Public Health tobacco-product reporting",
@@ -958,7 +997,7 @@
     {
       "name": "Yhdistynyt kuningaskunta",
       "sourceName": "United Kingdom",
-      "status": "missing",
+      "status": "partial",
       "customs": "HMRC UK Trade Info detailed commodity data; origin and dispatch fields",
       "route": "Use country of origin for manufacturing, country of dispatch for routing; subtract re-exports; separate Northern Ireland EU treatment",
       "salesSource": "MHRA Regulation 32 annual reports by brand/variant, units and refill ml",
@@ -1012,7 +1051,7 @@
     {
       "name": "Kiina",
       "sourceName": "China",
-      "status": "missing",
+      "status": "partial",
       "customs": "GACC interactive customs tables at national statistical code; imports and exports by commodity, origin/destination, consignment, customs regime and domestic location",
       "route": "Separate ordinary trade, processing trade, bonded zones and Hong Kong re-routing; use final destination for exports; do not infer Chinese consumption from exports",
       "salesSource": "State Tobacco Monopoly Administration licensing/tax/production reports where published",
@@ -1457,7 +1496,20 @@
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-fra.pdf",
       "tier": "B",
       "period": "WHO Report 2025 country profile",
-      "national": null
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 virallisessa tupakkatuotteiden valmisteveroluettelossa",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Légifrancen vuoden 2026 tyhjentävä tupakkatuotteiden valmisteverotaulukko ja Douanen veroluokkakuvaus; e-neste ei ole veroluokka",
+        "caveat": "Nollakanta on dokumentoitu oikeudellinen luokituspäätelmä virallisesta täydestä tariffiluettelosta, ei viranomaisen erikseen julkaisema nollatodistus; ALV ja mahdolliset tuontimaksut ovat erillisiä; kertakäyttöiset e-savukkeet kiellettiin 26.2.2025",
+        "rateUrl": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000050932002",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Italia",
@@ -1616,7 +1668,20 @@
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-nld.pdf",
       "tier": "B",
       "period": "WHO Report 2025 country profile",
-      "national": null
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 Wet op de accijns -lain verotuoteluettelossa",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Vuonna 2026 voimassa oleva Wet op de accijns luettelee valmisteveron kohteiksi alkoholin, mineraaliöljyt ja tupakkatuotteet; e-nesteitä säännellään tupakkaan liittyvinä tuotteina mutta niitä ei lisätä valmisteverotuotteeksi",
+        "caveat": "Nollakanta on dokumentoitu oikeudellinen luokituspäätelmä lain tyhjentävästä tuoteluettelosta; ALV ja tuonnin tullit ovat erillisiä; myyntikanavia ja makuja koskee erillinen sääntely",
+        "rateUrl": "https://wetten.overheid.nl/jci1.3:c:BWBR0005251&g=2026-04-10&z=2026-04-10",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Belgia",
@@ -1689,7 +1754,20 @@
       "url": "https://cdn.who.int/media/docs/default-source/country-profiles/tobacco/gtrc-2025/tobacco-2025-lux.pdf",
       "tier": "B",
       "period": "WHO Report 2025 country profile",
-      "national": null
+      "national": {
+        "asOf": "2026-07-17",
+        "status": "verified",
+        "rate": "0 EUR/ml erillistä e-nestevalmisteveroa vuoden 2026 virallisessa valmisteverotuoteluettelossa",
+        "taxedVolume": "not_obtained",
+        "actualRevenue": "not_obtained",
+        "revenuePeriod": "",
+        "forecast": "not_obtained",
+        "scope": "Guichet.lu ja vuoden 2026 Douanes et Accises -lupahakemus luettelevat valmisteverotuotteiksi alkoholin, energiatuotteet sekä savukkeet, sikarit ja polttotupakan; e-nesteelle ei ole omaa veroluokkaa",
+        "caveat": "Nollakanta on dokumentoitu luokituspäätelmä virallisista täydellisiksi ilmoitetuista tavaraluetteloista, ei erillinen viranomaisen nollatodistus; ALV ja tuontitulli ovat erillisiä; vuoden 2025 valvontatiedotteen 12 897 EUR vältetyt valmisteverot koskevat sekoitettua takavarikkoa eikä niitä saa kohdistaa 90 litraan e-nestettä",
+        "rateUrl": "https://guichet.public.lu/fr/entreprises/import-export/intra-ue/echanges-intra-ue/commerce-accises.html",
+        "volumeUrl": "",
+        "revenueUrl": ""
+      }
     },
     {
       "name": "Suomi",
@@ -1766,15 +1844,15 @@
         "asOf": "2026-07-17",
         "status": "verified",
         "rate": "2 087 SEK/litra eli 2,087 SEK/ml; vahva 15–20 mg/ml e-neste 4 174 SEK/litra eli 4,174 SEK/ml",
-        "taxedVolume": "not_obtained",
-        "actualRevenue": "not_obtained",
-        "revenuePeriod": "",
+        "taxedVolume": "26 000 litraa vuonna 2024: 14 000 litraa vahvoja ja 12 000 litraa muita e-nesteitä",
+        "actualRevenue": "80 milj. SEK: 60 milj. vahvoista ja 20 milj. muista e-nesteistä",
+        "revenuePeriod": "2024",
         "forecast": "not_obtained",
         "scope": "Nikotiinia sisältävät e-nesteet",
-        "caveat": "Skatteverketin sivu antaa vuoden 2026 kannan mutta ei samalla sivulla verotettua litramäärää tai verokertymää",
+        "caveat": "Finansdepartementin Beräkningskonventioner 2026 taulukko 7.5 yhdistää Ekonomistyrningsverketin, Skatteverketin ja ministeriön laskennan. Vuosi 2024 on viimeisin täysi vertailuvuosi, mutta luku ei ole julkaistu raakaverotilin tapahtumaotteena; sarjaa päivitetään ja pyöristetään.",
         "rateUrl": "https://www.skatteverket.se/foretagochorganisationer/skatter/punktskatter/nikotinskatt.4.41f1c61d16193087d7fc7fe.html",
-        "volumeUrl": "",
-        "revenueUrl": ""
+        "volumeUrl": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf",
+        "revenueUrl": "https://www.regeringen.se/contentassets/1ed01e00001b42e5ad8d47433db63ece/berakningskonventioner_2026.pdf"
       }
     },
     {
@@ -1812,12 +1890,12 @@
         "taxedVolume": "not_obtained",
         "actualRevenue": "not_obtained",
         "revenuePeriod": "",
-        "forecast": "not_obtained",
+        "forecast": "90 milj. DKK vuoden 2025 vuotuinen verotuotto voimassa olevilla säännöillä",
         "scope": "Nikotiinia sisältävät nesteet",
-        "caveat": "Verohallinnon oikeudellinen ohje vahvistaa kannan mutta ei julkaise samalla sivulla volyymia tai verokertymää",
-        "rateUrl": "https://info.skat.dk/data.aspx?oid=2350652",
+        "caveat": "Skatteministerietin vastaus Folketingetille ilmoittaa 2025 vuotuisen tuoton pyöristettynä lähimpään 5 milj. DKK:hon; kyse on arviosta, ei toteutuneesta tilinpäätösluvusta. Nimelliskannoilla 90 milj. DKK vastaa noin 36 000–60 000 litran haarukkaa ennen pyöristyksen ja sekoitetun vahvuusjakauman huomiointia.",
+        "rateUrl": "https://skm.dk/tal-og-metode/satser/satser-og-beloebsgraenser-i-lovgivningen/forbrugsafgiftsloven",
         "volumeUrl": "",
-        "revenueUrl": ""
+        "revenueUrl": "https://www.ft.dk/samling/20231/almdel/sau/spm/678/svar/2074316/2914215.pdf"
       }
     },
     {
@@ -2178,9 +2256,9 @@
     "numericCount": 15,
     "specificExciseCount": 8,
     "banCount": 3,
-    "nationalVerifiedCount": 12,
-    "officialVolumeCount": 2,
-    "officialRevenueCount": 3,
+    "nationalVerifiedCount": 15,
+    "officialVolumeCount": 3,
+    "officialRevenueCount": 4,
     "method": "WHO:n vuoden 2025 maaprofiilien sivu 9 raportoi halvimpien closed-, disposable- ja open-system e-nesteiden hinnan sekä kokonaisveron, valmisteveron, ALV:n, tullin ja muut verot prosenttina vähittäishinnasta. Pixan-auditointi säilyttää puuttuvat solut puuttuvina ja johtaa €/ml- tai paikallisvaluutta/ml-luvun vain hinnan ja WHO:n specific excise -osuuden tulona. Johdettu kanta merkitään B-tason tarkistusluvuksi, ei nykyiseksi lakikannaksi."
   },
   "customs": [
@@ -2291,6 +2369,220 @@
       "reported": false,
       "aggregate": true,
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2025&reporterCode=392&flowCode=M&partnerCode=0&cmdCode=240419&maxRecords=500"
+    }
+  ],
+  "eurostatRoutes": [
+    {
+      "reporter": "EU27_2020",
+      "market": "EU-27",
+      "worldEur": null,
+      "intraEur": null,
+      "extraEur": 2240456135.0,
+      "extraShare": 100.0,
+      "basis": "EU:n ulkoraja; vain extra-EU-tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "DE",
+      "market": "Saksa",
+      "worldEur": 980833215.0,
+      "intraEur": 129732288.0,
+      "extraEur": 851100927.0,
+      "extraShare": 86.7732570618543,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "IT",
+      "market": "Italia",
+      "worldEur": 419045056.0,
+      "intraEur": 294727146.0,
+      "extraEur": 124317910.0,
+      "extraShare": 29.66695543116013,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "FR",
+      "market": "Ranska",
+      "worldEur": 347118534.0,
+      "intraEur": 134793050.0,
+      "extraEur": 212325484.0,
+      "extraShare": 61.16800550903456,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "PL",
+      "market": "Puola",
+      "worldEur": 210579736.0,
+      "intraEur": 117476629.0,
+      "extraEur": 93103107.0,
+      "extraShare": 44.21275701475853,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "NL",
+      "market": "Alankomaat",
+      "worldEur": 204763244.0,
+      "intraEur": 28723436.0,
+      "extraEur": 176039808.0,
+      "extraShare": 85.97236718910352,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "ES",
+      "market": "Espanja",
+      "worldEur": 143444826.0,
+      "intraEur": 67732962.0,
+      "extraEur": 75711864.0,
+      "extraShare": 52.781174554180154,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "BE",
+      "market": "Belgia",
+      "worldEur": 127340939.0,
+      "intraEur": 19552292.0,
+      "extraEur": 107788647.0,
+      "extraShare": 84.64571397577019,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "AT",
+      "market": "Itävalta",
+      "worldEur": 73124990.0,
+      "intraEur": 27534343.0,
+      "extraEur": 45590647.0,
+      "extraShare": 62.34619245759897,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "SE",
+      "market": "Ruotsi",
+      "worldEur": 50027654.0,
+      "intraEur": 12248870.0,
+      "extraEur": 37778784.0,
+      "extraShare": 75.51580172038449,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "DK",
+      "market": "Tanska",
+      "worldEur": 14386010.0,
+      "intraEur": 8305811.0,
+      "extraEur": 6080199.0,
+      "extraShare": 42.26466546318263,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "LU",
+      "market": "Luxemburg",
+      "worldEur": 11009319.0,
+      "intraEur": 10980833.0,
+      "extraEur": 28486.0,
+      "extraShare": 0.25874443278462544,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    },
+    {
+      "reporter": "FI",
+      "market": "Suomi",
+      "worldEur": 5603452.0,
+      "intraEur": 5097770.0,
+      "extraEur": 505682.0,
+      "extraShare": 9.024472771427327,
+      "basis": "Jäsenmaan WORLD = intra-EU saapumiset + extra-EU tuonti",
+      "url": "https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?freq=A&reporter=EU27_2020&reporter=AT&reporter=BE&reporter=DE&reporter=DK&reporter=ES&reporter=FI&reporter=FR&reporter=IT&reporter=LU&reporter=NL&reporter=PL&reporter=SE&partner=WORLD&partner=INT_EU27_2020&partner=EXT_EU27_2020&product=85434000&product=24041200&product=24041910&product=24041990&flow=1&indicators=VALUE_IN_EUROS&indicators=QUANTITY_IN_100KG&indicators=SUPPLEMENTARY_QUANTITY&time=2025&lang=en"
+    }
+  ],
+  "eurostatOrigins": [
+    {
+      "code": "24041200",
+      "partner": "Kiina",
+      "valueEur": 1302170486.0,
+      "sharePct": 95.67470820602512,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 1
+    },
+    {
+      "code": "24041200",
+      "partner": "Iso-Britannia",
+      "valueEur": 33100919.0,
+      "sharePct": 2.432032364981948,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 2
+    },
+    {
+      "code": "24041200",
+      "partner": "Hongkong",
+      "valueEur": 9207310.0,
+      "sharePct": 0.6764910640221783,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 3
+    },
+    {
+      "code": "24041200",
+      "partner": "Laos",
+      "valueEur": 7218987.0,
+      "sharePct": 0.5304024950601504,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 4
+    },
+    {
+      "code": "24041200",
+      "partner": "Indonesia",
+      "valueEur": 6797208.0,
+      "sharePct": 0.49941301773265623,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 5
+    },
+    {
+      "code": "85434000",
+      "partner": "Kiina",
+      "valueEur": 724244429.0,
+      "sharePct": 82.37261031281237,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 1
+    },
+    {
+      "code": "85434000",
+      "partner": "Malesia",
+      "valueEur": 123861437.0,
+      "sharePct": 14.087495152532211,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 2
+    },
+    {
+      "code": "85434000",
+      "partner": "Indonesia",
+      "valueEur": 21783126.0,
+      "sharePct": 2.4775239926531643,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 3
+    },
+    {
+      "code": "85434000",
+      "partner": "Yhdysvallat",
+      "valueEur": 2337059.0,
+      "sharePct": 0.2658075679654982,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 4
+    },
+    {
+      "code": "85434000",
+      "partner": "Hongkong",
+      "valueEur": 1707218.0,
+      "sharePct": 0.19417201900633316,
+      "basis": "Alkuperämaa EU:n ulkopuolella",
+      "rank": 5
     }
   ],
   "narrowCustoms": [
@@ -2530,8 +2822,8 @@
     {
       "priority": "high",
       "title": "EU-27 CN8-reittimatriisi",
-      "detail": "Lataa DS-045409 reporter × origin × consignment × flow; erota extra-EU kokonaisuus ja jäsenmaiden sisäiset hubivirrat.",
-      "status": "active"
+      "detail": "Valmis 2025: EU-ulkoraja 2,240 mrd EUR ja 12 jäsenmaan WORLD/intra/extra-jako, CN8 85434000 + 24041200. Kaikki ryhmärivit täsmäytyivät 0 EUR erolla.",
+      "status": "done"
     },
     {
       "priority": "high",

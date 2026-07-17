@@ -19,6 +19,8 @@ python3 scripts/build_data.py
 
 Tämän jälkeen tarkistetaan `data/dashboard.json` ja `data.generated.js`, kopioidaan uusin pankkiliite `assets/`-kansioon ja julkaistaan muutos `main`-haaraan. GitHub Pages julkaisee sivun automaattisesti suoraan `main`-haarasta.
 
+Vuoden 2025 Eurostat Comext DS-045409 -reittimatriisin johdetut CSV:t, hakumanifesti ja raakavastaukset julkaistaan `data/eurostat/`-kansiossa. Jäsenmaan WORLD-tuonti täsmäytetään intra-EU- ja extra-EU-osaan; EU-27:n kokonaisluvussa käytetään vain extra-EU-virtaa.
+
 ## Todistustasot
 
 - A: viranomaisen myynti-, vero-, ilmoitus- tai toimitusraportti
